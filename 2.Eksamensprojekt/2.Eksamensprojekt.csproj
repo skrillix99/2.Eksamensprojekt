@@ -9,10 +9,4 @@
     <ProjectReference Include="..\SuperBookerData\SuperBookerData.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Pages\AdministrationPages\" />
-    <Folder Include="Pages\UnderviserPages\" />
-    <Folder Include="Pages\StuderendePages\" />
-  </ItemGroup>
-
 </Project>

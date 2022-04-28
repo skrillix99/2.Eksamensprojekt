@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SuperBookerData
 {
-    class BookingData
+    public class BookingData
     {
         private TimeSpan _tidsrum;
         private DateTime _dag;

@@ -36,9 +36,22 @@
     </div>
 
     <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2022 - _2.Eksamensprojekt - <a asp-area="" asp-page="/Privacy">Privacy</a>
-        </div>
+        <nav class="menuknapper">
+            <div class="rowtest">
+                <form method="get">
+                    <div class="columntest"><input type="submit" formaction="/Varer/KatalogVarer/Katalog" value="Varer" class="skaler btn btn-primary"></div>
+                </form>
+                <form method="get">
+                    <div class="columntest"><input type="submit" formaction="/Kunder/Indkøbsliste" value="Indkøbsliste" class="skaler btn btn-primary"></div>
+                </form>
+                <form method="get">
+                    <div class="columntest"><input type="submit" formaction="/Kunder/Bruger/BlivBud" value="Bliv Bud" class="skaler btn btn-primary"></div>
+                </form>
+                <form method="get">
+                    <div class="columntest"><input type="submit" formaction="/Kunder/Bruger/Bruger/3" value="Profil" class="skaler btn btn-primary"></div>
+                </form>
+            </div>
+        </nav>
     </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

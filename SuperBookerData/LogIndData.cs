@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace SuperBookerData
 {
     public enum brugerRolle { Student, Underviser, Administration };
-    class LogIndData
+    public class LogIndData
     {
         public string EmailLogInd { get; set; }
         public string Password { get; set; }

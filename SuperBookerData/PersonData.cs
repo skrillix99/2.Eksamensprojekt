@@ -2,7 +2,6 @@
 
 namespace SuperBookerData
 {
-    public enum brugerRolle { Student, Underviser, Administration }
     public class PersonData
     {
         private int _brugerID;
@@ -58,7 +57,6 @@ namespace SuperBookerData
             _brugerTlf = brugerTlf;
             _brugerEmail = brugerEmail;
             _brugerPassword = brugerPassword;
-            brugerRolle = 0;
         }
 
     }

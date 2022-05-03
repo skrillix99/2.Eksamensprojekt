@@ -9,11 +9,13 @@ using SuperBookerData;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Security.Claims;
+using _2.Eksamensprojekt.Services;
 
 namespace _2.Eksamensprojekt.Pages.LogInd
 {
     public class LogIndModel : PageModel
     {
+        private ILogIndService _brugerService;
         public static LogIndData LoggedInUser { get; set; } = null;
 
         [BindProperty]
@@ -26,32 +28,46 @@ namespace _2.Eksamensprojekt.Pages.LogInd
         //TODO opret en error message hvis der er incorrect input i felterne ved hjælp af string message
         //public string Message { get; set; }
 
+        public LogIndModel(ILogIndService brugerService)
+        {
+            _brugerService = brugerService;
+        }
+
         public void OnGet()
         {
         }
-
         public async Task<IActionResult> OnPost()
         {
-            LogIndData logIndData = new LogIndData(EmailLogInd, Password);
-
-            /*if (_brugerService.contains(logIndData))
+            List<LogIndData> logIndData = _brugerService.GetPersoner();
+            foreach (LogIndData user in logIndData)
             {
-                LoggedInUser = logIndData;
-
-                var claims = new List<Claim>
+                if (EmailLogInd == user.EmailLogInd && Password == user.Password)
                 {
-                    new Claim(ClaimTypes.Name, EmailLogInd), 
-                    new Claim(ClaimTypes.Role, brugerRolle.Administration.ToString())
-                };
+                    LoggedInUser = user;
+                    var claims = new List<Claim>
+                    {
+                        new Claim(ClaimTypes.Name, EmailLogInd),
+                        new Claim(ClaimTypes.Role, user.rolle.ToString())
+                    };
+                    var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
 
-                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
-                    new ClaimsPrincipal(claimsIdentity));
-                return RedirectToPage("/Persons/Index");
+                    if (claims[1].Value == brugerRolle.Student.ToString())
+                    {
+                        return RedirectToPage("/StuderendePages/StuderendeForside");
+                    }
+                    if (claims[1].Value == brugerRolle.Underviser.ToString())
+                    {
+                        return RedirectToPage("/UnderviserPages/UnderviserForside");
+                    }
+                    if (claims[1].Value == brugerRolle.Administration.ToString())
+                    {
+                        return RedirectToPage("/AdministrationPages/AdministrationForside");
+                    }
+                }
             }
-
-            */
-            return null;
+            
+            return Page();
         }
     }
 }

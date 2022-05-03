@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using _2.Eksamensprojekt.Pages.LogInd
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -24,6 +25,23 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
                         </li>
+                        @{
+                            if (LogIndModel.LoggedInUser == null)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-page="/LogInd/LogInd">Login</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item nav-link mr-3">
+                                    User: @LogIndModel.LoggedInUser.EmailLogInd
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-page="/LogInd/LogUd">Logout</a>
+                                </li>
+                            }
+                        }
                     </ul>
                 </div>
             </div>

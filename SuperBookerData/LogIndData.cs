@@ -9,7 +9,7 @@ namespace SuperBookerData
     public enum brugerRolle { Student, Underviser, Administration };
     public class LogIndData
     {
-        public string EmailLogInd { get; set; }
+        public string EmailLogInd { get; set; } //bruger email
         public string Password { get; set; }
         public brugerRolle rolle { get; set; }
 

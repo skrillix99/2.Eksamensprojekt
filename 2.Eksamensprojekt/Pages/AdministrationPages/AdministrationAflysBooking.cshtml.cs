@@ -14,7 +14,6 @@ namespace _2.Eksamensprojekt.Pages.AdministrationPages
         private IAdministrationService _administrationService;
 
         public LokaleData Lokale { get; set; }
-        public int test { get; set; }
 
         public AdministrationAflysBookingModel(IAdministrationService administrationService)
         {
@@ -23,7 +22,6 @@ namespace _2.Eksamensprojekt.Pages.AdministrationPages
 
         public void OnGet(int id)
         {
-            test = id;
             Lokale = _administrationService.GetSingelLokale(id);
         }
     }

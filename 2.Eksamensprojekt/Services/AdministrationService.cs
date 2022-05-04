@@ -36,11 +36,12 @@ namespace _2.Eksamensprojekt.Services
         {
             LokaleData list = new LokaleData();
 
-            string sql = "select * from Lokale WHERE LokaleID = 1";
+            string sql = "select * from Lokale WHERE LokaleID = @id";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlCommand cmd = new SqlCommand(sql, connection);
+                cmd.Parameters.AddWithValue("@id", id);
                 cmd.Connection.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
 
@@ -59,12 +60,12 @@ namespace _2.Eksamensprojekt.Services
         {
             LokaleData l = new LokaleData();
 
-            l.lokaleID = reader.GetInt32(0);
-            l.lokaleNavn = reader.GetString(1);
-            l.lokaleNummer = reader.GetString(2);
-            l.lokaleSmartBoard = reader.GetBoolean(3);
-            l.lokaleMuligeBookinger = reader.GetInt32(4);
+            l.LokaleID = reader.GetInt32(0);
+            l.LokaleNavn = reader.GetString(1);
+            l.LokaleNummer = reader.GetString(2);
+            l.LokaleSmartBoard = reader.GetBoolean(3);
             l.LokaleSize = (LokaleSize)reader.GetInt32(5);
+            l.LokaleMuligeBookinger = reader.GetInt32(4);
 
             return l;
         }

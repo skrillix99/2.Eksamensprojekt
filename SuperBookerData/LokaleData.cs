@@ -13,7 +13,45 @@ namespace SuperBookerData
         private string _lokaleNavn;
         private string _lokaleNummer;
         private bool _lokaleSmartBoard;
+        // enum LokaleSize 
         private int _lokaleMuligeBookinger;
+
+        public LokaleData()
+        {
+        }
+
+        public LokaleData(int lokaleId, string lokaleNavn, string lokaleNummer, bool lokaleSmartBoard, int muligeBookinger)
+        {
+            _lokaleID = lokaleId;
+            _lokaleNavn = lokaleNavn;
+            _lokaleNummer = lokaleNummer;
+            _lokaleSmartBoard = lokaleSmartBoard;
+            _lokaleMuligeBookinger = muligeBookinger;
+        }
+
+        public int LokaleID
+        {
+            get => _lokaleID;
+            set => _lokaleID = value;
+        }
+
+        public string LokaleNavn
+        {
+            get => _lokaleNavn;
+            set => _lokaleNavn = value;
+        }
+
+        public string LokaleNummer
+        {
+            get => _lokaleNummer;
+            set => _lokaleNummer = value;
+        }
+
+        public bool LokaleSmartBoard
+        {
+            get => _lokaleSmartBoard;
+            set => _lokaleSmartBoard = value;
+        }
 
         public LokaleSize LokaleSize
         {
@@ -21,50 +59,10 @@ namespace SuperBookerData
             set;
         }
 
-        public int lokaleID
-        {
-            get => _lokaleID;
-            set => lokaleID = value;
-        }
-
-        public string lokaleNavn
-        {
-            get => _lokaleNavn;
-            set => lokaleNavn = value;
-        }
-
-        public string lokaleNummer
-        {
-            get => _lokaleNummer;
-            set => lokaleNummer = value;
-        }
-
-        public bool lokaleSmartBoard
-        {
-            get => _lokaleSmartBoard;
-            set => lokaleSmartBoard = value;
-        }
-
-        public int lokaleMuligeBookinger
+        public int LokaleMuligeBookinger
         {
             get => _lokaleMuligeBookinger;
-            set => lokaleMuligeBookinger = value;
+            set => _lokaleMuligeBookinger = value;
         }
-
-        public LokaleData()
-        {
-
-        }
-
-        public LokaleData(int lokaleID, string lokaleNavn, string lokaleNummer, bool lokaleSmartBoard, int lokaleMuligeBookinger)
-        {
-            _lokaleID = lokaleID;
-            _lokaleNavn = lokaleNavn;
-            _lokaleNummer = lokaleNummer;
-            _lokaleSmartBoard = lokaleSmartBoard;
-            _lokaleMuligeBookinger = lokaleMuligeBookinger;
-            LokaleSize = 0;
-        }
-
     }
 }

@@ -13,41 +13,42 @@ namespace SuperBookerData
         private string _lokaleNavn;
         private string _lokaleNummer;
         private bool _lokaleSmartBoard;
-        private int _lokaleMuligeBookinger;
+        private int _muligeBookinger;
 
         public LokaleSize LokaleSize
         {
             get;
+            set;
         }
 
-        public int lokaleID
+        public int LokaleID
         {
             get => _lokaleID;
-            set => lokaleID = value;
+            set => LokaleID = value;
         }
 
-        public string lokaleNavn
+        public string LokaleNavn
         {
             get => _lokaleNavn;
-            set => lokaleNavn = value;
+            set => LokaleNavn = value;
         }
 
-        public string lokaleNummer
+        public string LokaleNummer
         {
             get => _lokaleNummer;
-            set => lokaleNummer = value;
+            set => LokaleNummer = value;
         }
 
-        public bool lokaleSmartBoard
+        public bool LokaleSmartBoard
         {
             get => _lokaleSmartBoard;
-            set => lokaleSmartBoard = value;
+            set => LokaleSmartBoard = value;
         }
 
-        public int lokaleMuligeBookinger
+        public int MuligeBookinger
         {
-            get => _lokaleMuligeBookinger;
-            set => lokaleMuligeBookinger = value;
+            get => _muligeBookinger;
+            set => MuligeBookinger = value;
         }
 
         public LokaleData()
@@ -55,13 +56,13 @@ namespace SuperBookerData
 
         }
 
-        public LokaleData(int lokaleID, string lokaleNavn, string lokaleNummer, bool lokaleSmartBoard, int lokaleMuligeBookinger)
+        public LokaleData(int LokaleID, string LokaleNavn, string LokaleNummer, bool LokaleSmartBoard, int MuligeBookinger)
         {
-            _lokaleID = lokaleID;
-            _lokaleNavn = lokaleNavn;
-            _lokaleNummer = lokaleNummer;
-            _lokaleSmartBoard = lokaleSmartBoard;
-            _lokaleMuligeBookinger = lokaleMuligeBookinger;
+            _lokaleID = LokaleID;
+            _lokaleNavn = LokaleNavn;
+            _lokaleNummer = LokaleNummer;
+            _lokaleSmartBoard = LokaleSmartBoard;
+            _muligeBookinger = MuligeBookinger;
             LokaleSize = 0;
         }
 

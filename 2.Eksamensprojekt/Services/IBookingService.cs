@@ -11,9 +11,9 @@ namespace _2.Eksamensprojekt.Services
     {
         public List<LokaleData> GetAll();
 
-        public LokaleData GetRoom(string lokaleNavn);
+        LokaleData GetById(int LokaleID);
 
-        public LokaleData GetNumber(string lokaleNummer);
+        LokaleData Delete(int lokaleID);
 
         //TODO public BookingData CreateBooking(????);
 

@@ -1,0 +1,21 @@
+﻿@page
+@using SuperBookerData
+@model _2.Eksamensprojekt.Pages.UnderviserPages.UnderviserAflysBekræftigelseModel
+@{
+}
+
+<a class="tilbageLink" asp-page="/UnderviserForside"> < TILBAGE TIL ALLE BOOKINGER</a>
+
+<h1 class="text-center">Følgende booking er blevet slettet</h1>
+<div class="lokaleInfoWrapper">
+    <h3>@Model.Lokale.lokaleNavn</h3>
+    <p><b>Størrelse:</b> @Enum.GetName(typeof(LokaleSize), (Model.Lokale.lokaleSize - 1)) </p>
+    <p><b>Antal pladser tilbage:</b> @Model.Lokale.lokaleMuligeBookinger</p>
+    <p><b>Dato:</b> 30/05-2022</p>
+    <p><b>Tidspunkt:</b> 10:00 - 12:00</p>
+    <p><b>Booket af:</b> Marcus (DAT 2B)</p>
+</div>
+
+<form method="post" class="AflysbookingForm">
+    <input type="submit" value="OK" class="submitBlack custom-btn" />
+</form>

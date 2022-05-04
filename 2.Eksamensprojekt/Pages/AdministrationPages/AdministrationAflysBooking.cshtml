@@ -17,6 +17,6 @@
 </div>
 
 <form method="post" class="AflysbookingForm">
-    <input type="submit" value="Ja" class="submitAprove custom-btn"/>
-    <input type="submit" value="Nej" class="submitDenied custom-btn"/>
+    <input type="submit" value="Ja" class="submitAprove custom-btn" asp-route-id="@Model.Lokale.lokaleID" asp-page="AdministrationAflysBekræftigelse"/>
+    <input type="submit" value="Nej" class="submitDenied custom-btn" formaction="/AdministrationForside"/>
 </form>

@@ -26,5 +26,10 @@ namespace _2.Eksamensprojekt.Pages.AdministrationPages
         {
             Lokale = _administrationService.GetSingelLokale(id);
         }
+
+        public IActionResult OnPost()
+        {
+            return RedirectToPage("/AdministrationPages/AdministrationAflysBekræftigelse");
+        }
     }
 }

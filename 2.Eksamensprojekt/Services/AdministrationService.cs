@@ -64,12 +64,12 @@ namespace _2.Eksamensprojekt.Services
         {
             LokaleData l = new LokaleData();
 
-            l.LokaleID = reader.GetInt32(0);
-            l.LokaleNavn = reader.GetString(1);
-            l.LokaleNummer = reader.GetString(2);
-            l.LokaleSmartBoard = reader.GetBoolean(3);
-            l.LokaleSize = (LokaleSize)reader.GetInt32(5);
-            l.LokaleMuligeBookinger = reader.GetInt32(4);
+            l.lokaleID = reader.GetInt32(0);
+            l.lokaleNavn = reader.GetString(1);
+            l.lokaleNummer = reader.GetString(2);
+            l.lokaleSmartBoard = reader.GetBoolean(3);
+            l.lokaleSize = (LokaleSize)reader.GetInt32(5);
+            l.lokaleMuligeBookinger = reader.GetInt32(4);
 
             return l;
         }

@@ -29,37 +29,37 @@ namespace SuperBookerData
             _lokaleMuligeBookinger = muligeBookinger;
         }
 
-        public int LokaleID
+        public int lokaleID
         {
             get => _lokaleID;
             set => _lokaleID = value;
         }
 
-        public string LokaleNavn
+        public string lokaleNavn
         {
             get => _lokaleNavn;
             set => _lokaleNavn = value;
         }
 
-        public string LokaleNummer
+        public string lokaleNummer
         {
             get => _lokaleNummer;
             set => _lokaleNummer = value;
         }
 
-        public bool LokaleSmartBoard
+        public bool lokaleSmartBoard
         {
             get => _lokaleSmartBoard;
             set => _lokaleSmartBoard = value;
         }
 
-        public LokaleSize LokaleSize
+        public LokaleSize lokaleSize
         {
             get;
             set;
         }
 
-        public int LokaleMuligeBookinger
+        public int lokaleMuligeBookinger
         {
             get => _lokaleMuligeBookinger;
             set => _lokaleMuligeBookinger = value;

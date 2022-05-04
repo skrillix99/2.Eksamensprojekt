@@ -7,7 +7,7 @@ namespace _2.Eksamensprojekt.Services
 {
     public class AdministrationService : IAdministrationService
     {
-        private const string ConnectionString = "Data Source=zealandmarc.database.windows.net;Initial Catalog=SuperBooker4000;User ID=AdminMarc;Password=Marcus19;Connect Timeout=30;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        private string connectionString = "Data Source=zealandmarc.database.windows.net;Initial Catalog=SuperBooker4000;User ID=AdminMarc;Password=Marcus19;Connect Timeout=30;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         
         public List<LokaleData> GetAllLokaler()
         {
@@ -15,7 +15,7 @@ namespace _2.Eksamensprojekt.Services
 
             string sql = "select * from Lokale";
 
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlCommand cmd = new SqlCommand(sql, connection);
                 cmd.Connection.Open();
@@ -34,27 +34,28 @@ namespace _2.Eksamensprojekt.Services
 
         public LokaleData GetSingelLokale(int id)
         {
-            LokaleData l = new LokaleData();
-            string sql = "select * from Lokale where LokaleID = @lokaleId";
+            LokaleData list = new LokaleData();
 
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            string sql = "select * from Lokale WHERE LokaleID = 1";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlCommand cmd = new SqlCommand(sql, connection);
-                cmd.Parameters.AddWithValue("@lokaleId", id);
                 cmd.Connection.Open();
-
                 SqlDataReader reader = cmd.ExecuteReader();
 
-                if (reader.Read())
+                while (reader.Read())
                 {
-                    l = ReadLokale(reader);
-                    return l;
+                    var us = ReadLokale(reader);
+                    return us;
                 }
+
+                return list;
             }
-            return l;
         }
 
-        private LokaleData ReadLokale(SqlDataReader reader)
+
+        public LokaleData ReadLokale(SqlDataReader reader)
         {
             LokaleData l = new LokaleData();
 

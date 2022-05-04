@@ -44,11 +44,11 @@ namespace _2.Eksamensprojekt.Pages.LogInd
                 if (EmailLogInd == user.EmailLogInd && Password == user.Password)
                 {
                     LoggedInUser = user;
-                var claims = new List<Claim>
-                {
-                    new Claim(ClaimTypes.Name, EmailLogInd), 
+                    var claims = new List<Claim>
+                    {
+                        new Claim(ClaimTypes.Name, EmailLogInd),
                         new Claim(ClaimTypes.Role, user.rolle.ToString())
-                };
+                    };
                     var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
 
@@ -66,7 +66,7 @@ namespace _2.Eksamensprojekt.Pages.LogInd
                     }
                 }
             }
-
+            
             return Page();
         }
     }

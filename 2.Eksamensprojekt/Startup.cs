@@ -7,8 +7,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using _2.Eksamensprojekt.Services;
 using _2.Eksamensprojekt.Services.Interfaces;
+using _2.Eksamensprojekt.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace _2.Eksamensprojekt
 {
@@ -25,6 +28,35 @@ namespace _2.Eksamensprojekt
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            services.AddSingleton<ILogIndService, LogIndService>();
+
+
+            // Marcus
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                // This lambda determines whether user consent for non-essential
+                //cookies is needed for a given request.
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).
+                AddCookie(cookieOptions =>
+                {
+                    cookieOptions.LoginPath = "/LogInd/LogInd";
+                });
+            services.AddMvc().AddRazorPagesOptions(options =>
+            {
+                // mapper der er låst uden logind. Bliver redirected til logind page hvis man prøver.
+                options.Conventions.AuthorizeFolder("/StuderendePages");
+                options.Conventions.AuthorizeFolder("/UnderviserPages");
+                options.Conventions.AuthorizeFolder("/AdministrationPages");
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.AccessDeniedPath = "/Account/AccessDenied";
+            });
             services.AddSingleton<IAdministrationService, AdministrationService>();
         }
 
@@ -43,6 +75,8 @@ namespace _2.Eksamensprojekt
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

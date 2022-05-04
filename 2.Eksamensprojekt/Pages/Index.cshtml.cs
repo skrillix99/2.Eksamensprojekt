@@ -5,6 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using _2.Eksamensprojekt.Pages.LogInd;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace _2.Eksamensprojekt.Pages
 {
@@ -19,7 +22,11 @@ namespace _2.Eksamensprojekt.Pages
 
         public void OnGet()
         {
-
+            if (LogIndModel.LoggedInUser == null)
+            {
+                HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            }
         }
+
     }
 }

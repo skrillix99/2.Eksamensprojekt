@@ -13,9 +13,9 @@ a {
 }
 
 .btn-primary {
-    color: #fff;
-    background-color: #1b6ec2;
-    border-color: #1861ac;
+    color: #000;
+    background-color: #FFF387;
+    border-color: #000;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
@@ -94,10 +94,6 @@ body {
     margin: 0;
 }
 
-.rema_farve {
-    background-color: #2359a2 !important;
-    color: white !important;
-}
 
 .centered {
     position: absolute;
@@ -135,7 +131,7 @@ body {
 
 .columntest {
     float: left;
-    width: 25%;
+    width: 33.33333333333%;
     /*taget fra https://www.w3schools.com/howto/howto_css_four_columns.asp*/
 }
 
@@ -189,4 +185,8 @@ body {
 
 .margin_left_small {
     margin-left: 2.5%;
+}
+
+.btn {
+    border-radius: 0 !important;
 }

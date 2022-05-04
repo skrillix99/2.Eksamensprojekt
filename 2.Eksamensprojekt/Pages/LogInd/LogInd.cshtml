@@ -1,0 +1,25 @@
+﻿@page
+@model _2.Eksamensprojekt.Pages.LogInd.LogIndModel
+@{
+}
+
+<div class="container">
+    <div>Error Message kommer her</div>
+    <form method="post">
+        <div class="form-group">
+            <label asp-for="EmailLogInd" class="col-form-label "></label>
+            <div>
+                <input asp-for="EmailLogInd" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Password" class="col-form-label"></label>
+            <div>
+                <input asp-for="Password" />
+            </div>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-outline-light">Log in</button>
+        </div>
+    </form>
+</div>

@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using _2.Eksamensprojekt.Pages.LogInd
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -24,6 +25,23 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
                         </li>
+                        @{
+                            if (LogIndModel.LoggedInUser == null)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-page="/LogInd/LogInd">Login</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item nav-link mr-3">
+                                    User: @LogIndModel.LoggedInUser.EmailLogInd
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-page="/LogInd/LogUd">Logout</a>
+                                </li>
+                            }
+                        }
                     </ul>
                 </div>
             </div>
@@ -39,16 +57,13 @@
         <nav class="menuknapper">
             <div class="rowtest">
                 <form method="get">
-                    <div class="columntest"><input type="submit" formaction="/Varer/KatalogVarer/Katalog" value="Varer" class="skaler btn btn-primary"></div>
+                    <div class="columntest"><input type="submit" formaction="/Shared/LedigeLokaler" value="Ledige Lokaler" class="skaler btn btn-primary"></div>
                 </form>
                 <form method="get">
-                    <div class="columntest"><input type="submit" formaction="/Kunder/Indkøbsliste" value="Indkøbsliste" class="skaler btn btn-primary"></div>
+                    <div class="columntest"><input type="submit" formaction="/AdministrationPages/AdministrationBooking" value="Mine Bookinger" class="skaler btn btn-primary"></div>
                 </form>
                 <form method="get">
-                    <div class="columntest"><input type="submit" formaction="/Kunder/Bruger/BlivBud" value="Bliv Bud" class="skaler btn btn-primary"></div>
-                </form>
-                <form method="get">
-                    <div class="columntest"><input type="submit" formaction="/Kunder/Bruger/Bruger/3" value="Profil" class="skaler btn btn-primary"></div>
+                    <div class="columntest"><input type="submit" formaction="/Shared/BookedeLokaler" value="Alle Bookinger" class="skaler btn btn-primary"></div>
                 </form>
             </div>
         </nav>

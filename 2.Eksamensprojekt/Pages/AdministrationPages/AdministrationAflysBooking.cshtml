@@ -1,4 +1,24 @@
-﻿@page
+﻿@page "{id:int}"
 @model _2.Eksamensprojekt.Pages.AdministrationPages.AdministrationAflysBookingModel
 @{
 }
+
+<a class="tilbageLink" asp-page="/AdministrationForside"> < TILBAGE</a>
+
+<h1 class="text-center">Ønsker du at slette denne booking</h1>
+
+<div class="lokaleInfoWrapper">
+    <h3>@*@Model.Lokale.lokaleNavn*@</h3>
+    <p><b>Størrelse:</b> 2</p>
+    <p><b>Antal pladser tilbage:</b> 1</p>
+    <p><b>Dato:</b> 30/05-2022</p>
+    <p><b>Tidspunkt:</b> 10:00 - 12:00</p>
+    <p><b>Booket af:</b> Marcus (DAT 2B)</p>
+</div>
+
+<form method="post" class="AflysbookingForm">
+    <input type="submit" value="Ja" class="submitAprove custom-btn"/>
+    <input type="submit" value="Nej" class="submitDenied custom-btn"/>
+</form>
+
+<h2>@Model.test</h2>

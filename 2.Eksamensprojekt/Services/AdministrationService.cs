@@ -7,8 +7,31 @@ namespace _2.Eksamensprojekt.Services
 {
     public class AdministrationService : IAdministrationService
     {
-        private string connectionString = "Data Source=zealandmarc.database.windows.net;Initial Catalog=SuperBooker4000;User ID=AdminMarc;Password=Marcus19;Connect Timeout=30;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-        
+        private const string connectionString = "Data Source=zealandmarc.database.windows.net;Initial Catalog=SuperBooker4000;User ID=AdminMarc;Password=Marcus19;Connect Timeout=30;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+
+        #region ReadLokale
+
+        /// <summary>
+        /// Oversætter data fra et Lokale database kald til et LokaleData object med alle columns.
+        /// </summary>
+        /// <param name="reader">Typen SqlDataReader. object med data fra database kald</param>
+        /// <returns>et object af typen LokaleData</returns>
+        public LokaleData ReadLokale(SqlDataReader reader)
+        {
+            LokaleData l = new LokaleData();
+
+            l.lokaleID = reader.GetInt32(0);
+            l.lokaleNavn = reader.GetString(1);
+            l.lokaleNummer = reader.GetString(2);
+            l.lokaleSmartBoard = reader.GetBoolean(3);
+            l.lokaleSize = (LokaleSize)reader.GetInt32(5);
+            l.lokaleMuligeBookinger = reader.GetInt32(4);
+
+            return l;
+        }
+
+        #endregion
+
         public List<LokaleData> GetAllLokaler()
         {
             List<LokaleData> lokaler = new List<LokaleData>();
@@ -55,23 +78,6 @@ namespace _2.Eksamensprojekt.Services
             }
         }
 
-        /// <summary>
-        /// Oversætter data fra et Lokale database kald til et LokaleData object med alle columns.
-        /// </summary>
-        /// <param name="reader">Typen SqlDataReader. object med data fra database kald</param>
-        /// <returns>et object af typen LokaleData</returns>
-        public LokaleData ReadLokale(SqlDataReader reader)
-        {
-            LokaleData l = new LokaleData();
-
-            l.lokaleID = reader.GetInt32(0);
-            l.lokaleNavn = reader.GetString(1);
-            l.lokaleNummer = reader.GetString(2);
-            l.lokaleSmartBoard = reader.GetBoolean(3);
-            l.lokaleSize = (LokaleSize)reader.GetInt32(5);
-            l.lokaleMuligeBookinger = reader.GetInt32(4);
-
-            return l;
-        }
+        
     }
 }

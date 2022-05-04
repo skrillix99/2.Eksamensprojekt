@@ -44,10 +44,11 @@ namespace _2.Eksamensprojekt.Pages.LogInd
                 if (EmailLogInd == user.EmailLogInd && Password == user.Password)
                 {
                     LoggedInUser = user;
-                var claims = new List<Claim>
+                    // sætter Claims op med Email (ClaimTypes.Name) og Rolle (ClaimTypes.Role) og bagefter redirect'er til den rette forside baseret på role.
+                    var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name, EmailLogInd), 
-                        new Claim(ClaimTypes.Role, user.rolle.ToString())
+                    new Claim(ClaimTypes.Role, user.rolle.ToString())
                 };
                     var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));

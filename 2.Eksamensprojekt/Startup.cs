@@ -52,7 +52,7 @@ namespace _2.Eksamensprojekt
                 options.Conventions.AuthorizeFolder("/AdministrationPages");
             }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
-
+            // sender hen til en AccessDenied side hvis man prøver at komme ind på en side man ikke må.
             services.ConfigureApplicationCookie(options =>
             {
                 options.AccessDeniedPath = "/Account/AccessDenied";

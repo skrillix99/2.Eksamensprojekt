@@ -1,15 +1,28 @@
 ﻿
-custom-btn, .submitAprove, .submitDenied {
+custom-btn, .submitAprove, .submitDenied, .submitBlack {
     padding: 0.5em 1em;
     border: solid 2px #555;
     width: 25%;
     font-size: 1.2em;
     font-weight: 700;
 }
+.topNavBar {
+    background-color: #FFF387 !important;
+}
 
+.logo {
+    width: 10em;
+    height: 2em;
+}
+
+.text-end {
+    text-align: end;
+}
 h1 {
     margin-top: 1em;
 }
+
+
 .tilbageLink {
     padding: 0.5em;
     border: solid 1.5px black;
@@ -27,6 +40,10 @@ h1 {
 }
 .submitDenied {
     background-color: red;
+}
+.submitBlack {
+    background-color: #222222;
+    color: white;
 }
 
 .lokaleInfoWrapper {

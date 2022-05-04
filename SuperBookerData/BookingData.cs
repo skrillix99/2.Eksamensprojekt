@@ -6,16 +6,30 @@ using System.Threading.Tasks;
 
 namespace SuperBookerData
 {
-    public class BookingData
+    public class BookingData : PersonData
     {
-        private TimeSpan _tidsrum;
+        private TimeSpan _tidStart;
         private DateTime _dag;
-        private bool _heltBooket;
-        
-        public TimeSpan Tidsrum
+        private TimeSpan _tidSlut;
+        private int _heltBooket;
+        private int _brugerId;
+
+        public int BrugerID_FK
         {
-            get => _tidsrum;
-            set => Tidsrum = value;
+            get => _brugerId;
+            set => BrugerID_FK = value;
+        }
+
+        public TimeSpan TidSlut
+        {
+            get => _tidSlut;
+            set => TidSlut = value;
+        }
+        
+        public TimeSpan TidStart
+        {
+            get => _tidStart;
+            set => TidStart = value;
         }
 
         public DateTime Dag
@@ -24,7 +38,7 @@ namespace SuperBookerData
             set => Dag = value;
         }
 
-        public bool HeltBooket
+        public int HeltBooket
         {
             get => _heltBooket;
             set => HeltBooket = value;
@@ -35,11 +49,12 @@ namespace SuperBookerData
 
         }
 
-        public BookingData(TimeSpan Tidsrum, DateTime Dag, bool HeltBooket)
+        public BookingData(TimeSpan TidStart, DateTime Dag, int HeltBooket, TimeSpan TidSlut)
         {
-            _tidsrum = Tidsrum;
+            _tidStart = TidStart;
             _dag = Dag;
             _heltBooket = HeltBooket;
+            _tidSlut = TidSlut;
         }
     }
 }

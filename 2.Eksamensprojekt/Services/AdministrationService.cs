@@ -55,7 +55,11 @@ namespace _2.Eksamensprojekt.Services
             }
         }
 
-
+        /// <summary>
+        /// Oversætter data fra et Lokale database kald til et LokaleData object med alle columns.
+        /// </summary>
+        /// <param name="reader">Typen SqlDataReader. object med data fra database kald</param>
+        /// <returns>et object af typen LokaleData</returns>
         public LokaleData ReadLokale(SqlDataReader reader)
         {
             LokaleData l = new LokaleData();

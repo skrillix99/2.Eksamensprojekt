@@ -18,6 +18,7 @@ namespace SuperBookerData
         public LokaleSize LokaleSize
         {
             get;
+            set;
         }
 
         public int lokaleID

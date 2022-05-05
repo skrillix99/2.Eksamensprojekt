@@ -23,14 +23,14 @@ namespace _2.Eksamensprojekt.Services
 
         public LokaleData GetNumber(string lokaleNummer)
         {
-            LokaleData lokale = _lokaleData.Find(x => x.lokaleNummer == lokaleNummer);
+            LokaleData lokale = _lokaleData.Find(x => x.LokaleNummer == lokaleNummer);
 
             return (lokale != null) ? lokale: throw new KeyNotFoundException();
         }
 
         public LokaleData GetRoom(string lokaleNavn)
         {
-            LokaleData room = _lokaleData.Find(x => x.lokaleNavn == lokaleNavn);
+            LokaleData room = _lokaleData.Find(x => x.LokaleNavn == lokaleNavn);
 
             return (room != null) ? room : throw new KeyNotFoundException();
         }

@@ -12,36 +12,36 @@ namespace SuperBookerData
         private DateTime _dag;
         private TimeSpan _tidSlut;
         private int _heltBooket;
-        private int _brugerId;
+        private int _brugerID;
 
         public int BrugerID_FK
         {
-            get => _brugerId;
-            set => BrugerID_FK = value;
+            get => _brugerID;
+            set => _brugerID = value;
         }
 
         public TimeSpan TidSlut
         {
             get => _tidSlut;
-            set => TidSlut = value;
+            set => _tidSlut = value;
         }
         
         public TimeSpan TidStart
         {
             get => _tidStart;
-            set => TidStart = value;
+            set => _tidStart = value;
         }
 
         public DateTime Dag
         {
             get => _dag;
-            set => Dag = value;
+            set => _dag = value;
         }
 
         public int HeltBooket
         {
             get => _heltBooket;
-            set => HeltBooket = value;
+            set => _heltBooket = value;
         }
 
         public BookingData()

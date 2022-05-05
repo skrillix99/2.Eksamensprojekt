@@ -46,12 +46,12 @@ namespace _2.Eksamensprojekt.Pages.Shared
         {
             LokaleData ld1 = new LokaleData();
 
-            ld1.lokaleID = reader.GetInt32(0);
-            ld1.lokaleNavn = reader.GetString(1);
-            ld1.lokaleNummer = reader.GetString(2);
-            ld1.lokaleSmartBoard = reader.GetBoolean(3);
+            ld1.LokaleID = reader.GetInt32(0);
+            ld1.LokaleNavn = reader.GetString(1);
+            ld1.LokaleNummer = reader.GetString(2);
+            ld1.LokaleSmartBoard = reader.GetBoolean(3);
             ld1.LokaleSize = (LokaleSize)reader.GetInt32(4);
-            ld1.lokaleMuligeBookinger = reader.GetInt32(5);
+            ld1.LokaleMuligeBookinger = reader.GetInt32(5);
 
             return ld1;
         }

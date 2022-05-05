@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using _2.Eksamensprojekt.Services;
 using Microsoft.AspNetCore.Authorization;
 using _2.Eksamensprojekt.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -14,22 +15,20 @@ namespace _2.Eksamensprojekt.Pages.AdministrationPages
     public class AdministrationAflysBookingModel : PageModel
     {
         private IAdministrationService _administrationService;
+        private IBookingService _bookingService;
 
-        public LokaleData Lokale { get; set; }
+        public BookingData Booking { get; set; }
 
-        public AdministrationAflysBookingModel(IAdministrationService administrationService)
+        public AdministrationAflysBookingModel(IAdministrationService administrationService, IBookingService bookingService)
         {
             _administrationService = administrationService;
+            _bookingService = bookingService;
         }
 
         public void OnGet(int id)
         {
-            Lokale = _administrationService.GetSingelLokale(id);
+            Booking = _administrationService.GetSingelBooking(id);
         }
-
-        public IActionResult OnPost()
-        {
-            return RedirectToPage("/AdministrationPages/AdministrationAflysBekræftigelse");
-        }
+        
     }
 }

@@ -20,5 +20,6 @@ namespace _2.Eksamensprojekt.Services.Interfaces
 
         void DeleteResevation(int id);
         List<BookingData> GetAllReservationer();
+        BookingData GetSingelBooking(int id);
     }
 }

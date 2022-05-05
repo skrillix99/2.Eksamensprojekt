@@ -4,19 +4,20 @@
 @{
 }
 
-<a class="tilbageLink" asp-page="/AdministrationForside"> < TILBAGE</a>
+<a class="tilbageLink" asp-page="UnderviserMineBookinger"> < TILBAGE</a>
 
 <h1 class="text-center">Ønsker du at slette denne booking</h1>
 <div class="lokaleInfoWrapper">
-    <h3>@Model.Lokale.LokaleNavn</h3>
-    <p><b>Størrelse:</b> @Enum.GetName(typeof(LokaleSize), (Model.Lokale.LokaleSize - 1)) </p>
-    <p><b>Antal pladser tilbage:</b> @Model.Lokale.LokaleMuligeBookinger</p>
-    <p><b>Dato:</b> 30/05-2022</p>
-    <p><b>Tidspunkt:</b> 10:00 - 12:00</p>
-    <p><b>Booket af:</b> Marcus (DAT 2B)</p>
+    <h3>@Model.Booking.Lokale.LokaleNavn</h3>
+    <h3>@(Model.Booking.Lokale.LokaleSmartBoard ? "M.Smartboard":"U.Smartboard")</h3>
+    <p><b>Størrelse:</b> @Enum.GetName(typeof(LokaleSize), (Model.Booking.Lokale.LokaleSize - 1)) </p>
+    <p><b>Antal pladser tilbage:</b> @Model.Booking.Lokale.MuligeBookinger</p>
+    <p><b>Dato:</b> @Model.Booking.Dag</p>
+    <p><b>Tidspunkt:</b> @Model.Booking.TidStart - @Model.Booking.TidSlut</p>
+    <p><b>Booket af:</b> @Model.Booking.Bruger.BrugerNavn</p>
 </div>
 
 <form method="post" class="AflysbookingForm">
-    <input type="submit" value="Ja" class="submitAprove custom-btn" asp-route-id="@Model.Lokale.LokaleID" asp-page="UnderviserAflysBekræftigelse" />
-    <input type="submit" value="Nej" class="submitDenied custom-btn" formaction="/UnderviserForside" />
+    <input type="submit" value="Ja" class="submitAprove custom-btn" asp-route-id="@Model.Booking.ResevertionId" asp-page="UnderviserAflysBekræftigelse" />
+    <input type="submit" value="Nej" class="submitDenied custom-btn" asp-page="UnderviserMineBookinger" />
 </form>

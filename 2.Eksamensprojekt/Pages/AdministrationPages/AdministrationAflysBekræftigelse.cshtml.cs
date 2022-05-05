@@ -15,20 +15,21 @@ namespace _2.Eksamensprojekt.Pages.AdministrationPages
     {
         private IAdministrationService _administrationService;
 
-        public LokaleData Lokale { get; set; }
+        public BookingData Booking{ get; set; }
 
         public AdministrationAflysBekræftigelseModel(IAdministrationService administrationService)
         {
             _administrationService = administrationService;
         }
 
-        public void OnGet()
+        public void OnGet(int id)
         {
+            Booking = _administrationService.GetSingelBooking(id);
         }
 
         public void OnPost(int id)
         {
-            Lokale = _administrationService.GetSingelLokale(id);
+            Booking = _administrationService.GetSingelBooking(id);
         }
     }
 }

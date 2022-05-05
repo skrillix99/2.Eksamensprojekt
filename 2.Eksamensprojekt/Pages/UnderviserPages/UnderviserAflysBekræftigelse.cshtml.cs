@@ -15,7 +15,7 @@ namespace _2.Eksamensprojekt.Pages.UnderviserPages
     {
         private IAdministrationService _administrationService;
 
-        public LokaleData Lokale { get; set; }
+        public BookingData Booking { get; set; }
 
         public UnderviserAflysBekræftigelseModel(IAdministrationService administrationService)
         {
@@ -26,7 +26,7 @@ namespace _2.Eksamensprojekt.Pages.UnderviserPages
         }
         public void OnPost(int id)
         {
-            Lokale = _administrationService.GetSingelLokale(id);
+            Booking = _administrationService.GetSingelBooking(id);
         }
     }
 }

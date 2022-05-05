@@ -26,7 +26,7 @@ namespace _2.Eksamensprojekt.Services
             l.LokaleNummer = reader.GetString(2);
             l.LokaleSmartBoard = reader.GetBoolean(3);
             l.LokaleSize = (LokaleSize)reader.GetInt32(5);
-            l.LokaleMuligeBookinger = reader.GetInt32(4);
+            l.MuligeBookinger = reader.GetInt32(4);
 
             return l;
         }
@@ -38,11 +38,33 @@ namespace _2.Eksamensprojekt.Services
         private BookingData ReadReservation(SqlDataReader reader)
         {
             BookingData b = new BookingData();
-            b.Tidsrum = reader.GetTimeSpan(0);
+            b.TidStart = reader.GetTimeSpan(0);
             b.Dag = reader.GetDateTime(1);
             b.HeltBooket = reader.GetInt32(2);
-
+             // ?? 
             return b;
+        }
+
+        #endregion
+
+        #region ReadBooking
+
+        private BookingData ReadBookings(SqlDataReader reader)
+        {
+            BookingData k = new BookingData();
+            LokaleData l = new LokaleData(reader.GetString(3), reader.GetString(4), reader.GetBoolean(5),
+                (LokaleSize)reader.GetInt32(6), reader.GetInt32(7));
+            PersonData p = new PersonData();
+            p.BrugerNavn = reader.GetString(8);
+
+            k.Dag = reader.GetDateTime(i: 0);
+            k.TidStart = reader.GetTimeSpan(i: 1);
+            k.TidSlut = reader.GetTimeSpan(i: 2);
+            k.Lokale = l; //3,4,5,6,7
+            k.Bruger = p; // 8
+            k.ResevertionId = reader.GetInt32(9);
+
+            return k;
         }
 
         #endregion
@@ -70,6 +92,29 @@ namespace _2.Eksamensprojekt.Services
             return lokaler;
         }
 
+        public LokaleData GetSingelLokale(int id)
+        {
+            LokaleData list = new LokaleData();
+
+            string sql = "select * from Lokale WHERE LokaleID = @id";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand(sql, connection);
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.Connection.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    var us = ReadLokale(reader);
+                    return us;
+                }
+
+                return list;
+            }
+        }
+
         public List<BookingData> GetAllReservationer()
         {
             List<BookingData> lokaler = new List<BookingData>();
@@ -93,26 +138,31 @@ namespace _2.Eksamensprojekt.Services
             return lokaler;
         }
 
-        public LokaleData GetSingelLokale(int id)
+        public BookingData GetSingelBooking(int id)
         {
-            LokaleData list = new LokaleData();
-
-            string sql = "select * from Lokale WHERE LokaleID = @id";
+            BookingData l = new BookingData();
+            string sql = "SELECT Reservation.Dag, Reservation.TidStart, Reservation.TidSlut, " +
+                         "Lokale.LokaleNavn, LokaleNummer, LokaleSmartBoard, LokaleSize, MuligeBookinger, Person.BrugerNavn, ReservationID " +
+                         "FROM Reservation " +
+                         "INNER JOIN Lokale ON Reservation.ReservationID = Lokale.LokaleID " +
+                         "INNER JOIN Person ON Reservation.ReservationID = Person.BrugerID " +
+                         "WHERE ReservationID = @id";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlCommand cmd = new SqlCommand(sql, connection);
                 cmd.Parameters.AddWithValue("@id", id);
                 cmd.Connection.Open();
+
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 while (reader.Read())
                 {
-                    var us = ReadLokale(reader);
-                    return us;
+                    l = ReadBookings(reader);
+                    return l;
                 }
 
-                return list;
+                return l;
             }
         }
 

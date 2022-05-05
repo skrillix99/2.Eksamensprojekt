@@ -46,7 +46,7 @@ namespace _2.Eksamensprojekt.Services
             ld1.LokaleNummer = reader.GetString(2);
             ld1.LokaleSmartBoard = reader.GetBoolean(3);
             ld1.LokaleSize = (LokaleSize)reader.GetInt32(4);
-            ld1.LokaleMuligeBookinger = reader.GetInt32(5);
+            ld1.MuligeBookinger = reader.GetInt32(5);
 
             return ld1;
         }

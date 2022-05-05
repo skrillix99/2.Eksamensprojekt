@@ -10,7 +10,7 @@ namespace SuperBookerData
     {
         private TimeSpan _tidsrum;
         private DateTime _dag;
-        private bool _heltBooket;
+        private int _heltBooket;
         
         public TimeSpan Tidsrum
         {
@@ -24,7 +24,7 @@ namespace SuperBookerData
             set => Dag = value;
         }
 
-        public bool HeltBooket
+        public int HeltBooket
         {
             get => _heltBooket;
             set => HeltBooket = value;
@@ -35,7 +35,7 @@ namespace SuperBookerData
 
         }
 
-        public BookingData(TimeSpan Tidsrum, DateTime Dag, bool HeltBooket)
+        public BookingData(TimeSpan Tidsrum, DateTime Dag, int HeltBooket)
         {
             _tidsrum = Tidsrum;
             _dag = Dag;

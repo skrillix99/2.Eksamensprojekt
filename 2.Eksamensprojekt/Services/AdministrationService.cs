@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using _2.Eksamensprojekt.Services.Interfaces;
 using SuperBookerData;
 using System.Data.SqlClient;
@@ -20,14 +21,28 @@ namespace _2.Eksamensprojekt.Services
         {
             LokaleData l = new LokaleData();
 
-            l.lokaleID = reader.GetInt32(0);
-            l.lokaleNavn = reader.GetString(1);
-            l.lokaleNummer = reader.GetString(2);
-            l.lokaleSmartBoard = reader.GetBoolean(3);
-            l.lokaleSize = (LokaleSize)reader.GetInt32(5);
-            l.lokaleMuligeBookinger = reader.GetInt32(4);
+            l.LokaleID = reader.GetInt32(0);
+            l.LokaleNavn = reader.GetString(1);
+            l.LokaleNummer = reader.GetString(2);
+            l.LokaleSmartBoard = reader.GetBoolean(3);
+            l.LokaleSize = (LokaleSize)reader.GetInt32(5);
+            l.LokaleMuligeBookinger = reader.GetInt32(4);
 
             return l;
+        }
+
+        #endregion
+
+        #region ReadReservation
+
+        private BookingData ReadReservation(SqlDataReader reader)
+        {
+            BookingData b = new BookingData();
+            b.Tidsrum = reader.GetTimeSpan(0);
+            b.Dag = reader.GetDateTime(1);
+            b.HeltBooket = reader.GetInt32(2);
+
+            return b;
         }
 
         #endregion
@@ -48,6 +63,29 @@ namespace _2.Eksamensprojekt.Services
                 while (reader.Read())
                 {
                     LokaleData l = ReadLokale(reader);
+                    lokaler.Add(l);
+                }
+            }
+
+            return lokaler;
+        }
+
+        public List<BookingData> GetAllReservationer()
+        {
+            List<BookingData> lokaler = new List<BookingData>();
+
+            string sql = "select * from Reservation";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand(sql, connection);
+                cmd.Connection.Open();
+
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    BookingData l = ReadReservation(reader);
                     lokaler.Add(l);
                 }
             }
@@ -78,6 +116,12 @@ namespace _2.Eksamensprojekt.Services
             }
         }
 
-        
+        public void DeleteResevation(int id)
+        {
+            //if (id <= 0 || )
+            //{
+            //    throw new NotImplementedException();
+            //}
+        }
     }
 }

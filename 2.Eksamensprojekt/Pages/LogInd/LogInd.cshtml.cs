@@ -55,15 +55,15 @@ namespace _2.Eksamensprojekt.Pages.LogInd
 
                     if (claims[1].Value == brugerRolle.Student.ToString())
                     {
-                        return RedirectToPage("/StuderendePages/StuderendeForside");
+                        return RedirectToPage("/Shared/LedigeLokaler");
                     }
                     if (claims[1].Value == brugerRolle.Underviser.ToString())
                     {
-                        return RedirectToPage("/UnderviserPages/UnderviserForside");
+                        return RedirectToPage("/Shared/LedigeLokaler");
                     }
                     if (claims[1].Value == brugerRolle.Administration.ToString())
                     {
-                        return RedirectToPage("/AdministrationPages/AdministrationForside");
+                        return RedirectToPage("/Shared/LedigeLokaler");
                     }
                 }
             }

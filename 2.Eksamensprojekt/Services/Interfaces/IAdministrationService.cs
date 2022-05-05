@@ -17,5 +17,8 @@ namespace _2.Eksamensprojekt.Services.Interfaces
         /// <param name="id">Typen int. Må ikke være negativt</param>
         /// <returns>et object af typen LokaleData</returns>
         LokaleData GetSingelLokale(int id);
+
+        void DeleteResevation(int id);
+        List<BookingData> GetAllReservationer();
     }
 }

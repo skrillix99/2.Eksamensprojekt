@@ -7,6 +7,9 @@ using _2.Eksamensprojekt.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SuperBookerData;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Security.Claims;
 
 namespace _2.Eksamensprojekt.Pages.Shared
 {
@@ -17,15 +20,15 @@ namespace _2.Eksamensprojekt.Pages.Shared
         
 
         public List<LokaleData> LokaleData { get; private set; }
-        public List<string> SortTypeValues { get; private set; }
+        public List<string> SoegeKriterierVaerdier { get; private set; }
         
         [BindProperty]
-        public string SortType { get; set; }
+        public string SoegeKriterier { get; set; }
 
         public LedigeLokalerModel(ILedigeLokalerService ledigeLokalerService)
         {
             _ledigeLokalerService = ledigeLokalerService;
-            SortTypeValues = new List<string>()
+            SoegeKriterierVaerdier = new List<string>()
             {
                 "Lokale Nummer Stigende", "Lokale Nummer Faldende"
             };
@@ -37,11 +40,15 @@ namespace _2.Eksamensprojekt.Pages.Shared
             LokaleData = new List<LokaleData>(_lokaleListe);
         }
 
-        public IActionResult OnPost()
-        {
-            DoFind();
-            return Page();
-        }
+        //public async Task<IActionResult> OnPost()
+        //{
+        //    if(user = brugerRolle.Student)
+        //    {
+        //        return RedirectToPage("StuderendePages/StuderendeBooking");
+        //    }
+        //    //DoFind();
+        //    return Page();
+        //}
         private LokaleData ReadLokaleData(SqlDataReader reader)
         {
             LokaleData ld1 = new LokaleData();
@@ -58,7 +65,7 @@ namespace _2.Eksamensprojekt.Pages.Shared
 
         private void DoFind()
         {
-            switch (SortType)
+            switch (SoegeKriterier)
             {
                 case "Lokale Nummer Stigende":
                     LokaleData = new List<LokaleData>(_lokaleListe);

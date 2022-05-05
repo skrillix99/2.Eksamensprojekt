@@ -11,11 +11,11 @@ namespace _2.Eksamensprojekt.Services
     {
         private const string ConnectionString = @"Data Source=zealandmarc.database.windows.net;Initial Catalog=SuperBooker4000;User ID=AdminMarc;Password=Marcus19;Connect Timeout=30;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
-        public List<LokaleData> GetAll()
+        public List<BookingData> GetAll()
         {
-            List<LokaleData> list = new List<LokaleData>();
+            List<BookingData> list = new List<BookingData>();
 
-            string sql = "Select * from Lokale";
+            string sql = "SELECT Reservation.Dag, Reservation.TidStart, Reservation.TidSlut, Lokale.LokaleNavn, LokaleNummer, LokaleSmartBoard, LokaleSize, MuligeBookinger, Person.BrugerNavn FROM Reservation INNER JOIN Lokale ON Reservation.ReservationID = Lokale.LokaleID INNER JOIN Person ON Reservation.ReservationID = Person.BrugerID ";
 
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
@@ -26,12 +26,29 @@ namespace _2.Eksamensprojekt.Services
 
                 while (reader.Read())
                 {
-                    LokaleData l = ReadLokale(reader);
+                    BookingData l = ReadBookings(reader);
                     list.Add(l);
                 }
 
                 return list;
             }
+        }
+
+        private BookingData ReadBookings(SqlDataReader reader)
+        {
+            BookingData k = new BookingData();
+            LokaleData l = new LokaleData(reader.GetString(3), reader.GetString(4), reader.GetBoolean(5),
+                (LokaleSize) reader.GetInt32(6), reader.GetInt32(7));
+            PersonData p = new PersonData();
+            p.BrugerNavn = reader.GetString(8);
+
+            k.Dag = reader.GetDateTime(i: 0);
+            k.TidStart = reader.GetTimeSpan(i: 1);
+            k.TidSlut = reader.GetTimeSpan(i: 2);
+            k.Lokale = l;
+            k.Bruger = p;
+
+            return k;
         }
 
         private LokaleData ReadLokale(SqlDataReader reader)

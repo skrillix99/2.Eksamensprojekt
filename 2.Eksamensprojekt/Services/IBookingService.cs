@@ -9,7 +9,7 @@ namespace _2.Eksamensprojekt.Services
 {
     public interface IBookingService
     {
-        public List<LokaleData> GetAll();
+        public List<BookingData> GetAll();
 
         LokaleData GetById(int LokaleID);
 

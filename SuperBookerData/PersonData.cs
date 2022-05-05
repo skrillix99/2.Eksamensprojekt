@@ -18,31 +18,31 @@ namespace SuperBookerData
         public int brugerID
         {
             get => _brugerID;
-            set => brugerID = value;
+            set => _brugerID = value;
         }
 
-        public string brugerNavn
+        public string BrugerNavn
         {
             get => _brugerNavn;
-            set => brugerNavn = value;
+            set => _brugerNavn = value;
         }
 
         public string brugerTlf
         {
             get => _brugerTlf;
-            set => brugerTlf = value;
+            set => _brugerTlf = value;
         }
 
         public string brugerEmail
         {
             get => _brugerEmail;
-            set => brugerEmail = value;
+            set => _brugerEmail = value;
         }
 
         public string brugerPassword
         {
             get => _brugerPassword;
-            set => brugerPassword = value;
+            set => _brugerPassword = value;
         }
 
         public PersonData()

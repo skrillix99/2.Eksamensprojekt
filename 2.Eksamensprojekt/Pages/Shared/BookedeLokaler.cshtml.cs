@@ -21,11 +21,11 @@ namespace _2.Eksamensprojekt.Pages.Shared
         }
 
         [BindProperty]
-        public LokaleData LokaleData { get; set; }
+        public List<BookingData> BookingData { get; set; }
 
-        public void OnGet(int LokaleID)
+        public void OnGet()
         {
-            LokaleData = _bookingService.GetById(LokaleID);
+        BookingData = _bookingService.GetAll();
         }
 
 

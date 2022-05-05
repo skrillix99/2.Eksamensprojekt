@@ -8,38 +8,69 @@ namespace SuperBookerData
 {
     public class BookingData
     {
-        private TimeSpan _tidsrum;
+        private int _resevertionID;
+        private TimeSpan _tidStart;
         private DateTime _dag;
-        private bool _heltBooket;
-        
-        public TimeSpan Tidsrum
+        private int _heltBooket;
+        private PersonData _bruger;
+        private LokaleData _lokale;
+        private TimeSpan _tidSlut;
+
+        public BookingData()
         {
-            get => _tidsrum;
-            set => Tidsrum = value;
+        }
+
+        public BookingData(int resevertionId, TimeSpan tidStart, DateTime dag, int heltBooket, PersonData bruger, LokaleData lokale, TimeSpan tidSlut)
+        {
+            _resevertionID = resevertionId;
+            _tidStart = tidStart;
+            _dag = dag;
+            _heltBooket = heltBooket;
+            _bruger = bruger;
+            _lokale = lokale;
+            _tidSlut = tidSlut;
+        }
+
+        public int ResevertionId
+        {
+            get => _resevertionID;
+            set => _resevertionID = value;
+        }
+
+        public TimeSpan TidStart
+        {
+            get => _tidStart;
+            set => _tidStart = value;
         }
 
         public DateTime Dag
         {
             get => _dag;
-            set => Dag = value;
+            set => _dag = value;
         }
 
-        public bool HeltBooket
+        public int HeltBooket
         {
             get => _heltBooket;
-            set => HeltBooket = value;
+            set => _heltBooket = value;
         }
 
-        public BookingData()
+        public PersonData Bruger
         {
-
+            get => _bruger;
+            set => _bruger = value;
         }
 
-        public BookingData(TimeSpan Tidsrum, DateTime Dag, bool HeltBooket)
+        public LokaleData Lokale
         {
-            _tidsrum = Tidsrum;
-            _dag = Dag;
-            _heltBooket = HeltBooket;
+            get => _lokale;
+            set => _lokale = value;
+        }
+
+        public TimeSpan TidSlut
+        {
+            get => _tidSlut;
+            set => _tidSlut = value;
         }
     }
 }

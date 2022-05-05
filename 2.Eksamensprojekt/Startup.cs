@@ -28,6 +28,7 @@ namespace _2.Eksamensprojekt
         {
             services.AddRazorPages();
             services.AddSingleton<ILogIndService, LogIndService>();
+            services.AddSingleton<IBookingService, BookingService>();
 
 
             // Marcus

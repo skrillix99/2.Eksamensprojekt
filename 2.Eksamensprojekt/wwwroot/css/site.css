@@ -190,3 +190,7 @@ body {
 .margin_left_small {
     margin-left: 2.5%;
 }
+
+#no_padding {
+    padding: 0 !important;
+}

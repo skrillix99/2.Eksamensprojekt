@@ -2,24 +2,27 @@
 @model _2.Eksamensprojekt.Pages.LogInd.LogIndModel
 @{
 }
-
-<div class="container">
+<body class="body-1">
+<div class="container-1">
+    <div><h1>SUPERBOOKER 4000!!!</h1></div>
     <div>Error Message kommer her</div>
     <form method="post">
         <div class="form-group">
-            <label asp-for="EmailLogInd" class="col-form-label "></label>
+            <label asp-for="EmailLogInd" class="col-form-label ">Benyt din Zealand e-mail</label>
             <div>
-                <input asp-for="EmailLogInd" />
+                <input asp-for="EmailLogInd" class="input-1" placeholder="bruger@zealand.dk" />
             </div>
         </div>
         <div class="form-group">
             <label asp-for="Password" class="col-form-label"></label>
             <div>
-                <input asp-for="Password" />
+                <input asp-for="Password" class="input-1" placeholder="Adgangskode" />
             </div>
         </div>
         <div class="form-group">
             <button class="btn btn-outline-light">Log in</button>
         </div>
     </form>
+    <div><p class="text1">Glemt kodeord? Send en SMS med teksten "kodeord" til 50 76 27 10</p></div>
 </div>
+</body>

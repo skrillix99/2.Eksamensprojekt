@@ -1,32 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace SuperBookerData
 {
-    public enum LokaleSize { S, M, L}
+    public enum LokaleSize { S, M, L }
     public class LokaleData
     {
         private int _lokaleID;
         private string _lokaleNavn;
         private string _lokaleNummer;
         private bool _lokaleSmartBoard;
-        // enum LokaleSize 
-        private int _lokaleMuligeBookinger;
+        private int _muligeBookinger;
 
-        public LokaleData()
+        public LokaleSize LokaleSize
         {
-        }
-
-        public LokaleData(int lokaleId, string lokaleNavn, string lokaleNummer, bool lokaleSmartBoard, int muligeBookinger)
-        {
-            _lokaleID = lokaleId;
-            _lokaleNavn = lokaleNavn;
-            _lokaleNummer = lokaleNummer;
-            _lokaleSmartBoard = lokaleSmartBoard;
-            _lokaleMuligeBookinger = muligeBookinger;
+            get;
+            set;
         }
 
         public int LokaleID
@@ -53,16 +46,38 @@ namespace SuperBookerData
             set => _lokaleSmartBoard = value;
         }
 
-        public LokaleSize LokaleSize
+        public int MuligeBookinger
         {
-            get;
-            set;
+            get => _muligeBookinger;
+            set => _muligeBookinger = value;
         }
 
-        public int LokaleMuligeBookinger
+        public LokaleData()
         {
-            get => _lokaleMuligeBookinger;
-            set => _lokaleMuligeBookinger = value;
+        }
+
+        public LokaleData(string navn, string nummer, bool smartboard, LokaleSize size, int muligeBookinger)
+        {
+            _lokaleNavn = navn;
+            _lokaleNummer = nummer;
+            _lokaleSmartBoard = smartboard;
+            LokaleSize = size;
+            _muligeBookinger = muligeBookinger;
+        }
+
+        public LokaleData(int LokaleID, string LokaleNavn, string LokaleNummer, bool LokaleSmartBoard, int MuligeBookinger)
+        {
+            _lokaleID = LokaleID;
+            _lokaleNavn = LokaleNavn;
+            _lokaleNummer = LokaleNummer;
+            _lokaleSmartBoard = LokaleSmartBoard;
+            _muligeBookinger = MuligeBookinger;
+            LokaleSize = 0;
+        }
+
+        public override string ToString()
+        {
+            return $"{nameof(LokaleSize)}: {LokaleSize}, {nameof(LokaleID)}: {LokaleID}, {nameof(LokaleNavn)}: {LokaleNavn}, {nameof(LokaleNummer)}: {LokaleNummer}, {nameof(LokaleSmartBoard)}: {LokaleSmartBoard}, {nameof(MuligeBookinger)}: {MuligeBookinger}";
         }
     }
 }

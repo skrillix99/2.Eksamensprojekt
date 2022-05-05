@@ -60,6 +60,7 @@ namespace _2.Eksamensprojekt
                 options.AccessDeniedPath = "/Account/AccessDenied";
             });
             services.AddSingleton<IAdministrationService, AdministrationService>();
+            services.AddSingleton<IBookingService, BookingService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

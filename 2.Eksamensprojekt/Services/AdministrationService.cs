@@ -41,7 +41,8 @@ namespace _2.Eksamensprojekt.Services
             b.TidStart = reader.GetTimeSpan(0);
             b.Dag = reader.GetDateTime(1);
             b.HeltBooket = reader.GetInt32(2);
-             // ?? 
+            b.TidSlut = reader.GetTimeSpan(3); 
+            //TODO tilføj brugerID og lokaleID foreign keys
             return b;
         }
 
@@ -166,12 +167,38 @@ namespace _2.Eksamensprojekt.Services
             }
         }
 
+        public BookingData CreateReservation(int id)
+        {
+            BookingData book = new BookingData();
+            string sql = "insert into Reservation(TidStart, Dag, HeltBooket, BrugerID_FK, LokaleID_FK, TidSlut) values(@TidStart, @Dag, @HeltBooket, @BrugerID_FK, @LokaleID_FK, @TidSlut)";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand(sql, connection);
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.Connection.Open();
+
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    book = ReadBookings(reader);
+                    return book;
+                }
+
+                return book;
+            }
+
+        }
+
         public void DeleteResevation(int id)
         {
             //if (id <= 0 || )
-            //{
-            //    throw new NotImplementedException();
-            //}
+            {
+                throw new NotImplementedException();
+            }
         }
+
+        
     }
 }

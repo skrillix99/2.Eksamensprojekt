@@ -29,8 +29,6 @@
 //                cmd.Parameters.AddWithValue("@TidStart", newBooking.TidStart);
 //                cmd.Parameters.AddWithValue("@Dag", newBooking.Dag);
 //                cmd.Parameters.AddWithValue("@HeltBooket", newBooking.HeltBooket);
-//                cmd.Parameters.AddWithValue("@BrugerID_FK", newBooking.BrugerID_FK);
-//                cmd.Parameters.AddWithValue("@LokaleID_FK", (int)newBooking.LokaleID_FK);
 //                cmd.Parameters.AddWithValue("@TidSlut", newBooking.TidSlut);
 
 //                // altid ved Insert, update, delete

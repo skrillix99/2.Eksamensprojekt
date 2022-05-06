@@ -19,9 +19,14 @@ namespace _2.Eksamensprojekt.Pages.LogInd
         public static LogIndData LoggedInUser { get; set; } = null;
 
         [BindProperty]
+        [Required(ErrorMessage = "Du skal udfylde feltet")]
+        [RegularExpression(@"\S+@\S+", ErrorMessage = "Din e-mail skal indeholde et @")]
+        [MinLength(12, ErrorMessage = "Email kan ikke være kortere end 12 tegn")]
         public string EmailLogInd { get; set; }
 
         [BindProperty]
+        [Required(ErrorMessage = "Du skal udfylde adgangskode feltet.")]
+        [MinLength(8, ErrorMessage = "Din Adgangskode skal indeholde minumum 8 tegn.")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 

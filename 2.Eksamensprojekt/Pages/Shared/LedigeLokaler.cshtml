@@ -25,21 +25,25 @@
                 </div>
                 <div class="card-body">
                     <p class="card-text">Størrelse: @LkD.LokaleSize</p>
-                    
-                    <form method="post">
-                        @if (Model.TestB == "marx3796@zealand.dk")
-                        {
-                            <input type="submit" value="Lærer Book" class="btn btn-primary"/>
-                        }
-                        @if (Model.TestA == "jepp198l@zealand.dk")
-                        {
-                            <input type="submit" value="Admin Book" class="btn btn-primary" />
-                        }
-                        @if (Model.TestC == "alex650w@zealand.dk")
-                        {
-                            <input type="submit" value="Stud Book" class="btn btn-primary"/>
-                        }
-                    </form>
+                    @foreach (var test in User.Claims)
+                    {
+                        test.Value.ToString();
+
+                        <form method="post">
+                            @if (test.Value == "marx3796@zealand.dk")
+                            {
+                                <input type="submit" value="Lærer Book" class="btn btn-primary"/>
+                            }
+                            @if (test.Value == "jepp198l@zealand.dk")
+                            {
+                                <input type="submit" value="Admin Book" class="btn btn-primary"/>
+                            }
+                            @if (test.Value == "alex650w@zealand.dk")
+                            {
+                                <input type="submit" value="Stud Book" class="btn btn-primary"/>
+                            }
+                        </form>
+                    }
                 </div>
             </div>
         }

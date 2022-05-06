@@ -34,6 +34,11 @@ namespace _2.Eksamensprojekt.Pages.AdministrationPages
             Lokale = _administrationService.GetSingelLokale(id);
         }
 
+        public void OnPost(int id)
+        {
+            Lokale = _administrationService.GetSingelLokale(id);
+        }
+
         public void OnPostBook(int id)
         {
             Lokale.LokaleID = id;

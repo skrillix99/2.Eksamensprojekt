@@ -1,16 +1,17 @@
 ﻿@page "{id:int}"
+@using SuperBookerData
 @model _2.Eksamensprojekt.Pages.AdministrationPages.AdministrationBookingModel
 @{
 }
 <a href="#">content</a>
 <div class="centered">
     <h1>Booking af</h1>
+    <div class="lokaleInfoWrapper" style="width: unset">
+        <h3>@Model.Lokale.LokaleNummer @Model.Lokale.LokaleNavn</h3>
+        <p><b>Størrelse:</b> @Enum.GetName(typeof(LokaleSize), (Model.Lokale.LokaleSize - 1))</p>
+    </div>
 
-    @* TODO *@
-    
-    [@Model.Lokale.LokaleNummer] - 
-    @Model.Lokale.LokaleNavn
-    
+
     <form method="post">
         
         @foreach (var claim in User.Claims)

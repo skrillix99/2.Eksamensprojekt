@@ -6,6 +6,26 @@
 <h1>booking system til administration</h1>
 
 <form action="/" method="post">
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            <h6>Datetimepicker</h6>
 
-    <input type="datetime-local" value="welp2"/>
+            <div class="form-group">
+                <div class="input-group date" id="datetimepicker">
+                    <input type="text" class="form-control" />	<span class="input-group-addon"><span class="glyphicon-calendar glyphicon"></span></span>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function testfunction() {
+                $('#datetimepicker').datetimepicker({
+                    minDate: moment()
+                });
+            };
+        </script>
+    </div>
+    @*<input type="datetime-local" value="welp2"/>*@
 </form>
+

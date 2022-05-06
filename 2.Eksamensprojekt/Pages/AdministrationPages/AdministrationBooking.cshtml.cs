@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SuperBookerData;
 
+
 namespace _2.Eksamensprojekt.Pages.AdministrationPages
 {
     public class AdministrationBookingModel : PageModel
@@ -19,7 +20,6 @@ namespace _2.Eksamensprojekt.Pages.AdministrationPages
         {
             _administrationService = admin;
         }
-        
 
 
         public void OnGet()

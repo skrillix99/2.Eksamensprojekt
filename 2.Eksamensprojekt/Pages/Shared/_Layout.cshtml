@@ -53,27 +53,62 @@
             @RenderBody()
         </main>
     </div>
+    
 
-    <footer class="border-top footer text-muted">
-        <nav class="menuknapper">
-            <div class="rowtest">
-                <form method="get">
-                    <div class="columntest"><input type="submit" formaction="/Shared/LedigeLokaler" value="Ledige Lokaler" class="skaler btn btn-primary"></div>
-                </form>
-                <form method="get">
-                    <div class="columntest"><input type="submit" formaction="/AdministrationPages/AdministrationBooking" value="Mine Bookinger" class="skaler btn btn-primary"></div>
-                </form>
-                <form method="get">
-                    <div class="columntest"><input type="submit" formaction="/Shared/BookedeLokaler" value="Alle Bookinger" class="skaler btn btn-primary"></div>
-                </form>
-            </div>
-        </nav>
-    </footer>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+
+
+
+    <footer class="border-top footer text-muted">
+        <nav class="menuknapper">
+            <div class="rowtest">
+            @foreach (var test in User.Claims)
+            {
+                if (test.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role")
+                {
+                    <form method="get">
+                        <div class="columntest"><input type="submit" formaction="/Shared/LedigeLokaler" value="Ledige Lokaler" class="skaler btn btn-primary"></div>
+                    </form>
+
+                    if (test.Value == "Administration")
+                    {
+                        <form method="get">
+                            <div class="columntest"><input type="submit" formaction="/AdministrationPages/AdministrationMineBookinger" value="Mine Bookinger" class="skaler btn btn-primary"></div>
+                        </form>
+
+                        <form method="get">
+                            <div class="columntest"><input type="submit" formaction="/Shared/BookedeLokaler" value="Alle Bookinger" class="skaler btn btn-primary"></div>
+                        </form>
+                    }
+                    if (test.Value == "Underviser")
+                    {
+                        <form method="get">
+                            <div class="columntest"><input type="submit" formaction="/UnderviserPages/UnderviserMineBookinger" value="Mine Bookinger" class="skaler btn btn-primary"></div>
+                        </form>
+
+                        <form method="get">
+                            <div class="columntest"><input type="submit" formaction="/Shared/BookedeLokaler" value="Alle Bookinger" class="skaler btn btn-primary"></div>
+                        </form>
+                    }
+                    if (test.Value == "Student")
+                    {
+                        <form method="get">
+                            <div class="columntest"><input type="submit" formaction="/StuderendePages/StuderendeMineBookinger" value="Mine Bookinger" class="skaler btn btn-primary"></div>
+                        </form>
+
+                        <form method="get">
+                            <div class="columntest"><input type="submit" formaction="/Shared/LokaleLokation" value="Oversigtsplan" class="skaler btn btn-primary"></div>
+                        </form>
+                    }
+                }
+            }
+            </div>
+        </nav>
+    </footer>

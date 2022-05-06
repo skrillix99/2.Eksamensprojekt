@@ -15,7 +15,16 @@ namespace _2.Eksamensprojekt.Pages.Shared
         public List<LokaleData> LokaleData { get; private set; } 
         public void OnGet()
         {
-
+            _lokaleListe = _ledigeLokalerService.GetAll();
+            LokaleData = new List<LokaleData>(_lokaleListe);
         }
+
+        public void OnPost()
+        {
+            _lokaleListe = _ledigeLokalerService.GetAll();
+            LokaleData = new List<LokaleData>(_lokaleListe);
+        }
+
+
     }
 }

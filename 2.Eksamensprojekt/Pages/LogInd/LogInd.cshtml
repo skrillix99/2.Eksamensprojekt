@@ -3,6 +3,44 @@
 @{
 }
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - _2.Eksamensprojekt</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/Marcus.css" />
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 topNavBar">
+        <div class="container">
+            <a class="navbar-brand" asp-area="" asp-page="/Index"> <img class="logo" src="~/img/Zealand_logo_black_RGB_1600px_72dpi.png" alt="Logo"> </a>
+            <ul class="navbar-nav flex-grow-1">
+                @{
+                    if (LogIndModel.LoggedInUser == null)
+                    {
+                        <li class="nav-item text-end">
+                            <a class="nav-link" asp-area="" asp-page="/LogInd/LogInd">Login</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item text-end">
+                            <a class="nav-link" asp-area="" asp-page="/LogInd/LogUd">Logout</a>
+                        </li>
+                    }
+                }
+            </ul>
+        </div>
+    </nav>
+</header>
+<div class="container">
+<main role="main" class="pb-3">
+
+
 <div class="container">
     <div>Error Message kommer her</div>
     <form method="post">
@@ -24,4 +62,13 @@
     </form>
 </div>
 
-<footer></footer>
+    
+</main>
+</div>
+
+
+</body>
+</html>
+@{
+    Layout = null;
+}

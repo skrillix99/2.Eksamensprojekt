@@ -28,6 +28,7 @@ namespace _2.Eksamensprojekt.Pages.LogInd
         //TODO opret en error message hvis der er incorrect input i felterne ved hjælp af string message
         //public string Message { get; set; }
 
+
         public LogIndModel(ILogIndService brugerService)
         {
             _brugerService = brugerService;

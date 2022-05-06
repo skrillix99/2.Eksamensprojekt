@@ -8,24 +8,35 @@ namespace SuperBookerData
 {
     public class BookingData : PersonData
     {
+        private int _resevertionID;
         private TimeSpan _tidStart;
         private DateTime _dag;
-        private TimeSpan _tidSlut;
         private int _heltBooket;
-        private int _brugerID;
+        private PersonData _bruger;
+        private LokaleData _lokale;
+        private TimeSpan _tidSlut;
 
-        public int BrugerID_FK
+        public BookingData()
         {
-            get => _brugerID;
-            set => _brugerID = value;
         }
 
-        public TimeSpan TidSlut
+        public BookingData(int resevertionId, TimeSpan tidStart, DateTime dag, int heltBooket, PersonData bruger, LokaleData lokale, TimeSpan tidSlut)
         {
-            get => _tidSlut;
-            set => _tidSlut = value;
+            _resevertionID = resevertionId;
+            _tidStart = tidStart;
+            _dag = dag;
+            _heltBooket = heltBooket;
+            _bruger = bruger;
+            _lokale = lokale;
+            _tidSlut = tidSlut;
         }
-        
+
+        public int ResevertionId
+        {
+            get => _resevertionID;
+            set => _resevertionID = value;
+        }
+
         public TimeSpan TidStart
         {
             get => _tidStart;
@@ -44,17 +55,22 @@ namespace SuperBookerData
             set => _heltBooket = value;
         }
 
-        public BookingData()
+        public PersonData Bruger
         {
-
+            get => _bruger;
+            set => _bruger = value;
         }
 
-        public BookingData(TimeSpan TidStart, DateTime Dag, int HeltBooket, TimeSpan TidSlut)
+        public LokaleData Lokale
         {
-            _tidStart = TidStart;
-            _dag = Dag;
-            _heltBooket = HeltBooket;
-            _tidSlut = TidSlut;
+            get => _lokale;
+            set => _lokale = value;
+        }
+
+        public TimeSpan TidSlut
+        {
+            get => _tidSlut;
+            set => _tidSlut = value;
         }
     }
 }

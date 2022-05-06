@@ -1,4 +1,23 @@
-﻿@page
+﻿@page "{id:int}"
+@using SuperBookerData
 @model _2.Eksamensprojekt.Pages.AdministrationPages.AdministrationAflysBookingModel
 @{
 }
+
+<a class="tilbageLink" asp-page="AdministrationMineBookinger"> < TILBAGE</a>
+
+<h1 class="text-center">Ønsker du at slette denne booking</h1>
+<div class="lokaleInfoWrapper">
+    <h3>@Model.Booking.Lokale.LokaleNavn</h3>
+    <h3>@(Model.Booking.Lokale.LokaleSmartBoard ? "M.Smartboard":"U.Smartboard")</h3>
+    <p><b>Størrelse:</b> @Enum.GetName(typeof(LokaleSize), (Model.Booking.Lokale.LokaleSize - 1)) </p>
+    <p><b>Antal pladser tilbage:</b> @Model.Booking.Lokale.MuligeBookinger</p>
+    <p><b>Dato:</b> @Model.Booking.Dag</p>
+    <p><b>Tidspunkt:</b> @Model.Booking.TidStart - @Model.Booking.TidSlut</p>
+    <p><b>Booket af:</b> @Model.Booking.Bruger.BrugerNavn</p>
+</div>
+
+<form method="post" class="AflysbookingForm">
+    <input type="submit" value="Ja" class="submitAprove custom-btn" asp-route-id="@Model.Booking.ResevertionId" asp-page="AdministrationAflysBekræftigelse"/>
+    <input type="submit" value="Nej" class="submitDenied custom-btn" asp-page="AdministrationMineBookinger"/>
+</form>

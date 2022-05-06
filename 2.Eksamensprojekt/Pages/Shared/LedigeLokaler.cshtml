@@ -3,3 +3,50 @@
 @{
 }
 
+
+<div class="row">
+    <div class="col-md-8">
+        @foreach (var LkD in @Model.LokaleData)
+        {
+
+            <div class="card mb-2" style="width: 30rem;">
+                <div class="card-header p-2">
+                    <h5 class="card-title">@LkD.LokaleNummer. @LkD.LokaleNavn</h5>
+                    <h5>
+                        @if (LkD.LokaleSmartBoard == true)
+                        {
+                            @("(M. SmartBoard)")
+                        }
+                        @if (LkD.LokaleSmartBoard == false)
+                        {
+                            @("(U. SmartBoard)")
+                        }
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Størrelse: @LkD.LokaleSize</p>
+                    @foreach (var test in User.Claims)
+                    {
+                        test.Value.ToString();
+
+                        <form method="post">
+                            @if (test.Value == "marx3796@zealand.dk")
+                            {
+                                <input type="submit" value="Lærer Book" asp-page="/UnderviserPages/UnderviserBooking" class="btn btn-primary"/>
+                            }
+                            @if (test.Value == "jepp198l@zealand.dk")
+                            {
+                                <input type="submit" value="Admin Book" asp-page="/AdministratorPages/AdministratorBooking" class="btn btn-primary"/>
+                            }
+                            @if (test.Value == "alex650w@zealand.dk")
+                            {
+                                <input type="submit" value="Stud Book" asp-page="/StudentPages/StudentBooking" class="btn btn-primary"/>
+                            }
+                        </form>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</div>
+

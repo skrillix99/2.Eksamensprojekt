@@ -32,15 +32,15 @@
                         <form method="post">
                             @if (test.Value == "marx3796@zealand.dk")
                             {
-                                <input type="submit" value="Lærer Book" class="btn btn-primary"/>
+                                <input type="submit" value="Lærer Book" asp-page="/UnderviserPages/UnderviserBooking" class="btn btn-primary"/>
                             }
                             @if (test.Value == "jepp198l@zealand.dk")
                             {
-                                <input type="submit" value="Admin Book" class="btn btn-primary"/>
+                                <input type="submit" value="Admin Book" asp-page="/AdministratorPages/AdministratorBooking" class="btn btn-primary"/>
                             }
                             @if (test.Value == "alex650w@zealand.dk")
                             {
-                                <input type="submit" value="Stud Book" class="btn btn-primary"/>
+                                <input type="submit" value="Stud Book" asp-page="/StudentPages/StudentBooking" class="btn btn-primary"/>
                             }
                         </form>
                     }

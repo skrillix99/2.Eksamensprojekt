@@ -11,17 +11,20 @@ using SuperBookerData;
 namespace _2.Eksamensprojekt.Pages.UnderviserPages
 {
     [Authorize(Roles = "Underviser")]
-    public class UnderviserAflysBookingModel : PageModel
+    public class UnderviserAflysBekræftigelseModel : PageModel
     {
         private IAdministrationService _administrationService;
 
         public BookingData Booking { get; set; }
 
-        public UnderviserAflysBookingModel(IAdministrationService administrationService)
+        public UnderviserAflysBekræftigelseModel(IAdministrationService administrationService)
         {
             _administrationService = administrationService;
         }
-        public void OnGet(int id)
+        public void OnGet()
+        {
+        }
+        public void OnPost(int id)
         {
             Booking = _administrationService.GetSingelBooking(id);
         }

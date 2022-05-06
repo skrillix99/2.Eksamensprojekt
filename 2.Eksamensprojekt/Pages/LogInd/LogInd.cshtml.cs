@@ -28,6 +28,7 @@ namespace _2.Eksamensprojekt.Pages.LogInd
         //TODO opret en error message hvis der er incorrect input i felterne ved hjælp af string message
         //public string Message { get; set; }
 
+
         public LogIndModel(ILogIndService brugerService)
         {
             _brugerService = brugerService;
@@ -44,25 +45,26 @@ namespace _2.Eksamensprojekt.Pages.LogInd
                 if (EmailLogInd == user.EmailLogInd && Password == user.Password)
                 {
                     LoggedInUser = user;
-                var claims = new List<Claim>
+                    // sætter Claims op med Email (ClaimTypes.Name) og Rolle (ClaimTypes.Role) og bagefter redirect'er til den rette forside baseret på role.
+                    var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name, EmailLogInd), 
-                        new Claim(ClaimTypes.Role, user.rolle.ToString())
+                    new Claim(ClaimTypes.Role, user.rolle.ToString())
                 };
                     var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
 
                     if (claims[1].Value == brugerRolle.Student.ToString())
                     {
-                        return RedirectToPage("/StuderendePages/StuderendeForside");
+                        return RedirectToPage("/Shared/LedigeLokaler");
                     }
                     if (claims[1].Value == brugerRolle.Underviser.ToString())
                     {
-                        return RedirectToPage("/UnderviserPages/UnderviserForside");
+                        return RedirectToPage("/Shared/LedigeLokaler");
                     }
                     if (claims[1].Value == brugerRolle.Administration.ToString())
                     {
-                        return RedirectToPage("/AdministrationPages/AdministrationForside");
+                        return RedirectToPage("/Shared/LedigeLokaler");
                     }
                 }
             }

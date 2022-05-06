@@ -8,20 +8,26 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SuperBookerData;
 
-namespace _2.Eksamensprojekt.Pages.UnderviserPages
+namespace _2.Eksamensprojekt.Pages.AdministrationPages
 {
-    [Authorize(Roles = "Underviser")]
-    public class UnderviserAflysBookingModel : PageModel
+    [Authorize(Roles = "Administration")]
+    public class AdministrationAflysBekræftigelseModel : PageModel
     {
         private IAdministrationService _administrationService;
 
-        public BookingData Booking { get; set; }
+        public BookingData Booking{ get; set; }
 
-        public UnderviserAflysBookingModel(IAdministrationService administrationService)
+        public AdministrationAflysBekræftigelseModel(IAdministrationService administrationService)
         {
             _administrationService = administrationService;
         }
+
         public void OnGet(int id)
+        {
+            Booking = _administrationService.GetSingelBooking(id);
+        }
+
+        public void OnPost(int id)
         {
             Booking = _administrationService.GetSingelBooking(id);
         }

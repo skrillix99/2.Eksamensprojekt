@@ -184,7 +184,7 @@ namespace _2.Eksamensprojekt.Services
         public void AddReservation(BookingData newBooking)
         {
             string sql = "insert into Reservation VALUES (@tidStart, @dag, 0, @brugerFK, @lokaleFK, @tidSlut, @bookesFor)";
-                                                        // TidStart, Dag, Heltbooket, Bruger_FK, Lokale_FK, TidSlut
+                                                        // TidStart, Dag, Heltbooket, Bruger_FK, Lokale_FK, TidSlut, BookesFor
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 TimeSpan tidSlut= newBooking.Dag.TimeOfDay.Add(newBooking.TidStart);

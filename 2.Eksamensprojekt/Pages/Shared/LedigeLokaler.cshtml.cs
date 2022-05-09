@@ -21,7 +21,7 @@ namespace _2.Eksamensprojekt.Pages.Shared
         {
             _ledigeLokalerService = ledigeLokalerService;
         }
-        
+
         public void OnGet()
         {
             _lokaleListe = _ledigeLokalerService.GetAll();

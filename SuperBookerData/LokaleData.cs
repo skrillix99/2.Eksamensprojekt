@@ -15,6 +15,7 @@ namespace SuperBookerData
         private string _lokaleNummer;
         private bool _lokaleSmartBoard;
         private int _muligeBookinger;
+        private int _etage;
 
         public LokaleSize LokaleSize
         {
@@ -52,27 +53,24 @@ namespace SuperBookerData
             set => _muligeBookinger = value;
         }
 
+        public int Etage
+        {
+            get => _etage;
+            set => _etage = value;
+        }
         public LokaleData()
         {
         }
 
-        public LokaleData(string navn, string nummer, bool smartboard, LokaleSize size, int muligeBookinger)
-        {
-            _lokaleNavn = navn;
-            _lokaleNummer = nummer;
-            _lokaleSmartBoard = smartboard;
-            LokaleSize = size;
-            _muligeBookinger = muligeBookinger;
-        }
-
-        public LokaleData(int LokaleID, string LokaleNavn, string LokaleNummer, bool LokaleSmartBoard, int MuligeBookinger)
+        public LokaleData(int LokaleID, string LokaleNavn, string LokaleNummer, bool LokaleSmartBoard, int MuligeBookinger, LokaleSize size, int etage)
         {
             _lokaleID = LokaleID;
             _lokaleNavn = LokaleNavn;
             _lokaleNummer = LokaleNummer;
             _lokaleSmartBoard = LokaleSmartBoard;
             _muligeBookinger = MuligeBookinger;
-            LokaleSize = 0;
+            LokaleSize = size;
+            _etage = etage;
         }
 
         public override string ToString()

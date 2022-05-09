@@ -16,7 +16,7 @@
     <p><b>Tidspunkt:</b> @Model.Booking.TidStart - @Model.Booking.TidSlut</p>
     <p><b>Booket af:</b> @Model.Booking.Bruger.BrugerNavn</p>
 </div>
-jepp198l@zealand.dk
+
 <form method="post" class="AflysbookingForm">
     <input type="submit" value="Ja" class="submitAprove custom-btn" asp-route-id="@Model.Booking.ResevertionId" asp-page="AdministrationAflysBekræftigelse" />
     <input type="submit" value="Nej" class="submitDenied custom-btn" asp-page="AdministrationMineBookinger" />

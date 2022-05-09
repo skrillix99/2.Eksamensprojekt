@@ -9,5 +9,6 @@ namespace _2.Eksamensprojekt.Services
     public interface ILedigeLokalerService
     {
         List<LokaleData> GetAll();
+        List<LokaleData> GetAllLokaleBySqlString(string sql);
     }
 }

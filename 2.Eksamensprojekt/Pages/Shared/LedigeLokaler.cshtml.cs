@@ -16,7 +16,13 @@ namespace _2.Eksamensprojekt.Pages.Shared
     {
         private ILedigeLokalerService _ledigeLokalerService;
         private static List<LokaleData> _lokaleListe;
+
         public List<LokaleData> LokaleData { get; private set; }
+        [BindProperty]
+        public LokaleData LokaleDataSingel { get; private set; }
+        [BindProperty]
+        public string NummerSøgning { get; set; }
+
         public LedigeLokalerModel(ILedigeLokalerService ledigeLokalerService)
         {
             _ledigeLokalerService = ledigeLokalerService;
@@ -30,8 +36,20 @@ namespace _2.Eksamensprojekt.Pages.Shared
 
         public void OnPost()
         {
-            _lokaleListe = _ledigeLokalerService.GetAll();
-            LokaleData = new List<LokaleData>(_lokaleListe);
+            LokaleDataSingel = new LokaleData();
+            string sql = "select * from Lokale where 1=1 ";
+
+            if (!String.IsNullOrWhiteSpace(NummerSøgning))
+            {
+                sql += $"AND LokaleNummer = '{NummerSøgning}' ";
+            }
+
+            if (!(LokaleDataSingel.Etage <= 0) || (LokaleDataSingel.Etage >= 4))
+            {
+                sql += $"AND LokaleEtage = {LokaleDataSingel.Etage} ";
+            }
+
+            LokaleData = _ledigeLokalerService.GetAllLokaleBySqlString(sql);
         }
 
 

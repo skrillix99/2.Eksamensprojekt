@@ -53,15 +53,21 @@ namespace _2.Eksamensprojekt.Services
         private BookingData ReadBookings(SqlDataReader reader)
         {
             BookingData k = new BookingData();
-            LokaleData l = new LokaleData(reader.GetString(3), reader.GetString(4), reader.GetBoolean(5),
-                (LokaleSize)reader.GetInt32(6), reader.GetInt32(7));
+
+            LokaleData ld = new LokaleData();
+            ld.LokaleNavn = reader.GetString(3);
+            ld.LokaleNummer = reader.GetString(4);
+            ld.LokaleSmartBoard = reader.GetBoolean(5);
+            ld.LokaleSize = (LokaleSize)reader.GetInt32(6);
+            ld.MuligeBookinger = reader.GetInt32(7);
+
             PersonData p = new PersonData();
             p.BrugerNavn = reader.GetString(8);
 
             k.Dag = reader.GetDateTime(i: 0);
             k.TidStart = reader.GetTimeSpan(i: 1);
             k.TidSlut = reader.GetTimeSpan(i: 2);
-            k.Lokale = l; //3,4,5,6,7
+            k.Lokale = ld; //3,4,5,6,7
             k.Bruger = p; // 8
             k.ResevertionId = reader.GetInt32(9);
 

@@ -145,8 +145,8 @@ namespace _2.Eksamensprojekt.Services
             string sql = "SELECT Reservation.Dag, Reservation.TidStart, Reservation.TidSlut, " +
                          "Lokale.LokaleNavn, LokaleNummer, LokaleSmartBoard, LokaleSize, MuligeBookinger, Person.BrugerNavn, ReservationID " +
                          "FROM Reservation " +
-                         "INNER JOIN Lokale ON Reservation.ReservationID = Lokale.LokaleID " +
-                         "INNER JOIN Person ON Reservation.ReservationID = Person.BrugerID " +
+                         "INNER JOIN Lokale ON Reservation.LokaleID_FK = Lokale.LokaleID " +
+                         "INNER JOIN Person ON Reservation.BrugerID_FK = Person.BrugerID " +
                          "WHERE ReservationID = @id";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -193,9 +193,25 @@ namespace _2.Eksamensprojekt.Services
 
         public void DeleteResevation(int id)
         {
-            //if (id <= 0 || )
+            if (id <= 0)
             {
-                throw new NotImplementedException();
+                throw new KeyNotFoundException("Der findes ikke nogle reservationer med det ID");
+            }
+
+            string sql = "DELETE from Reservation WHERE ReservationID = @id";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand(sql, connection);
+                cmd.Parameters.AddWithValue("@id", id);
+
+                cmd.Connection.Open();
+
+                int rows = cmd.ExecuteNonQuery();
+                if (rows != 1)
+                {
+                    throw new InvalidOperationException("Der skete en fejl i databasen"); 
+                }
             }
         }
 

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using _2.Eksamensprojekt.Pages.AdministrationPages;
 using _2.Eksamensprojekt.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -26,7 +27,8 @@ namespace _2.Eksamensprojekt.Pages.UnderviserPages
         }
         public void OnPost(int id)
         {
-            Booking = _administrationService.GetSingelBooking(id);
+            _administrationService.DeleteResevation(id);
+            Booking = UnderviserAflysBookingModel.TempBookingData;
         }
     }
 }

@@ -27,20 +27,5 @@ namespace _2.Eksamensprojekt.Pages.AdministrationPages
 
 
 
-        public IActionResult OnPost()
-        {
-
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
-            if (book.ResevertionId.Equals(0))
-            {
-                book.ResevertionId++;
-            }
-
-            return RedirectToPage("/AdministrationPages/AdministrationMineBookinger");
-        }
     }
 }

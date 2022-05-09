@@ -11,24 +11,22 @@
         <div class="col-md-12">
             <h6>Datetimepicker</h6>
 
+            
+
             <div class="form-group">
                 <div class="input-group date" id="datetimepicker">
-                    <asp:Calendar ID="Calendar1" TodayDayStyle-Font-Underline="false" runat="server" SelectionMode="None" OnDayRender="Calendar1_DayRender">
-                        <DayStyle Font-Underline="False" Wrap="False" />
-                    </asp:Calendar>
+
+                    <input type="datetime-local" class="form-control col-md-6" name="book" required>
+                    <script>
+                        var today = new Date().toISOString().slice(0, 16);
+
+                        document.getElementsByName("book")[0].min = today;
+
+                    </script>
                 </div>
             </div>
         </div>
 
-        <script>
-                    protected void Calendar1_DayRender(object sender, DayRenderEventArgs e)
-                {
-                    if (e.Day.Date < DateTime.Now.Date) {
-                        e.Day.IsSelectable = false;
-                        e.Cell.ForeColor = System.Drawing.Color.Gray;
-                    }
-                }
-        </script>
     </div>
     @*<input type="datetime-local" value="welp2"/>*@
 </form>

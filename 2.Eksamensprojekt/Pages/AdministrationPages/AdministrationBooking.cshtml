@@ -4,3 +4,30 @@
 }
 
 <h1>booking system til administration</h1>
+
+<form action="/" method="post">
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            <h6>Datetimepicker</h6>
+
+            
+
+            <div class="form-group">
+                <div class="input-group date" id="datetimepicker">
+
+                    <input type="datetime-local" class="form-control col-md-6" name="book" required>
+                    <script>
+                        var today = new Date().toISOString().slice(0, 16);
+
+                        document.getElementsByName("book")[0].min = today;
+
+                    </script>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    @*<input type="datetime-local" value="welp2"/>*@
+</form>
+

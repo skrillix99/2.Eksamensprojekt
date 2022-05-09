@@ -15,7 +15,7 @@ namespace SuperBookerData
             get;
         }
 
-        public int brugerID
+        public int BrugerID
         {
             get => _brugerID;
             set => _brugerID = value;
@@ -27,19 +27,19 @@ namespace SuperBookerData
             set => _brugerNavn = value;
         }
 
-        public string brugerTlf
+        public string BrugerTlf
         {
             get => _brugerTlf;
             set => _brugerTlf = value;
         }
 
-        public string brugerEmail
+        public string BrugerEmail
         {
             get => _brugerEmail;
             set => _brugerEmail = value;
         }
 
-        public string brugerPassword
+        public string BrugerPassword
         {
             get => _brugerPassword;
             set => _brugerPassword = value;

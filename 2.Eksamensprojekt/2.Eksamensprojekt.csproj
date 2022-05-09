@@ -14,4 +14,8 @@
     <ProjectReference Include="..\SuperBookerData\SuperBookerData.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Billeder\" />
+  </ItemGroup>
+
 </Project>

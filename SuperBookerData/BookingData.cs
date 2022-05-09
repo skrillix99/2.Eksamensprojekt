@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace SuperBookerData
 {
-    public class BookingData
+    public class BookingData : PersonData
     {
         private int _resevertionID;
         private TimeSpan _tidStart;
@@ -37,18 +38,21 @@ namespace SuperBookerData
             set => _resevertionID = value;
         }
 
+        [Required]
         public TimeSpan TidStart
         {
             get => _tidStart;
             set => _tidStart = value;
         }
 
+        [Required]
         public DateTime Dag
         {
             get => _dag;
             set => _dag = value;
         }
 
+        [Required]
         public int HeltBooket
         {
             get => _heltBooket;
@@ -67,6 +71,7 @@ namespace SuperBookerData
             set => _lokale = value;
         }
 
+        [Required]
         public TimeSpan TidSlut
         {
             get => _tidSlut;

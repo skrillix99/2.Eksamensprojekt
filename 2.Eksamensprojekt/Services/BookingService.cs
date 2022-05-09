@@ -38,7 +38,7 @@ namespace _2.Eksamensprojekt.Services
         {
             BookingData k = new BookingData();
             LokaleData l = new LokaleData(reader.GetString(3), reader.GetString(4), reader.GetBoolean(5),
-                (LokaleSize)reader.GetInt32(6), reader.GetInt32(7));
+                (LokaleSize)reader.GetInt32(6), reader.GetInt32(7), reader.GetInt32(8));
             PersonData p = new PersonData();
             p.BrugerNavn = reader.GetString(8);
 

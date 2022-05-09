@@ -26,6 +26,7 @@ namespace _2.Eksamensprojekt.Pages.LogInd
 
         [BindProperty]
         [Required(ErrorMessage = "Du skal udfylde adgangskode feltet.")]
+        //TODO make a regularexpression
         [MinLength(8, ErrorMessage = "Din Adgangskode skal indeholde minumum 8 tegn.")]
         [DataType(DataType.Password)]
         public string Password { get; set; }

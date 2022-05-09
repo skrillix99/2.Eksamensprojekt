@@ -13,17 +13,21 @@
 
             <div class="form-group">
                 <div class="input-group date" id="datetimepicker">
-                    <input type="text" class="form-control" />	<span class="input-group-addon"><span class="glyphicon-calendar glyphicon"></span></span>
+                    <asp:Calendar ID="Calendar1" TodayDayStyle-Font-Underline="false" runat="server" SelectionMode="None" OnDayRender="Calendar1_DayRender">
+                        <DayStyle Font-Underline="False" Wrap="False" />
+                    </asp:Calendar>
                 </div>
             </div>
         </div>
 
         <script>
-            function testfunction() {
-                $('#datetimepicker').datetimepicker({
-                    minDate: moment()
-                });
-            };
+                    protected void Calendar1_DayRender(object sender, DayRenderEventArgs e)
+                {
+                    if (e.Day.Date < DateTime.Now.Date) {
+                        e.Day.IsSelectable = false;
+                        e.Cell.ForeColor = System.Drawing.Color.Gray;
+                    }
+                }
         </script>
     </div>
     @*<input type="datetime-local" value="welp2"/>*@

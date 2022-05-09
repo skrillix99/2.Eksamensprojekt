@@ -183,7 +183,7 @@ namespace _2.Eksamensprojekt.Services
 
         public void AddReservation(BookingData newBooking)
         {
-            string sql = "insert into Reservation VALUES (@tidStart, @dag, 0, @brugerFK, @lokaleFK, @tidSlut)";
+            string sql = "insert into Reservation VALUES (@tidStart, @dag, 0, @brugerFK, @lokaleFK, @tidSlut, @bookesFor)";
                                                         // TidStart, Dag, Heltbooket, Bruger_FK, Lokale_FK, TidSlut
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -196,6 +196,7 @@ namespace _2.Eksamensprojekt.Services
                 cmd.Parameters.AddWithValue("@tidSlut", tidSlut.ToString());
                 cmd.Parameters.AddWithValue("@brugerFK", brugerID);
                 cmd.Parameters.AddWithValue("@lokaleFK", newBooking.Lokale.LokaleID);
+                cmd.Parameters.AddWithValue("@bookesFor", (int)newBooking.BookesFor);
 
                 cmd.Connection.Open();
 

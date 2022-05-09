@@ -15,6 +15,7 @@ namespace SuperBookerData
         private PersonData _bruger;
         private LokaleData _lokale;
         private TimeSpan _tidSlut;
+        private brugerRolle _bookesFor;
 
         public BookingData()
         {
@@ -29,6 +30,7 @@ namespace SuperBookerData
             _bruger = bruger;
             _lokale = lokale;
             _tidSlut = tidSlut;
+            _bookesFor = 0;
         }
 
         public int ResevertionId
@@ -71,6 +73,12 @@ namespace SuperBookerData
         {
             get => _tidSlut;
             set => _tidSlut = value;
+        }
+
+        public brugerRolle BookesFor
+        {
+            get => _bookesFor;
+            set => _bookesFor = value;
         }
     }
 }

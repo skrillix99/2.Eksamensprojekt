@@ -38,11 +38,21 @@
         <fieldset>
             <label>Bookes for</label>
             <br/>
-            <select>
-                <option value="value">text</option>
+            <select asp-for="@Model.Booking.BookesFor">            
+                @foreach (var rolle in Enum.GetValues(typeof(brugerRolle)))
+                {
+                    <option value="@rolle">@rolle</option>            
+                 }
             </select>
         </fieldset>
 
         <input type="submit" value="Book" class="btn-primary" asp-page-handler="book" asp-route-id="@Model.Lokale.LokaleID"/>
     </form>
 </div>
+
+
+<script>
+    var today = new Date().toISOString().slice(0, 16);
+
+    document.getElementsByName("Booking.Dag")[0].min = today;
+</script>

@@ -1,18 +1,31 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+using _2.Eksamensprojekt.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using SuperBookerData;
 
 namespace _2.Eksamensprojekt.Pages.AdministrationPages
 {
-    [Authorize(Roles = "Administration")]
     public class AdministrationBookingModel : PageModel
     {
+        [BindProperty]
+        public BookingData book { get; set; }
+
+        private IAdministrationService _administrationService;
+        
+        public AdministrationBookingModel(IAdministrationService admin)
+        {
+            _administrationService = admin;
+        }
+
+
         public void OnGet()
         {
+
+
         }
+
+
+
     }
 }

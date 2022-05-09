@@ -27,22 +27,23 @@
                     <p class="card-text">Størrelse: @LkD.LokaleSize</p>
                     @foreach (var test in User.Claims)
                     {
-                        test.Value.ToString();
+                        if(test.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role") { 
 
                         <form method="post">
-                            @if (test.Value == "marx3796@zealand.dk")
+                            @if (test.Value == "Underviser")
                             {
-                                <input type="submit" value="Lærer Book" class="btn btn-primary" />
+                                <input type="submit" value="Lærer Book" asp-page="/UnderviserPages/UnderviserBooking" class="btn btn-primary"/>
                             }
-                            @if (test.Value == "jepp198l@zealand.dk")
+                            @if (test.Value == "Administration")
                             {
-                                <input type="submit" value="Admin Book" class="btn btn-primary" />
+                                <input type="submit" value="Admin Book" asp-page="/AdministrationPages/AdministrationBooking" class="btn btn-primary"/>
                             }
-                            @if (test.Value == "alex650w@zealand.dk")
+                            @if (test.Value == "Student")
                             {
-                                <input type="submit" value="Stud Book" class="btn btn-primary" />
+                                <input type="submit" value="Stud Book" asp-page="/StuderendePages/StuderendeBooking" class="btn btn-primary"/>
                             }
                         </form>
+                        }
                     }
                 </div>
             </div>

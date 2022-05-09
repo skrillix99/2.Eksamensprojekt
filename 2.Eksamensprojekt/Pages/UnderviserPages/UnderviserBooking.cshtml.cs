@@ -13,20 +13,19 @@ namespace _2.Eksamensprojekt.Pages.UnderviserPages
     [Authorize(Roles = "Underviser")]
     public class UnderviserBookingModel : PageModel
     {
+        private IUnderviserService _underviserService;
         private IAdministrationService _administrationService;
 
         [BindProperty]
         public BookingData Booking { get; set; }
         [BindProperty]
-        public PersonData Email { get; set; }
-        [BindProperty]
         public LokaleData Lokale { get; set; }
 
-        public UnderviserBookingModel(IAdministrationService administrationService)
+        public UnderviserBookingModel(IUnderviserService underviserService, IAdministrationService administrationService)
         {
+            _underviserService = underviserService;
             _administrationService = administrationService;
 
-            Email = new PersonData();
             Lokale = new LokaleData();
         }
         public void OnGet(int id)
@@ -43,8 +42,7 @@ namespace _2.Eksamensprojekt.Pages.UnderviserPages
         {
             Lokale.LokaleID = id;
             Booking.Lokale = Lokale;
-            Booking.Bruger = Email;
-            _administrationService.AddReservation(Booking);
+            _underviserService.AddReservation(Booking);
         }
     }
 }

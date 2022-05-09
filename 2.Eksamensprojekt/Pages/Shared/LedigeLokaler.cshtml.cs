@@ -18,6 +18,7 @@ namespace _2.Eksamensprojekt.Pages.Shared
         private ILedigeLokalerService _ledigeLokalerService;
         private static List<LokaleData> _lokaleListe;
         
+        
 
         public List<LokaleData> LokaleData { get; private set; }
         public List<string> SoegeKriterierVaerdier { get; private set; }
@@ -38,7 +39,11 @@ namespace _2.Eksamensprojekt.Pages.Shared
         {
             _lokaleListe = _ledigeLokalerService.GetAll();
             LokaleData = new List<LokaleData>(_lokaleListe);
+
+            
         }
+
+
 
         //public async Task<IActionResult> OnPost()
         //{

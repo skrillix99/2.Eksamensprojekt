@@ -2,37 +2,120 @@
 @model _2.Eksamensprojekt.Pages.Shared.LedigeLokalerModel
 @{
 }
+<div class="soege-kriteria">
+    <label for="drop" class="toggle">&#8801; Søgekriterier</label>
+    <input type="checkbox" id="drop" />
+    <ul class="menu">
+        @* ETAGE *@
+        <li>
+            <!-- First Tier Drop Down -->
+            <label for="drop-1" class="toggle">Vælg Etage</label>
+            @*<a href="#">Service</a>*@
+            <input type="checkbox" id="drop-1" />
+            <ul>
+                <li><button><a href="#">Alle etager</a></button> </li>
+                <li><button><a href="#">Stue etage (D1)</a></button> </li>
+                <li> <button><a href="#">1. etage (D2)</a></button> </li>
+                <li> <button><a href="#">2. etage (D3)</a></button> </li>
+            </ul>
+        </li>
+
+        @* DATO OG TID *@
+        <li>
+            <!-- First Tier Drop Down -->
+            <label for="drop-2" class="toggle">TODOVælg dato og tid</label>
+            @*<a href="#">Service</a>*@
+            <input type="checkbox" id="drop-2" />
+            <ul>
+                <li><button><a href="#">Alle etager</a></button> </li>
+                <li><button><a href="#">Stue etage (D1)</a></button> </li>
+                <li> <button><a href="#">1. etage (D2)</a></button> </li>
+                <li> <button><a href="#">2. etage (D3)</a></button> </li>
+            </ul>
+        </li>
+
+        @* STØRRELSE *@
+        <li>
+            <!-- First Tier Drop Down -->
+            <label for="drop-3" class="toggle">Vælg størrelse</label>
+            @*<a href="#">Service</a>*@
+            <input type="checkbox" id="drop-3" />
+            <ul>
+                <li><button><a href="#">Alle Lokaler</a></button> </li>
+                <li><button><a href="#">Gruppe lokale</a></button> </li>
+                <li> <button><a href="#">Klasse lokale</a></button> </li>
+                <li> <button><a href="#">Auditorie</a></button> </li>
+            </ul>
+        </li>
 
 
-<div class="sec-center">
-    <input class="dropdown" type="checkbox" id="dropdown" name="dropdown" />
-    <label class="for-dropdown" for="dropdown">Dropdown Menu <i class="uil uil-arrow-down"></i></label>
-    <div class="section-dropdown">
-        <a href="#">Dropdown Link <i class="uil uil-arrow-right"></i></a>
-        <input class="dropdown-sub" type="checkbox" id="dropdown-sub" name="dropdown-sub" />
-        <label class="for-dropdown-sub" for="dropdown-sub">Dropdown Sub <i class="uil uil-plus"></i></label>
-        <div class="section-dropdown-sub">
-            <a href="#">Dropdown Link <i class="uil uil-arrow-right"></i></a>
-            <a href="#">Dropdown Link <i class="uil uil-arrow-right"></i></a>
-        </div>
-        <a href="#">Dropdown Link <i class="uil uil-arrow-right"></i></a>
-        <a href="#">Dropdown Link <i class="uil uil-arrow-right"></i></a>
-    </div>
+        @* SMARTBOARD *@
+        <li>
+            <!-- First Tier Drop Down -->
+            <label for="drop-4" class="toggle">Har SmartBoard?</label>
+            <input type="checkbox" id="drop-4" />
+            <ul>
+                <li><button><a href="#">Nulstil</a></button> </li>
+                <li><button><a href="#">Ja</a></button> </li>
+                <li> <button><a href="#">Nej</a></button> </li>
+            </ul>
+        </li>
+
+        @* SORTER EFTER *@
+        <li>
+            <!-- First Tier Drop Down -->
+            <label for="drop-5" class="toggle">Sorter Efter...</label>
+            @*<a href="#">Service</a>*@
+            <input type="checkbox" id="drop-5" />
+            <ul>
+                <li><button><a href="#">Etage</a></button> </li>
+                <li> <button><a href="#">Størrelse</a></button> </li>
+            </ul>
+        </li>
+
+        <!--<li>-->
+
+            <!-- First Tier Drop Down -->
+            <!--<label for="drop-2" class="toggle">Portfolio +</label>
+            <a href="#">Portfolio</a>
+            <input type="checkbox" id="drop-2" />
+            <ul>
+                <li><a href="#">Portfolio 1</a></li>
+                <li><a href="#">Portfolio 2</a></li>
+                <li>-->
+
+                    <!-- Second Tier Drop Down -->
+                    <!--<label for="drop-3" class="toggle">Works +</label>
+                    <a href="#">Works</a>
+                    <input type="checkbox" id="drop-3" />
+                    <ul>
+                        <li><a href="#">HTML/CSS</a></li>
+                        <li><a href="#">jQuery</a></li>
+                        <li><a href="#">Python</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Submit</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">About</a></li>-->
+    </ul>
 </div>
-@*<form method="post">
-        <div class="form-group rounded">
-            <label>Søgekriterier</label>
-            </br>
-            <select id="SortType" name="SortType" asp-for="@Model.SoegeKriterier" class="form-control text-center">
-                @foreach (var sk in Model.SoegeKriterierVaerdier)
-                {
-                    <option value="@sk">@sk</option>
-                }
-            </select>
-            </br>
-            <input type="submit" value="Søg" class="btn btn-primary" />
-        </div>
-    </form>*@
+
+@* Input = søg efter lokalenummer
+    vælg etage er 4 (stue, 1., 2. og alle) button med type submit, 
+    tid og dato er datetime local, input type
+    vælg størrelse (alle størrelser, mødelokaler, klasselokaler) button med type submit
+    SmartBoard (Alle, med smartboard, uden smartboard) button med type submit
+    Sorter med 5 buttons og en nulstil knap (Lokale nummer, Etage, Dag, Størrelse)
+    *@
+
+
+
+
+
+
 
 
 <div class="row">
@@ -48,20 +131,20 @@
                         {
                             @("(M. SmartBoard)")
                         }
-                    @if (LkD.LokaleSmartBoard == false)
-                    {
-                        @("(U. SmartBoard)")
-                    }
-                </h5>
-            </div>
-            <div class="card-body">
-                <p class="card-text">Størrelse: @LkD.LokaleSize</p>
+                        @if (LkD.LokaleSmartBoard == false)
+                        {
+                            @("(U. SmartBoard)")
+                        }
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Størrelse: @LkD.LokaleSize</p>
 
-                <form>
-                    <input type="submit" value="Book" class="btn btn-primary book-btn font-weight-bold" />
-                </form>
+                    <form>
+                        <input type="submit" value="Book" class="btn btn-primary book-btn font-weight-bold" />
+                    </form>
+                </div>
             </div>
-        </div>
-    }
+        }
     </div>
 </div>

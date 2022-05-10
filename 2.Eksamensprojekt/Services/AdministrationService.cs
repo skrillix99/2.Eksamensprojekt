@@ -23,10 +23,11 @@ namespace _2.Eksamensprojekt.Services
 
             l.LokaleID = reader.GetInt32(0);
             l.LokaleNavn = reader.GetString(1);
-            l.LokaleNummer = reader.GetString(2);
-            l.LokaleSmartBoard = reader.GetBoolean(3);
-            l.LokaleSize = (LokaleSize)reader.GetInt32(5);
-            l.MuligeBookinger = reader.GetInt32(4);
+            l.LokaleSmartBoard = reader.GetBoolean(2);
+            l.LokaleSize = (LokaleSize)reader.GetInt32(7);
+            l.LokaleNummer = reader.GetString(9);
+            l.MuligeBookinger = reader.GetInt32(8);
+            l.Etage = reader.GetInt32(10);
 
             return l;
         }
@@ -82,7 +83,7 @@ namespace _2.Eksamensprojekt.Services
 
             string sql = "select * from Lokale " +
                          "inner join LokaleSize ON LokaleSize_FK = SizeId " +
-                         "inner join LokaleLokation ON LokaleLokation_FK = LokaleNummer";
+                         "inner join LokaleLokation ON LokaleLokation_FK = LokaleLokationId";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -107,7 +108,7 @@ namespace _2.Eksamensprojekt.Services
 
             string sql = "select * from Lokale WHERE LokaleID = @id " +
                          "inner join LokaleSize ON LokaleSize_FK = SizeId " +
-                         "inner join LokaleLokation ON LokaleLokation_FK = LokaleNummer";
+                         "inner join LokaleLokation ON LokaleLokation_FK = LokaleLokationId";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -147,7 +148,7 @@ namespace _2.Eksamensprojekt.Services
             }
 
             return lokaler;
-        }
+        } //TODO need?
 
         public BookingData GetSingelBooking(int id)
         {
@@ -157,9 +158,9 @@ namespace _2.Eksamensprojekt.Services
                          "FROM Reservation " +
                          "INNER JOIN Lokale ON Reservation.LokaleID_FK = Lokale.LokaleID " +
                          "inner join LokaleSize ON Lokale.LokaleSize_FK = SizeId " +
-                         "inner join LokaleLokation ON Lokale.LokaleLokation_FK = LokaleNummer " +
+                         "inner join LokaleLokation ON Lokale.LokaleLokation_FK = LokaleLokationId " +
                          "INNER JOIN Person ON Reservation.BrugerID_FK = Person.BrugerID " +
-                         "WHERE ReservationID = @id"; //TODO welp
+                         "WHERE ReservationID = @id";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {

@@ -16,10 +16,11 @@ namespace _2.Eksamensprojekt.Services
             List<LokaleData> LkDataList = new List<LokaleData>();
             string sql = "SELECT * FROM Lokale " +
                          "inner join LokaleSize ON LokaleSize_FK = SizeId " +
-                         "inner join LokaleLokation ON LokaleLokation_FK = LokaleNummer";
+                         "inner join LokaleLokation ON LokaleLokation_FK = LokaleLokationId";
             //Opretter forbindelse
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
+
                 //åbner forbindelsen
                 connection.Open();
 
@@ -44,11 +45,11 @@ namespace _2.Eksamensprojekt.Services
 
             ld1.LokaleID = reader.GetInt32(0);
             ld1.LokaleNavn = reader.GetString(1);
-            ld1.LokaleNummer = reader.GetString(2);
-            ld1.LokaleSmartBoard = reader.GetBoolean(3);
-            ld1.LokaleSize = (LokaleSize)reader.GetInt32(4);
-            ld1.MuligeBookinger = reader.GetInt32(5);
-            ld1.Etage = reader.GetInt32(7);
+            ld1.LokaleSmartBoard = reader.GetBoolean(2);
+            ld1.LokaleSize = (LokaleSize)reader.GetInt32(7);
+            ld1.LokaleNummer = reader.GetString(9);
+            ld1.MuligeBookinger = reader.GetInt32(8);
+            ld1.Etage = reader.GetInt32(10);
 
             return ld1;
         }

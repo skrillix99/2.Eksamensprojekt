@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Claims;
 using SuperBookerData;
-using Claim = Microsoft.IdentityModel.Claims.Claim;
 
 namespace _2.Eksamensprojekt.Pages.Shared
 {

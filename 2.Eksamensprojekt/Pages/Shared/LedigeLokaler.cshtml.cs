@@ -49,6 +49,8 @@ namespace _2.Eksamensprojekt.Pages.Shared
                 sql += $"AND LokaleEtage = {LokaleDataSingel.Etage} ";
             }
 
+            sql += $"SORT BY Etage";
+
             LokaleData = _ledigeLokalerService.GetAllLokaleBySqlString(sql);
         }
 

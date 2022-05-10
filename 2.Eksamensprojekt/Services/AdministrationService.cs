@@ -109,7 +109,7 @@ namespace _2.Eksamensprojekt.Services
             }
 
             return lokaler;
-        }
+        } //TODO need?
 
         public LokaleData GetSingelLokale(int id)
         {

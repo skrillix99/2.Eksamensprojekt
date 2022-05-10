@@ -17,10 +17,22 @@ namespace _2.Eksamensprojekt.Services.Interfaces
         /// <param name="id">Typen int. Må ikke være negativt</param>
         /// <returns>et object af typen LokaleData</returns>
         LokaleData GetSingelLokale(int id);
-
+        /// <summary>
+        /// Sletter en reservation fra Reservations tabellen.
+        /// </summary>
+        /// <param name="id">Typen int. Skal passe med et reservations id</param>
         void DeleteResevation(int id);
         List<BookingData> GetAllReservationer();
+        /// <summary>
+        /// Henter en bestemt reservation fra Rerservations tabellen, baseret på parameter id.
+        /// </summary>
+        /// <param name="id">Typen int. Skal passe med et reservations id</param>
+        /// <returns>BookingData objet</returns>
         BookingData GetSingelBooking(int id);
+        /// <summary>
+        /// Opretter en ny reservations der bliver gemt i Reservations tabellen, som Administration. Den regner TidSlut ud baseret på Dag og TidStart. Den henter BrugerID fra ILogIndService.
+        /// </summary>
+        /// <param name="newBooking">BookingData object. Skal have følgene TidStart, Dag, Bruger.BrugerEmail og BookesFor</param>
         void AddReservation(BookingData newBooking);
 
         BookingData CreateReservation(int id);

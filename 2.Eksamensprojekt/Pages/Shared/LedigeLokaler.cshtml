@@ -2,10 +2,76 @@
 @model _2.Eksamensprojekt.Pages.Shared.LedigeLokalerModel
 @{
 }
+
+<!-- input tag -->
+<input id="searchbar" onkeyup="search_animal()" type="text"
+       name="search" placeholder="Search animals..">
+
+<!-- ordered list -->
+<ol id='list'>
+    <li class="animals">Cat</li>
+    <li class="animals">Dog</li>
+    <li class="animals">Elephant</li>
+    <li class="animals">Fish</li>
+    <li class="animals">Gorilla</li>
+    <li class="animals">Monkey</li>
+    <li class="animals">Turtle</li>
+    <li class="animals">Whale</li>
+    <li class="animals">Aligator</li>
+    <li class="animals">Donkey</li>
+    <li class="animals">Horse</li>
+</ol>
+
+<!-- linking javascript -->
+<script>function search_animal() {
+        let input = document.getElementById('searchbar').value
+        input = input.toLowerCase();
+        let x = document.getElementsByClassName('animals');
+
+        for (i = 0; i < x.length; i++) {
+            if (!x[i].innerHTML.toLowerCase().includes(input)) {
+                x[i].style.display = "none";
+            }
+            else {
+                x[i].style.display = "list-item";
+            }
+        }
+    }</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <div class="soege-kriteria">
     <label for="drop" class="toggle">&#8801; Søgekriterier</label>
     <input type="checkbox" id="drop" />
     <ul class="menu">
+        <form method="post">
+            <fieldset>
+
+                @* SØGE FUNKTION*@
+        <li>
+
+            <input type="search" @*asp-for="Search"*@ placeholder="Søg efter lokale nummer" class="search_input" />
+            <input type="submit" value="Søg" class="btn" />
+
+        </li>
+
         @* ETAGE *@
         <li>
             <!-- First Tier Drop Down -->
@@ -60,56 +126,18 @@
                 <li> <button><a href="#">Nej</a></button> </li>
             </ul>
         </li>
-
-        @* SORTER EFTER *@
-        <li>
-            <!-- First Tier Drop Down -->
-            <label for="drop-5" class="toggle">Sorter Efter...</label>
-            @*<a href="#">Service</a>*@
-            <input type="checkbox" id="drop-5" />
-            <ul>
-                <li><button><a href="#">Etage</a></button> </li>
-                <li> <button><a href="#">Størrelse</a></button> </li>
-            </ul>
-        </li>
-
-        <!--<li>-->
-
-            <!-- First Tier Drop Down -->
-            <!--<label for="drop-2" class="toggle">Portfolio +</label>
-            <a href="#">Portfolio</a>
-            <input type="checkbox" id="drop-2" />
-            <ul>
-                <li><a href="#">Portfolio 1</a></li>
-                <li><a href="#">Portfolio 2</a></li>
-                <li>-->
-
-                    <!-- Second Tier Drop Down -->
-                    <!--<label for="drop-3" class="toggle">Works +</label>
-                    <a href="#">Works</a>
-                    <input type="checkbox" id="drop-3" />
-                    <ul>
-                        <li><a href="#">HTML/CSS</a></li>
-                        <li><a href="#">jQuery</a></li>
-                        <li><a href="#">Python</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-        <li><a href="#">Blog</a></li>
-        <li><a href="#">Submit</a></li>
-        <li><a href="#">Contact</a></li>
-        <li><a href="#">About</a></li>-->
+        </fieldset>
+        </form>
     </ul>
 </div>
 
 @* Input = søg efter lokalenummer
-    vælg etage er 4 (stue, 1., 2. og alle) button med type submit, 
+    vælg etage er 4 (stue, 1., 2. og alle) button med type submit,
     tid og dato er datetime local, input type
     vælg størrelse (alle størrelser, mødelokaler, klasselokaler) button med type submit
     SmartBoard (Alle, med smartboard, uden smartboard) button med type submit
     Sorter med 5 buttons og en nulstil knap (Lokale nummer, Etage, Dag, Størrelse)
-    *@
+*@
 
 
 

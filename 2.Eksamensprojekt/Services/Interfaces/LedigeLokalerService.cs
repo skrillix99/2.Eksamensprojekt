@@ -14,7 +14,9 @@ namespace _2.Eksamensprojekt.Services
         public List<LokaleData> GetAll()
         {
             List<LokaleData> LkDataList = new List<LokaleData>();
-            string sql = "SELECT * FROM Lokale";
+            string sql = "SELECT * FROM Lokale " +
+                         "inner join LokaleSize ON LokaleSize_FK = SizeId " +
+                         "inner join LokaleLokation ON LokaleLokation_FK = LokaleNummer";
             //Opretter forbindelse
             using (SqlConnection connection = new SqlConnection(connectionString))
             {

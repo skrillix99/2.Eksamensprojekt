@@ -80,7 +80,9 @@ namespace _2.Eksamensprojekt.Services
         {
             List<LokaleData> lokaler = new List<LokaleData>();
 
-            string sql = "select * from Lokale";
+            string sql = "select * from Lokale " +
+                         "inner join LokaleSize ON LokaleSize_FK = SizeId " +
+                         "inner join LokaleLokation ON LokaleLokation_FK = LokaleNummer";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -103,7 +105,9 @@ namespace _2.Eksamensprojekt.Services
         {
             LokaleData list = new LokaleData();
 
-            string sql = "select * from Lokale WHERE LokaleID = @id";
+            string sql = "select * from Lokale WHERE LokaleID = @id " +
+                         "inner join LokaleSize ON LokaleSize_FK = SizeId " +
+                         "inner join LokaleLokation ON LokaleLokation_FK = LokaleNummer";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -149,11 +153,13 @@ namespace _2.Eksamensprojekt.Services
         {
             BookingData l = new BookingData();
             string sql = "SELECT Reservation.Dag, Reservation.TidStart, Reservation.TidSlut, " +
-                         "Lokale.LokaleNavn, LokaleNummer, LokaleSmartBoard, LokaleSize, MuligeBookinger, Person.BrugerNavn, ReservationID " +
+                         "Lokale.LokaleNavn, LokaleLokation.LokaleNummer, LokaleSmartBoard, LokaleSize.Size, MuligeBookinger, Person.BrugerNavn, ReservationID " +
                          "FROM Reservation " +
                          "INNER JOIN Lokale ON Reservation.LokaleID_FK = Lokale.LokaleID " +
+                         "inner join LokaleSize ON Lokale.LokaleSize_FK = SizeId " +
+                         "inner join LokaleLokation ON Lokale.LokaleLokation_FK = LokaleNummer " +
                          "INNER JOIN Person ON Reservation.BrugerID_FK = Person.BrugerID " +
-                         "WHERE ReservationID = @id";
+                         "WHERE ReservationID = @id"; //TODO welp
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {

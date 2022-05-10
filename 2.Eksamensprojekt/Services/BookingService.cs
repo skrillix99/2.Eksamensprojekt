@@ -15,8 +15,12 @@ namespace _2.Eksamensprojekt.Services
         {
             List<BookingData> list = new List<BookingData>();
 
-            string sql = "SELECT Reservation.Dag, Reservation.TidStart, Reservation.TidSlut, Lokale.LokaleNavn, LokaleNummer, LokaleSmartBoard, LokaleSize, MuligeBookinger, Person.BrugerNavn FROM Reservation INNER JOIN Lokale ON Reservation.ReservationID = Lokale.LokaleID INNER JOIN Person ON Reservation.ReservationID = Person.BrugerID ";
-
+            string sql =
+                "Select Dag, TidStart, TidSlut, LokaleNavn, LokaleNummer, LokaleSmartBoard, Size, Muligebookinger, BrugerNavn From Reservation " +
+                "INNER JOIN Person ON Reservation.BrugerID_FK = Person.BrugerID " +
+                "INNER JOIN Lokale ON Reservation.LokaleID_FK = Lokale.LokaleID " +
+                "INNER JOIN LokaleLokation ON Lokale.LokaleLokation_FK = LokaleLokation.LokaleNummer " +
+                "INNER JOIN LokaleSize ON Lokale.LokaleSize_FK = LokaleSize.SizeId";
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
                 SqlCommand cmd = new SqlCommand(sql, connection);

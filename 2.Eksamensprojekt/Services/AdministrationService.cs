@@ -37,9 +37,9 @@ namespace _2.Eksamensprojekt.Services
             l.LokaleNavn = reader.GetString(1);
             l.LokaleSmartBoard = reader.GetBoolean(2);
             l.LokaleSize = (LokaleSize)reader.GetInt32(7);
-            l.LokaleNummer = reader.GetString(9);
+            l.LokaleNummer = reader.GetString(10);
             l.MuligeBookinger = reader.GetInt32(8);
-            l.Etage = reader.GetInt32(10);
+            l.Etage = reader.GetInt32(11);
 
             return l;
         }
@@ -118,9 +118,10 @@ namespace _2.Eksamensprojekt.Services
         {
             LokaleData list = new LokaleData();
 
-            string sql = "select * from Lokale WHERE LokaleID = @id " +
+            string sql = "select * from Lokale  " +
                          "inner join LokaleSize ON LokaleSize_FK = SizeId " +
-                         "inner join LokaleLokation ON LokaleLokation_FK = LokaleLokationId";
+                         "inner join LokaleLokation ON LokaleLokation_FK = LokaleLokationId " +
+                         "WHERE LokaleID = @id";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -204,7 +205,7 @@ namespace _2.Eksamensprojekt.Services
                 SqlCommand cmd = new SqlCommand(sql, connection);
                 cmd.Parameters.AddWithValue("@tidStart", newBooking.TidStart.ToString());
                 cmd.Parameters.AddWithValue("@dag", newBooking.Dag.ToString("s"));
-                cmd.Parameters.AddWithValue("@tidSlut", tidSlut.ToString());
+                cmd.Parameters.AddWithValue("@tidSlut", newBooking.Dag.ToShortTimeString());
                 cmd.Parameters.AddWithValue("@brugerFK", brugerID);
                 cmd.Parameters.AddWithValue("@lokaleFK", newBooking.Lokale.LokaleID);
                 cmd.Parameters.AddWithValue("@bookesFor", (int)newBooking.BookesFor);

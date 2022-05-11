@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Security.Claims;
 
+
 namespace _2.Eksamensprojekt.Pages.Shared
 {
     public class LedigeLokalerModel : PageModel
@@ -35,15 +36,28 @@ namespace _2.Eksamensprojekt.Pages.Shared
             };
 
         }
+
         public void OnGet()
         {
             _lokaleListe = _ledigeLokalerService.GetAll();
             LokaleData = new List<LokaleData>(_lokaleListe);
 
-            
+
         }
 
+        //MARCUS KODE DO NOT DELETE XD
+        //public async Task OnGetAsync()
+        //{
+        //    // live update search stuff (forhåblig) ToListAsync??? problem
+        //    var movies = from m in _ledigeLokalerService.GetAll()
+        //                 select m;
+        //    if (!string.IsNullOrEmpty(SoegeKriterier))
+        //    {
+        //        movies = movies.Where(s => s.LokaleNummer.Contains(SoegeKriterier));
+        //    }
 
+        //    LokaleData = await movies.ToListAsync();
+        //}
 
         //public async Task<IActionResult> OnPost()
         //{
@@ -60,10 +74,11 @@ namespace _2.Eksamensprojekt.Pages.Shared
 
             ld1.LokaleID = reader.GetInt32(0);
             ld1.LokaleNavn = reader.GetString(1);
-            ld1.LokaleNummer = reader.GetString(2);
-            ld1.LokaleSmartBoard = reader.GetBoolean(3);
-            ld1.LokaleSize = (LokaleSize)reader.GetInt32(4);
-            ld1.LokaleMuligeBookinger = reader.GetInt32(5);
+            ld1.LokaleSmartBoard = reader.GetBoolean(2);
+            ld1.LokaleSize = (LokaleSize)reader.GetInt32(7);
+            ld1.LokaleNummer = reader.GetString(9);
+            ld1.LokaleMuligeBookinger = reader.GetInt32(8);
+            ld1.LokaleEtage = reader.GetInt32(10);
 
             return ld1;
         }

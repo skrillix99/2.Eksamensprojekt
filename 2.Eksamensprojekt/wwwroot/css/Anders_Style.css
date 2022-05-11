@@ -27,7 +27,7 @@
     }
 
 .soege-kriteria ul {
-        float: left;
+      /*  float: left;*/
         padding: 0;
         margin: 0;
         list-style: none;
@@ -99,7 +99,7 @@ nav ul li:active > ul {
         font-weight: bold;
         line-height: 60px;
         text-decoration: none;
-        border: none;
+        /*border: none;*/
     }
 
 
@@ -131,3 +131,58 @@ nav ul li:active > ul {
         .soege-kriteria ul ul ul li {
             position: static;
         }
+
+
+.soege-kriteria {
+    margin-bottom: 2em;
+}
+
+.border-custom {
+    border: 3px solid black;
+    max-width: 100%;
+    margin-top: 5px;
+    border-left-width: 0px;
+    border-right-width: 0px;
+}
+
+.container {
+    max-width: 65% !important;
+}
+
+.dropdown-kategorier {
+    text-align: center;
+}
+
+.dropdown-button {
+    /*margin-top: 5px;*/
+    width: 100% !important;
+    border-left-width: 0px;
+    border-right-width: 0px;
+}
+
+
+
+
+
+
+
+
+
+
+
+#searchbar {
+    padding: 15px;
+    border-radius: 10px;
+}
+
+input[type=text] {
+    width: 100%;
+    -webkit-transition: width 0.15s ease-in-out;
+    transition: width 0.15s ease-in-out;
+}
+
+
+
+/*.animals {
+    display: list-item;
+} */

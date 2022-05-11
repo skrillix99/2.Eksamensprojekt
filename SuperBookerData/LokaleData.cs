@@ -14,6 +14,7 @@ namespace SuperBookerData
         private string _lokaleNummer;
         private bool _lokaleSmartBoard;
         private int _lokaleMuligeBookinger;
+        private int _lokaleEtage;
 
         public LokaleSize LokaleSize
         {
@@ -51,12 +52,17 @@ namespace SuperBookerData
             set => _lokaleMuligeBookinger = value;
         }
 
+        public int LokaleEtage
+        {
+            get => _lokaleEtage;
+            set => _lokaleEtage = value;
+        }
         public LokaleData()
         {
 
         }
 
-        public LokaleData(int lokaleID, string lokaleNavn, string lokaleNummer, bool lokaleSmartBoard, int lokaleMuligeBookinger)
+        public LokaleData(int lokaleID, string lokaleNavn, string lokaleNummer, bool lokaleSmartBoard, int lokaleMuligeBookinger, int etage)
         {
             _lokaleID = lokaleID;
             _lokaleNavn = lokaleNavn;
@@ -64,6 +70,7 @@ namespace SuperBookerData
             _lokaleSmartBoard = lokaleSmartBoard;
             _lokaleMuligeBookinger = lokaleMuligeBookinger;
             LokaleSize = 0;
+            _lokaleEtage = etage;
         }
 
     }

@@ -31,6 +31,11 @@ namespace _2.Eksamensprojekt.Pages.AdministrationPages
             Booking = _administrationService.GetSingelBooking(id);
             TempBookingData = _administrationService.GetSingelBooking(id);
         }
+        public void OnPost(int id)
+        {
+            Booking = _administrationService.GetSingelBooking(id);
+            TempBookingData = _administrationService.GetSingelBooking(id);
+        }
         
     }
 }

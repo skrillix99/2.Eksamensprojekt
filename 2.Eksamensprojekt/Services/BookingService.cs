@@ -21,11 +21,7 @@ namespace _2.Eksamensprojekt.Services
                 "INNER JOIN Lokale ON Reservation.LokaleID_FK = Lokale.LokaleID " +
                 "INNER JOIN LokaleLokation ON Lokale.LokaleLokation_FK = LokaleLokation.LokaleLokationId " +
                 "INNER JOIN LokaleSize ON Lokale.LokaleSize_FK = LokaleSize.SizeId";
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
-            {
-                SqlCommand cmd = new SqlCommand(sql, connection);
-                cmd.Connection.Open();
-
+            
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
                 SqlCommand cmd = new SqlCommand(sql, connection);
@@ -62,7 +58,7 @@ namespace _2.Eksamensprojekt.Services
             k.TidSlut = reader.GetTimeSpan(i: 2);
             k.Lokale = ld; //3,4,5,6,7
             k.Bruger = p; // 8
-            k.ReservationId = reader.GetInt32(9);
+            k.ResevertionId = reader.GetInt32(9);
             return k;
         }
 
@@ -83,6 +79,7 @@ namespace _2.Eksamensprojekt.Services
 
         public LokaleData GetById(int LokaleID)
         {
+            LokaleData k = new LokaleData();
             String sql = "Select * from Lokale where LokaleID=@LokaleID";
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
@@ -96,11 +93,13 @@ namespace _2.Eksamensprojekt.Services
 
                 while (reader.Read())
                 {
-                    LokaleData k = ReadLokale(reader);
+                    k = ReadLokale(reader);
                     return k;
                 }
-
             }
+
+            return k;
+        }
 
         public void DeleteResevation(int id)
         {

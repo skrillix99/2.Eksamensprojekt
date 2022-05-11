@@ -16,10 +16,10 @@ namespace _2.Eksamensprojekt.Services
             List<BookingData> list = new List<BookingData>();
 
             string sql =
-                "Select Dag, TidStart, TidSlut, LokaleNavn, LokaleNummer, LokaleSmartBoard, Size, Muligebookinger, BrugerNavn From Reservation " +
+                "Select Dag, TidStart, TidSlut, LokaleNavn, LokaleNummer, LokaleSmartBoard, Size, Muligebookinger, BrugerNavn, ReservationID From Reservation " +
                 "INNER JOIN Person ON Reservation.BrugerID_FK = Person.BrugerID " +
                 "INNER JOIN Lokale ON Reservation.LokaleID_FK = Lokale.LokaleID " +
-                "INNER JOIN LokaleLokation ON Lokale.LokaleLokation_FK = LokaleLokation.LokaleNummer " +
+                "INNER JOIN LokaleLokation ON Lokale.LokaleLokation_FK = LokaleLokation.LokaleLokationId " +
                 "INNER JOIN LokaleSize ON Lokale.LokaleSize_FK = LokaleSize.SizeId";
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
@@ -51,6 +51,7 @@ namespace _2.Eksamensprojekt.Services
             k.TidSlut = reader.GetTimeSpan(i: 2);
             k.Lokale = l;
             k.Bruger = p;
+            k.ResevertionId = reader.GetInt32(9);
 
             return k;
         }
@@ -68,7 +69,7 @@ namespace _2.Eksamensprojekt.Services
             return k;
         }
 
-
+        
         public LokaleData GetById(int LokaleID)
         {
             String sql = "Select * from Lokale where LokaleID=@LokaleID";
@@ -93,30 +94,29 @@ namespace _2.Eksamensprojekt.Services
             return null;
         }
 
-
-        public LokaleData Delete(int lokaleID)
+        public void DeleteResevation(int id)
         {
-            LokaleData deletedk = GetById(lokaleID);
+            if (id <= 0)
+            {
+                throw new KeyNotFoundException("Der findes ikke nogle reservationer med det ID");
+            }
 
-            String sql = "delete from LokalData where LokaleID=@LokalID";
+            string sql = "DELETE from Reservation WHERE ReservationID = @id";
 
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
-                connection.Open();
-
                 SqlCommand cmd = new SqlCommand(sql, connection);
+                cmd.Parameters.AddWithValue("@id", id);
 
-                cmd.Parameters.AddWithValue("@LokaleID", lokaleID);
+                cmd.Connection.Open();
 
                 int rows = cmd.ExecuteNonQuery();
-
                 if (rows != 1)
                 {
-                    //fejl
+                    throw new InvalidOperationException("Der skete en fejl i databasen");
                 }
-
-                return deletedk;
             }
         }
+
     }
 }

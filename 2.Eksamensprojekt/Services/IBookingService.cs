@@ -10,10 +10,10 @@ namespace _2.Eksamensprojekt.Services
     public interface IBookingService
     {
         public List<BookingData> GetAll();
-
+        
         LokaleData GetById(int LokaleID);
 
-        LokaleData Delete(int lokaleID);
+        void DeleteResevation(int id);
 
         //TODO public BookingData CreateBooking(????);
 

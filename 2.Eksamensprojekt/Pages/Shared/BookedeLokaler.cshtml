@@ -1,4 +1,4 @@
-﻿@page 
+﻿@page
 @model _2.Eksamensprojekt.Pages.Shared.BookedeLokalerModel
 @{
     ViewData["Title"] = "Detailed View";
@@ -24,6 +24,9 @@
             <h5 class="card-title"><b>Date:</b> @lokale.Dag.ToString("d")</h5>
             <h5 class=""><b>Tidspunkt:</b> @lokale.TidStart.ToString(@"hh\:mm") - @lokale.TidSlut.ToString(@"hh\:mm")</h5>
             <h5 class=""><b>Bookede af:</b> @lokale.Bruger.BrugerNavn</h5>
+            <form method="post">
+                <button type="submit" asp-page="/AdministrationPages/AdministrationAflysBooking" asp-route-id="@lokale.ResevertionId" ><i class="fa fa-trash"></i></button>
+            </form>
         </div>
     </div>
 }

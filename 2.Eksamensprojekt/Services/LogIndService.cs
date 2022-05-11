@@ -110,5 +110,9 @@ namespace _2.Eksamensprojekt.Services
             return LogInd.rolle;
         }
 
+        public PersonData GetSingelPersonByEmail(string email)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -21,7 +21,8 @@ namespace _2.Eksamensprojekt.Services.Interfaces
         /// Sletter en reservation fra Reservations tabellen.
         /// </summary>
         /// <param name="id">Typen int. Skal passe med et reservations id</param>
-        void DeleteResevation(int id);
+        void DeleteReservation(int id);
+        //void DeleteReservation();
         List<BookingData> GetAllReservationer();
         /// <summary>
         /// Henter en bestemt reservation fra Rerservations tabellen, baseret på parameter id.
@@ -34,7 +35,5 @@ namespace _2.Eksamensprojekt.Services.Interfaces
         /// </summary>
         /// <param name="newBooking">BookingData object. Skal have følgene TidStart, Dag, Bruger.BrugerEmail og BookesFor</param>
         void AddReservation(BookingData newBooking);
-
-        BookingData CreateReservation(int id);
     }
 }

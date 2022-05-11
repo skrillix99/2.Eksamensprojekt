@@ -192,18 +192,48 @@ namespace _2.Eksamensprojekt.Services
             }
         }
 
+        //public void AddReservation(BookingData newBooking)
+        //{
+        //    string sql = "insert into Reservation VALUES (@tidStart, @dag, 0, @brugerFK, @lokaleFK, @tidSlut, @bookesFor)";
+        //                                                // TidStart, Dag, Heltbooket, Bruger_FK, Lokale_FK, TidSlut, BookesFor
+        //    using (SqlConnection connection = new SqlConnection(connectionString))
+        //    {
+        //        TimeSpan tidSlut= newBooking.Dag.TimeOfDay.Add(newBooking.TidStart);
+        //        int brugerID = _logIndService.GetSingelPersonByEmail(newBooking.Bruger.BrugerEmail).BrugerID;
+
+        //        SqlCommand cmd = new SqlCommand(sql, connection);
+        //        cmd.Parameters.AddWithValue("@tidStart", newBooking.TidStart.ToString());
+        //        cmd.Parameters.AddWithValue("@dag", newBooking.Dag.ToString("s"));
+        //        cmd.Parameters.AddWithValue("@tidSlut", tidSlut.ToString());
+        //        cmd.Parameters.AddWithValue("@brugerFK", brugerID);
+        //        cmd.Parameters.AddWithValue("@lokaleFK", newBooking.Lokale.LokaleID);
+        //        cmd.Parameters.AddWithValue("@bookesFor", (int)newBooking.BookesFor);
+
+        //        cmd.Connection.Open();
+
+        //        int rows = cmd.ExecuteNonQuery();
+
+        //        if (rows != 1)
+        //        {
+        //            throw new Exception("welp");
+        //        }
+        //    }
+
+        //}
+
         public void AddReservation(BookingData newBooking)
         {
-            string sql = "insert into Reservation VALUES (@tidStart, @dag, 0, @brugerFK, @lokaleFK, @tidSlut, @bookesFor)";
+            string sql = "insert into Reservation VALUES (@tidStart, @dag, @mulige, @brugerFK, @lokaleFK, @tidSlut, @bookesFor)";
                                                         // TidStart, Dag, Heltbooket, Bruger_FK, Lokale_FK, TidSlut, BookesFor
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                TimeSpan tidSlut= newBooking.Dag.TimeOfDay.Add(newBooking.TidStart);
+                TimeSpan tidSlut = newBooking.Dag.TimeOfDay.Add(newBooking.TidStart);
                 int brugerID = _logIndService.GetSingelPersonByEmail(newBooking.Bruger.BrugerEmail).BrugerID;
 
                 SqlCommand cmd = new SqlCommand(sql, connection);
                 cmd.Parameters.AddWithValue("@tidStart", newBooking.TidStart.ToString());
                 cmd.Parameters.AddWithValue("@dag", newBooking.Dag.ToString("s"));
+                //cmd.Parameters.AddWithValue("@mulige", );
                 cmd.Parameters.AddWithValue("@tidSlut", tidSlut.ToString());
                 cmd.Parameters.AddWithValue("@brugerFK", brugerID);
                 cmd.Parameters.AddWithValue("@lokaleFK", newBooking.Lokale.LokaleID);
@@ -217,30 +247,6 @@ namespace _2.Eksamensprojekt.Services
                 {
                     throw new Exception("welp");
                 }
-            }
-
-        }
-
-        public BookingData CreateReservation(int id)
-        {
-            BookingData book = new BookingData();
-            string sql = "insert into Reservation(TidStart, Dag, HeltBooket, BrugerID_FK, LokaleID_FK, TidSlut) values(@TidStart, @Dag, @HeltBooket, @BrugerID_FK, @LokaleID_FK, @TidSlut)";
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                SqlCommand cmd = new SqlCommand(sql, connection);
-                cmd.Parameters.AddWithValue("@id", id);
-                cmd.Connection.Open();
-
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    book = ReadBookings(reader);
-                    return book;
-                }
-
-                return book;
             }
 
         }
@@ -269,6 +275,34 @@ namespace _2.Eksamensprojekt.Services
             }
         }
 
-        
+
+        //public void DeleteReservation()
+        //{
+        //    //if (id <= 0)
+        //    //{
+        //    //    throw new KeyNotFoundException("Der findes ikke nogle reservationer med det ID");
+        //    //}
+
+        //    //string sql = "DELETE from Reservation WHERE ReservationID = @id";
+        //    string sql = "DELETE from Reservation WHERE Dag < @nextDay";
+
+        //    using (SqlConnection connection = new SqlConnection(connectionString))
+        //    {
+        //        SqlCommand cmd = new SqlCommand(sql, connection);
+        //        //cmd.Parameters.AddWithValue("@id", id);
+        //        cmd.Parameters.AddWithValue("@nextDay", DateTime.Today.AddDays(1).Date.ToString("s"));
+
+        //        cmd.Connection.Open();
+
+        //        DateTime ll = DateTime.Today.AddDays(1).Date;
+
+        //        int rows = cmd.ExecuteNonQuery();
+        //        //if (rows != 1)
+        //        //{
+        //        //    throw new InvalidOperationException("Der skete en fejl i databasen"); 
+        //        //}
+        //    }
+        //}
+
     }
 }

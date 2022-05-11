@@ -11,7 +11,7 @@ namespace _2.Eksamensprojekt.Services
     {
         private const string ConnectionString = @"Data Source=zealandmarc.database.windows.net;Initial Catalog=SuperBooker4000;User ID=AdminMarc;Password=Marcus19;Connect Timeout=30;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
-        public List<BookingData> GetAll()
+        public List<BookingData> GetAllBookings()
         {
             List<BookingData> list = new List<BookingData>();
 
@@ -21,6 +21,11 @@ namespace _2.Eksamensprojekt.Services
                 "INNER JOIN Lokale ON Reservation.LokaleID_FK = Lokale.LokaleID " +
                 "INNER JOIN LokaleLokation ON Lokale.LokaleLokation_FK = LokaleLokation.LokaleLokationId " +
                 "INNER JOIN LokaleSize ON Lokale.LokaleSize_FK = LokaleSize.SizeId";
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand(sql, connection);
+                cmd.Connection.Open();
+
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
                 SqlCommand cmd = new SqlCommand(sql, connection);
@@ -41,35 +46,41 @@ namespace _2.Eksamensprojekt.Services
         private BookingData ReadBookings(SqlDataReader reader)
         {
             BookingData k = new BookingData();
-            LokaleData l = new LokaleData(reader.GetString(3), reader.GetString(4), reader.GetBoolean(5),
-                (LokaleSize) reader.GetInt32(6), reader.GetInt32(7));
+
+            LokaleData ld = new LokaleData();
+            ld.LokaleNavn = reader.GetString(3);
+            ld.LokaleNummer = reader.GetString(4);
+            ld.LokaleSmartBoard = reader.GetBoolean(5);
+            ld.LokaleSize = (LokaleSize)reader.GetInt32(6);
+            ld.MuligeBookinger = reader.GetInt32(7);
+
             PersonData p = new PersonData();
             p.BrugerNavn = reader.GetString(8);
 
             k.Dag = reader.GetDateTime(i: 0);
             k.TidStart = reader.GetTimeSpan(i: 1);
             k.TidSlut = reader.GetTimeSpan(i: 2);
-            k.Lokale = l;
-            k.Bruger = p;
-            k.ResevertionId = reader.GetInt32(9);
-
+            k.Lokale = ld; //3,4,5,6,7
+            k.Bruger = p; // 8
+            k.ReservationId = reader.GetInt32(9);
             return k;
         }
 
         private LokaleData ReadLokale(SqlDataReader reader)
         {
             LokaleData k = new LokaleData();
-            k.LokaleID = reader.GetInt32(i:0);
-            k.LokaleNavn = reader.GetString(i:1);
-            k.LokaleNummer = reader.GetString(i:2);
-            k.LokaleSmartBoard = reader.GetBoolean(i:3);
-            k.LokaleSize = (LokaleSize)reader.GetInt32(i:4);
-            k.MuligeBookinger = reader.GetInt32(i: 5);
+            k.LokaleID = reader.GetInt32(0);
+            k.LokaleNavn = reader.GetString(1);
+            k.LokaleSmartBoard = reader.GetBoolean(2);
+            k.LokaleSize = (LokaleSize)reader.GetInt32(7);
+            k.LokaleNummer = reader.GetString(10);
+            k.MuligeBookinger = reader.GetInt32(8);
+            k.Etage = reader.GetInt32(11);
 
             return k;
         }
 
-        
+
         public LokaleData GetById(int LokaleID)
         {
             String sql = "Select * from Lokale where LokaleID=@LokaleID";
@@ -90,9 +101,6 @@ namespace _2.Eksamensprojekt.Services
                 }
 
             }
-
-            return null;
-        }
 
         public void DeleteResevation(int id)
         {

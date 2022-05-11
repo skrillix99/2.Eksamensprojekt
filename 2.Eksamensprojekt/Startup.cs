@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using _2.Eksamensprojekt.Services.Interfaces;
 using _2.Eksamensprojekt.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
@@ -28,8 +29,8 @@ namespace _2.Eksamensprojekt
         {
             services.AddRazorPages();
             services.AddSingleton<ILogIndService, LogIndService>();
-            services.AddSingleton<IBookingService, BookingService>();
-
+            services.AddSingleton<ILedigeLokalerService, LedigeLokalerService>();
+            services.AddSingleton<IUnderviserService, UnderviserService>();
 
             // Marcus
             services.Configure<CookiePolicyOptions>(options =>
@@ -50,13 +51,16 @@ namespace _2.Eksamensprojekt
                 options.Conventions.AuthorizeFolder("/StuderendePages");
                 options.Conventions.AuthorizeFolder("/UnderviserPages");
                 options.Conventions.AuthorizeFolder("/AdministrationPages");
+                //options.Conventions.AuthorizeFolder("/Shared");
             }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
-
+            // sender hen til en AccessDenied side hvis man prøver at komme ind på en side man ikke må.
             services.ConfigureApplicationCookie(options =>
             {
                 options.AccessDeniedPath = "/Account/AccessDenied";
             });
+            services.AddSingleton<IAdministrationService, AdministrationService>();
+            services.AddSingleton<IBookingService, BookingService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

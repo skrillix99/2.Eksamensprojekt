@@ -1,4 +1,5 @@
 ﻿@using _2.Eksamensprojekt.Pages.LogInd
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,72 +10,93 @@
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/Dennis.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/css/Marcus.css" />
+    <link rel="stylesheet" href="~/css/Alexander.css" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 topNavBar">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">_2.Eksamensprojekt</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
-                        @{
-                            if (LogIndModel.LoggedInUser == null)
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-area="" asp-page="/LogInd/LogInd">Login</a>
-                                </li>
-                            }
-                            else
-                            {
-                                <li class="nav-item nav-link mr-3">
-                                    User: @LogIndModel.LoggedInUser.EmailLogInd
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-area="" asp-page="/LogInd/LogUd">Logout</a>
-                                </li>
-                            }
+                <a class="navbar-brand"> <img class="logo" src="~/img/Zealand_logo_black_RGB_1600px_72dpi.png" alt="Logo"> </a>
+                <ul class="navbar-nav flex-grow-1">
+                    @{
+                        if (LogIndModel.LoggedInUser == null)
+                        {
+                            <li class="nav-item text-end">
+                                <a class="nav-link" asp-area="" asp-page="/LogInd/LogInd">Login</a>
+                            </li>
                         }
-                    </ul>
-                </div>
+                        else
+                        {
+                            <li class="nav-item text-end">
+                                <a class="nav-link" asp-area="" asp-page="/LogInd/LogUd">Logout</a>
+                            </li>
+                        }
+                    }
+                </ul>
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="container" id="no_padding">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
+    
 
-    <footer class="border-top footer text-muted">
-        <nav class="menuknapper">
-            <div class="rowtest">
-                <form method="get">
-                    <div class="columntest"><input type="submit" formaction="/Shared/LedigeLokaler" value="Ledige Lokaler" class="skaler btn btn-primary"></div>
-                </form>
-                <form method="get">
-                    <div class="columntest"><input type="submit" formaction="/AdministrationPages/AdministrationBooking" value="Mine Bookinger" class="skaler btn btn-primary"></div>
-                </form>
-                <form method="get">
-                    <div class="columntest"><input type="submit" formaction="/Shared/BookedeLokaler" value="Alle Bookinger" class="skaler btn btn-primary"></div>
-                </form>
-            </div>
-        </nav>
-    </footer>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+
+
+    <footer class="border-top footer text-muted">
+        <nav class="menuknapper">
+            <div class="rowtest">
+                @foreach (var test in User.Claims)
+                {
+                if (test.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role")
+                {
+                <form method="get">
+                    <div class="columntest"><input type="submit" formaction="/Shared/LedigeLokaler" value="Ledige Lokaler" class="skaler btn btn-primary"></div>
+                </form>
+
+                if (test.Value == "Administration")
+                {
+                <form method="get">
+                    <div class="columntest"><input type="submit" formaction="/AdministrationPages/AdministrationMineBookinger" value="Mine Bookinger" class="skaler btn btn-primary"></div>
+                </form>
+
+                <form method="get">
+                    <div class="columntest"><input type="submit" formaction="/Shared/BookedeLokaler" value="Alle Bookinger" class="skaler btn btn-primary"></div>
+                </form>
+                }
+                if (test.Value == "Underviser")
+                {
+                <form method="get">
+                    <div class="columntest"><input type="submit" formaction="/UnderviserPages/UnderviserMineBookinger" value="Mine Bookinger" class="skaler btn btn-primary"></div>
+                </form>
+
+                <form method="get">
+                    <div class="columntest"><input type="submit" formaction="/Shared/BookedeLokaler" value="Alle Bookinger" class="skaler btn btn-primary"></div>
+                </form>
+                }
+                if (test.Value == "Student")
+                {
+                <form method="get">
+                    <div class="columntest"><input type="submit" formaction="/StuderendePages/StuderendeMineBookinger" value="Mine Bookinger" class="skaler btn btn-primary"></div>
+                </form>
+
+                <form method="get">
+                    <div class="columntest"><input type="submit" formaction="/Shared/OversigtsPlanZealand" value="Oversigtsplan" class="skaler btn btn-primary"></div>
+                </form>
+                }
+                }
+                }
+            </div>
+        </nav>
+    </footer>

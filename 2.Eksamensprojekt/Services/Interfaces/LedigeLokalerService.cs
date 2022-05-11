@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using SuperBookerData;
 using System.Data.SqlClient;
 
 namespace _2.Eksamensprojekt.Services
@@ -15,10 +14,13 @@ namespace _2.Eksamensprojekt.Services
         public List<LokaleData> GetAll()
         {
             List<LokaleData> LkDataList = new List<LokaleData>();
-            string sql = "SELECT * FROM Lokale";
+            string sql = "SELECT * FROM Lokale " +
+                         "inner join LokaleSize ON LokaleSize_FK = SizeId " +
+                         "inner join LokaleLokation ON LokaleLokation_FK = LokaleLokationId";
             //Opretter forbindelse
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
+
                 //åbner forbindelsen
                 connection.Open();
 
@@ -43,13 +45,40 @@ namespace _2.Eksamensprojekt.Services
 
             ld1.LokaleID = reader.GetInt32(0);
             ld1.LokaleNavn = reader.GetString(1);
-            ld1.LokaleNummer = reader.GetString(2);
-            ld1.LokaleSmartBoard = reader.GetBoolean(3);
-            ld1.LokaleSize = (LokaleSize)reader.GetInt32(4);
-            ld1.MuligeBookinger = reader.GetInt32(5);
+            ld1.LokaleSmartBoard = reader.GetBoolean(2);
+            ld1.LokaleSize = (LokaleSize)reader.GetInt32(7);
+            ld1.LokaleNummer = reader.GetString(10);
+            ld1.MuligeBookinger = reader.GetInt32(8);
+            ld1.Etage = reader.GetInt32(11);
 
             return ld1;
         }
-    }
 
+        public List<LokaleData> GetAllLokaleBySqlString(string sql)
+        {
+            List<LokaleData> Lokaler = new List<LokaleData>();
+            
+            //Opretter forbindelse
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                //åbner forbindelsen
+                connection.Open();
+
+                //Opretter sql query
+                SqlCommand cmd = new SqlCommand(sql, connection);
+
+                //altid ved select
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                //Læser alle rækker
+                while (reader.Read())
+                {
+                    LokaleData ld = ReadLokaleData(reader);
+                    Lokaler.Add(ld);
+                }
+            }
+            return Lokaler;
+        }
+
+    }
 }

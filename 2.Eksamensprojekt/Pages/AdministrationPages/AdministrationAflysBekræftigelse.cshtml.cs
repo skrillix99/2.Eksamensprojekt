@@ -22,14 +22,14 @@ namespace _2.Eksamensprojekt.Pages.AdministrationPages
             _administrationService = administrationService;
         }
 
-        public void OnGet(int id)
+        public void OnGet()
         {
-            Booking = _administrationService.GetSingelBooking(id);
         }
 
         public void OnPost(int id)
         {
-            Booking = _administrationService.GetSingelBooking(id);
+            _administrationService.DeleteResevation(id);
+            Booking = AdministrationAflysBookingModel.TempBookingData;
         }
     }
 }

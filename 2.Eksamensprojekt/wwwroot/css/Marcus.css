@@ -1,5 +1,5 @@
 ﻿
-custom-btn, .submitAprove, .submitDenied, .submitBlack {
+.custom-btn, .submitAprove, .submitDenied, .submitBlack {
     padding: 0.5em 1em;
     border: solid 2px #555;
     width: 25%;
@@ -44,6 +44,9 @@ h1 {
 .submitBlack {
     background-color: #222222;
     color: white;
+}
+.submitYellow {
+    background-color: #FFF387;
 }
 
 .lokaleInfoWrapper {

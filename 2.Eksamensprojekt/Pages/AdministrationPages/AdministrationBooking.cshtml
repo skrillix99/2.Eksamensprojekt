@@ -1,33 +1,58 @@
-﻿@page
+﻿@page "{id:int}"
+@using SuperBookerData
 @model _2.Eksamensprojekt.Pages.AdministrationPages.AdministrationBookingModel
 @{
 }
-
-<h1>booking system til administration</h1>
-
-<form action="/" method="post">
-    <br />
-    <div class="row">
-        <div class="col-md-12">
-            <h6>Datetimepicker</h6>
-
-            
-
-            <div class="form-group">
-                <div class="input-group date" id="datetimepicker">
-
-                    <input type="datetime-local" class="form-control col-md-6" name="book" required>
-                    <script>
-                        var today = new Date().toISOString().slice(0, 16);
-
-                        document.getElementsByName("book")[0].min = today;
-
-                    </script>
-                </div>
-            </div>
-        </div>
-
+<a asp-page="/Shared/LedigeLokaler">< TILBAGE</a>
+<div class="centered">
+    <h1>Booking af</h1>
+    <div class="lokaleInfoWrapper" style="width: unset">
+        <h3>@Model.Lokale.LokaleNummer @Model.Lokale.LokaleNavn</h3>
+        <p><b>Størrelse:</b> @Enum.GetName(typeof(LokaleSize), (Model.Lokale.LokaleSize - 1))</p>
     </div>
-    @*<input type="datetime-local" value="welp2"/>*@
-</form>
 
+
+    <form method="post">
+        
+        @foreach (var claim in User.Claims)
+        {
+            if (claim.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name")
+            {
+                Model.Email.BrugerEmail = claim.Value;
+                <input type="text" value="@claim.Value" asp-for="Email.BrugerEmail" hidden="hidden"/>
+            }
+        }
+        
+        
+
+        <fieldset>
+            <label>Tidspunkt og dato Fra:</label>
+            <br/>
+            <input type="datetime-local" asp-for="@Model.Booking.Dag"/>
+        </fieldset>
+        <fieldset>
+            <label>Til:</label>
+            <br/>
+            <input type="time" asp-for="Booking.TidStart"/>
+        </fieldset>
+        <fieldset>
+            <label>Bookes for</label>
+            <br/>
+            <select asp-for="@Model.Booking.BookesFor">            
+                @foreach (var rolle in Enum.GetValues(typeof(brugerRolle)))
+                {
+                    <option value="@rolle">@rolle</option>            
+                 }
+            </select>
+        </fieldset>
+
+        <input type="submit" value="Book" class="btn-primary" asp-page-handler="book" asp-route-id="@Model.Lokale.LokaleID"/>
+    </form>
+</div>
+
+
+<script>
+    var today = new Date().toISOString().slice(0, 16);
+
+    document.getElementsByName("Booking.Dag")[0].min = today;
+</script>

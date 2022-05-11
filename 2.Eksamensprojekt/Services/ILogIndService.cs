@@ -12,5 +12,6 @@ namespace _2.Eksamensprojekt.Services
         public bool Contains(LogIndData LogInd);
 
         public brugerRolle ContainsAndGiveRole(LogIndData LogInd);
+        PersonData GetSingelPersonByEmail(string email);
     }
 }

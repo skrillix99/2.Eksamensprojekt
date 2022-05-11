@@ -18,6 +18,7 @@ namespace _2.Eksamensprojekt.Pages.AdministrationPages
         private IBookingService _bookingService;
 
         public BookingData Booking { get; set; }
+        public static BookingData TempBookingData { get; set; }
 
         public AdministrationAflysBookingModel(IAdministrationService administrationService, IBookingService bookingService)
         {
@@ -28,6 +29,7 @@ namespace _2.Eksamensprojekt.Pages.AdministrationPages
         public void OnGet(int id)
         {
             Booking = _administrationService.GetSingelBooking(id);
+            TempBookingData = _administrationService.GetSingelBooking(id);
         }
         
     }

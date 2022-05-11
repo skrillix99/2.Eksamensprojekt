@@ -16,6 +16,7 @@ namespace _2.Eksamensprojekt.Pages.UnderviserPages
         private IAdministrationService _administrationService;
 
         public BookingData Booking { get; set; }
+        public static BookingData TempBookingData { get; set; }
 
         public UnderviserAflysBookingModel(IAdministrationService administrationService)
         {
@@ -24,6 +25,7 @@ namespace _2.Eksamensprojekt.Pages.UnderviserPages
         public void OnGet(int id)
         {
             Booking = _administrationService.GetSingelBooking(id);
+            TempBookingData = _administrationService.GetSingelBooking(id);
         }
     }
 }

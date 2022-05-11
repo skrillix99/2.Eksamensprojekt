@@ -30,7 +30,7 @@ namespace _2.Eksamensprojekt
             services.AddRazorPages();
             services.AddSingleton<ILogIndService, LogIndService>();
             services.AddSingleton<ILedigeLokalerService, LedigeLokalerService>();
-
+            services.AddSingleton<IUnderviserService, UnderviserService>();
 
             // Marcus
             services.Configure<CookiePolicyOptions>(options =>

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Claims;
 using SuperBookerData;
+using Claim = Microsoft.IdentityModel.Claims.Claim;
 
 namespace _2.Eksamensprojekt.Pages.Shared
 {
@@ -15,12 +16,18 @@ namespace _2.Eksamensprojekt.Pages.Shared
     {
         private ILedigeLokalerService _ledigeLokalerService;
         private static List<LokaleData> _lokaleListe;
+
         public List<LokaleData> LokaleData { get; private set; }
+        [BindProperty]
+        public LokaleData LokaleDataSingel { get; private set; }
+        [BindProperty]
+        public string NummerSøgning { get; set; }
+
         public LedigeLokalerModel(ILedigeLokalerService ledigeLokalerService)
         {
             _ledigeLokalerService = ledigeLokalerService;
         }
-        
+
         public void OnGet()
         {
             _lokaleListe = _ledigeLokalerService.GetAll();
@@ -29,30 +36,22 @@ namespace _2.Eksamensprojekt.Pages.Shared
 
         public void OnPost()
         {
+            LokaleDataSingel = new LokaleData();
             string sql = "select * from Lokale where 1=1 ";
-            //if (LokaleNavn != null)
-            //{
-            //    sql = sql + "AND LokaleNummer = 1";
-            //}
-            //if (Etage != null)
-            //{
-            //    sql = sql + "AND Etage = 1";
-            //}
-            //if (datetime != null)
-            //{
-            //    sql = sql + "AND DateTime = 1";
-            //}
-            //if (LokaleSize != null)
-            //{
-            //    sql = sql + "AND Størrelse = 1"
-            //}
-            //if (LokaleSmartBoard != null)
-            //{
-            //    sql = sql + "AND LokaleSmartBoard = 1";
-            //}
 
-            sql = sql + "ORDER BY LokaleEtage";
+            if (!String.IsNullOrWhiteSpace(NummerSøgning))
+            {
+                sql += $"AND LokaleNummer = '{NummerSøgning}' ";
+            }
 
+            if (!(LokaleDataSingel.Etage <= 0) || (LokaleDataSingel.Etage >= 4))
+            {
+                sql += $"AND LokaleEtage = {LokaleDataSingel.Etage} ";
+            }
+
+            sql += $"SORT BY Etage";
+
+            LokaleData = _ledigeLokalerService.GetAllLokaleBySqlString(sql);
         }
 
 

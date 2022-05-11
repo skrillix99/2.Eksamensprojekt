@@ -36,7 +36,6 @@ namespace _2.Eksamensprojekt.Pages.Shared
             };
 
         }
-        //MARCUS KODE DO NOT DELETE XD
 
         public void OnGet()
         {
@@ -46,6 +45,7 @@ namespace _2.Eksamensprojekt.Pages.Shared
 
         }
 
+        //MARCUS KODE DO NOT DELETE XD
         //public async Task OnGetAsync()
         //{
         //    // live update search stuff (forhåblig) ToListAsync??? problem

@@ -1,5 +1,4 @@
 ﻿@page
-
 @model _2.Eksamensprojekt.Pages.Shared.BookedeLokalerModel
 @{
     ViewData["Title"] = "Detailed View";
@@ -20,51 +19,17 @@
                     @("(U. SmartBoard)")
                 }
             </h5>
-            <h5 class="Lokale-Størrelse:">Størrelse: @lokale.Lokale.LokaleSize</h5>
-            <h5 class="card-title">Antal pladser tilbage: @lokale.Lokale.MuligeBookinger</h5>
-            <h5 class="card-title">Date: @lokale.Dag.ToString("d")</h5>
-            <h5 class="">Tidspunkt: @lokale.TidStart - @lokale.TidSlut</h5>
-            <h5 class="">Bookede af: @lokale.Bruger.BrugerNavn</h5>
-        </div>
-
-        @*<div class="card-body">
-                <p class="card-text">@Model.UserStory.Description</p>
-            </div>*@
-
-        <div class="card-footer">
-            <button id="myModalBtn" class="btn" data-toggle="modal" data-target="#myModal">
-                <i class="fa fa-info-circle"></i>
-            </button>
-        </div>
-    </div>
-
-    <div class="modal" id="myModal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">
-                        <small class="text-muted">(@lokale.Lokale.LokaleSize)</small>
-                        @lokale.Lokale.MuligeBookinger
-                    </h5>
-                    <a type="button" class="close" asp-page="Index">&times;</a>
-                </div>
-                <div class="modal-body">
-                    <p><b>Description:</b> @lokale.Dag</p>
-                    <p><b>Business Value:</b> @lokale.TidStart</p>
-                    <p><b>Story Points:</b> @lokale.TidSlut</p>
-                    <p>@lokale.Bruger.BrugerNavn</p>
-                </div>
-                <div class="modal-footer">
-                    <a type="button" class="btn btn-danger" asp-page="Index">Close</a>
-                </div>
-            </div>
+            <h5 class="Lokale-Størrelse:"><b>Størrelse:</b> @lokale.Lokale.LokaleSize</h5>
+            <h5 class="card-title"><b>Antal pladser tilbage:</b> @lokale.Lokale.MuligeBookinger</h5>
+            <h5 class="card-title"><b>Date:</b> @lokale.Dag.ToString("d")</h5>
+            <h5 class=""><b>Tidspunkt:</b> @lokale.TidStart.ToString(@"hh\:mm") - @lokale.TidSlut.ToString(@"hh\:mm")</h5>
+            <h5 class=""><b>Bookede af:</b> @lokale.Bruger.BrugerNavn</h5>
+            <form method="post">
+                <button type="submit" asp-page="/AdministrationPages/AdministrationAflysBooking" asp-route-id="@lokale.ResevertionId" ><i class="fa fa-trash"></i></button>
+            </form>
         </div>
     </div>
 }
-
-
-
-
 
 @section Scripts
 {

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace _2.Eksamensprojekt.Pages.Shared
 {
-    public class LokaleLokationModel : PageModel
+    public class OversigtsPlanZealandModel : PageModel
     {
         public void OnGet()
         {

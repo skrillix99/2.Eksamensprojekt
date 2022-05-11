@@ -1,12 +1,12 @@
-﻿@page "{id:int}"
+﻿@page
 @using SuperBookerData
-@model _2.Eksamensprojekt.Pages.AdministrationPages.AdministrationAflysBookingModel
+@model _2.Eksamensprojekt.Pages.UnderviserPages.UnderviserAflysBekræftigelseModel
 @{
 }
 
-<a class="tilbageLink" asp-page="AdministrationMineBookinger"> < TILBAGE</a>
+<a class="tilbageLink" asp-page="UnderviserMineBookinger"> < TILBAGE</a>
 
-<h1 class="text-center">Ønsker du at slette denne booking</h1>
+<h1 class="text-center">Følgende booking er blevet slettet</h1>
 <div class="lokaleInfoWrapper">
     <h3>@Model.Booking.Lokale.LokaleNavn</h3>
     <h3>@(Model.Booking.Lokale.LokaleSmartBoard ? "M.Smartboard":"U.Smartboard")</h3>
@@ -18,6 +18,6 @@
 </div>
 
 <form method="post" class="AflysbookingForm">
-    <input type="submit" value="Ja" class="submitAprove custom-btn" asp-route-id="@Model.Booking.ResevertionId" asp-page="AdministrationAflysBekræftigelse" />
-    <input type="submit" value="Nej" class="submitDenied custom-btn" asp-page="AdministrationMineBookinger" />
+    <input type="submit" value="Fortryd" class="submitBlack custom-btn" asp-page="UnderviserMineBookinger" />
+    <input type="submit" value="OK" class="submitBlack custom-btn" asp-page="UnderviserMineBookinger" />
 </form>

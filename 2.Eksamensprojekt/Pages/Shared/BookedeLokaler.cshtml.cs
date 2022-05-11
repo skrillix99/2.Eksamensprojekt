@@ -25,17 +25,8 @@ namespace _2.Eksamensprojekt.Pages.Shared
 
         public void OnGet()
         {
-        BookingData = _bookingService.GetAll();
+        BookingData = _bookingService.GetAllBookings();
         }
-
-
-        public IActionResult OnPost(int LokaleID)
-        {
-            LokaleData deletedLokale = _bookingService.Delete(LokaleID);
-
-            return RedirectToPage("Index");
-        }
-
     }
 }
 

@@ -26,6 +26,7 @@ namespace _2.Eksamensprojekt.Pages
             {
                 HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             }
+            
         }
 
     }

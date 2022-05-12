@@ -190,3 +190,9 @@ body {
 .margin_left_small {
     margin-left: 2.5%;
 }
+
+DIV.container {
+    min-height: 10em;
+    display: table-cell;
+    vertical-align: middle
+}

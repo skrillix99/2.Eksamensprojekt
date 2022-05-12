@@ -3,7 +3,10 @@
 
 .book-btn{
     display: inline;
-    float: right;
+    width: 40%;
+    margin-left: 30%;
+    margin-right: 30%;
+    padding: 10px 0%;
 }
 /*Code inspired by*/
 /*https://codepen.io/dautoblog/pen/KMGogz*/
@@ -146,7 +149,9 @@ nav ul li:active > ul {
 }
 
 .container {
-    max-width: 65% !important;
+    margin-left: 0;
+    margin-right: 0;
+    max-width: 100% !important;
 }
 
 .dropdown-kategorier {
@@ -160,8 +165,13 @@ nav ul li:active > ul {
     border-right-width: 0px;
 }
 
+.mb-2 {
+    margin-bottom: 1.5rem;
+}
 
-
+.ingen-border-bottom {
+    border-bottom: 0px !important;
+}
 
 
 
@@ -173,6 +183,7 @@ nav ul li:active > ul {
 #searchbar {
     padding: 15px;
     border-radius: 10px;
+    margin-bottom: 0.5em;
 }
 
 input[type=text] {
@@ -181,8 +192,8 @@ input[type=text] {
     transition: width 0.15s ease-in-out;
 }
 
-
-
-/*.animals {
-    display: list-item;
-} */
+.lokale-info-centreret {
+    width: 70%;
+    margin-left: 15%;
+    margin-right: 15%;
+}

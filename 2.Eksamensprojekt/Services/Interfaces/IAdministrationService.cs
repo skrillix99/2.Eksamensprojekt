@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 using SuperBookerData;
 
@@ -21,7 +22,8 @@ namespace _2.Eksamensprojekt.Services.Interfaces
         /// Sletter en reservation fra Reservations tabellen.
         /// </summary>
         /// <param name="id">Typen int. Skal passe med et reservations id</param>
-        void DeleteReservation(int id);
+        /// <param name="dag">Typen DateTime. Skal være DateTime objectet da resevertionen blev oprettet</param>
+        void DeleteReservation(int id, DateTime dag);
         void DeleteReservation();
         List<BookingData> GetAllReservationer();
         /// <summary>

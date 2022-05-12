@@ -146,7 +146,9 @@ nav ul li:active > ul {
 }
 
 .container {
-    max-width: 65% !important;
+    /*max-width: 65% !important;*/
+    margin-left: 0;
+    margin-right: 0;
 }
 
 .dropdown-kategorier {
@@ -180,9 +182,3 @@ input[type=text] {
     -webkit-transition: width 0.15s ease-in-out;
     transition: width 0.15s ease-in-out;
 }
-
-
-
-/*.animals {
-    display: list-item;
-} */

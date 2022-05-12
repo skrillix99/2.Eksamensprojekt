@@ -22,17 +22,33 @@ namespace _2.Eksamensprojekt.Pages.Shared
         
 
         public List<LokaleData> LokaleData { get; private set; }
-        public List<string> SoegeKriterierVaerdier { get; private set; }
-        
+        public List<string> SKEtage { get; private set; }
+        public List<string> SKStoerrelse { get; private set; }
+        public List<string> SKSmartBoard { get; private set; }
+
         [BindProperty]
-        public string SoegeKriterier { get; set; }
+        public string SKEtage_valg { get; set; }
+
+        [BindProperty]
+        public string SKStoerrelse_valg { get; set; }
+
+        [BindProperty]
+        public string SKSmartBoard_valg { get; set; }
 
         public LedigeLokalerModel(ILedigeLokalerService ledigeLokalerService)
         {
             _ledigeLokalerService = ledigeLokalerService;
-            SoegeKriterierVaerdier = new List<string>()
+            SKEtage = new List<string>()
             {
-                "Lokale Nummer Stigende", "Lokale Nummer Faldende"
+                "Alle etager", "Stue etage (D1)", "1. etage (D2)", "2. etage (D3)"
+            };
+            SKStoerrelse = new List<string>()
+            {
+                "Alle lokaler", "Gruppe lokaler", "Klasse lokaler", "Auditorie"
+            };
+            SKSmartBoard = new List<string>()
+            {
+                "Nulstil", "Ja", "Nej"
             };
 
         }
@@ -41,33 +57,14 @@ namespace _2.Eksamensprojekt.Pages.Shared
         {
             _lokaleListe = _ledigeLokalerService.GetAll();
             LokaleData = new List<LokaleData>(_lokaleListe);
-
-
         }
 
-        //MARCUS KODE DO NOT DELETE XD
-        //public async Task OnGetAsync()
-        //{
-        //    // live update search stuff (forhåblig) ToListAsync??? problem
-        //    var movies = from m in _ledigeLokalerService.GetAll()
-        //                 select m;
-        //    if (!string.IsNullOrEmpty(SoegeKriterier))
-        //    {
-        //        movies = movies.Where(s => s.LokaleNummer.Contains(SoegeKriterier));
-        //    }
+        public void OnPost()
+        {
 
-        //    LokaleData = await movies.ToListAsync();
-        //}
+         //   string sql = "select * from Lokale WHERE Dag between 'welp1' AND 'welp2'";
+        }
 
-        //public async Task<IActionResult> OnPost()
-        //{
-        //    if(user = brugerRolle.Student)
-        //    {
-        //        return RedirectToPage("StuderendePages/StuderendeBooking");
-        //    }
-        //    //DoFind();
-        //    return Page();
-        //}
         private LokaleData ReadLokaleData(SqlDataReader reader)
         {
             LokaleData ld1 = new LokaleData();
@@ -81,41 +78,6 @@ namespace _2.Eksamensprojekt.Pages.Shared
             ld1.LokaleEtage = reader.GetInt32(10);
 
             return ld1;
-        }
-
-        private void DoFind()
-        {
-            switch (SoegeKriterier)
-            {
-                case "Lokale Nummer Stigende":
-                    LokaleData = new List<LokaleData>(_lokaleListe);
-                    break;
-
-                case "Lokale Nummer Faldende":
-                    List<LokaleData> LkDataList = new List<LokaleData>();
-                    string sql = "SELECT * FROM Lokale ORDER BY LokaleNummer";
-                    const string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=SuperBookerLokal;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-                    //Opretter forbindelse
-                    using (SqlConnection connection = new SqlConnection(connectionString))
-                    {
-                        //åbner forbindelsen
-                        connection.Open();
-
-                        //Opretter sql query
-                        SqlCommand cmd = new SqlCommand(sql, connection);
-
-                        //altid ved select
-                        SqlDataReader reader = cmd.ExecuteReader();
-
-                        //Læser alle rækker
-                        while (reader.Read())
-                        {
-                            LokaleData ld = ReadLokaleData(reader);
-                            LkDataList.Add(ld);
-                        }
-                    }
-                    break;
-            }
         }
     }
 }

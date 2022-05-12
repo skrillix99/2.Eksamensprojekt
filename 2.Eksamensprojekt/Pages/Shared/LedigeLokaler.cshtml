@@ -3,6 +3,7 @@
 @{
 }
 
+@* (Må gerne bruges, men i rapporten skal i beskrive hvordan I ville gøre det hvis det kun skulle være ren razor pages *@
 <!-- input tag -->
 <input id="searchbar" onkeyup="soeg_lokale()" type="text"
        name="search" placeholder="Søg efter lokaler">
@@ -48,13 +49,15 @@
         @* STØRRELSE *@
         <li>
             <!-- First Tier Drop Down -->
+
+            @* TO DO, LAV BUTTON OM TIL SELECT, BRUG KUN 1 FORM GROUP *@
             <div class="border-custom dropdown-kategorier">
                 <label for="drop-3" class="toggle">Vælg størrelse &#9660;</label>
                 <input type="checkbox" id="drop-3" />
                 <ul>
-                    <li><button class="dropdown-button"><a href="#">Alle Lokaler</a></button> </li>
-                    <li><button class="dropdown-button"><a href="#">Gruppe lokale</a></button> </li>
-                    <li><button class="dropdown-button"><a href="#">Klasse lokale</a></button> </li>
+                    <li><button class="dropdown-button">Alle lokaler</button> </li>
+                    <li><button class="dropdown-button"><a href="#">Gruppe lokaler</a></button> </li>
+                    <li><button class="dropdown-button"><a href="#">Klasse lokaler</a></button> </li>
                     <li><button class="dropdown-button ingen-border-bottom"><a href="#">Auditorie</a></button> </li>
                 </ul>
             </div>

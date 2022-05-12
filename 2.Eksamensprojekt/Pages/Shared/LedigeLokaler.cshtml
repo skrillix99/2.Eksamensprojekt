@@ -5,83 +5,22 @@
 
 <!-- input tag -->
 <input id="searchbar" onkeyup="search_animal()" type="text"
-       name="search" placeholder="Søg efter lokaler">
-</br>
+       name="search" placeholder="Search animals..">
 
-
-<div class="soege-kriteria dropdown-kategorier">
-    <label for="drop" class="toggle">&#8801; Søgekriterier</label>
-    <input type="checkbox" id="drop" />
-    <ul class="menu">
-        <form method="post">
-            <fieldset>
-                @* ETAGE *@
-
-        <li>
-            <!-- First Tier Drop Down -->
-            <div class="border-custom dropdown-kategorier">
-                <label for="drop-1" class="toggle">Vælg Etage</label>
-                @*<a href="#">Service</a>*@
-                <input type="checkbox" id="drop-1" />
-                <ul>
-                    <li><button class="dropdown-button"><a href="#">Alle etager</a></button> </li>
-                    <li><button class="dropdown-button"><a href="#">Stue etage (D1)</a></button> </li>
-                    <li> <button class="dropdown-button"><a href="#">1. etage (D2)</a></button> </li>
-                    <li> <button class="dropdown-button"><a href="#">2. etage (D3)</a></button> </li>
-                </ul>
-            </div>
-        </li>
-
-        @* DATO OG TID *@
-        <li>
-            <!-- First Tier Drop Down -->
-            <div class="border-custom dropdown-kategorier">
-                <label for="drop-2" class="toggle">TODOVælg dato og tid</label>
-                @*<a href="#">Service</a>*@
-                <input type="checkbox" id="drop-2" />
-                <ul>
-                    <li> <button class="dropdown-button"><a href="#">Alle etager</a></button> </li>
-                    <li> <button class="dropdown-button"><a href="#">Stue etage (D1)</a></button> </li>
-                    <li> <button class="dropdown-button"><a href="#">1. etage (D2)</a></button> </li>
-                    <li> <button class="dropdown-button"><a href="#">2. etage (D3)</a></button> </li>
-                </ul>
-            </div>
-        </li>
-
-        @* STØRRELSE *@
-        <li>
-            <!-- First Tier Drop Down -->
-            <div class="border-custom dropdown-kategorier">
-                <label for="drop-3" class="toggle">Vælg størrelse</label>
-                @*<a href="#">Service</a>*@
-                <input type="checkbox" id="drop-3" />
-                <ul>
-                    <li><button class="dropdown-button"><a href="#">Alle Lokaler</a></button> </li>
-                    <li><button class="dropdown-button"><a href="#">Gruppe lokale</a></button> </li>
-                    <li><button class="dropdown-button"><a href="#">Klasse lokale</a></button> </li>
-                    <li><button class="dropdown-button"><a href="#">Auditorie</a></button> </li>
-                </ul>
-            </div>
-        </li>
-
-
-        @* SMARTBOARD *@
-        <li>
-            <!-- First Tier Drop Down -->
-            <div class="border-custom dropdown-kategorier">
-                <label for="drop-4" class="toggle">Har SmartBoard?</label>
-                <input type="checkbox" id="drop-4" />
-                <ul>
-                    <li><button class="dropdown-button"><a href="#">Nulstil</a></button> </li>
-                    <li><button class="dropdown-button"><a href="#">Ja</a></button> </li>
-                    <li><button class="dropdown-button"><a href="#">Nej</a></button> </li>
-                </ul>
-            </div>
-        </li>
-        </fieldset>
-        </form>
-    </ul>
-</div>
+<!-- ordered list -->
+@*<ol id='list'>
+        <li class="animals">Cat</li>
+        <li class="animals">Dog</li>
+        <li class="animals">Elephant</li>
+        <li class="animals">Fish</li>
+        <li class="animals">Gorilla</li>
+        <li class="animals">Monkey</li>
+        <li class="animals">Turtle</li>
+        <li class="animals">Whale</li>
+        <li class="animals">Aligator</li>
+        <li class="animals">Donkey</li>
+        <li class="animals">Horse</li>
+    </ol>*@
 
 <div class="row">
     <div class="col-md-8">
@@ -152,6 +91,90 @@
 
 
 
+
+<div class="soege-kriteria dropdown-kategorier">
+    <label for="drop" class="toggle">&#8801; Søgekriterier</label>
+    <input type="checkbox" id="drop" />
+    <ul class="menu">
+        <form method="post">
+            <fieldset>
+
+                @* SØGE FUNKTION*@
+                <!--<li>
+
+                    <input type="search"-->
+                @*asp-for="Search"*@
+                <!--placeholder="Søg efter lokale nummer" class="search_input" />
+                    <input type="submit" value="Søg" class="btn" />
+
+                </li>-->
+                @* ETAGE *@
+
+        <li>
+            <!-- First Tier Drop Down -->
+            <div class="border-custom dropdown-kategorier">
+                <label for="drop-1" class="toggle">Vælg Etage</label>
+                @*<a href="#">Service</a>*@
+                <input type="checkbox" id="drop-1" />
+                <ul>
+                    <li><button class="dropdown-button"><a href="#">Alle etager</a></button> </li>
+                    <li><button class="dropdown-button"><a href="#">Stue etage (D1)</a></button> </li>
+                    <li> <button class="dropdown-button"><a href="#">1. etage (D2)</a></button> </li>
+                    <li> <button class="dropdown-button"><a href="#">2. etage (D3)</a></button> </li>
+                </ul>
+            </div>
+        </li>
+
+        @* DATO OG TID *@
+        <li>
+            <!-- First Tier Drop Down -->
+            <div class="border-custom dropdown-kategorier">
+                <label for="drop-2" class="toggle">TODOVælg dato og tid</label>
+                @*<a href="#">Service</a>*@
+                <input type="checkbox" id="drop-2" />
+                <ul>
+                    <li> <button class="dropdown-button"><a href="#">Alle etager</a></button> </li>
+                    <li> <button class="dropdown-button"><a href="#">Stue etage (D1)</a></button> </li>
+                    <li> <button class="dropdown-button"><a href="#">1. etage (D2)</a></button> </li>
+                    <li> <button class="dropdown-button"><a href="#">2. etage (D3)</a></button> </li>
+                </ul>
+            </div>
+        </li>
+
+        @* STØRRELSE *@
+        <li>
+            <!-- First Tier Drop Down -->
+            <div class="border-custom dropdown-kategorier">
+                <label for="drop-3" class="toggle">Vælg størrelse</label>
+                @*<a href="#">Service</a>*@
+                <input type="checkbox" id="drop-3" />
+                <ul>
+                    <li><button class="dropdown-button"><a href="#">Alle Lokaler</a></button> </li>
+                    <li><button class="dropdown-button"><a href="#">Gruppe lokale</a></button> </li>
+                    <li><button class="dropdown-button"><a href="#">Klasse lokale</a></button> </li>
+                    <li><button class="dropdown-button"><a href="#">Auditorie</a></button> </li>
+                </ul>
+            </div>
+        </li>
+
+
+        @* SMARTBOARD *@
+        <li>
+            <!-- First Tier Drop Down -->
+            <div class="border-custom dropdown-kategorier">
+                <label for="drop-4" class="toggle">Har SmartBoard?</label>
+                <input type="checkbox" id="drop-4" />
+                <ul>
+                    <li><button class="dropdown-button"><a href="#">Nulstil</a></button> </li>
+                    <li><button class="dropdown-button"><a href="#">Ja</a></button> </li>
+                    <li><button class="dropdown-button"><a href="#">Nej</a></button> </li>
+                </ul>
+            </div>
+        </li>
+        </fieldset>
+        </form>
+    </ul>
+</div>
 
 @* Input = søg efter lokalenummer
     vælg etage er 4 (stue, 1., 2. og alle) button med type submit,

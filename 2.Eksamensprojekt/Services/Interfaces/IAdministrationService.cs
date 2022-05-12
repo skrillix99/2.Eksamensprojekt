@@ -22,7 +22,7 @@ namespace _2.Eksamensprojekt.Services.Interfaces
         /// </summary>
         /// <param name="id">Typen int. Skal passe med et reservations id</param>
         void DeleteReservation(int id);
-        //void DeleteReservation();
+        void DeleteResevation();
         List<BookingData> GetAllReservationer();
         /// <summary>
         /// Henter en bestemt reservation fra Rerservations tabellen, baseret på parameter id.

@@ -13,36 +13,6 @@ namespace _2.Eksamensprojekt.Services
         private const string connectionString = "Data Source=zealandmarc.database.windows.net;Initial Catalog=SuperBooker4000;User ID=AdminMarc;Password=Marcus19;Connect Timeout=30;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         private readonly List<LogIndData> _logIndData;
 
-        #region ReadPersoner
-
-        private LogIndData ReadPersoner(SqlDataReader reader)
-        {
-            LogIndData l = new LogIndData
-            {
-                EmailLogInd = reader.GetString(0),
-                Password = reader.GetString(1),
-                rolle = (brugerRolle)reader.GetInt32(2)
-            };
-
-            return l;
-        }
-
-        #endregion
-
-        #region ReadPersonID
-
-        private PersonData ReadPersonID(SqlDataReader reader)
-        {
-            PersonData l = new PersonData()
-            {
-                BrugerID = reader.GetInt32(0)
-            };
-
-            return l;
-        }
-
-        #endregion
-
         public List<LogIndData> GetPersoner()
         {
             List<LogIndData> list = new List<LogIndData>();
@@ -66,30 +36,17 @@ namespace _2.Eksamensprojekt.Services
 
         }
 
-        public PersonData GetSingelPersonByEmail(string email)
+        private LogIndData ReadPersoner(SqlDataReader reader)
         {
-            PersonData list = new PersonData();
-
-            string sql = "select BrugerID from Person WHERE BrugerEmail = @email";
-
-                using (SqlConnection connection = new SqlConnection(connectionString))
+            LogIndData l = new LogIndData
             {
-                SqlCommand cmd = new SqlCommand(sql, connection);
-                cmd.Parameters.AddWithValue("@email", email);
-                cmd.Connection.Open();
-                SqlDataReader reader = cmd.ExecuteReader();
+                EmailLogInd = reader.GetString(0),
+                Password = reader.GetString(1),
+                rolle = (brugerRolle)reader.GetInt32(2)
+            };
 
-                while (reader.Read())
-                {
-                    var us = ReadPersonID(reader);
-                    return us;
-                }
-
-                return list;
-            }
+            return l;
         }
-
-        
 
         public bool Contains(LogIndData LogInd)
         {
@@ -153,5 +110,9 @@ namespace _2.Eksamensprojekt.Services
             return LogInd.rolle;
         }
 
+        public PersonData GetSingelPersonByEmail(string email)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

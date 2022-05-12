@@ -253,7 +253,7 @@ namespace _2.Eksamensprojekt.Services
 
         }
 
-        public void DeleteResevation(int id)
+        public void DeleteReservation(int id)
         {
             if (id <= 0)
             {
@@ -278,33 +278,31 @@ namespace _2.Eksamensprojekt.Services
         }
 
 
-        //public void DeleteReservation()
-        //{
-        //    //if (id <= 0)
-        //    //{
-        //    //    throw new KeyNotFoundException("Der findes ikke nogle reservationer med det ID");
-        //    //}
+        public void DeleteReservation()
+        {
+            //if (id <= 0)
+            //{
+            //    throw new KeyNotFoundException("Der findes ikke nogle reservationer med det ID");
+            //}
 
-        //    //string sql = "DELETE from Reservation WHERE ReservationID = @id";
-        //    string sql = "DELETE from Reservation WHERE Dag < @nextDay";
+            //string sql = "DELETE from Reservation WHERE ReservationID = @id";
+            string sql = "DELETE from Reservation WHERE Dag < @nextDay";
 
-        //    using (SqlConnection connection = new SqlConnection(connectionString))
-        //    {
-        //        SqlCommand cmd = new SqlCommand(sql, connection);
-        //        //cmd.Parameters.AddWithValue("@id", id);
-        //        cmd.Parameters.AddWithValue("@nextDay", DateTime.Today.AddDays(1).Date.ToString("s"));
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand(sql, connection);
+                //cmd.Parameters.AddWithValue("@id", id);
+                cmd.Parameters.AddWithValue("@nextDay", DateTime.Today.ToString("s"));
 
-        //        cmd.Connection.Open();
+                cmd.Connection.Open();
 
-        //        DateTime ll = DateTime.Today.AddDays(1).Date;
-
-        //        int rows = cmd.ExecuteNonQuery();
-        //        //if (rows != 1)
-        //        //{
-        //        //    throw new InvalidOperationException("Der skete en fejl i databasen"); 
-        //        //}
-        //    }
-        //}
+                int rows = cmd.ExecuteNonQuery();
+                //if (rows != 1)
+                //{
+                //    throw new InvalidOperationException("Der skete en fejl i databasen"); 
+                //}
+            }
+        }
 
     }
 }

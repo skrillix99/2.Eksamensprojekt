@@ -17,7 +17,7 @@ namespace SuperBookerData
         private LokaleData _lokale;
         private TimeSpan _tidSlut;
         private brugerRolle _bookesFor;
-
+        
         public BookingData()
         {
         }

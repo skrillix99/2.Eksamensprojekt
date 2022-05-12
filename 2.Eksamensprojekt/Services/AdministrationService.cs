@@ -219,13 +219,13 @@ namespace _2.Eksamensprojekt.Services
                                                         // TidStart, Dag, Heltbooket, Bruger_FK, Lokale_FK, TidSlut, BookesFor
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                TimeSpan tidSlut= newBooking.Dag.TimeOfDay.Add(newBooking.TidStart);
+                string tidSlut = newBooking.Dag.Add(newBooking.TidStart).ToShortTimeString();
                 int brugerID = _logIndService.GetSingelPersonByEmail(newBooking.Bruger.BrugerEmail).BrugerID;
 
                 SqlCommand cmd = new SqlCommand(sql, connection);
-                cmd.Parameters.AddWithValue("@tidStart", newBooking.TidStart.ToString());
+                cmd.Parameters.AddWithValue("@tidStart", newBooking.Dag.ToShortTimeString());
                 cmd.Parameters.AddWithValue("@dag", newBooking.Dag.ToString("s"));
-                cmd.Parameters.AddWithValue("@tidSlut", tidSlut.ToString());
+                cmd.Parameters.AddWithValue("@tidSlut", tidSlut);
                 cmd.Parameters.AddWithValue("@brugerFK", brugerID);
                 cmd.Parameters.AddWithValue("@lokaleFK", newBooking.Lokale.LokaleID);
                 cmd.Parameters.AddWithValue("@bookesFor", (int)newBooking.BookesFor);

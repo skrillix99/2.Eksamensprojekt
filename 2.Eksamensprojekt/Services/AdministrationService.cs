@@ -48,10 +48,26 @@ namespace _2.Eksamensprojekt.Services
         private BookingData ReadReservation(SqlDataReader reader)
         {
             BookingData b = new BookingData();
-            b.TidStart = reader.GetTimeSpan(0);
-            b.Dag = reader.GetDateTime(1);
-            b.HeltBooket = reader.GetInt32(2);
-            b.TidSlut = reader.GetTimeSpan(3); 
+            b.ResevertionId = reader.GetInt32(0);
+            b.TidStart = reader.GetTimeSpan(1);
+            b.Dag = reader.GetDateTime(2);
+            b.HeltBooket = reader.GetInt32(3);
+            b.TidSlut = reader.GetTimeSpan(4);
+            b.BookesFor = (brugerRolle)reader.GetInt32(5);
+            b.brugerRolle = (brugerRolle)reader.GetInt32(6);
+            b.BrugerID = reader.GetInt32(7);
+            b.BrugerNavn = reader.GetString(8);
+
+            LokaleData l = new LokaleData();
+            l.LokaleNavn = reader.GetString(9);
+            l.LokaleNummer = reader.GetString(10);
+            l.LokaleSmartBoard = reader.GetBoolean(11);
+            l.LokaleSize = (LokaleSize)reader.GetInt32(12);
+            l.MuligeBookinger = reader.GetInt32(13);
+            b.Lokale = l;
+            
+
+
             //TODO tilføj brugerID og lokaleID foreign keys
             return b;
         }
@@ -137,11 +153,18 @@ namespace _2.Eksamensprojekt.Services
             }
         }
 
-        public List<BookingData> GetAllReservationer()
+        public List<BookingData> GetAllReservationer(string sql2)
         {
             List<BookingData> lokaler = new List<BookingData>();
 
-            string sql = "select * from Reservation";
+            string sql = "Select ReservationID, TidStart, Dag, HeltBooket, TidSlut, BookesFor, BrugerRolle, BrugerID, BrugerNavn, LokaleNavn, LokaleNummer, LokaleSmartBoard, Size, Muligebookinger " +
+                "From Reservation INNER JOIN Person ON Reservation.BrugerID_FK = Person.BrugerID " +
+                "INNER JOIN Lokale ON Reservation.LokaleID_FK = Lokale.LokaleID " +
+                "INNER JOIN LokaleLokation ON Lokale.LokaleLokation_FK = LokaleLokation.LokaleLokationId " +
+                "INNER JOIN LokaleSize ON Lokale.LokaleSize_FK = LokaleSize.SizeId ";
+
+
+            sql += sql2;
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {

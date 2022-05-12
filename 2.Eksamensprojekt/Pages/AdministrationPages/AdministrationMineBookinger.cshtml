@@ -2,3 +2,11 @@
 @model _2.Eksamensprojekt.Pages.AdministrationPages.AdministrationMineBookingerModel
 @{
 }
+
+@foreach (var item in Model.Booking)
+{
+    @item.ResevertionId
+    @item.Dag
+    @item.BrugerNavn
+    @item.Lokale.LokaleNavn
+}

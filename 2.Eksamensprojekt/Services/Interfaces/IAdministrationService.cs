@@ -19,7 +19,7 @@ namespace _2.Eksamensprojekt.Services.Interfaces
         LokaleData GetSingelLokale(int id);
 
         void DeleteResevation(int id);
-        List<BookingData> GetAllReservationer();
+        List<BookingData> GetAllReservationer(string sql2);
         BookingData GetSingelBooking(int id);
         void AddReservation(BookingData newBooking);
 

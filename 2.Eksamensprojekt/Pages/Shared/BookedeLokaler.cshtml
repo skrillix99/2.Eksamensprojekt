@@ -1,4 +1,5 @@
 ﻿@page
+@using SuperBookerData
 @model _2.Eksamensprojekt.Pages.Shared.BookedeLokalerModel
 @{
     ViewData["Title"] = "Detailed View";
@@ -22,7 +23,8 @@
             <h5 class="Lokale-Størrelse:"><b>Størrelse:</b> @lokale.Lokale.LokaleSize</h5>
             <h5 class="card-title"><b>Antal pladser tilbage:</b> @lokale.Lokale.MuligeBookinger</h5>
             <h5 class="card-title"><b>Date:</b> @lokale.Dag.ToString("d")</h5>
-            <h5 class=""><b>Tidspunkt:</b> @lokale.TidStart.ToString(@"hh\:mm") - @lokale.TidSlut.ToString(@"hh\:mm")</h5>
+            <h5 class=""><b>Tidspunkt: </b>@lokale.TidSlut.ToString(@"hh\:mm")</h5>
+            <h5 class=""><b>Varighed: </b>@lokale.TidStart.ToString(@"hh\:mm")</h5>
             <h5 class=""><b>Bookede af:</b> @lokale.Bruger.BrugerNavn</h5>
             <form method="post">
                 @foreach (var test in User.Claims)
@@ -35,11 +37,10 @@
                         }
                         if (test.Value == "Underviser")
                         {
+                            if(lokale.brugerRolle == brugerRolle.Underviser) 
+                            {
                             <button type="submit" asp-page="/UnderviserPages/UnderviserAflysBooking" asp-route-id="@lokale.ResevertionId"><i class="fa fa-trash"></i></button>
-                        }
-                        if (test.Value == "Student")
-                        {
-                            <button type="submit" asp-page="/StuderendePages/StuderendeAflysBooking" asp-route-id="@lokale.ResevertionId"><i class="fa fa-trash"></i></button>
+                            }
                         }
                     }
                 }

@@ -17,7 +17,8 @@
     <p><b>Booket af:</b> @Model.Booking.Bruger.BrugerNavn</p>
 </div>
 
+
 <form method="post" class="AflysbookingForm">
+    <input type="submit" value="OK" class="submitBlack custom-btn" asp-page="UnderviserMineBookinger"/>
     <input type="submit" value="Fortryd" class="submitBlack custom-btn" asp-page="UnderviserMineBookinger" />
-    <input type="submit" value="OK" class="submitBlack custom-btn" asp-page="UnderviserMineBookinger" />
 </form>

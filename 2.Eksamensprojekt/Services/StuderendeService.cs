@@ -79,35 +79,49 @@ namespace _2.Eksamensprojekt.Services
         /// hvis kaldet til databasen fejler så thrower den en Execption
         /// </summary>
         /// <param name="newBooking">Typen BookingData.</param>
+        /// <returns>string med en besked om hvor mange reservationer man har tilbage</returns>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         /// <exception cref="Exception"></exception>
-        public void AddReservation(BookingData newBooking)
+        public string AddReservation(BookingData newBooking)
         {
-            string sql = "insert into Reservation VALUES (@tidStart, @dag, @mulige, @brugerFK, @lokaleFK, @tidSlut, 0)";
-            // TidStart, Dag, Heltbooket, Bruger_FK, Lokale_FK, TidSlut, BookesFor
+            string msg;
 
+            int BrugerID = _logIndService.GetSingelPersonByEmail(newBooking.BrugerEmail).BrugerID;
+            if (CheckReservationerByBrugerId(BrugerID).Count <= 3)
+            {
+                msg = $"Du har nu {3 - CheckReservationerByBrugerId(BrugerID).Count} tilbage";
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException("Du må kun have 3 bookings ad gangen");
+            }
+
+            
             BookingData tilbage = GetSingelBooking(newBooking.Lokale.LokaleID);
+            if (tilbage == null)
+            {
+                tilbage = new BookingData();
+                tilbage.HeltBooket = GetSingelLokale(newBooking.Lokale.LokaleID).MuligeBookinger;
+            }
+            else if (tilbage.HeltBooket == 0)
+            {
+                throw new ArgumentOutOfRangeException("Der er ikke flere bookings ledige på dette lokale");
+            }
+
+
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                if (tilbage == null)
-                {
-                    tilbage = new BookingData();
-                    tilbage.HeltBooket = GetSingelLokale(newBooking.Lokale.LokaleID).MuligeBookinger;
-                }
-                else if (tilbage.HeltBooket == 0)
-                {
-                    throw new ArgumentOutOfRangeException("Der er ikke flere bookings ledige på dette lokale");
-                }
-
                 string tidSlut = newBooking.Dag.Add(newBooking.TidStart).ToShortTimeString();
-                int brugerID = _logIndService.GetSingelPersonByEmail(newBooking.BrugerEmail).BrugerID;
+
+                string sql = "insert into Reservation VALUES (@tidStart, @dag, @mulige, @brugerFK, @lokaleFK, @tidSlut, 0)";
+                // TidStart, Dag, Heltbooket, Bruger_FK, Lokale_FK, TidSlut, BookesFor
 
                 SqlCommand cmd = new SqlCommand(sql, connection);
                 cmd.Parameters.AddWithValue("@tidStart", newBooking.Dag.ToShortTimeString());
                 cmd.Parameters.AddWithValue("@dag", newBooking.Dag.ToString("s"));
                 cmd.Parameters.AddWithValue("@mulige", tilbage.HeltBooket - 1);
                 cmd.Parameters.AddWithValue("@tidSlut", tidSlut);
-                cmd.Parameters.AddWithValue("@brugerFK", brugerID);
+                cmd.Parameters.AddWithValue("@brugerFK", BrugerID);
                 cmd.Parameters.AddWithValue("@lokaleFK", newBooking.Lokale.LokaleID);
 
                 cmd.Connection.Open();
@@ -119,6 +133,8 @@ namespace _2.Eksamensprojekt.Services
                     throw new Exception("welp");
                 }
             }
+
+            return msg;
         }
 
         public LokaleData GetSingelLokale(int id)
@@ -147,14 +163,52 @@ namespace _2.Eksamensprojekt.Services
             }
         }
 
-        public void DeleteReservation(int id, DateTime dag)
+        public void DeleteReservation(int id)
         {
-            throw new NotImplementedException();
+            
         }
 
         public List<BookingData> GetAllReservationer(string sql2)
         {
             throw new NotImplementedException();
+        }
+
+        public List<BookingData> CheckReservationerByBrugerId(int id)
+        {
+            List<BookingData> lokaler = new List<BookingData>();
+
+            string sql = "Select ReservationID " +
+                         "From Reservation INNER JOIN Person ON Reservation.BrugerID_FK = Person.BrugerID " +
+                         "INNER JOIN Lokale ON Reservation.LokaleID_FK = Lokale.LokaleID " +
+                         "INNER JOIN LokaleLokation ON Lokale.LokaleLokation_FK = LokaleLokation.LokaleLokationId " +
+                         "INNER JOIN LokaleSize ON Lokale.LokaleSize_FK = LokaleSize.SizeId " +
+                         "WHERE Person.BrugerID = @id";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand(sql, connection);
+                cmd.Connection.Open();
+                cmd.Parameters.AddWithValue("@id", id);
+
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    BookingData l = ReadReservationByBrugerId(reader);
+                    lokaler.Add(l);
+                }
+            }
+
+            return lokaler;
+        }
+
+        private BookingData ReadReservationByBrugerId(SqlDataReader reader)
+        {
+            BookingData bd = new BookingData();
+
+            bd.ResevertionId = reader.GetInt32(0);
+
+            return bd;
         }
 
         public BookingData GetSingelBooking(int id)

@@ -274,19 +274,10 @@ namespace _2.Eksamensprojekt.Services
 
         }
 
-        public void DeleteReservation(int id, DateTime dag)
-        {
-            DateTime dt = DateTime.Now.AddDays(-3); //TODO logic ændres
-            int newDay = dag.Subtract(dt).Days;
-            if (!(dag.Subtract(dt).Days >= 3))
-            {
-                throw new ArgumentOutOfRangeException("Må kun annulere med minimum 3 dages varsel.");
-            }
 
-            if (id <= 0)
-            {
-                throw new KeyNotFoundException("Der findes ikke nogle reservationer med det ID");
-            }
+        public void DeleteReservation(int id)
+        {
+            
 
             string sql = "DELETE from Reservation WHERE ReservationID = @id";
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 using _2.Eksamensprojekt.Services.Interfaces;
 using SuperBookerData;
@@ -42,6 +43,38 @@ namespace _2.Eksamensprojekt.Services
                 }
             }
 
+        }
+
+
+        public void BegrænsetAdgang(DateTime dag, int id)
+        {
+            DateTime dt = DateTime.Now.AddDays(-3); //TODO logic ændres
+            int newDay = dag.Subtract(dt).Days;
+            if (!(dag.Subtract(dt).Days >= 3))
+            {
+                throw new ArgumentOutOfRangeException("Må kun annulere med minimum 3 dages varsel.");
+            }
+
+            if (id <= 0)
+            {
+                throw new KeyNotFoundException("Der findes ikke nogle reservationer med det ID");
+            }
+
+            string sql = "DELETE from Reservation WHERE ReservationID = @id";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand(sql, connection);
+                cmd.Parameters.AddWithValue("@id", id);
+
+                cmd.Connection.Open();
+
+                int rows = cmd.ExecuteNonQuery();
+                if (rows != 1)
+                {
+                    throw new InvalidOperationException("Der skete en fejl i databasen");
+                }
+            }
         }
     }
 }

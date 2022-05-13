@@ -41,6 +41,10 @@
                             {
                             <button type="submit" asp-page="/UnderviserPages/UnderviserAflysBooking" asp-route-id="@lokale.ResevertionId"><i class="fa fa-trash"></i></button>
                             }
+                            if(lokale.brugerRolle == brugerRolle.Student) 
+                            {
+                            <button type="submit" asp-page="/UnderviserPages/UnderviserAflysBooking" asp-route-id="@lokale.ResevertionId"><i class="fa fa-trash"></i></button>
+                            }
                         }
                     }
                 }

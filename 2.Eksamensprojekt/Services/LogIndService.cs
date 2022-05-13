@@ -35,6 +35,16 @@ namespace _2.Eksamensprojekt.Services
 
         }
 
+        private PersonData ReadPersonID(SqlDataReader reader)
+        {
+            PersonData l = new PersonData()
+            {
+                BrugerID = reader.GetInt32(0)
+            };
+
+            return l;
+        }
+
         private LogIndData ReadPersoner(SqlDataReader reader)
         {
             LogIndData l = new LogIndData

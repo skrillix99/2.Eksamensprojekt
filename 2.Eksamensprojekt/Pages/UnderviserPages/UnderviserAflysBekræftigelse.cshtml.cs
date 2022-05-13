@@ -27,8 +27,8 @@ namespace _2.Eksamensprojekt.Pages.UnderviserPages
         }
         public void OnPost(int id)
         {
-            //_administrationService.DeleteResevation(id);
             Booking = UnderviserAflysBookingModel.TempBookingData;
+            _administrationService.DeleteReservation(id, Booking.Dag);
         }
     }
 }

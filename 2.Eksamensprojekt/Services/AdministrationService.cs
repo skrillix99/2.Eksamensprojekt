@@ -253,7 +253,7 @@ namespace _2.Eksamensprojekt.Services
 
         public void DeleteReservation(int id, DateTime dag)
         {
-            DateTime dt = DateTime.Now.AddDays(-3);
+            DateTime dt = DateTime.Now.AddDays(-3); //TODO logic ændres
             int newDay = dag.Subtract(dt).Days;
             if (!(dag.Subtract(dt).Days >= 3))
             {

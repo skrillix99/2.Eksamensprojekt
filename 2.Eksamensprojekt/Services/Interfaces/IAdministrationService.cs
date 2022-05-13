@@ -25,7 +25,7 @@ namespace _2.Eksamensprojekt.Services.Interfaces
         /// <param name="dag">Typen DateTime. Skal være DateTime objectet da resevertionen blev oprettet</param>
         void DeleteReservation(int id, DateTime dag);
         void DeleteReservation();
-        List<BookingData> GetAllReservationer();
+        List<BookingData> GetAllReservationer(string sql2);
         /// <summary>
         /// Henter en bestemt reservation fra Rerservations tabellen, baseret på parameter id.
         /// </summary>

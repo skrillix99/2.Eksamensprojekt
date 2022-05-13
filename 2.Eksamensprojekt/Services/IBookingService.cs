@@ -13,7 +13,7 @@ namespace _2.Eksamensprojekt.Services
 
         LokaleData GetById(int LokaleID);
 
-        LokaleData Delete(int lokaleID);
+        void DeleteResevation(int id);
 
         //TODO public BookingData CreateBooking(????);
 

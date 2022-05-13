@@ -25,7 +25,7 @@
             
             <div class="card mb-2" style="width: 30rem;">
                 <div class="card-header p-2">
-                    <h5 class="card-title">@LkD.LokaleNummer. @LkD.LokaleNavn</h5>
+                    <h5 class="card-title">@LkD.LokaleNummer @LkD.LokaleNavn</h5>
                     <h5>
                         @if (LkD.LokaleSmartBoard == true)
                         {
@@ -54,7 +54,7 @@
                             }
                             @if (test.Value == "Student")
                             {
-                                <input type="submit" value="Stud Book" asp-page="/StuderendePages/StuderendeBooking" class="btn btn-primary"/>
+                                <input type="submit" value="Stud Book" asp-page="/StuderendePages/StuderendeBooking" asp-route-id="@LkD.LokaleID" class="btn btn-primary"/>
                             }
                         </form>
                         }

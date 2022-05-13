@@ -36,14 +36,18 @@ namespace _2.Eksamensprojekt.Pages.AdministrationPages
         public void OnPost(int id)
         {
             Lokale = _administrationService.GetSingelLokale(id);
+
+
         }
 
-        public void OnPostBook(int id)
+        public IActionResult OnPostBook(int id)
         {
             Lokale.LokaleID = id;
             Booking.Lokale = Lokale;
             Booking.Bruger = Email;
             _administrationService.AddReservation(Booking);
+
+            return RedirectToPage("/Shared/LedigeLokaler");
         }
 
 

@@ -12,7 +12,7 @@ namespace SuperBookerData
 
         public brugerRolle brugerRolle
         {
-            get;
+            get; set;
         }
 
         public int BrugerID

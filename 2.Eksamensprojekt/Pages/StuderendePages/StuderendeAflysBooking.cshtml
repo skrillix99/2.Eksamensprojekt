@@ -1,4 +1,10 @@
-﻿@page
+﻿@page "{id:int}"
 @model _2.Eksamensprojekt.Pages.StuderendePages.StuderendeAflysBookingModel
 @{
 }
+
+<form method="post">
+    <input type="submit" value="sure?" asp-route-id="@Model.Booking.ResevertionId" />
+</form>
+<br />
+@Model.Booking.ResevertionId

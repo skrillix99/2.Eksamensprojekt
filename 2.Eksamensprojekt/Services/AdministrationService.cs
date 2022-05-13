@@ -89,6 +89,7 @@ namespace _2.Eksamensprojekt.Services
             ld.LokaleSmartBoard = reader.GetBoolean(5);
             ld.LokaleSize = (LokaleSize) reader.GetInt32(6);
             ld.MuligeBookinger = reader.GetInt32(7);
+            ld.LokaleID = reader.GetInt32(11);
 
             PersonData p = new PersonData();
             p.BrugerNavn = reader.GetString(8);
@@ -99,6 +100,7 @@ namespace _2.Eksamensprojekt.Services
             k.Lokale = ld; //3,4,5,6,7
             k.Bruger = p; // 8
             k.ResevertionId = reader.GetInt32(9);
+            k.HeltBooket = reader.GetInt32(10);
 
             return k;
         }
@@ -191,7 +193,7 @@ namespace _2.Eksamensprojekt.Services
             BookingData l = new BookingData();
             string sql = "SELECT Reservation.Dag, Reservation.TidStart, Reservation.TidSlut, " +
                          "Lokale.LokaleNavn, LokaleLokation.LokaleNummer, LokaleSmartBoard, LokaleSize.Size, " +
-                         "MuligeBookinger, Person.BrugerNavn, ReservationID, Reservation.Heltbooket " +
+                         "MuligeBookinger, Person.BrugerNavn, Reservation.ReservationID, Reservation.Heltbooket, Lokale.lokaleID " +
                          "FROM Reservation " +
                          "INNER JOIN Lokale ON Reservation.LokaleID_FK = Lokale.LokaleID " +
                          "inner join LokaleSize ON Lokale.LokaleSize_FK = SizeId " +
@@ -249,8 +251,6 @@ namespace _2.Eksamensprojekt.Services
 
         public void DeleteReservation(int id)
         {
-            
-
             string sql = "DELETE from Reservation WHERE ReservationID = @id";
 
             using (SqlConnection connection = new SqlConnection(connectionString))

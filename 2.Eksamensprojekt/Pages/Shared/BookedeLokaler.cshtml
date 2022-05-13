@@ -25,7 +25,7 @@
             <h5 class="card-title"><b>Date:</b> @lokale.Dag.ToString("d")</h5>
             <h5 class=""><b>Tidspunkt:</b> @lokale.TidStart.ToString(@"hh\:mm") - @lokale.TidSlut.ToString(@"hh\:mm")</h5>
             <h5 class=""><b>Bookede af:</b> @lokale.Bruger.BrugerNavn</h5>
-            <form method="post">
+            <form method="get">
                 @foreach (var test in User.Claims)
                 {
                     if (test.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role")

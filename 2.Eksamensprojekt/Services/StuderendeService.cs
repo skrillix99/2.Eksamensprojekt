@@ -10,13 +10,15 @@ namespace _2.Eksamensprojekt.Services
     {
         private const string connectionString = "Data Source=zealandmarc.database.windows.net;Initial Catalog=SuperBooker4000;User ID=AdminMarc;Password=Marcus19;Connect Timeout=30;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         private readonly ILogIndService _logIndService;
+        private readonly IAdministrationService _administrationService;
         /// <summary>
         /// Laver dependency injection til at kunne bruge ILogIndService.
         /// </summary>
         /// <param name="logIndService">Typen ILogIndService</param>
-        public StuderendeService(ILogIndService logIndService)
+        public StuderendeService(ILogIndService logIndService, IAdministrationService administrationService)
         {
             _logIndService = logIndService;
+            _administrationService = administrationService;
         }
 
         #region ReadLokale
@@ -58,6 +60,7 @@ namespace _2.Eksamensprojekt.Services
 
             PersonData p = new PersonData();
             p.BrugerNavn = reader.GetString(8);
+            p.BrugerID = reader.GetInt32(10);
 
             k.Dag = reader.GetDateTime(i: 0);
             k.TidStart = reader.GetTimeSpan(i: 1);
@@ -65,6 +68,7 @@ namespace _2.Eksamensprojekt.Services
             k.Lokale = ld; //3,4,5,6,7
             k.Bruger = p; // 8
             k.ResevertionId = reader.GetInt32(9);
+            k.HeltBooket = reader.GetInt32(11);
 
             return k;
         }
@@ -96,30 +100,29 @@ namespace _2.Eksamensprojekt.Services
                 throw new ArgumentOutOfRangeException("Du må kun have 3 bookings ad gangen");
             }
 
-            
-            BookingData tilbage = GetSingelBooking(newBooking.Lokale.LokaleID);
-            if (tilbage == null)
-            {
-                tilbage = new BookingData();
-                tilbage.HeltBooket = GetSingelLokale(newBooking.Lokale.LokaleID).MuligeBookinger;
-            }
-            else if (tilbage.HeltBooket == 0)
-            {
-                throw new ArgumentOutOfRangeException("Der er ikke flere bookings ledige på dette lokale");
-            }
-
-
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
+                BookingData tilbage = GetSingelBooking(newBooking.Lokale.LokaleID);
+                if (tilbage == null)
+                {
+                    tilbage = new BookingData();
+                    tilbage.HeltBooket = GetSingelLokale(newBooking.Lokale.LokaleID).MuligeBookinger;
+                }
+                else if (tilbage.HeltBooket == 0)
+                {
+                    throw new ArgumentOutOfRangeException("Der er ikke flere bookings ledige på dette lokale");
+                }
+
+
                 string tidSlut = newBooking.Dag.Add(newBooking.TidStart).ToShortTimeString();
 
                 string sql = "insert into Reservation VALUES (@tidStart, @dag, @mulige, @brugerFK, @lokaleFK, @tidSlut, 0)";
-                // TidStart, Dag, Heltbooket, Bruger_FK, Lokale_FK, TidSlut, BookesFor
+                string sqlUpdate = "UPDATE Reservation SET HeltBooket = @heltBooket WHERE LokaleID_FK = @id";
 
                 SqlCommand cmd = new SqlCommand(sql, connection);
                 cmd.Parameters.AddWithValue("@tidStart", newBooking.Dag.ToShortTimeString());
                 cmd.Parameters.AddWithValue("@dag", newBooking.Dag.ToString("s"));
-                cmd.Parameters.AddWithValue("@mulige", tilbage.HeltBooket - 1);
+                cmd.Parameters.AddWithValue("@mulige", tilbage.HeltBooket);
                 cmd.Parameters.AddWithValue("@tidSlut", tidSlut);
                 cmd.Parameters.AddWithValue("@brugerFK", BrugerID);
                 cmd.Parameters.AddWithValue("@lokaleFK", newBooking.Lokale.LokaleID);
@@ -131,6 +134,20 @@ namespace _2.Eksamensprojekt.Services
                 if (rows != 1)
                 {
                     throw new Exception("welp");
+                }
+                cmd.Connection.Close();
+
+
+                SqlCommand cmdUpdate = new SqlCommand(sqlUpdate, connection);
+                cmdUpdate.Parameters.AddWithValue("@heltBooket", tilbage.HeltBooket - 1);
+                cmdUpdate.Parameters.AddWithValue("@id", newBooking.Lokale.LokaleID);
+
+                cmdUpdate.Connection.Open();
+
+                int rowsUpdate = cmdUpdate.ExecuteNonQuery();
+                if (rowsUpdate < 1)
+                {
+                    throw new Exception("humu humu");
                 }
             }
 
@@ -165,7 +182,39 @@ namespace _2.Eksamensprojekt.Services
 
         public void DeleteReservation(int id)
         {
-            
+            string sql = "DELETE from Reservation WHERE ReservationID = @id";
+            string sqlUpdate = "UPDATE Reservation SET HeltBooket = @heltBooket WHERE LokaleID_FK = @id";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                BookingData bd = _administrationService.GetSingelBooking(id);
+
+                SqlCommand cmdUpdate = new SqlCommand(sqlUpdate, connection);
+                cmdUpdate.Parameters.AddWithValue("@heltBooket", bd.HeltBooket + 1);
+                cmdUpdate.Parameters.AddWithValue("@id", bd.Lokale.LokaleID);
+
+                cmdUpdate.Connection.Open();
+
+                int rowsUpdate = cmdUpdate.ExecuteNonQuery();
+                if (rowsUpdate < 1)
+                {
+                    throw new InvalidOperationException("Der skete en fejl i databasen. update");
+                }
+                cmdUpdate.Connection.Close();
+
+
+                SqlCommand cmd = new SqlCommand(sql, connection);
+                cmd.Parameters.AddWithValue("@id", id);
+
+                cmd.Connection.Open();
+
+                int rows = cmd.ExecuteNonQuery();
+                if (rows != 1)
+                {
+                    throw new InvalidOperationException("Der skete en fejl i databasen");
+                }
+
+            }
         }
 
         public List<BookingData> GetAllReservationer(string sql2)
@@ -216,7 +265,7 @@ namespace _2.Eksamensprojekt.Services
             BookingData l = new BookingData();
             string sql = "SELECT Reservation.Dag, Reservation.TidStart, Reservation.TidSlut, " +
                          "Lokale.LokaleNavn, LokaleLokation.LokaleNummer, LokaleSmartBoard, LokaleSize.Size, " +
-                         "MuligeBookinger, Person.BrugerNavn, ReservationID, Reservation.Heltbooket " +
+                         "MuligeBookinger, Person.BrugerNavn, ReservationID, Person.BrugerID, Reservation.HeltBooket " +
                          "FROM Reservation " +
                          "INNER JOIN Lokale ON Reservation.LokaleID_FK = Lokale.LokaleID " +
                          "inner join LokaleSize ON Lokale.LokaleSize_FK = SizeId " +
@@ -240,7 +289,7 @@ namespace _2.Eksamensprojekt.Services
 
                 if (!reader.HasRows)
                 {
-                    return l = null;
+                    return null;
                 }
                 return l;
             }

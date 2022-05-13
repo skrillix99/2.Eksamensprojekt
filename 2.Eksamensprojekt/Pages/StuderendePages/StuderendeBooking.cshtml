@@ -1,4 +1,38 @@
-﻿@page
+﻿@page "{id:int}"
+@using SuperBookerData
 @model _2.Eksamensprojekt.Pages.StuderendePages.StuderendeBookingModel
 @{
 }
+
+<a asp-page="/Shared/LedigeLokaler">< TILBAGE</a>
+<div class="centered">
+    <h1>Booking af</h1>
+    <div class="lokaleInfoWrapper" style="width: unset">
+        <h3>@Model.Lokale.LokaleNummer @Model.Lokale.LokaleNavn</h3>
+        <p><b>Størrelse:</b> @Enum.GetName(typeof(LokaleSize), (Model.Lokale.LokaleSize - 1))</p>
+    </div>
+
+
+    <form method="post">
+            
+        @foreach (var claim in User.Claims)
+        {
+            if (claim.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name")
+            {
+                <input type="text" value="@claim.Value" asp-for="Booking.BrugerEmail" hidden="hidden"/>
+            }
+        }
+        <fieldset>
+        <label>Tidspunkt og dato Fra:</label>
+        <br/>
+        <input type="datetime-local" asp-for="@Model.Booking.Dag"/>
+        </fieldset>
+        <fieldset>
+            <label>Til:</label>
+            <br/>
+            <input type="time" asp-for="Booking.TidStart"/>
+        </fieldset>
+
+        <input type="submit" value="Book" class="btn-primary" asp-page-handler="book" asp-route-id="@Model.Lokale.LokaleID"/>
+    </form>
+</div>

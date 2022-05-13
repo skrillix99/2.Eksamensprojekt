@@ -190,7 +190,8 @@ namespace _2.Eksamensprojekt.Services
         {
             BookingData l = new BookingData();
             string sql = "SELECT Reservation.Dag, Reservation.TidStart, Reservation.TidSlut, " +
-                         "Lokale.LokaleNavn, LokaleLokation.LokaleNummer, LokaleSmartBoard, LokaleSize.Size, MuligeBookinger, Person.BrugerNavn, ReservationID " +
+                         "Lokale.LokaleNavn, LokaleLokation.LokaleNummer, LokaleSmartBoard, LokaleSize.Size, " +
+                         "MuligeBookinger, Person.BrugerNavn, ReservationID, Reservation.Heltbooket " +
                          "FROM Reservation " +
                          "INNER JOIN Lokale ON Reservation.LokaleID_FK = Lokale.LokaleID " +
                          "inner join LokaleSize ON Lokale.LokaleSize_FK = SizeId " +

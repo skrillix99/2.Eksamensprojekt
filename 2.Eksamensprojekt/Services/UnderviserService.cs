@@ -19,7 +19,7 @@ namespace _2.Eksamensprojekt.Services
         public void AddReservation(BookingData newBooking)
         {
 
-            string sql = "insert into Reservation VALUES (@tidStart, @dag, 0, @brugerFK, @lokaleFK, @tidSlut, 1)";
+            string sql = "insert into Reservation VALUES (@tidStart, @dag, 0, @brugerFK, @lokaleFK, @tidSlut, @bookesFor)";
                                                         // TidStart, Dag, Heltbooket, Bruger_FK, Lokale_FK, TidSlut, BookesFor
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -27,11 +27,12 @@ namespace _2.Eksamensprojekt.Services
                 int brugerID = _logIndService.GetSingelPersonByEmail(newBooking.BrugerEmail).BrugerID;
 
                 SqlCommand cmd = new SqlCommand(sql, connection);
-                cmd.Parameters.AddWithValue("@tidStart", newBooking.TidStart.ToString());
+                cmd.Parameters.AddWithValue("@tidStart", newBooking.Dag.ToShortTimeString());
                 cmd.Parameters.AddWithValue("@dag", newBooking.Dag.ToString("s"));
-                cmd.Parameters.AddWithValue("@tidSlut", tidSlut.ToString());
+                cmd.Parameters.AddWithValue("@tidSlut", tidSlut);
                 cmd.Parameters.AddWithValue("@brugerFK", brugerID);
                 cmd.Parameters.AddWithValue("@lokaleFK", newBooking.Lokale.LokaleID);
+                cmd.Parameters.AddWithValue("@bookesFor", (int)newBooking.BookesFor);
 
                 cmd.Connection.Open();
 

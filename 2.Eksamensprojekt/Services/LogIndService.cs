@@ -121,7 +121,7 @@ namespace _2.Eksamensprojekt.Services
 
         public PersonData GetSingelPersonByEmail(string email)
         {
-            PersonData list = new PersonData();
+            PersonData pd = new PersonData();
 
             string sql = "select BrugerID from Person WHERE BrugerEmail = @email";
 
@@ -132,14 +132,12 @@ namespace _2.Eksamensprojekt.Services
                 cmd.Connection.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
 
-                while (reader.Read())
+                if (reader.Read())
                 {
-                    var us = ReadPersonID(reader);
-                    return us;
+                    pd = ReadPersonID(reader);
                 }
-
-                return list;
             }
+            return pd;
         }
     }
 }

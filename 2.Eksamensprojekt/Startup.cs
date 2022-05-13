@@ -31,6 +31,9 @@ namespace _2.Eksamensprojekt
             services.AddSingleton<ILogIndService, LogIndService>();
             services.AddSingleton<ILedigeLokalerService, LedigeLokalerService>();
             services.AddSingleton<IUnderviserService, UnderviserService>();
+            services.AddSingleton<IAdministrationService, AdministrationService>();
+            services.AddSingleton<IBookingService, BookingService>();
+            services.AddSingleton<IStuderendeService, StuderendeService>();
 
             // Marcus
             services.Configure<CookiePolicyOptions>(options =>
@@ -59,8 +62,7 @@ namespace _2.Eksamensprojekt
             {
                 options.AccessDeniedPath = "/Account/AccessDenied";
             });
-            services.AddSingleton<IAdministrationService, AdministrationService>();
-            services.AddSingleton<IBookingService, BookingService>();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

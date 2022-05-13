@@ -36,7 +36,7 @@
                         }
                         if (test.Value == "Underviser")
                         {
-                            if (lokale.brugerRolle == brugerRolle.Underviser)
+                            if (lokale.brugerRolle == brugerRolle.Underviser || lokale.brugerRolle == brugerRolle.Student)
                             {
                                 <button type="submit" asp-page="/UnderviserPages/UnderviserAflysBooking" asp-route-id="@lokale.ResevertionId"><i class="fa fa-trash"></i></button>
                             }

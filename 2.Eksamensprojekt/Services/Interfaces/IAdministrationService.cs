@@ -23,7 +23,7 @@ namespace _2.Eksamensprojekt.Services.Interfaces
         /// </summary>
         /// <param name="id">Typen int. Skal passe med et reservations id</param>
         /// <param name="dag">Typen DateTime. Skal være DateTime objectet da resevertionen blev oprettet</param>
-        void DeleteReservation(int id, DateTime dag);
+        void DeleteReservation(int id);
         void DeleteReservation();
         List<BookingData> GetAllReservationer(string sql2);
         /// <summary>
@@ -37,5 +37,7 @@ namespace _2.Eksamensprojekt.Services.Interfaces
         /// </summary>
         /// <param name="newBooking">BookingData object. Skal have følgene TidStart, Dag, Bruger.BrugerEmail og BookesFor</param>
         void AddReservation(BookingData newBooking);
+
+
     }
 }

@@ -1,4 +1,7 @@
 ﻿using SuperBookerData;
+using System;
+using System.Collections.Generic;
+
 
 namespace _2.Eksamensprojekt.Services.Interfaces
 {
@@ -9,5 +12,7 @@ namespace _2.Eksamensprojekt.Services.Interfaces
         /// </summary>
         /// <param name="newBooking">BookingData object. Skal have følgene TidStart, Dag og Bruger.BrugerEmail</param>
         void AddReservation(BookingData newBooking);
+
+        public void BegrænsetAdgang(DateTime dag, int id);
     }
 }

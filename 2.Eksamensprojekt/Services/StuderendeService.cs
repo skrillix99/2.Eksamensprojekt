@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using _2.Eksamensprojekt.Services.Interfaces;
-using SuperBookerData;
 
 namespace _2.Eksamensprojekt.Services
 {

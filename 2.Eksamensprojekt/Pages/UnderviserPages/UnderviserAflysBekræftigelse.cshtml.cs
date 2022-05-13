@@ -14,21 +14,23 @@ namespace _2.Eksamensprojekt.Pages.UnderviserPages
     [Authorize(Roles = "Underviser")]
     public class UnderviserAflysBekræftigelseModel : PageModel
     {
-        private IAdministrationService _administrationService;
+        private IUnderviserService _underviserService;
 
         public BookingData Booking { get; set; }
 
-        public UnderviserAflysBekræftigelseModel(IAdministrationService administrationService)
+        public UnderviserAflysBekræftigelseModel(IUnderviserService underviserService)
         {
-            _administrationService = administrationService;
+            _underviserService = underviserService;
         }
         public void OnGet()
         {
+        
         }
+
         public void OnPost(int id)
         {
             Booking = UnderviserAflysBookingModel.TempBookingData;
-            _administrationService.DeleteReservation(id, Booking.Dag);
+            _underviserService.BegrænsetAdgang(Booking.Dag, id);
         }
     }
 }

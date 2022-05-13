@@ -111,7 +111,25 @@ namespace _2.Eksamensprojekt.Services
 
         public PersonData GetSingelPersonByEmail(string email)
         {
-            throw new NotImplementedException();
+            PersonData list = new PersonData();
+
+            string sql = "select BrugerID from Person WHERE BrugerEmail = @email";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand(sql, connection);
+                cmd.Parameters.AddWithValue("@email", email);
+                cmd.Connection.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    var us = ReadPersonID(reader);
+                    return us;
+                }
+
+                return list;
+            }
         }
     }
 }

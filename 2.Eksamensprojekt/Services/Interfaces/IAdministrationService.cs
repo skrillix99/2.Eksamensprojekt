@@ -22,7 +22,5 @@ namespace _2.Eksamensprojekt.Services.Interfaces
         List<BookingData> GetAllReservationer(string sql2);
         BookingData GetSingelBooking(int id);
         void AddReservation(BookingData newBooking);
-
-        BookingData CreateReservation(int id);
     }
 }

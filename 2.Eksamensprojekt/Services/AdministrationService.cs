@@ -242,29 +242,7 @@ namespace _2.Eksamensprojekt.Services
 
         }
 
-        public BookingData CreateReservation(int id)
-        {
-            BookingData book = new BookingData();
-            string sql = "insert into Reservation(TidStart, Dag, HeltBooket, BrugerID_FK, LokaleID_FK, TidSlut) values(@TidStart, @Dag, @HeltBooket, @BrugerID_FK, @LokaleID_FK, @TidSlut)";
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                SqlCommand cmd = new SqlCommand(sql, connection);
-                cmd.Parameters.AddWithValue("@id", id);
-                cmd.Connection.Open();
-
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    book = ReadBookings(reader);
-                    return book;
-                }
-
-                return book;
-            }
-
-        }
+      
 
         public void DeleteResevation(int id)
         {

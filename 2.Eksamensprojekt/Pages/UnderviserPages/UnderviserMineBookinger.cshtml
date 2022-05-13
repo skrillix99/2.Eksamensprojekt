@@ -2,3 +2,31 @@
 @model _2.Eksamensprojekt.Pages.UnderviserPages.UnderviserMineBookingerModel
 @{
 }
+@foreach (var item in Model.Booking)
+{
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card mb-2" style="width: 30rem;">
+                <div class="card-header p-2">
+                    <h5 class="card-title">@item.Lokale.LokaleNummer @item.Lokale.LokaleNavn </h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Lokale: @item.Lokale.LokaleSize</p>
+                    <p class="card-text">Dato: @item.Dag</p>
+                    <p class="card-text">Booket af: @item.BrugerNavn</p>
+                    <form method="post">
+                        <button type="submit" asp-page="/UnderviserPages/UnderviserAflysBooking" asp-route-id="@item.ResevertionId"><i class="fa fa-trash"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+    <script>
+        var today = new Date().toISOString().slice(0, 16);
+
+        document.getElementsByName("Booking.Dag")[0].min = today;
+    </script>
+
+

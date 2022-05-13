@@ -25,5 +25,12 @@ namespace _2.Eksamensprojekt.Pages.UnderviserPages
 
             Booking = _administrationService.GetAllReservationer(sql2);
         }
+        public void OnPost()
+        {
+            string sql2 = "where BrugerRolle = 1";
+
+            Booking = _administrationService.GetAllReservationer(sql2);
+        }
+
     }
 }

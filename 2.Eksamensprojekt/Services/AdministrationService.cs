@@ -216,35 +216,6 @@ namespace _2.Eksamensprojekt.Services
             }
         }
 
-        //public void AddReservation(BookingData newBooking)
-        //{
-        //    string sql = "insert into Reservation VALUES (@tidStart, @dag, 0, @brugerFK, @lokaleFK, @tidSlut, @bookesFor)";
-        //                                                // TidStart, Dag, Heltbooket, Bruger_FK, Lokale_FK, TidSlut, BookesFor
-        //    using (SqlConnection connection = new SqlConnection(connectionString))
-        //    {
-        //        TimeSpan tidSlut= newBooking.Dag.TimeOfDay.Add(newBooking.TidStart);
-        //        int brugerID = _logIndService.GetSingelPersonByEmail(newBooking.Bruger.BrugerEmail).BrugerID;
-
-        //        SqlCommand cmd = new SqlCommand(sql, connection);
-        //        cmd.Parameters.AddWithValue("@tidStart", newBooking.TidStart.ToString());
-        //        cmd.Parameters.AddWithValue("@dag", newBooking.Dag.ToString("s"));
-        //        cmd.Parameters.AddWithValue("@tidSlut", tidSlut.ToString());
-        //        cmd.Parameters.AddWithValue("@brugerFK", brugerID);
-        //        cmd.Parameters.AddWithValue("@lokaleFK", newBooking.Lokale.LokaleID);
-        //        cmd.Parameters.AddWithValue("@bookesFor", (int)newBooking.BookesFor);
-
-        //        cmd.Connection.Open();
-
-        //        int rows = cmd.ExecuteNonQuery();
-
-        //        if (rows != 1)
-        //        {
-        //            throw new Exception("welp");
-        //        }
-        //    }
-
-        //}
-
         public void AddReservation(BookingData newBooking)
         {
             string sql = "insert into Reservation VALUES (@tidStart, @dag, @mulige, @brugerFK, @lokaleFK, @tidSlut, @bookesFor)";

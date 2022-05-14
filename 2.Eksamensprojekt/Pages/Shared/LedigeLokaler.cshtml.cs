@@ -61,7 +61,29 @@ namespace _2.Eksamensprojekt.Pages.Shared
 
         public void OnPost()
         {
+              string sql = $"SELECT * from UserStory WHERE Id = {id}";
 
+            //Opretter forbindelse
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                //åbner forbindelsen
+                connection.Open();
+
+                //Opretter sql query
+                SqlCommand cmd = new SqlCommand(sql, connection);
+
+                //altid ved select
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                //Læser alle rækker
+                while (reader.Read())
+                {
+                    UserStory us = ReadUserStory(reader);
+                    return us;
+                }
+
+            }
+            return null;
          //   string sql = "select * from Lokale WHERE Dag between 'welp1' AND 'welp2'";
         }
 

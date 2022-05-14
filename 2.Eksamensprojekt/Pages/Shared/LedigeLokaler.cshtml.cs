@@ -40,11 +40,11 @@ namespace _2.Eksamensprojekt.Pages.Shared
             _ledigeLokalerService = ledigeLokalerService;
             SKEtage = new List<string>()
             {
-                "Vælg etage", "Alle etager", "Stue etage (D1)", "1. etage (D2)", "2. etage (D3)"
+                "Vælg etage", "Stue etage (D1)", "1. etage (D2)", "2. etage (D3)"
             };
             SKStoerrelse = new List<string>()
             {
-               "Vælg lokale størrelse", "Alle lokaler", "Gruppe lokaler", "Klasse lokaler", "Auditorie"
+               "Vælg lokale størrelse", "Gruppe lokaler", "Klasse lokaler", "Auditorie"
             };
             SKSmartBoard = new List<string>()
             {
@@ -61,45 +61,50 @@ namespace _2.Eksamensprojekt.Pages.Shared
 
         public void OnPost()
         {
-              string sql = $"SELECT * from UserStory WHERE Id = {id}";
+            LokaleData = new List<LokaleData>();
+            string sql = "SELECT * FROM Lokale inner join LokaleSize ON LokaleSize_FK = SizeId inner join LokaleLokation ON LokaleLokation_FK = LokaleLokationId WHERE 1=1";
 
-            //Opretter forbindelse
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            if (SKEtage_valg == "Stue etage (D1)")
             {
-                //åbner forbindelsen
-                connection.Open();
-
-                //Opretter sql query
-                SqlCommand cmd = new SqlCommand(sql, connection);
-
-                //altid ved select
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                //Læser alle rækker
-                while (reader.Read())
-                {
-                    UserStory us = ReadUserStory(reader);
-                    return us;
-                }
-
+                sql += "AND LokaleEtage = 1";
             }
-            return null;
-         //   string sql = "select * from Lokale WHERE Dag between 'welp1' AND 'welp2'";
-        }
+            if (SKEtage_valg == "1. etage (D2)")
+            {
+                sql += "AND LokaleEtage = 2";
+            }
+            if (SKEtage_valg == "2. etage (D3)")
+            {
+                sql += "AND LokaleEtage = 3";
+            }
 
-        private LokaleData ReadLokaleData(SqlDataReader reader)
-        {
-            LokaleData ld1 = new LokaleData();
+            // "Vælg lokale størrelse"
+            if (SKStoerrelse_valg == "Gruppe lokaler")
+            {
+                sql += "AND Size = 0";
+            }
+            if (SKStoerrelse_valg == "Klasse lokaler")
+            {
+                sql += "AND Size = 1";
+            }
+            if (SKStoerrelse_valg == "Auditorie")
+            {
+                sql += "AND Size = 2";
+            }
 
-            ld1.LokaleID = reader.GetInt32(0);
-            ld1.LokaleNavn = reader.GetString(1);
-            ld1.LokaleSmartBoard = reader.GetBoolean(2);
-            ld1.LokaleSize = (LokaleSize)reader.GetInt32(7);
-            ld1.LokaleNummer = reader.GetString(9);
-            ld1.LokaleMuligeBookinger = reader.GetInt32(8);
-            ld1.LokaleEtage = reader.GetInt32(10);
+            //  "Har SmartBoard?", "Ja", "Nej"
+            if (SKSmartBoard_valg == "Ja")
+            {
+                sql += "AND LokaleSmartBoard = 1";
+            }
+            if (SKSmartBoard_valg == "Nej")
+            {
+                sql += "AND LokaleSmartBoard = 0 ";
+            }
 
-            return ld1;
+
+            LokaleData = _ledigeLokalerService.GetAllLokaleBySqlString(sql);
+
+            //   string sql = "select * from Lokale WHERE Dag between 'welp1' AND 'welp2'";
         }
     }
 }

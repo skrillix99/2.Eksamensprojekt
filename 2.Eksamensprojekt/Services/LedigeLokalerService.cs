@@ -54,7 +54,31 @@ namespace _2.Eksamensprojekt.Services
             return ld1;
         }
 
+        public List<LokaleData> GetAllLokaleBySqlString(string sql)
+        {
+            List<LokaleData> Lokaler = new List<LokaleData>();
 
+            //Opretter forbindelse
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                //åbner forbindelsen
+                connection.Open();
+
+                //Opretter sql query
+                SqlCommand cmd = new SqlCommand(sql, connection);
+
+                //altid ved select
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                //Læser alle rækker
+                while (reader.Read())
+                {
+                    LokaleData ld = ReadLokaleData(reader);
+                    Lokaler.Add(ld);
+                }
+            }
+            return Lokaler;
+        }
     }
     
 }

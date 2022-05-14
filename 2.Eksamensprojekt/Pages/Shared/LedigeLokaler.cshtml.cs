@@ -40,15 +40,15 @@ namespace _2.Eksamensprojekt.Pages.Shared
             _ledigeLokalerService = ledigeLokalerService;
             SKEtage = new List<string>()
             {
-                "Alle etager", "Stue etage (D1)", "1. etage (D2)", "2. etage (D3)"
+                "Vælg etage", "Alle etager", "Stue etage (D1)", "1. etage (D2)", "2. etage (D3)"
             };
             SKStoerrelse = new List<string>()
             {
-                "Alle lokaler", "Gruppe lokaler", "Klasse lokaler", "Auditorie"
+               "Vælg lokale størrelse", "Alle lokaler", "Gruppe lokaler", "Klasse lokaler", "Auditorie"
             };
             SKSmartBoard = new List<string>()
             {
-                "Nulstil", "Ja", "Nej"
+                "Har SmartBoard?", "Ja", "Nej"
             };
 
         }

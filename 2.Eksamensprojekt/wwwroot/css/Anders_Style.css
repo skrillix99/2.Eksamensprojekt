@@ -159,7 +159,7 @@ nav ul li:active > ul {
 }
 
 .dropdown-button {
-    /*margin-top: 5px;*/
+    text-align: center;
     width: 100% !important;
     border-left-width: 0px;
     border-right-width: 0px;

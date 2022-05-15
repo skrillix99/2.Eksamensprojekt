@@ -6,7 +6,7 @@
 @* (Må gerne bruges, men i rapporten skal i beskrive hvordan I ville gøre det hvis det kun skulle være ren razor pages *@
 @* Søgebars funktionen er blevet inspireret af https://www.geeksforgeeks.org/search-bar-using-html-css-and-javascript/ *@
 
-<!-- SØGEFELT -->
+<!-- DYNAMISK SØGEFELT (Forklaring ligger i scriptet) -->
 <input id="searchbar" onkeyup="soeg_lokale()" type="text"
        name="search" placeholder="Søg efter lokaler...">
 
@@ -17,9 +17,11 @@
     <ul class="menu">
         <form method="post">
             <fieldset>
-                @* ETAGE *@
+
+                @* VÆLG ETAGE
+                    Virker ved at *@
         <li>
-            <div class="border-custom">
+            <div class="ll-border-custom">
                 <div class="dropdown-kategorier">
                     <label for="drop-1" class="toggle">
 
@@ -35,8 +37,8 @@
         </li>
 
         <li>
-            <!-- First Tier Drop Down -->
-            <div class="border-custom">
+            <!-- VÆLG STØRRELSE -->
+            <div class="ll-border-custom">
                 <div class="dropdown-kategorier">
                     <label for="drop-2" class="toggle">
 
@@ -52,18 +54,21 @@
         </li>
 
         <li>
-            <!-- First Tier Drop Down -->
-            <div class="border-custom">
-                <div class="dropdown-kategorier">
-                    <label for="drop-3" class="toggle">
+            <!-- HAR SMARTBOARD? -->
+            <div class="ll-border-custom">
+                <div id="ll-border-bottom">
 
-                        <select id="SKSmartBoard_valg" name="SKSmartBoard_valg" asp-for="@Model.SKSmartBoard_valg" class="form-control">
-                            @foreach (var smartboard in Model.SKSmartBoard)
-                            {
-                                <option class="dropdown-button" value="@smartboard">@smartboard</option>
-                            }
-                        </select>
-                    </label>
+                    <div class="dropdown-kategorier">
+                        <label for="drop-3" class="toggle">
+
+                            <select id="SKSmartBoard_valg" name="SKSmartBoard_valg" asp-for="@Model.SKSmartBoard_valg" class="form-control">
+                                @foreach (var smartboard in Model.SKSmartBoard)
+                                {
+                                    <option class="dropdown-button" value="@smartboard">@smartboard</option>
+                                }
+                            </select>
+                        </label>
+                    </div>
                 </div>
             </div>
         </li>
@@ -112,6 +117,10 @@
 
 
 <!-- javascript -->
+@* Virker ved at det man indtaster i det dynamiske søgefelt, bliver sendt til JavaScript funktionen kaldet soeg_lokale().
+    Funktionen konverterer derefter det som er skrevet, til alt sammen at være lower case. 
+    Herefter tager den den indtastede værdi, og kigger inde i de HTML elementer, som har klassen "card".
+    Hvis HTML elementerne ikke har den værdi, bliver de ikke vist, ellers bliver de vist.*@
 <script>
     function soeg_lokale() {
         let input = document.getElementById('searchbar').value

@@ -136,12 +136,17 @@ nav ul li:active > ul {
     margin-bottom: 2em;
 }
 
-.border-custom {
+.ll-border-custom {
     border-top: 3px dashed black;
     max-width: 100%;
     margin-top: 5px;
     border-left-width: 0px;
     border-right-width: 0px;
+}
+
+#ll-border-bottom {
+    border-bottom: 3px dashed black;
+    margin-bottom: 0.5rem;
 }
 
 .container {
@@ -184,8 +189,6 @@ nav ul li:active > ul {
 fieldset {
     padding-bottom: 0.5rem;
 }
-
-
 
 
 

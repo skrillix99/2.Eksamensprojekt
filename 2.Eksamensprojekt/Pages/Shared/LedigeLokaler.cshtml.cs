@@ -16,6 +16,7 @@ namespace _2.Eksamensprojekt.Pages.Shared
 {
     public class LedigeLokalerModel : PageModel
     {
+        
         private ILedigeLokalerService _ledigeLokalerService;
         private static List<LokaleData> _lokaleListe;
         
@@ -35,6 +36,9 @@ namespace _2.Eksamensprojekt.Pages.Shared
         [BindProperty]
         public string SKSmartBoard_valg { get; set; }
 
+        /// <summary>
+        /// Bruges til at bestemme valgmulighederne i de forskellige søgekriterier.
+        /// </summary>
         public LedigeLokalerModel(ILedigeLokalerService ledigeLokalerService)
         {
             _ledigeLokalerService = ledigeLokalerService;
@@ -53,12 +57,21 @@ namespace _2.Eksamensprojekt.Pages.Shared
 
         }
 
+        /// <summary>
+        /// Når siden "Ledige lokaler" bliver loadet ind, så henter den informationen omkring ALLE de lokaler der er i "Lokale" databasen og lægger det ind i en liste
+        /// så det kan blive vist frem på hjemmesiden.
+        /// </summary>
         public void OnGet()
         {
             _lokaleListe = _ledigeLokalerService.GetAll();
             LokaleData = new List<LokaleData>(_lokaleListe);
         }
 
+        /// <summary>
+        /// OnPost metoden gør at når der bliver trykket på "Søg" knappen, opretter den en ny liste over lokalerne, som passer til SQL stringen. 
+        /// Til at starte med er SQL stringen bare at den viser alle lokaler, men alt efter hvad brugeren har valgt, inden for de 3 søgekriterier, så tilpaser den
+        /// SQL stringen, og gør at lokalerne der passer til brugerens søge kriterier dukker op. 
+        /// </summary>
         public void OnPost()
         {
             LokaleData = new List<LokaleData>();

@@ -8,7 +8,7 @@
     margin-right: 30%;
     padding: 10px 0%;
 }
-/*Code inspired by*/
+/* Dropdown-menu kode er inspireret af*/
 /*https://codepen.io/dautoblog/pen/KMGogz*/
 
 
@@ -85,63 +85,59 @@ li > a:only-child:after {
 nav ul li:active > ul {
     display: inherit;
 }
-/* Her var der media querys, men de er slettet nu
---------------------------------------------- */
 
-    .toggle + a,
-    .menu {
-        display: none;
-    }
+.toggle + a,
+.menu {
+    display: none;
+}
 
-    .toggle {
-        display: block;
-        background-color: #FFF;
-        padding: 0 20px;
-        color: #000;
-        font-size: 22px;
-        font-weight: bold;
-        line-height: 60px;
-        text-decoration: none;
-        /*border: none;*/
-    }
+.toggle {
+    display: block;
+    background-color: #FFF;
+    padding: 0 20px;
+    color: #000;
+    font-size: 22px;
+    font-weight: bold;
+    line-height: 60px;
+    text-decoration: none;
+}
 
 
-    [id^=drop]:checked + ul {
-        display: block;
-    }
+[id^=drop]:checked + ul {
+    display: block;
+}
 
-    .soege-kriteria ul ul .toggle,
-    .soege-kriteria ul ul a {
-        padding: 0 40px;
-    }
+.soege-kriteria ul ul .toggle,
+.soege-kriteria ul ul a {
+    padding: 0 40px;
+}
 
-    .soege-kriteria ul li ul li .toggle,
-    .soege-kriteria ul ul a {
-        background-color: #fff;
-    }
+.soege-kriteria ul li ul li .toggle,
+.soege-kriteria ul ul a {
+    background-color: #fff;
+}
 
-    .soege-kriteria ul ul {
-        float: none;
-        position: static;
-        color: #000;
-    }
+.soege-kriteria ul ul {
+    float: none;
+    position: static;
+    color: #000;
+}
 
-        .soege-kriteria ul ul li {
-            display: block;
-            width: 100%;
-        }
+.soege-kriteria ul ul li {
+    display: block;
+    width: 100%;
+}
 
-        .soege-kriteria ul ul ul li {
-            position: static;
-        }
-
+.soege-kriteria ul ul ul li {
+    position: static;
+}
 
 .soege-kriteria {
     margin-bottom: 2em;
 }
 
 .border-custom {
-    border: 3px solid black;
+    border-top: 3px dashed black;
     max-width: 100%;
     margin-top: 5px;
     border-left-width: 0px;
@@ -156,6 +152,8 @@ nav ul li:active > ul {
 
 .dropdown-kategorier {
     text-align: center;
+    width:80%;
+    margin-left: 10%;
 }
 
 .dropdown-button {
@@ -163,6 +161,8 @@ nav ul li:active > ul {
     width: 100% !important;
     border-left-width: 0px;
     border-right-width: 0px;
+    color: black;
+    background-color: white;
 }
 
 .mb-2 {
@@ -173,6 +173,17 @@ nav ul li:active > ul {
     border-bottom: 0px !important;
 }
 
+.form-control {
+    display: inline-block;
+    color: black;
+    border: 1px solid black;
+    border-radius: 10px;
+    font-size: 1.3rem;
+}
+
+fieldset {
+    padding-bottom: 0.5rem;
+}
 
 
 
@@ -184,6 +195,9 @@ nav ul li:active > ul {
     padding: 15px;
     border-radius: 10px;
     margin-bottom: 0.5em;
+    width: 80%;
+    margin-left: 10%;
+    text-align: center;
 }
 
 input[type=text] {

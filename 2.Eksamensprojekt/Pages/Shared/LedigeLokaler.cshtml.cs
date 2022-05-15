@@ -63,7 +63,7 @@ namespace _2.Eksamensprojekt.Pages.Shared
         {
             LokaleData = new List<LokaleData>();
             string sql = "SELECT * FROM Lokale inner join LokaleSize ON LokaleSize_FK = SizeId inner join LokaleLokation ON LokaleLokation_FK = LokaleLokationId WHERE 1=1";
-
+            //  "Vælg Etage"
             if (SKEtage_valg == "Stue etage (D1)")
             {
                 sql += "AND LokaleEtage = 1";
@@ -91,7 +91,7 @@ namespace _2.Eksamensprojekt.Pages.Shared
                 sql += "AND Size = 2";
             }
 
-            //  "Har SmartBoard?", "Ja", "Nej"
+            //  "Har SmartBoard?"
             if (SKSmartBoard_valg == "Ja")
             {
                 sql += "AND LokaleSmartBoard = 1";
@@ -104,6 +104,8 @@ namespace _2.Eksamensprojekt.Pages.Shared
 
             LokaleData = _ledigeLokalerService.GetAllLokaleBySqlString(sql);
 
+
+            //TODO SØRG FOR AT MAN KAN SORTERE EFTER DATO
             //   string sql = "select * from Lokale WHERE Dag between 'welp1' AND 'welp2'";
         }
     }

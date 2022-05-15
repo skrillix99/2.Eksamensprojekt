@@ -4,11 +4,13 @@
 }
 
 @* (Må gerne bruges, men i rapporten skal i beskrive hvordan I ville gøre det hvis det kun skulle være ren razor pages *@
-<!-- input tag -->
+@* Søgebars funktionen er blevet inspireret af https://www.geeksforgeeks.org/search-bar-using-html-css-and-javascript/ *@
+
+<!-- SØGEFELT -->
 <input id="searchbar" onkeyup="soeg_lokale()" type="text"
-       name="search" placeholder="Søg efter lokaler">
+       name="search" placeholder="Søg efter lokaler...">
 
-
+<!-- SØGEKRITERIER-->
 <div class="soege-kriteria dropdown-kategorier">
     <label for="drop" class="toggle">&#8801; Søgekriterier</label>
     <input type="checkbox" id="drop" />
@@ -16,50 +18,53 @@
         <form method="post">
             <fieldset>
                 @* ETAGE *@
-
-                @* TO DO, LAV BUTTON OM TIL SELECT, BRUG KUN 1 FORM GROUP *@
         <li>
-            <!-- First Tier Drop Down -->
-            <div class="border-custom dropdown-kategorier">
-                <label for="drop-1" class="toggle">
+            <div class="border-custom">
+                <div class="dropdown-kategorier">
+                    <label for="drop-1" class="toggle">
 
-                    <select id="SKEtage_valg" name="SKEtage_valg" asp-for="@Model.SKEtage_valg" class="form-control">
-                        @foreach (var etage in Model.SKEtage)
-                        {
-                            <option class="dropdown-button" value="@etage">@etage</option>
-                        }
-                    </select>
-                </label>
+                        <select id="SKEtage_valg" name="SKEtage_valg" asp-for="@Model.SKEtage_valg" class="form-control">
+                            @foreach (var etage in Model.SKEtage)
+                            {
+                                <option class="dropdown-button" value="@etage">@etage</option>
+                            }
+                        </select>
+                    </label>
+                </div>
             </div>
         </li>
 
         <li>
             <!-- First Tier Drop Down -->
-            <div class="border-custom dropdown-kategorier">
-                <label for="drop-2" class="toggle">
+            <div class="border-custom">
+                <div class="dropdown-kategorier">
+                    <label for="drop-2" class="toggle">
 
-                    <select id="SKStoerrelse_valg" name="SKStoerrelse_valg" asp-for="@Model.SKStoerrelse_valg" class="form-control">
-                        @foreach (var etage in Model.SKStoerrelse)
-                        {
-                            <option class="dropdown-button" value="@etage">@etage</option>
-                        }
-                    </select>
-                </label>
+                        <select id="SKStoerrelse_valg" name="SKStoerrelse_valg" asp-for="@Model.SKStoerrelse_valg" class="form-control">
+                            @foreach (var etage in Model.SKStoerrelse)
+                            {
+                                <option class="dropdown-button" value="@etage">@etage</option>
+                            }
+                        </select>
+                    </label>
+                </div>
             </div>
         </li>
 
         <li>
             <!-- First Tier Drop Down -->
-            <div class="border-custom dropdown-kategorier">
-                <label for="drop-3" class="toggle">
+            <div class="border-custom">
+                <div class="dropdown-kategorier">
+                    <label for="drop-3" class="toggle">
 
-                    <select id="SKSmartBoard_valg" name="SKSmartBoard_valg" asp-for="@Model.SKSmartBoard_valg" class="form-control">
-                        @foreach (var smartboard in Model.SKSmartBoard)
-                        {
-                            <option class="dropdown-button" value="@smartboard">@smartboard</option>
-                        }
-                    </select>
-                </label>
+                        <select id="SKSmartBoard_valg" name="SKSmartBoard_valg" asp-for="@Model.SKSmartBoard_valg" class="form-control">
+                            @foreach (var smartboard in Model.SKSmartBoard)
+                            {
+                                <option class="dropdown-button" value="@smartboard">@smartboard</option>
+                            }
+                        </select>
+                    </label>
+                </div>
             </div>
         </li>
         <input type="submit" value="Søg" class="btn btn-primary" />
@@ -122,58 +127,3 @@
             }
         }
     }</script>
-
-
-@* Input = søg efter lokalenummer
-    vælg etage er 4 (stue, 1., 2. og alle) button med type submit,
-    tid og dato er datetime local, input type
-    vælg størrelse (alle størrelser, mødelokaler, klasselokaler) button med type submit
-    SmartBoard (Alle, med smartboard, uden smartboard) button med type submit
-    Sorter med 5 buttons og en nulstil knap (Lokale nummer, Etage, Dag, Størrelse)
-*@
-        @* DATO OG TID *@
-        <!--<li>
-            <!-- First Tier Drop Down -->
-            <!--<div class="border-custom dropdown-kategorier">
-                <label for="drop-2" class="toggle">TODOVælg dato og tid &#9660;</label>
-                <input type="checkbox" id="drop-2" />
-                <ul>
-                    <li> <button class="dropdown-button"><a href="#">Alle etager</a></button> </li>
-                    <li> <button class="dropdown-button"><a href="#">Stue etage (D1)</a></button> </li>
-                    <li> <button class="dropdown-button"><a href="#">1. etage (D2)</a></button> </li>
-                    <li> <button class="dropdown-button ingen-border-bottom"><a href="#">2. etage (D3)</a></button> </li>
-                </ul>
-            </div>
-        </li>-->
-
-        @* STØRRELSE *@
-        <!--<li>-->
-            <!-- First Tier Drop Down -->
-
-            <!--@* TO DO, LAV BUTTON OM TIL SELECT, BRUG KUN 1 FORM GROUP *@
-            <!--<div class="border-custom dropdown-kategorier">
-                <label for="drop-3" class="toggle">Vælg størrelse &#9660;</label>
-                <input type="checkbox" id="drop-3" />
-                <ul>
-                    <li><button class="dropdown-button">Alle lokaler</button> </li>
-                    <li><button class="dropdown-button"><a href="#">Gruppe lokaler</a></button> </li>
-                    <li><button class="dropdown-button"><a href="#">Klasse lokaler</a></button> </li>
-                    <li><button class="dropdown-button ingen-border-bottom"><a href="#">Auditorie</a></button> </li>
-                </ul>
-            </div>
-        </li>-->
-
-
-        @* SMARTBOARD *@
-      <!--  <li>-->
-            <!-- First Tier Drop Down -->
-            <!--<div class="border-custom dropdown-kategorier ingen-border-bottom">
-                <label for="drop-4" class="toggle">Har SmartBoard? &#9660;</label>
-                <input type="checkbox" id="drop-4" />
-                <ul>
-                    <li><button class="dropdown-button"><a href="#">Nulstil</a></button> </li>
-                    <li><button class="dropdown-button"><a href="#">Ja</a></button> </li>
-                    <li><button class="dropdown-button ingen-border-bottom"><a href="#">Nej</a></button> </li>
-                </ul>
-            </div>
-        </li>-->

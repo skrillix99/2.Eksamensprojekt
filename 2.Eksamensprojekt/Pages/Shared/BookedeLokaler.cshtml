@@ -26,7 +26,8 @@
             <h5 class=""><b>Tidspunkt: </b>@lokale.TidSlut.ToString(@"hh\:mm")</h5>
             <h5 class=""><b>Varighed: </b>@lokale.TidStart.ToString(@"hh\:mm")</h5>
             <h5 class=""><b>Bookede af:</b> @lokale.Bruger.BrugerNavn</h5>
-            <form method="get">
+            <h5 class=""><b>Booket for: </b>@Enum.GetName(typeof(brugerRolle), (lokale.BookesFor))</h5>
+            <form method="post">
                 @foreach (var test in User.Claims)
                 {
                     if (test.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role")

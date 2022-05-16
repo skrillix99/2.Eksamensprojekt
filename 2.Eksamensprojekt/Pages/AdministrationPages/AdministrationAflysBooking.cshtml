@@ -10,7 +10,7 @@
 <div class="lokaleInfoWrapper">
     <h3>@Model.Booking.Lokale.LokaleNavn</h3>
     <h3>@(Model.Booking.Lokale.LokaleSmartBoard ? "M.Smartboard":"U.Smartboard")</h3>
-    <p><b>Størrelse:</b> @Enum.GetName(typeof(LokaleSize), (Model.Booking.Lokale.LokaleSize - 1)) </p>
+    <p><b>Størrelse:</b> @Enum.GetName(typeof(LokaleSize), (Model.Booking.Lokale.LokaleSize)) </p>
     <p><b>Antal pladser tilbage:</b> @Model.Booking.Lokale.MuligeBookinger</p>
     <p><b>Dato:</b> @Model.Booking.Dag</p>
     <p><b>Tidspunkt:</b> @Model.Booking.TidStart - @Model.Booking.TidSlut</p>

@@ -11,7 +11,10 @@ namespace _2.Eksamensprojekt.Services
     public class LogIndService: ILogIndService
     {
         private const string connectionString = "Data Source=zealandmarc.database.windows.net;Initial Catalog=SuperBooker4000;User ID=AdminMarc;Password=Marcus19;Connect Timeout=30;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-
+        /// <summary>
+        /// Henter alle Logind oplysninger i Databasen ned i en liste
+        /// </summary>
+        /// <returns>Returnerer en liste af typen LogIndData</returns>
         public List<LogIndData> GetPersoner()
         {
             List<LogIndData> list = new List<LogIndData>();
@@ -34,7 +37,11 @@ namespace _2.Eksamensprojekt.Services
             }
 
         }
-
+        /// <summary>
+        /// Oversætter data fra databasen og lægger det ind i et PersonData objekt
+        /// </summary>
+        /// <param name="reader">Typen SqlDataReader. Indeholder data fra Databasen</param>
+        /// <returns>Returnerer et objekt af typen PersonData</returns>
         private PersonData ReadPersonID(SqlDataReader reader)
         {
             PersonData l = new PersonData()
@@ -44,7 +51,11 @@ namespace _2.Eksamensprojekt.Services
 
             return l;
         }
-
+        /// <summary>
+        /// Oversætter data fra databasen og lægger det ind i et PersonData objekt
+        /// </summary>
+        /// <param name="reader">Typen SqlDataReader. Indeholder data fra Databasen</param>
+        /// <returns>Returnerer et objekt af typen PersonData</returns>
         private LogIndData ReadPersoner(SqlDataReader reader)
         {
             LogIndData l = new LogIndData
@@ -56,7 +67,7 @@ namespace _2.Eksamensprojekt.Services
 
             return l;
         }
-
+        
         public bool Contains(LogIndData LogInd)
         {
             string sql = "select BrugerEmail, BrugerPassword from Person where BrugerEmail = @email AND BrugerPassword = @password";
@@ -79,7 +90,7 @@ namespace _2.Eksamensprojekt.Services
             List<string> list = new List<string>();
             string sql = "select BrugerEmail from Person";
 
-            using (SqlConnection connection =  new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlCommand cmd = new SqlCommand(sql, connection);
                 cmd.Connection.Open();
@@ -118,7 +129,11 @@ namespace _2.Eksamensprojekt.Services
 
             return LogInd.rolle;
         }
-
+        /// <summary>
+        /// Henter et person ID ud fra email fra databasen og lægger det ind i et objekt af typen PersonData
+        /// </summary>
+        /// <param name="email">Typen string. indeholder en email</param>
+        /// <returns>Returnerer et objekt af typen PersonData</returns>
         public PersonData GetSingelPersonByEmail(string email)
         {
             PersonData pd = new PersonData();

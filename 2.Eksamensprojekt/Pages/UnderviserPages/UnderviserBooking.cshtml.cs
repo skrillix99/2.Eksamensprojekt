@@ -38,11 +38,13 @@ namespace _2.Eksamensprojekt.Pages.UnderviserPages
             Lokale = _administrationService.GetSingelLokale(id);
         }
 
-        public void OnPostBook(int id)
+        public IActionResult OnPostBook(int id)
         {
             Lokale.LokaleID = id;
             Booking.Lokale = Lokale;
             _underviserService.AddReservation(Booking);
+
+            return RedirectToPage("/Shared/LedigeLokaler");
         }
     }
 }

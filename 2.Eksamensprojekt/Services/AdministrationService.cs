@@ -47,7 +47,11 @@ namespace _2.Eksamensprojekt.Services
         #endregion
 
         #region ReadReservation
-
+        /// <summary>
+        /// Oversætter data fra et Booking database kald til et BookingData object med alle columns.
+        /// </summary>
+        /// <param name="reader">Typen SqlDataReader. object med data fra database kald</param>
+        /// <returns>et object af typen BookingData</returns>
         private BookingData ReadReservation(SqlDataReader reader)
         {
             BookingData b = new BookingData();
@@ -76,7 +80,11 @@ namespace _2.Eksamensprojekt.Services
         }
 
         #endregion
-
+        /// <summary>
+        /// Oversætter data fra et Booking database kald til et BookingData object med alle columns.
+        /// </summary>
+        /// <param name="reader">Typen SqlDataReader. objekt med data fra database kald</param>
+        /// <returns>et object af typen BookingData</returns>
         #region ReadBooking
 
         private BookingData ReadBookings(SqlDataReader reader)
@@ -106,7 +114,10 @@ namespace _2.Eksamensprojekt.Services
         }
 
         #endregion
-
+        /// <summary>
+        /// Henter alle Lokaler i databasen ned i en liste
+        /// </summary>
+        /// <returns>Returnerer en list med objekter af typen LokaleData</returns>
         public List<LokaleData> GetAllLokaler()
         {
             List<LokaleData> lokaler = new List<LokaleData>();
@@ -131,7 +142,11 @@ namespace _2.Eksamensprojekt.Services
 
             return lokaler;
         } //TODO need?
-
+        /// <summary>
+        /// Henter et lokale baseret på id fra databasen
+        /// </summary>
+        /// <param name="id">Typen int. Indeholder værdien af id'et på det lokale man vil hente fra databasen </param>
+        /// <returns>Et objekt af typen LokaleData</returns>
         public LokaleData GetSingelLokale(int id)
         {
             LokaleData list = new LokaleData();
@@ -158,6 +173,11 @@ namespace _2.Eksamensprojekt.Services
             }
         }
 
+        /// <summary>
+        /// Henter alle bookinger ned fra databasen baseret på brugerrolle
+        /// </summary>
+        /// <param name="sql2">Typen string. Indeholder WHERE argumentet til sql strengen</param>
+        /// <returns>En liste af typen BookingData</returns>
         public List<BookingData> GetAllReservationer(string sql2)
         {
             List<BookingData> lokaler = new List<BookingData>();
@@ -187,7 +207,11 @@ namespace _2.Eksamensprojekt.Services
 
             return lokaler;
         } //TODO need?
-
+        /// <summary>
+        /// Henter en booking baseret på id fra databasen
+        /// </summary>
+        /// <param name="id">Typen int. Indeholder id'et på den booking man vil hente fra databasen </param>
+        /// <returns>Et objekt af typen BookingData</returns>
         public BookingData GetSingelBooking(int id)
         {
             BookingData l = new BookingData();
@@ -218,7 +242,10 @@ namespace _2.Eksamensprojekt.Services
                 return l;
             }
         }
-
+        /// <summary>
+        /// Opretter en ny booking og gemmer den i databasen
+        /// </summary>
+        /// <param name="newBooking">Typen BookingData. Indeholder den nye bookings information</param>
         public void AddReservation(BookingData newBooking)
         {
             string sql = "insert into Reservation VALUES (@tidStart, @dag, @mulige, @brugerFK, @lokaleFK, @tidSlut, @bookesFor)";
@@ -269,12 +296,16 @@ namespace _2.Eksamensprojekt.Services
         }
 
 
-        public void DeleteReservation()
+        /// <summary>
+        /// Sletter en booking fra databasen baseret på id
+        /// </summary>
+        /// <param name="id">Typen int. Indeholder id'et på den booking der skal slettes</param>
+        public void DeleteResevation(int id)
         {
-            //if (id <= 0)
-            //{
-            //    throw new KeyNotFoundException("Der findes ikke nogle reservationer med det ID");
-            //}
+            if (id <= 0)
+            {
+                throw new KeyNotFoundException("Der findes ikke nogle reservationer med det ID");
+            }
 
             //string sql = "DELETE from Reservation WHERE ReservationID = @id";
             string sql = "DELETE from Reservation WHERE Dag < @nextDay";

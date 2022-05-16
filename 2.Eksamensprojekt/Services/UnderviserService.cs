@@ -15,7 +15,10 @@ namespace _2.Eksamensprojekt.Services
         {
             _logIndService = logIndService;
         }
-
+        /// <summary>
+        /// Opretter en reservation og gemmer den i Databasen med de data BookingData objektet indeholder
+        /// </summary>
+        /// <param name="newBooking">Typen BookingData. Indeholder data om den nye reservation</param>
         public void AddReservation(BookingData newBooking)
         {
 

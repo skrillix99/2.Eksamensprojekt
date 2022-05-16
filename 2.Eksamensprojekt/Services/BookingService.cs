@@ -76,7 +76,7 @@ namespace _2.Eksamensprojekt.Services
             k.Lokale = ld; //3,4,5,6,7
             k.Bruger = p; // 8
             k.ResevertionId = reader.GetInt32(9);
-            k.brugerRolle = (brugerRolle) reader.GetInt32(10);
+            k.brugerRolle = (brugerRolle)reader.GetInt32(10);
             return k;
         }
 

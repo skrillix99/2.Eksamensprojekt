@@ -11,6 +11,8 @@
        name="search" placeholder="Søg efter lokaler...">
 
 <!-- SØGEKRITERIER-->
+<!-- Dropdown-menu kode er inspireret af
+https://codepen.io/dautoblog/pen/KMGogz -->
 <div class="soege-kriteria dropdown-kategorier">
     <label for="drop" class="toggle">&#8801; Søgekriterier</label>
     <input type="checkbox" id="drop" />
@@ -118,7 +120,7 @@
 
 <!-- javascript -->
 @* Virker ved at det man indtaster i det dynamiske søgefelt, bliver sendt til JavaScript funktionen kaldet soeg_lokale().
-    Funktionen konverterer derefter det som er skrevet, til alt sammen at være lower case. 
+    Funktionen konverterer derefter det som er skrevet, til alt sammen at være lower case.
     Herefter tager den den indtastede værdi, og kigger inde i de HTML elementer, som har klassen "card".
     Hvis HTML elementerne ikke har den værdi, bliver de ikke vist, ellers bliver de vist.*@
 <script>

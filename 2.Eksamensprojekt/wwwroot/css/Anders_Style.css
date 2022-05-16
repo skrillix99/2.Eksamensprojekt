@@ -7,6 +7,7 @@
     margin-left: 30%;
     margin-right: 30%;
     padding: 10px 0%;
+    font-weight: bold;
 }
 /* Dropdown-menu kode er inspireret af*/
 /*https://codepen.io/dautoblog/pen/KMGogz*/
@@ -171,7 +172,7 @@ nav ul li:active > ul {
 }
 
 .mb-2 {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.5rem !important;
 }
 
 .ingen-border-bottom {
@@ -180,7 +181,7 @@ nav ul li:active > ul {
 
 .form-control {
     display: inline-block;
-    color: black;
+    color: gray;
     border: 1px solid black;
     border-radius: 10px;
     font-size: 1.3rem;
@@ -213,4 +214,8 @@ input[type=text] {
     width: 70%;
     margin-left: 15%;
     margin-right: 15%;
+}
+
+.centrer-item {
+    text-align: center;
 }

@@ -51,13 +51,13 @@ h1 {
     background-color: #FFF387;
 }
 
-.lokaleInfoWrapper {
+/*.lokaleInfoWrapper {
     margin: 1em auto;
     width: 75%;
     border: solid 1.5px #222;
     color: #555;
     padding: 2em;
-}
+}*/
 .lokaleInfoWrapper p {
     margin: 0;
 }

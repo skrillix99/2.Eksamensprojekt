@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using SuperBookerData;
 using System.Data.SqlClient;
 
 namespace _2.Eksamensprojekt.Services
@@ -43,6 +44,7 @@ namespace _2.Eksamensprojekt.Services
             }
             return LkDataList;
         }
+
         /// <summary>
         /// Oversætter data modtaget fra databasen og sætter dem ind i et LokaleData objekt
         /// </summary>
@@ -63,10 +65,22 @@ namespace _2.Eksamensprojekt.Services
             return ld1;
         }
 
+        /// <summary>
+        /// GetAllLokaleBySqlString funktionen er nødvendig for at sorteringen virker på "Ledige lokaler" siden.
+        /// Den opretter først en tom liste, som skal blive brugt til at opbevarer informationen omkring de lokaler, som bliver beskrevet i SQL stringen. 
+        /// Herefter opretter den forbindelse til vores database, bruger den sql kode som den har fra sin parameter, vælger alt data som passer til koden, 
+        /// og putter dataen ind i den tomme liste. 
+        /// </summary>
+        /// <param name="sql">
+        /// sql parameteren er den SQL kode som bliver brugt til at finde de lokaler som vi ønsker at finde, baseret på hvad vi har skrevet som vores sql string.
+        /// </param>
+        /// <returns>
+        /// Returnerer alt information om alle lokaler, som passer til hvad SQL stringen beskriver.
+        /// </returns>
         public List<LokaleData> GetAllLokaleBySqlString(string sql)
         {
             List<LokaleData> Lokaler = new List<LokaleData>();
-            
+
             //Opretter forbindelse
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -88,6 +102,7 @@ namespace _2.Eksamensprojekt.Services
             }
             return Lokaler;
         }
-
     }
+    
+}
 }

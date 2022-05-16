@@ -4,26 +4,90 @@
 @{
 }
 
-<form method="post">
-    <input type="text" asp-for="@Model.NummerSøgning" placeholder="Søg efter et nummer" />
-    <select asp-for="@Model.LokaleDataSingel.Etage">
-        <option value="0">Alle etager</option>
-        <option value="1"> D1</option>
-        <option value="2"> D2</option>
-        <option value="3"> D3</option>
-    </select>
+@* (Må gerne bruges, men i rapporten skal i beskrive hvordan I ville gøre det hvis det kun skulle være ren razor pages *@
+@* Søgebars funktionen er blevet inspireret af https://www.geeksforgeeks.org/search-bar-using-html-css-and-javascript/ *@
 
-    <input type="submit" value="Søg" />
-</form>
+<!-- DYNAMISK SØGEFELT (Forklaring ligger i scriptet) -->
+<input id="searchbar" onkeyup="soeg_lokale()" type="text"
+       name="search" placeholder="Søg efter lokaler...">
 
-<br />
-<br />
+<!-- SØGEKRITERIER-->
+<!-- Dropdown-menu kode er inspireret af
+https://codepen.io/dautoblog/pen/KMGogz -->
+<div class="soege-kriteria dropdown-kategorier">
+    <label for="drop" class="toggle">&#8801; Søgekriterier</label>
+    <input type="checkbox" id="drop" />
+    <ul class="menu">
+        <form method="post">
+            <fieldset>
+
+                @* VÆLG ETAGE
+                    Virker ved at *@
+        <li>
+            <div class="ll-border-custom">
+                <div class="dropdown-kategorier">
+                    <label for="drop-1" class="toggle">
+
+                        <select id="SKEtage_valg" name="SKEtage_valg" asp-for="@Model.SKEtage_valg" class="form-control">
+                            @foreach (var etage in Model.SKEtage)
+                            {
+                                <option class="dropdown-button" value="@etage">@etage</option>
+                            }
+                        </select>
+                    </label>
+                </div>
+            </div>
+        </li>
+
+        <li>
+            <!-- VÆLG STØRRELSE -->
+            <div class="ll-border-custom">
+                <div class="dropdown-kategorier">
+                    <label for="drop-2" class="toggle">
+
+                        <select id="SKStoerrelse_valg" name="SKStoerrelse_valg" asp-for="@Model.SKStoerrelse_valg" class="form-control">
+                            @foreach (var etage in Model.SKStoerrelse)
+                            {
+                                <option class="dropdown-button" value="@etage">@etage</option>
+                            }
+                        </select>
+                    </label>
+                </div>
+            </div>
+        </li>
+
+        <li>
+            <!-- HAR SMARTBOARD? -->
+            <div class="ll-border-custom">
+                <div id="ll-border-bottom">
+
+                    <div class="dropdown-kategorier">
+                        <label for="drop-3" class="toggle">
+
+                            <select id="SKSmartBoard_valg" name="SKSmartBoard_valg" asp-for="@Model.SKSmartBoard_valg" class="form-control">
+                                @foreach (var smartboard in Model.SKSmartBoard)
+                                {
+                                    <option class="dropdown-button" value="@smartboard">@smartboard</option>
+                                }
+                            </select>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <input type="submit" value="Søg" class="btn btn-primary" />
+
+        </fieldset>
+        </form>
+    </ul>
+</div>
+
 <div class="row">
-    <div class="col-md-8">
+    <div class="lokale-info-centreret">
         @foreach (var LkD in @Model.LokaleData)
         {
-            
-            <div class="card mb-2" style="width: 30rem;">
+
+            <div class="card mb-2">
                 <div class="card-header p-2">
                     <h5 class="card-title">@LkD.LokaleNummer @LkD.LokaleNavn</h5>
                     <h5>
@@ -39,28 +103,39 @@
                 </div>
                 <div class="card-body">
                     <p class="card-text">Størrelse: @LkD.LokaleSize</p>
-                    @foreach (var test in User.Claims)
-                    {
-                        if(test.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role") { 
 
-                        <form method="post">
-                            @if (test.Value == "Underviser")
-                            {
-                                <input type="submit" value="Lærer Book" asp-page="/UnderviserPages/UnderviserBooking" asp-route-id="@LkD.LokaleID" class="btn btn-primary" />
-                            }
-                            @if (test.Value == "Administration")
-                            {
-                                <input type="submit" value="Admin Book" asp-page="/AdministrationPages/AdministrationBooking" asp-route-id="@LkD.LokaleID" class="btn btn-primary" />
-                            }
-                            @if (test.Value == "Student")
-                            {
-                                <input type="submit" value="Stud Book" asp-page="/StuderendePages/StuderendeBooking" asp-route-id="@LkD.LokaleID" class="btn btn-primary"/>
-                            }
-                        </form>
-                        }
-                    }
+                    <form>
+                        <input type="submit" value="Book" class="btn btn-primary book-btn font-weight-bold" />
+                    </form>
                 </div>
             </div>
         }
     </div>
 </div>
+
+
+
+
+
+
+
+<!-- javascript -->
+@* Virker ved at det man indtaster i det dynamiske søgefelt, bliver sendt til JavaScript funktionen kaldet soeg_lokale().
+    Funktionen konverterer derefter det som er skrevet, til alt sammen at være lower case.
+    Herefter tager den den indtastede værdi, og kigger inde i de HTML elementer, som har klassen "card".
+    Hvis HTML elementerne ikke har den værdi, bliver de ikke vist, ellers bliver de vist.*@
+<script>
+    function soeg_lokale() {
+        let input = document.getElementById('searchbar').value
+        input = input.toLowerCase();
+        let x = document.getElementsByClassName('card');
+
+        for (i = 0; i < x.length; i++) {
+            if (!x[i].innerHTML.toLowerCase().includes(input)) {
+                x[i].style.display = "none";
+            }
+            else {
+                x[i].style.display = "flex";
+            }
+        }
+    }</script>

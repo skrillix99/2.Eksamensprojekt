@@ -26,6 +26,7 @@
             <h5 class=""><b>Tidspunkt: </b>@lokale.TidSlut.ToString(@"hh\:mm")</h5>
             <h5 class=""><b>Varighed: </b>@lokale.TidStart.ToString(@"hh\:mm")</h5>
             <h5 class=""><b>Bookede af:</b> @lokale.Bruger.BrugerNavn</h5>
+            <h5 class=""><b>Booket for: </b>@Enum.GetName(typeof(brugerRolle), (lokale.BookesFor))</h5>
             <form method="post">
                 @foreach (var test in User.Claims)
                 {
@@ -37,13 +38,13 @@
                         }
                         if (test.Value == "Underviser")
                         {
-                            if(lokale.brugerRolle == brugerRolle.Underviser) 
+                            if (lokale.brugerRolle == brugerRolle.Underviser)
                             {
-                            <button type="submit" asp-page="/UnderviserPages/UnderviserAflysBooking" asp-route-id="@lokale.ResevertionId"><i class="fa fa-trash"></i></button>
+                                <button type="submit" asp-page="/UnderviserPages/UnderviserAflysBooking" asp-route-id="@lokale.ResevertionId"><i class="fa fa-trash"></i></button>
                             }
-                            if(lokale.brugerRolle == brugerRolle.Student) 
+                            if (lokale.brugerRolle == brugerRolle.Student)
                             {
-                            <button type="submit" asp-page="/UnderviserPages/UnderviserAflysBooking" asp-route-id="@lokale.ResevertionId"><i class="fa fa-trash"></i></button>
+                                <button type="submit" asp-page="/UnderviserPages/UnderviserAflysBooking" asp-route-id="@lokale.ResevertionId"><i class="fa fa-trash"></i></button>
                             }
                         }
                     }

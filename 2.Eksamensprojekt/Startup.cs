@@ -51,7 +51,7 @@ namespace _2.Eksamensprojekt
                 options.Conventions.AuthorizeFolder("/StuderendePages");
                 options.Conventions.AuthorizeFolder("/UnderviserPages");
                 options.Conventions.AuthorizeFolder("/AdministrationPages");
-                //options.Conventions.AuthorizeFolder("/Shared");
+                options.Conventions.AuthorizeFolder("/Shared");
             }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
             // sender hen til en AccessDenied side hvis man prøver at komme ind på en side man ikke må.

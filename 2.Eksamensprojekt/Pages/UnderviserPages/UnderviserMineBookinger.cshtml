@@ -1,4 +1,5 @@
 ﻿@page
+@using SuperBookerData
 @model _2.Eksamensprojekt.Pages.UnderviserPages.UnderviserMineBookingerModel
 @{
 }
@@ -14,6 +15,7 @@
                     <p class="card-text">Lokale: @item.Lokale.LokaleSize</p>
                     <p class="card-text">Dato: @item.Dag</p>
                     <p class="card-text">Booket af: @item.BrugerNavn</p>
+                    <p class="card-text">Booket for: @Enum.GetName(typeof(brugerRolle), (item.BookesFor))</p>
                     <form method="post">
                         <button type="submit" asp-page="/UnderviserPages/UnderviserAflysBooking" asp-route-id="@item.ResevertionId"><i class="fa fa-trash"></i></button>
                     </form>
@@ -23,10 +25,10 @@
     </div>
 }
 
-    <script>
-        var today = new Date().toISOString().slice(0, 16);
+<script>
+    var today = new Date().toISOString().slice(0, 16);
 
-        document.getElementsByName("Booking.Dag")[0].min = today;
-    </script>
+    document.getElementsByName("Booking.Dag")[0].min = today;
+</script>
 
 

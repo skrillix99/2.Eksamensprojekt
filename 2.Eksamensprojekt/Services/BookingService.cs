@@ -28,7 +28,7 @@ namespace _2.Eksamensprojekt.Services
 
             //fortæller hvad der skal hentes fra databasen i det her tilfælle fra flere tabler og den gør det ved hjælp af i inner join 
             String sql =
-                "Select Dag, TidStart, TidSlut, LokaleNavn, LokaleNummer, LokaleSmartBoard, Size, Muligebookinger, BrugerNavn, ReservationID, BrugerRolle From Reservation " +
+                "Select Dag, TidStart, TidSlut, LokaleNavn, LokaleNummer, LokaleSmartBoard, Size, Muligebookinger, BrugerNavn, ReservationID, BrugerRolle, BookesFor From Reservation " +
                 "INNER JOIN Person ON Reservation.BrugerID_FK = Person.BrugerID " +
                 "INNER JOIN Lokale ON Reservation.LokaleID_FK = Lokale.LokaleID " +
                 "INNER JOIN LokaleLokation ON Lokale.LokaleLokation_FK = LokaleLokation.LokaleLokationId " +
@@ -77,6 +77,7 @@ namespace _2.Eksamensprojekt.Services
             k.Bruger = p; // 8
             k.ResevertionId = reader.GetInt32(9);
             k.brugerRolle = (brugerRolle)reader.GetInt32(10);
+            k.BookesFor = (brugerRolle)reader.GetInt32(11);
             return k;
         }
 

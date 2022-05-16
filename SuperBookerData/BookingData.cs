@@ -22,7 +22,7 @@ namespace SuperBookerData
         {
         }
 
-        public BookingData(int resevertionId, TimeSpan tidStart, DateTime dag, int heltBooket, PersonData bruger, LokaleData lokale, TimeSpan tidSlut)
+        public BookingData(int resevertionId, TimeSpan tidStart, DateTime dag, int heltBooket, PersonData bruger, LokaleData lokale, TimeSpan tidSlut, brugerRolle rolle)
         {
             _resevertionID = resevertionId;
             _tidStart = tidStart;
@@ -31,7 +31,7 @@ namespace SuperBookerData
             _bruger = bruger;
             _lokale = lokale;
             _tidSlut = tidSlut;
-            _bookesFor = 0;
+            _bookesFor = rolle;
         }
 
         public int ResevertionId

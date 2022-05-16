@@ -297,16 +297,10 @@ namespace _2.Eksamensprojekt.Services
 
 
         /// <summary>
-        /// Sletter en booking fra databasen baseret på id
+        /// Sletter en booking fra databasen dagen efter bookingen er overskredet
         /// </summary>
-        /// <param name="id">Typen int. Indeholder id'et på den booking der skal slettes</param>
-        public void DeleteResevation(int id)
+        public void DeleteReservation()
         {
-            if (id <= 0)
-            {
-                throw new KeyNotFoundException("Der findes ikke nogle reservationer med det ID");
-            }
-
             //string sql = "DELETE from Reservation WHERE ReservationID = @id";
             string sql = "DELETE from Reservation WHERE Dag < @nextDay";
 

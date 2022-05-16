@@ -80,7 +80,7 @@ namespace _2.Eksamensprojekt.Services
         /// <summary>
         /// Oversætter data fra et Booking database kald til et BookingData object med alle columns.
         /// </summary>
-        /// <param name="reader">Typen SqlDataReader. object med data fra database kald</param>
+        /// <param name="reader">Typen SqlDataReader. objekt med data fra database kald</param>
         /// <returns>et object af typen BookingData</returns>
         #region ReadBooking
 

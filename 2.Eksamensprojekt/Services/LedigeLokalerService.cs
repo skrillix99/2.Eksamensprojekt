@@ -11,6 +11,10 @@ namespace _2.Eksamensprojekt.Services
     {
         private const string connectionString = @"Data Source=zealandmarc.database.windows.net;Initial Catalog=SuperBooker4000;User ID=AdminMarc;Password=Marcus19;Connect Timeout=30;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
+        /// <summary>
+        /// Henter alle lokaler i databasen og lægger dem ind i et list objekt af typen LokaleData.
+        /// </summary>
+        /// <returns>Returnerer en liste af typen LokaleData</returns>
         public List<LokaleData> GetAll()
         {
             List<LokaleData> LkDataList = new List<LokaleData>();
@@ -39,6 +43,11 @@ namespace _2.Eksamensprojekt.Services
             }
             return LkDataList;
         }
+        /// <summary>
+        /// Oversætter data modtaget fra databasen og sætter dem ind i et LokaleData objekt
+        /// </summary>
+        /// <param name="reader">Typen SqlDataReader. Indeholder data modtaget fra databasen</param>
+        /// <returns>Returnerer et objekt af typen LokaleData</returns>
         private LokaleData ReadLokaleData(SqlDataReader reader)
         {
             LokaleData ld1 = new LokaleData();

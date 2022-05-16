@@ -179,8 +179,8 @@ h2 {
     border-color: black;
 }
 
-.fit-content {
-    max-width: fit-content;
+.nav-link {
+    display: inline-block;
 }
 
 @media (min-width: 576px) {

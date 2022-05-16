@@ -2,11 +2,13 @@
 @using SuperBookerData
 @model _2.Eksamensprojekt.Pages.UnderviserPages.UnderviserMineBookingerModel
 @{
+    ViewData["Title"] = "Mine bookinger - Underviser";
 }
+
 @foreach (var item in Model.Booking)
 {
+
     <div class="row">
-        @*<div class="col-md-8">*@
         <div class="lokale-info-centreret">
             <div class="card mb-2">
                 <div class="card-header p-2">
@@ -23,10 +25,10 @@
                     </h2>
                 </div>
                 <div class="card-body">
-                    <p class="card-text">Lokale størrelse: @item.Lokale.LokaleSize</p>
-                    <p class="card-text">Dato: @item.Dag</p>
-                    <p class="card-text">Booket af: @item.BrugerNavn</p>
-                    <p class="card-text">Booket for: @Enum.GetName(typeof(brugerRolle), (item.BookesFor))</p>
+                    <p class="card-text"><b>Lokale størrelse:</b> @item.Lokale.LokaleSize</p>
+                    <p class="card-text"><b>Dato:</b> @item.Dag</p>
+                    <p class="card-text"><b>Booket af:</b> @item.BrugerNavn</p>
+                    <p class="card-text"><b>Booket for:</b> @Enum.GetName(typeof(brugerRolle), (item.BookesFor))</p>
                     <div class="centrer-item">
                         <form method="post">
                             <button class="btn btn-primary black-button" type="submit" asp-page="/UnderviserPages/UnderviserAflysBooking" asp-route-id="@item.ResevertionId">AFLYS</button>

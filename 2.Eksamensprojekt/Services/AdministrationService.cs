@@ -262,6 +262,7 @@ namespace _2.Eksamensprojekt.Services
                 cmd.Parameters.AddWithValue("@brugerFK", brugerID);
                 cmd.Parameters.AddWithValue("@lokaleFK", newBooking.Lokale.LokaleID);
                 cmd.Parameters.AddWithValue("@bookesFor", (int)newBooking.BookesFor);
+                cmd.Parameters.AddWithValue("@mulige", newBooking.Lokale.MuligeBookinger);
 
                 cmd.Connection.Open();
 

@@ -18,6 +18,8 @@ namespace _2.Eksamensprojekt.Pages.LogInd
         private ILogIndService _brugerService;
         public static LogIndData LoggedInUser { get; set; } = null;
 
+        public string Errormsg { get; set; }
+
         [BindProperty]
         [Required(ErrorMessage = "Du skal udfylde feltet")]
         [RegularExpression(@"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$", ErrorMessage = "Ugyldig Zealand E-mail")]
@@ -43,6 +45,7 @@ namespace _2.Eksamensprojekt.Pages.LogInd
             List<LogIndData> logIndData = _brugerService.GetPersoner();
             foreach (LogIndData user in logIndData)
             {
+
                 if (EmailLogInd == user.EmailLogInd && Password == user.Password)
                 {
                     LoggedInUser = user;

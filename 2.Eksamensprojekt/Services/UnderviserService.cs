@@ -55,7 +55,7 @@ namespace _2.Eksamensprojekt.Services
 
             DateTime dt = DateTime.Now.AddDays(-3); //TODO logic ændres
             int newDay = dag.Subtract(dt).Days;
-            if ((dag.Subtract(dt).Days >= 3) && rolle == brugerRolle.Student)
+            if ((dag.Subtract(dt).Days <= 3) && rolle == brugerRolle.Student)
             {
                 throw new ArgumentOutOfRangeException("Må kun annulere med minimum 3 dages varsel.");
             }
@@ -64,6 +64,7 @@ namespace _2.Eksamensprojekt.Services
         }
         public void BegrænsetAdgang(DateTime dag, int id, string email)
         {
+
             if (id <= 0)
             {
                 throw new KeyNotFoundException("Der findes ikke nogle reservationer med det ID");

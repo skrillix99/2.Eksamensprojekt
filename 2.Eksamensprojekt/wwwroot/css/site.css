@@ -182,6 +182,11 @@ h2 {
 .nav-link {
     display: inline-block;
 }
+.forsideBillede {
+    display: block;
+    height: 45vh;
+    margin: 0 auto;
+}
 
 @media (min-width: 576px) {
     .navbar-expand-sm .navbar-nav {

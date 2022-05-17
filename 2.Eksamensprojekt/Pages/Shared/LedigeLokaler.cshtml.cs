@@ -38,6 +38,7 @@ namespace _2.Eksamensprojekt.Pages.Shared
         [BindProperty]
         public string SKSmartBoard_valg { get; set; }
 
+
         /// <summary>
         /// Bruges til at bestemme valgmulighederne i de forskellige søgekriterier.
         /// </summary>

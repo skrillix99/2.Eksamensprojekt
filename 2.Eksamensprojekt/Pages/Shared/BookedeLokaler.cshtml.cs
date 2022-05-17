@@ -11,8 +11,7 @@ using SuperBookerData;
 
 namespace _2.Eksamensprojekt.Pages.Shared
 {
-    [Authorize(Roles = "Underviser")]
-    [Authorize(Roles = "Administration")]
+    [Authorize(Roles = "Underviser, Administration")]
 
     public class BookedeLokalerModel : PageModel
     {

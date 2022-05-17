@@ -7,7 +7,6 @@
 <a class="tilbageLink" asp-page="AdministrationMineBookinger"> < TILBAGE</a>
 
 <h1 class="text-center">Ønsker du at slette denne booking?</h1>
-
 <div class="row">
     <div class="lokale-info-centreret">
         <div class="card mb-2">
@@ -19,7 +18,7 @@
                 <p class="card-text"><b>Størrelse:</b> @Enum.GetName(typeof(LokaleSize), (Model.Booking.Lokale.LokaleSize)) </p>
                 <p class="card-text"><b>Antal pladser tilbage:</b> @Model.Booking.Lokale.MuligeBookinger</p>
                 <p class="card-text"><b>Dato:</b> @Model.Booking.Dag</p>
-                <p class="card-text"><b>Tidspunkt:</b> @Model.Booking.TidStart - @Model.Booking.TidSlut</p>
+                <p class="card-text"><b>Varighed:</b> @Model.Booking.TidSlut</p>
                 <p class="card-text"><b>Booket af:</b> @Model.Booking.Bruger.BrugerNavn</p>
             </div>
         </div>

@@ -25,12 +25,12 @@
             }
         }
         <fieldset>
-        <label>Tidspunkt og dato Fra:</label>
-        <br/>
-        <input type="datetime-local" asp-for="@Model.Booking.Dag"/>
+            <label>Tidspunkt og dato Fra:</label>
+            <br/>
+            <input type="datetime-local" asp-for="@Model.Booking.Dag" value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")"/>
         </fieldset>
         <fieldset>
-            <label>Til:</label>
+            <label>Varighed:</label>
             <br/>
             <input type="time" asp-for="Booking.TidStart"/>
         </fieldset>
@@ -38,3 +38,10 @@
         <input type="submit" value="Book" class="btn-primary" asp-page-handler="book" asp-route-id="@Model.Lokale.LokaleID"/>
     </form>
 </div>
+
+
+<script>
+    var today = new Date().toISOString().slice(0, 16);
+
+    document.getElementsByName("Booking.Dag")[0].min = today;
+</script>

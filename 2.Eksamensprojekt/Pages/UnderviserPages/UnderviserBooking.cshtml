@@ -28,7 +28,7 @@
         <fieldset>
             <label>Tidspunkt og dato Fra:</label>
             <br />
-            <input type="datetime-local" asp-for="@Model.Booking.Dag" />
+            <input type="datetime-local" asp-for="@Model.Booking.Dag" value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")"/>
         </fieldset>
         <fieldset>
             <label>Varighed:</label>

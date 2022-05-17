@@ -174,13 +174,16 @@ h2 {
 }
 
 .black-button {
-    color: white;
+    color: white !important;
     background-color: black;
     border-color: black;
+    font-weight: bold;
 }
 
 .nav-link {
     display: inline-block;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
 }
 
 @media (min-width: 576px) {

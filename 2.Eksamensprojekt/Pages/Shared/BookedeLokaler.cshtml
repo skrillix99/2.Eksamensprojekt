@@ -2,15 +2,15 @@
 @using SuperBookerData
 @model _2.Eksamensprojekt.Pages.Shared.BookedeLokalerModel
 @{
-    ViewData["Title"] = "Detailed View";
+    ViewData["Title"] = "Alle Bookinger";
 }
 
 @foreach (var lokale in Model.BookingData)
 {
     <div class="card mb-2" style="width: 20rem;">
         <div class="card-header p-2">
-            <h5 class="card-title">@lokale.Lokale.LokaleNummer @lokale.Lokale.LokaleNavn</h5>
-            <h5>
+            <h2 class="card-title">@lokale.Lokale.LokaleNummer @lokale.Lokale.LokaleNavn</h2>
+            <h2>
                 @if (lokale.Lokale.LokaleSmartBoard == true)
                 {
                     @("(M. SmartBoard)")
@@ -19,14 +19,15 @@
                 {
                     @("(U. SmartBoard)")
                 }
-            </h5>
-            <h5 class="Lokale-Størrelse:"><b>Størrelse:</b> @lokale.Lokale.LokaleSize</h5>
-            <h5 class="card-title"><b>Antal pladser tilbage:</b> @lokale.Lokale.MuligeBookinger</h5>
-            <h5 class="card-title"><b>Date:</b> @lokale.Dag.ToString("d")</h5>
-            <h5 class=""><b>Tidspunkt: </b>@lokale.TidSlut.ToString(@"hh\:mm")</h5>
-            <h5 class=""><b>Varighed: </b>@lokale.TidStart.ToString(@"hh\:mm")</h5>
-            <h5 class=""><b>Bookede af:</b> @lokale.Bruger.BrugerNavn</h5>
-            <h5 class=""><b>Booket for: </b>@Enum.GetName(typeof(brugerRolle), (lokale.BookesFor))</h5>
+            </h2>
+            <div class="card-body">
+            <p class="card-text"><b>Størrelse:</b> @lokale.Lokale.LokaleSize</p>
+            <p class="card-text"><b>Antal pladser tilbage:</b> @lokale.Lokale.MuligeBookinger</p>
+            <p class="card-text"><b>Date:</b> @lokale.Dag.ToString("d")</p>
+            <p class="card-text"><b>Tidspunkt: </b>@lokale.TidSlut.ToString(@"hh\:mm")</p>
+            <p class="card-text"><b>Varighed: </b>@lokale.TidStart.ToString(@"hh\:mm")</p>
+            <p class="card-text"><b>Booket af:</b> @lokale.Bruger.BrugerNavn</p>
+            <p class="card-text"><b>Booket for: </b>@Enum.GetName(typeof(brugerRolle), (lokale.BookesFor))</p>
             <form method="post">
                 @foreach (var test in User.Claims)
                 {
@@ -59,6 +60,8 @@
                 }
 
             </form>
+            </div>
+        </div>
         </div>
     </div>
 }

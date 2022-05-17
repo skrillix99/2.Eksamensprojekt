@@ -12,28 +12,30 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="~/css/Marcus.css" />
     <link rel="stylesheet" href="~/css/Alexander.css" />
+    <link rel="stylesheet" href="~/css/Anders_Style.css" />
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 topNavBar">
             <div class="container">
-                <a class="navbar-brand"> <img class="logo" src="~/img/Zealand_logo_black_RGB_1600px_72dpi.png" alt="Logo"> </a>
-                <ul class="navbar-nav flex-grow-1">
-                    @{
-                        if (LogIndModel.LoggedInUser == null)
-                        {
-                            <li class="nav-item text-end">
-                                <a class="nav-link" asp-area="" asp-page="/LogInd/LogInd">Login</a>
-                            </li>
+                <a class="navbar-brand" asp-page="/Shared/LedigeLokaler"> <img class="logo" src="~/img/Zealand_logo_black_RGB_1600px_72dpi.png" alt="Logo"> </a>
+                
+                    <ul class="navbar-nav flex-grow-1">
+                        @{
+                            if (LogIndModel.LoggedInUser == null)
+                            {
+                                <li class="nav-item text-end">
+                                    <a class="nav-link black-button" asp-area="" asp-page="/LogInd/LogInd">Login</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item text-end">
+                                    <b><a class="nav-link" asp-area="" asp-page="/LogInd/LogUd">Logout</a></b>
+                                </li>
+                            }
                         }
-                        else
-                        {
-                            <li class="nav-item text-end">
-                                <a class="nav-link" asp-area="" asp-page="/LogInd/LogUd">Logout</a>
-                            </li>
-                        }
-                    }
-                </ul>
+                    </ul>
             </div>
         </nav>
     </header>

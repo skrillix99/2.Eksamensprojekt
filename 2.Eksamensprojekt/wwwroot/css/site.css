@@ -24,37 +24,6 @@ a {
     border-color: #1861ac;
 }
 
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-    font-size: 14px;
-}
-
-@media (min-width: 768px) {
-    html {
-        font-size: 16px;
-    }
-}
-
-.border-top {
-    border-top: 1px solid #e5e5e5;
-}
-
-.border-bottom {
-    border-bottom: 1px solid #e5e5e5;
-}
-
-.box-shadow {
-    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
-}
-
-button.accept-policy {
-    font-size: 1rem;
-    line-height: inherit;
-}
-
-/* Sticky footer styles
--------------------------------------------------- */
 html {
     position: relative;
     min-height: 100%;
@@ -193,4 +162,32 @@ body {
 
 #no_padding {
     padding: 0 !important;
+}
+
+.row {
+    margin-right:0;
+    margin-left:0;
+}
+
+h2 {
+    font-size: 1.25rem;
+}
+
+.black-button {
+    color: white;
+    background-color: black;
+    border-color: black;
+}
+
+.nav-link {
+    display: inline-block;
+}
+
+@media (min-width: 576px) {
+    .navbar-expand-sm .navbar-nav {
+        flex-direction: column;
+    }
+    .container {
+        max-width: 100%;
+    }
 }

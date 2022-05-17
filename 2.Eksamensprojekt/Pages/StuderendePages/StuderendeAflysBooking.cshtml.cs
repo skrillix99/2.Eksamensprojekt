@@ -18,6 +18,8 @@ namespace _2.Eksamensprojekt.Pages.StuderendePages
 
         public BookingData Booking { get; set; }
 
+        public static BookingData TempBookingData { get; set; }
+
         public StuderendeAflysBookingModel(IStuderendeService studerendeService, IAdministrationService administrationService)
         {
             _studerendeService = studerendeService;
@@ -26,12 +28,13 @@ namespace _2.Eksamensprojekt.Pages.StuderendePages
         public void OnGet(int id)
         {
             Booking = _administrationService.GetSingelBooking(id);
+            TempBookingData = _administrationService.GetSingelBooking(id);
         }
 
         public void OnPost(int id)
         {
             Booking = _administrationService.GetSingelBooking(id);
-            _studerendeService.DeleteReservation(id);
+            TempBookingData = _administrationService.GetSingelBooking(id);
         }
     }
 }

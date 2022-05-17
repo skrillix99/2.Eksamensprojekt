@@ -1,13 +1,23 @@
 ﻿@page
+@using SuperBookerData;
 @model _2.Eksamensprojekt.Pages.StuderendePages.StuderendeAflysBekræftigelseModel
 @{
 }
 
+<a class="tilbageLink" asp-page="AdministrationMineBookinger"> < TILBAGE TIL ALLE BOOKINGER</a>
 
-
-
+<h1 class="text-center">Følgende booking er blevet slettet</h1>
+<div class="lokaleInfoWrapper">
+    <h3>@Model.Booking.Lokale.LokaleNavn</h3>
+    <h3>@(Model.Booking.Lokale.LokaleSmartBoard ? "M.Smartboard":"U.Smartboard")</h3>
+    <p><b>Størrelse:</b> @Enum.GetName(typeof(LokaleSize), (Model.Booking.Lokale.LokaleSize)) </p>
+    <p><b>Antal pladser tilbage:</b> @Model.Booking.Lokale.MuligeBookinger</p>
+    <p><b>Dato:</b> @Model.Booking.Dag</p>
+    <p><b>Tidspunkt:</b> @Model.Booking.TidStart - @Model.Booking.TidSlut</p>
+    <p><b>Booket af:</b> @Model.Booking.Bruger.BrugerNavn</p>
+</div>
 
 <form method="post" class="AflysbookingForm">
-    <input type="submit" value="OK" class="submitBlack custom-btn" asp-page="StuderendeMineBookinger"/>
+    <input type="submit" value="OK" class="submitBlack custom-btn" asp-page="StuderendeMineBookinger" asp-page-handler="del" asp-route-id="@Model.Booking.ResevertionId" />
     <input type="submit" value="Fortryd" class="submitBlack custom-btn" asp-page="StuderendeMineBookinger" />
 </form>

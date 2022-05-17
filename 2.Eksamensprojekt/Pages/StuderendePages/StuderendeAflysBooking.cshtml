@@ -4,20 +4,20 @@
 @{
 }
 
-<a class="tilbageLink" asp-page="AdministrationMineBookinger"> < TILBAGE TIL ALLE BOOKINGER</a>
+<a class="tilbageLink" asp-page="AdministrationMineBookinger"> < TILBAGE</a>
 
-<h1 class="text-center">Følgende booking er blevet slettet</h1>
+<h1 class="text-center">Ønsker du at slette denne booking</h1>
 <div class="lokaleInfoWrapper">
     <h3>@Model.Booking.Lokale.LokaleNavn</h3>
     <h3>@(Model.Booking.Lokale.LokaleSmartBoard ? "M.Smartboard":"U.Smartboard")</h3>
     <p><b>Størrelse:</b> @Enum.GetName(typeof(LokaleSize), (Model.Booking.Lokale.LokaleSize)) </p>
     <p><b>Antal pladser tilbage:</b> @Model.Booking.Lokale.MuligeBookinger</p>
-    <p><b>Dato:</b> @Model.Booking.Dag</p>
-    <p><b>Tidspunkt:</b> @Model.Booking.TidStart - @Model.Booking.TidSlut</p>
+    <p><b>Tid:</b> @Model.Booking.Dag</p>
+    <p><b>Varighed:</b> @Model.Booking.TidSlut</p>
     <p><b>Booket af:</b> @Model.Booking.Bruger.BrugerNavn</p>
 </div>
 
 <form method="post" class="AflysbookingForm">
-    <input type="submit" value="OK" class="submitBlack custom-btn" asp-page="AdministrationMineBookinger" />
-    <input type="submit" value="Fortryd" class="submitBlack custom-btn" asp-page="AdministrationMineBookinger" />
+    <input type="submit" value="Ja" class="submitAprove custom-btn" asp-route-id="@Model.Booking.ResevertionId" asp-page="StuderendeAflysBekræftigelse" />
+    <input type="submit" value="Nej" class="submitDenied custom-btn" asp-page="StuderendeMineBookinger" />
 </form>

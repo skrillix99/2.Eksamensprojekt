@@ -12,8 +12,8 @@
     <h3>@(Model.Booking.Lokale.LokaleSmartBoard ? "M.Smartboard":"U.Smartboard")</h3>
     <p><b>Størrelse:</b> @Enum.GetName(typeof(LokaleSize), (Model.Booking.Lokale.LokaleSize)) </p>
     <p><b>Antal pladser tilbage:</b> @Model.Booking.Lokale.MuligeBookinger</p>
-    <p><b>Dato:</b> @Model.Booking.Dag</p>
-    <p><b>Tidspunkt:</b> @Model.Booking.TidStart - @Model.Booking.TidSlut</p>
+    <p><b>Tid:</b> @Model.Booking.Dag</p>
+    <p><b>Varighed:</b> @Model.Booking.TidSlut</p>
     <p><b>Booket af:</b> @Model.Booking.Bruger.BrugerNavn</p>
 </div>
 

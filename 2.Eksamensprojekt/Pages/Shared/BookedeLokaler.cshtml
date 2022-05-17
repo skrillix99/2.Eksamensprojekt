@@ -30,26 +30,33 @@
             <form method="post">
                 @foreach (var test in User.Claims)
                 {
-                    if (test.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role")
+                    if (test.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name")
                     {
-                        if (test.Value == "Administration")
+
+                        if (lokale.Bruger.BrugerEmail == test.Value)
                         {
-                            <button type="submit" asp-page="/AdministrationPages/AdministrationAflysBooking" asp-route-id="@lokale.ResevertionId"><i class="fa fa-trash"></i></button>
-                        }
-                        if (test.Value == "Underviser")
-                        {
-                            if (lokale.brugerRolle == brugerRolle.Underviser || lokale.brugerRolle == brugerRolle.Student)
+                            if (lokale.Bruger.brugerRolle == brugerRolle.Underviser)
                             {
                                 <button type="submit" asp-page="/UnderviserPages/UnderviserAflysBooking" asp-route-id="@lokale.ResevertionId"><i class="fa fa-trash"></i></button>
                             }
                         }
-                        if (test.Value == "Student")
+                    }
+                    if (test.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role")
+                    {
+
+                        if (lokale.Bruger.brugerRolle.ToString() == "Student" || lokale.Bruger.brugerRolle.ToString() == "0")
                         {
-                            <button type="submit" asp-page="/StuderendePages/StuderendeAflysBooking" asp-route-id="@lokale.ResevertionId"><i class="fa fa-trash"></i></button>
+                            if (test.Value != "Administration")
+                            {
+                                <button type="submit" asp-page="/UnderviserPages/UnderviserAflysBooking" asp-route-id="@lokale.ResevertionId"><i class="fa fa-trash"></i></button>
+                            }
+                        }
+                        if (test.Value == "Administration")  //TODO ikke vis ovenståendes
+                        {
+                            <button type="submit" asp-page="/AdministrationPages/AdministrationAflysBooking" asp-route-id="@lokale.ResevertionId"><i class="fa fa-trash"></i></button>
                         }
                     }
                 }
-
 
             </form>
         </div>

@@ -29,6 +29,10 @@ namespace _2.Eksamensprojekt.Pages.AdministrationPages
         public void OnPost(int id)
         {
             Booking = AdministrationAflysBookingModel.TempBookingData;
+        }
+
+        public void OnPostDel(int id)
+        {
             _administrationService.DeleteReservation(id);
         }
     }

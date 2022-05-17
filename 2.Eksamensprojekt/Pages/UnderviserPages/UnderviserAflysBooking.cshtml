@@ -3,6 +3,7 @@
 @model _2.Eksamensprojekt.Pages.UnderviserPages.UnderviserAflysBookingModel
 @{
 }
+<p class="alert-danger">@Model.ErrorMsg</p>
 
 <a class="tilbageLink" asp-page="UnderviserMineBookinger"> < TILBAGE</a>
 
@@ -10,14 +11,17 @@
 <div class="lokaleInfoWrapper">
     <h3>@Model.Booking.Lokale.LokaleNavn</h3>
     <h3>@(Model.Booking.Lokale.LokaleSmartBoard ? "M.Smartboard":"U.Smartboard")</h3>
-    <p><b>Størrelse:</b> @Enum.GetName(typeof(LokaleSize), (Model.Booking.Lokale.LokaleSize - 1)) </p>
+    <p><b>Størrelse:</b> @Enum.GetName(typeof(LokaleSize), (Model.Booking.Lokale.LokaleSize)) </p>
     <p><b>Antal pladser tilbage:</b> @Model.Booking.Lokale.MuligeBookinger</p>
     <p><b>Dato:</b> @Model.Booking.Dag</p>
     <p><b>Tidspunkt:</b> @Model.Booking.TidStart - @Model.Booking.TidSlut</p>
     <p><b>Booket af:</b> @Model.Booking.Bruger.BrugerNavn</p>
 </div>
 
-<form method="post" class="AflysbookingForm">
-    <input type="submit" value="Ja" class="submitAprove custom-btn" asp-route-id="@Model.Booking.ResevertionId" asp-page="/UnderviserPages/UnderviserAflysBekræftigelse" />
-    <input type="submit" value="Nej" class="submitDenied custom-btn" asp-page="UnderviserMineBookinger" />
-</form>
+@if (Model.ErrorMsg == null)
+{
+    <form method="post" class="AflysbookingForm">
+        <input type="submit" value="Ja" class="submitAprove custom-btn" asp-route-id="@Model.Booking.ResevertionId" asp-page="/UnderviserPages/UnderviserAflysBekræftigelse"/>
+        <input type="submit" value="Nej" class="submitDenied custom-btn" asp-page="UnderviserMineBookinger"/>
+    </form>
+}

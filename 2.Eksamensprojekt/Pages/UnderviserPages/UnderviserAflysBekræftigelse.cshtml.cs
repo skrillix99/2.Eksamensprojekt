@@ -17,7 +17,7 @@ namespace _2.Eksamensprojekt.Pages.UnderviserPages
         private IUnderviserService _underviserService;
 
         public BookingData Booking { get; set; }
-
+        public string ErrorMsg { get; set; }
         public UnderviserAflysBekræftigelseModel(IUnderviserService underviserService)
         {
             _underviserService = underviserService;
@@ -29,8 +29,15 @@ namespace _2.Eksamensprojekt.Pages.UnderviserPages
 
         public void OnPost(int id)
         {
-            Booking = UnderviserAflysBookingModel.TempBookingData;
-            _underviserService.BegrænsetAdgang(Booking.Dag, id);
+            try
+            {
+                Booking = UnderviserAflysBookingModel.TempBookingData;
+                _underviserService.BegrænsetAdgang(Booking.Dag, id, Booking.Bruger.BrugerEmail);
+            }
+            catch (ArgumentOutOfRangeException e)
+            {
+                ErrorMsg = e.ParamName;
+            }
         }
     }
 }

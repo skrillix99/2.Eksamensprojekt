@@ -29,7 +29,11 @@ namespace _2.Eksamensprojekt.Pages.Shared
 
         public void OnGet()
         {
-        BookingData = _bookingService.GetAllBookings();
+            BookingData = _bookingService.GetAllBookings();
+        }
+        public void OnPost()
+        {
+            BookingData = _bookingService.GetAllBookings();
         }
     }
 }

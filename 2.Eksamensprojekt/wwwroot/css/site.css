@@ -140,7 +140,7 @@ body {
 }
 
 .little_margin_top {
-    margin-top: 2%;
+    margin-top: 2% !important;
 }
 
 .display_inline {

@@ -21,49 +21,49 @@
                 }
             </h2>
             <div class="card-body">
-            <p class="card-text"><b>Størrelse:</b> @lokale.Lokale.LokaleSize</p>
-            <p class="card-text"><b>Antal pladser tilbage:</b> @lokale.Lokale.MuligeBookinger</p>
-            <p class="card-text"><b>Date:</b> @lokale.Dag.ToString("d")</p>
-            <p class="card-text"><b>Tidspunkt: </b>@lokale.TidSlut.ToString(@"hh\:mm")</p>
-            <p class="card-text"><b>Varighed: </b>@lokale.TidStart.ToString(@"hh\:mm")</p>
-            <p class="card-text"><b>Booket af:</b> @lokale.Bruger.BrugerNavn</p>
-            <p class="card-text"><b>Booket for: </b>@Enum.GetName(typeof(brugerRolle), (lokale.BookesFor))</p>
-            <form method="post">
-                @foreach (var test in User.Claims)
-                {
-                    if (test.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name")
+                <p class="card-text"><b>Størrelse:</b> @lokale.Lokale.LokaleSize</p>
+                <p class="card-text"><b>Antal pladser tilbage:</b> @lokale.Lokale.MuligeBookinger</p>
+                <p class="card-text"><b>Date:</b> @lokale.Dag.ToString("d")</p>
+                <p class="card-text"><b>Start: </b>@lokale.TidStart.ToString(@"hh\:mm")</p>
+                <p class="card-text"><b>Varighed: </b>@lokale.TidSlut.ToString(@"hh\:mm") timer</p>
+                <p class="card-text"><b>Booket af:</b> @lokale.Bruger.BrugerNavn</p>
+                <p class="card-text"><b>Booket for: </b>@Enum.GetName(typeof(brugerRolle), (lokale.BookesFor))</p>
+                <form method="post">
+                    @foreach (var test in User.Claims)
                     {
-
-                        if (lokale.Bruger.BrugerEmail == test.Value)
+                        if (test.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name")
                         {
-                            if (lokale.Bruger.brugerRolle == brugerRolle.Underviser)
+
+                            if (lokale.Bruger.BrugerEmail == test.Value)
                             {
-                                <button type="submit" asp-page="/UnderviserPages/UnderviserAflysBooking" asp-route-id="@lokale.ResevertionId"><i class="fa fa-trash"></i></button>
+                                if (lokale.Bruger.brugerRolle == brugerRolle.Underviser)
+                                {
+                                    <button type="submit" asp-page="/UnderviserPages/UnderviserAflysBooking" asp-route-id="@lokale.ResevertionId"><i class="fa fa-trash"></i></button>
+                                }
+                            }
+                        }
+                        if (test.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role")
+                        {
+
+                            if (lokale.Bruger.brugerRolle.ToString() == "Student" || lokale.Bruger.brugerRolle.ToString() == "0")
+                            {
+                                if (test.Value != "Administration")
+                                {
+                                    <button type="submit" asp-page="/UnderviserPages/UnderviserAflysBooking" asp-route-id="@lokale.ResevertionId"><i class="fa fa-trash"></i></button>
+                                }
+                            }
+                            if (test.Value == "Administration")  //TODO ikke vis ovenståendes
+                            {
+                                <button type="submit" asp-page="/AdministrationPages/AdministrationAflysBooking" asp-route-id="@lokale.ResevertionId"><i class="fa fa-trash"></i></button>
                             }
                         }
                     }
-                    if (test.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role")
-                    {
 
-                        if (lokale.Bruger.brugerRolle.ToString() == "Student" || lokale.Bruger.brugerRolle.ToString() == "0")
-                        {
-                            if (test.Value != "Administration")
-                            {
-                                <button type="submit" asp-page="/UnderviserPages/UnderviserAflysBooking" asp-route-id="@lokale.ResevertionId"><i class="fa fa-trash"></i></button>
-                            }
-                        }
-                        if (test.Value == "Administration")  //TODO ikke vis ovenståendes
-                        {
-                            <button type="submit" asp-page="/AdministrationPages/AdministrationAflysBooking" asp-route-id="@lokale.ResevertionId"><i class="fa fa-trash"></i></button>
-                        }
-                    }
-                }
-
-            </form>
+                </form>
             </div>
         </div>
         </div>
-    </div>
+   
 }
 
 @section Scripts

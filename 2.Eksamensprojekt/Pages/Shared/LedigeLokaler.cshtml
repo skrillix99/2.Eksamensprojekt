@@ -103,9 +103,27 @@ https://codepen.io/dautoblog/pen/KMGogz -->
                 <div class="card-body">
                     <p class="card-text">Størrelse: @LkD.LokaleSize</p>
 
-                    <form>
-                        <input type="submit" value="Book" class="btn btn-primary book-btn font-weight-bold" />
-                    </form>
+
+                    @foreach (var test in User.Claims)
+                    {
+                        if (test.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role")
+                        {
+                            <form method="post">
+                                @if (test.Value == "Underviser")
+                                {
+                                    <input type="submit" value="Lærer Book" asp-page="/UnderviserPages/UnderviserBooking" asp-route-id="@LkD.LokaleID" class="btn btn-primary book-btn font-weight-bold" />
+                                }
+                                @if (test.Value == "Administration")
+                                {
+                                    <input type="submit" value="Admin Book" asp-page="/AdministrationPages/AdministrationBooking" asp-route-id="@LkD.LokaleID" class="btn btn-primary book-btn font-weight-bold" />
+                                }
+                                @if (test.Value == "Student")
+                                {
+                                    <input type="submit" value="Stud Book" asp-page="/StuderendePages/StuderendeBooking" asp-route-id="@LkD.LokaleID" class="btn btn-primary book-btn font-weight-bold" />
+                                }
+                            </form>
+                        }
+                    }
                 </div>
             </div>
         }

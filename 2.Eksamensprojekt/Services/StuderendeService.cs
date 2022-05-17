@@ -265,13 +265,13 @@ namespace _2.Eksamensprojekt.Services
             BookingData l = new BookingData();
             string sql = "SELECT Reservation.Dag, Reservation.TidStart, Reservation.TidSlut, " +
                          "Lokale.LokaleNavn, LokaleLokation.LokaleNummer, LokaleSmartBoard, LokaleSize.Size, " +
-                         "MuligeBookinger, Person.BrugerNavn, ReservationID, Person.BrugerID, Reservation.HeltBooket " +
+                         "MuligeBookinger, Person.BrugerNavn, Reservation.ReservationID, Reservation.Heltbooket, Lokale.lokaleID " +
                          "FROM Reservation " +
                          "INNER JOIN Lokale ON Reservation.LokaleID_FK = Lokale.LokaleID " +
                          "inner join LokaleSize ON Lokale.LokaleSize_FK = SizeId " +
                          "inner join LokaleLokation ON Lokale.LokaleLokation_FK = LokaleLokationId " +
                          "INNER JOIN Person ON Reservation.BrugerID_FK = Person.BrugerID " +
-                         "WHERE LokaleID = @id";
+                         "WHERE ReservationID = @id";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {

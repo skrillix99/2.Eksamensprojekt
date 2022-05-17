@@ -12,17 +12,19 @@ namespace _2.Eksamensprojekt.Pages.StuderendePages
 {
     public class StuderendeAflysBekræftigelseModel : PageModel
     {
-        private IAdministrationService _administrationService;
+        private IStuderendeService _studerendeService;
 
         public BookingData Booking { get; set; }
+        public BookingData TempBookingData { get; set; }
 
-        public StuderendeAflysBekræftigelseModel(IAdministrationService administrationService)
+        public StuderendeAflysBekræftigelseModel(IStuderendeService studerendeService)
         {
-            _administrationService = administrationService;
+            _studerendeService = studerendeService;
         }
 
-        public void OnGet()
+        public void OnGet(int id)
         {
+            TempBookingData = _studerendeService.GetSingelBooking(id);
         }
 
         public void OnPost(int id)
@@ -30,9 +32,11 @@ namespace _2.Eksamensprojekt.Pages.StuderendePages
             Booking = StuderendeAflysBookingModel.TempBookingData;
         }
 
-        public void OnPostDel(int id)
+        public IActionResult OnPostDel(int id)
         {
-            _administrationService.DeleteReservation(id);
+            _studerendeService.DeleteReservation(id);
+
+            return RedirectToPage("StuderendeMineBookinger");
         }
     }
 }

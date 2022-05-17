@@ -6,7 +6,7 @@ using SuperBookerData;
 
 namespace _2.Eksamensprojekt.Services
 {
-    public class UnderviserService: IUnderviserService
+    public class UnderviserService : IUnderviserService
     {
         private const string connectionString = "Data Source=zealandmarc.database.windows.net;Initial Catalog=SuperBooker4000;User ID=AdminMarc;Password=Marcus19;Connect Timeout=30;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         private readonly ILogIndService _logIndService;

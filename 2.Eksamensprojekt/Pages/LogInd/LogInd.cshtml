@@ -23,15 +23,13 @@
                         if (LogIndModel.LoggedInUser == null)
                         {
                             <li class="nav-item text-end">
-                                <b>
-                                    <a class="nav-link" asp-area="" asp-page="/LogInd/LogInd" required>Login</a>
-                                </b>
+                                <a class="nav-link black-button" asp-area="" asp-page="/LogInd/LogInd" required>Login</a>
                             </li>
                         }
                         else
                         {
                             <li class="nav-item text-end">
-                                <a class="nav-link" asp-area="" asp-page="/LogInd/LogUd" required>Logout</a>
+                                <a class="nav-link black-button" asp-area="" asp-page="/LogInd/LogUd" required>Log ud</a>
                             </li>
                         }
                     }

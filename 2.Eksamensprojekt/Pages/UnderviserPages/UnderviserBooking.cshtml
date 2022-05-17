@@ -9,46 +9,47 @@
     <h1>Booking af</h1>
     <div class="lokaleInfoWrapper" style="width: unset">
         <h3>@Model.Lokale.LokaleNummer @Model.Lokale.LokaleNavn</h3>
-        <p><b>Størrelse:</b> @Enum.GetName(typeof(LokaleSize), (Model.Lokale.LokaleSize))</p>
+        <p><b>Størrelse:</b> @Enum.GetName(typeof(LokaleSize), (Model.Lokale.LokaleSize - 1))</p>
     </div>
 
 
     <form method="post">
-        
+
         @foreach (var claim in User.Claims)
         {
             if (claim.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name")
             {
-                <input type="text" value="@claim.Value" asp-for="Booking.BrugerEmail" hidden="hidden"/>
+                <input type="text" value="@claim.Value" asp-for="Booking.BrugerEmail" hidden="hidden" />
             }
         }
-        
-        
+
+
 
         <fieldset>
             <label>Tidspunkt og dato Fra:</label>
-            <br/>
-            <input type="datetime-local" asp-for="@Model.Booking.Dag"/>
+            <br />
+            <input type="datetime-local" asp-for="@Model.Booking.Dag" />
         </fieldset>
         <fieldset>
             <label>Varighed:</label>
-            <br/>
-            <input type="time" asp-for="Booking.TidStart"/>
+            <br />
+            <input type="time" asp-for="Booking.TidStart" />
         </fieldset>
         <fieldset>
             <label>Bookes for</label>
-            <br/>
-            <select asp-for="@Model.Booking.BookesFor">            
+            <br />
+            <select asp-for="@Model.Booking.BookesFor">
                 @foreach (var rolle in Enum.GetValues(typeof(brugerRolle)))
                 {
-                    if(!(brugerRolle.Administration.ToString() == rolle.ToString())){
-                    <option value="@rolle">@rolle</option>            
+                    if (!(brugerRolle.Administration.ToString() == rolle.ToString()))
+                    {
+                        <option value="@rolle">@rolle</option>
                     }
                 }
             </select>
         </fieldset>
 
-        <input type="submit" value="Book" class="btn-primary" asp-page-handler="book" asp-route-id="@Model.Lokale.LokaleID"/>
+        <input type="submit" value="Book" class="btn-primary" asp-page-handler="book" asp-route-id="@Model.Lokale.LokaleID" />
     </form>
 </div>
 

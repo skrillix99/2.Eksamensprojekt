@@ -1,0 +1,14 @@
+﻿@page
+@model _2.Eksamensprojekt.Pages.AdministrationPages.AdministrationBegrænsningerModel
+@{
+}
+
+<div class="centered">
+    <h1>Studerendes rettigheder</h1>
+    <form method="post">
+        <label>Antal bookings de må have ad gangen</label>
+        <input type="text" asp-for="@Model.NewLimit" value="@Model.NewLimit" />
+        
+        <input type="submit" value="Updatere" />
+    </form>
+</div>

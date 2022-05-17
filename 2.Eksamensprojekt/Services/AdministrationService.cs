@@ -11,7 +11,7 @@ namespace _2.Eksamensprojekt.Services
     public class AdministrationService : IAdministrationService
     {
         private const string connectionString = "Data Source=zealandmarc.database.windows.net;Initial Catalog=SuperBooker4000;User ID=AdminMarc;Password=Marcus19;Connect Timeout=30;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-        private ILogIndService _logIndService;
+        private readonly ILogIndService _logIndService;
         /// <summary>
         /// Laver dependency injection til at kunne bruge ILogIndService.
         /// </summary>
@@ -206,7 +206,7 @@ namespace _2.Eksamensprojekt.Services
             }
 
             return lokaler;
-        } //TODO need?
+        }
         /// <summary>
         /// Henter en booking baseret på id fra databasen
         /// </summary>
@@ -302,13 +302,11 @@ namespace _2.Eksamensprojekt.Services
         /// </summary>
         public void DeleteReservation()
         {
-            //string sql = "DELETE from Reservation WHERE ReservationID = @id";
             string sql = "DELETE from Reservation WHERE Dag < @nextDay";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlCommand cmd = new SqlCommand(sql, connection);
-                //cmd.Parameters.AddWithValue("@id", id);
                 cmd.Parameters.AddWithValue("@nextDay", DateTime.Today.ToString("s"));
 
                 cmd.Connection.Open();
@@ -319,6 +317,51 @@ namespace _2.Eksamensprojekt.Services
                 //    throw new InvalidOperationException("Der skete en fejl i databasen"); 
                 //}
             }
+        }
+
+        public void StuderendeRettighederUpdate(int bookingLimit)
+        {
+            string sql = "UPDATE StuderendeRettigheder SET BookingLimit = @bookingLimit";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand(sql, connection);
+                cmd.Parameters.AddWithValue("@bookingLimit", bookingLimit);
+
+                cmd.Connection.Open();
+
+                int rows = cmd.ExecuteNonQuery();
+
+                if (rows < 1)
+                {
+                    throw new ArgumentException("Der skete en fejl");
+                }
+            }
+        }
+
+        public List<object> GetAllStuderendeRettigheder()
+        {
+            List<object> objects = new List<object>();
+            string sql = "select * from StuderendeRettigheder";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand(sql, connection);
+
+                cmd.Connection.Open();
+
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    int id = reader.GetInt32(0);
+                    int limit = reader.GetInt32(1);
+                    objects.Add(id);
+                    objects.Add(limit);
+                }
+            }
+
+            return objects;
         }
 
     }

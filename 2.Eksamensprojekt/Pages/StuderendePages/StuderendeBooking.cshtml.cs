@@ -51,6 +51,7 @@ namespace _2.Eksamensprojekt.Pages.StuderendePages
             catch (ArgumentOutOfRangeException e)
             {
                 ErrorMsg = e.ParamName;
+                return Page();
             }
 
             return RedirectToPage("StuderendeMineBookinger");

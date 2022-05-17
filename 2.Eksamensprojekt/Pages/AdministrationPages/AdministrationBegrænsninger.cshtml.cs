@@ -1,0 +1,34 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using _2.Eksamensprojekt.Services.Interfaces;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+
+namespace _2.Eksamensprojekt.Pages.AdministrationPages
+{
+    public class AdministrationBegrænsningerModel : PageModel
+    {
+        private IAdministrationService _administrationService;
+        [BindProperty]
+        public int NewLimit { get; set; }
+        public static int Limit { get; set; }
+
+        public AdministrationBegrænsningerModel(IAdministrationService administrationService)
+        {
+            _administrationService = administrationService;
+        }
+
+        public void OnGet()
+        {
+            NewLimit = (int) _administrationService.GetAllStuderendeRettigheder()[1];
+            Limit = NewLimit;
+        }
+
+        public void OnPost()
+        {
+            _administrationService.StuderendeRettighederUpdate(NewLimit);
+        }
+    }
+}

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using _2.Eksamensprojekt.Pages.AdministrationPages;
 using _2.Eksamensprojekt.Services.Interfaces;
 using SuperBookerData;
 
@@ -91,13 +92,14 @@ namespace _2.Eksamensprojekt.Services
             string msg;
 
             int BrugerID = _logIndService.GetSingelPersonByEmail(newBooking.BrugerEmail).BrugerID;
-            if (CheckReservationerByBrugerId(BrugerID).Count <= 3)
+            int limit = (int) _administrationService.GetAllStuderendeRettigheder()[1];
+            if (CheckReservationerByBrugerId(BrugerID).Count <= limit)
             {
-                msg = $"Du har nu {3 - CheckReservationerByBrugerId(BrugerID).Count} tilbage";
+                msg = $"Du har nu {limit - CheckReservationerByBrugerId(BrugerID).Count} tilbage";
             }
             else
             {
-                throw new ArgumentOutOfRangeException("Du må kun have 3 bookings ad gangen");
+                throw new ArgumentOutOfRangeException($"Du må kun have {limit} bookings ad gangen");
             }
 
             using (SqlConnection connection = new SqlConnection(connectionString))

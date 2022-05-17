@@ -108,7 +108,7 @@ https://codepen.io/dautoblog/pen/KMGogz -->
                     {
                         if (test.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role")
                         {
-                            <form method="post">
+                            <form method="post" class="centrer-item">
                                 @if (test.Value == "Underviser")
                                 {
                                     <input type="submit" value="Lærer Book" asp-page="/UnderviserPages/UnderviserBooking" asp-route-id="@LkD.LokaleID" class="btn btn-primary book-btn font-weight-bold" />

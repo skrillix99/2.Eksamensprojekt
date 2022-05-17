@@ -33,17 +33,17 @@
 
 
             <fieldset>
-                <label>Tidspunkt og dato Fra:</label>
+                <label><b>Tidspunkt og dato fra:</b></label>
                 <br />
                 <input type="datetime-local" asp-for="@Model.Booking.Dag" />
             </fieldset>
             <fieldset>
-                <label>Varighed:</label>
+                <label><b>Varighed:</b></label>
                 <br />
                 <input type="time" asp-for="Booking.TidStart" />
             </fieldset>
             <fieldset>
-                <label>Bookes for:</label>
+                <label><b>Bookes for:</b></label>
                 <br />
                 <select asp-for="@Model.Booking.BookesFor">
                     @foreach (var rolle in Enum.GetValues(typeof(brugerRolle)))

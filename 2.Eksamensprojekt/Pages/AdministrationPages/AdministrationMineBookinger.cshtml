@@ -19,6 +19,9 @@
                     <form method="post">
                         <button type="submit" asp-page="/AdministrationPages/AdministrationAflysBooking" asp-route-id="@item.ResevertionId"><i class="fa fa-trash"></i></button>
                     </form>
+                    <form method="get">
+                        <button type="submit" asp-page="/AdministrationPages/AdministrationRedigerBooking" asp-route-id="@item.ResevertionId">Rediger</button>
+                    </form>
                 </div>
             </div>
         </div>

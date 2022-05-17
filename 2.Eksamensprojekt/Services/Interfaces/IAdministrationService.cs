@@ -38,6 +38,8 @@ namespace _2.Eksamensprojekt.Services.Interfaces
         /// <param name="newBooking">BookingData object. Skal have følgene TidStart, Dag, Bruger.BrugerEmail og BookesFor</param>
         void AddReservation(BookingData newBooking);
 
+        void UpdateReservation(BookingData updatedBooking);
+
 
     }
 }

@@ -2,7 +2,9 @@
 @using SuperBookerData
 @model _2.Eksamensprojekt.Pages.AdministrationPages.AdministrationMineBookingerModel
 @{
+    ViewData["Title"] = "Mine bookinger";
 }
+
 @foreach (var item in Model.Booking)
 {
    <div class="row">

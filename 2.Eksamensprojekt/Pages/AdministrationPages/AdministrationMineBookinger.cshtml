@@ -23,13 +23,14 @@
                 </div>
                 <div class="card-body">
                     <p class="card-text"><b>Lokale størrelse:</b> @item.Lokale.LokaleSize</p>
-                    <p class="card-text"><b>Dato:</b> @item.Dag</p>
+                    <p class="card-text"><b>Dato:</b> @item.Dag.ToString("d")</p>
+                    <p class="card-text"><b>Tidspunkt:</b> @item.TidStart - @item.TidSlut</p>
                     <p class="card-text"><b>Booket af:</b> @item.BrugerNavn</p>
                     <p class="card-text"><b>Booket for:</b> @Enum.GetName(typeof(brugerRolle), (item.BookesFor))</p>
                     <div class="centrer-item">
-                    <form method="post">
-                        <button class="btn btn-primary black-button" type="submit" asp-page="/AdministrationPages/AdministrationAflysBooking" asp-route-id="@item.ResevertionId">AFLYS</button>
-                    </form>
+                        <form method="post">
+                            <button class="btn btn-primary black-button" type="submit" asp-page="/AdministrationPages/AdministrationAflysBooking" asp-route-id="@item.ResevertionId">AFLYS</button>
+                        </form>
                     </div>
                 </div>
             </div>

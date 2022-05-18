@@ -19,7 +19,6 @@
             </div>
             <div class="card-body">
                 <p class="card-text"><b>Størrelse:</b> @Enum.GetName(typeof(LokaleSize), (Model.Booking.Lokale.LokaleSize)) </p>
-                <p class="card-text"><b>Antal pladser tilbage:</b> @Model.Booking.Lokale.MuligeBookinger</p>
                 <p class="card-text"><b>Dato:</b> @Model.Booking.Dag</p>
                 <p class="card-text"><b>Tidspunkt:</b> @Model.Booking.TidStart - @Model.Booking.TidSlut</p>
                 <p class="card-text"><b>Booket af:</b> @Model.Booking.Bruger.BrugerNavn</p>

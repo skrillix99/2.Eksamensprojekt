@@ -2,6 +2,7 @@
 @using SuperBookerData;
 @model _2.Eksamensprojekt.Pages.StuderendePages.StuderendeAflysBekræftigelseModel
 @{
+    ViewData["Title"] = "Bekræft Aflysning";
 }
 
 <a class="tilbageLink" asp-page="StuderendeMineBookinger"> < TILBAGE</a>
@@ -16,10 +17,8 @@
             </div>
             <div class="card-body">
                 <p><b>Størrelse:</b> @Enum.GetName(typeof(LokaleSize), (Model.Booking.Lokale.LokaleSize)) </p>
-                <p><b>Antal pladser tilbage:</b> @Model.Booking.Lokale.MuligeBookinger</p>
-                <p><b>Dato:</b> @Model.Booking.Dag</p>
-                <p><b>Tidspunkt:</b> @Model.Booking.TidStart - @Model.Booking.TidSlut</p>
-                <p><b>Booket af:</b> @Model.Booking.Bruger.BrugerNavn</p>
+                <p><b>Dato:</b> @Model.Booking.Dag.ToString("d")</p>
+                <p><b>Tidspunkt:</b> @Model.Booking.TidStart.ToString(@"hh\:mm") - @Model.Booking.TidSlut.ToString(@"hh\:mm")</p>
             </div>
         </div>
     </div>

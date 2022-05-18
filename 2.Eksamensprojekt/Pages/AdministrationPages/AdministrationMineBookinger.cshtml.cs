@@ -26,9 +26,9 @@ namespace _2.Eksamensprojekt.Pages.AdministrationPages
 
             Booking = _bookingService.GetAllReservationerByRolle(sql2);
         }
-        public void OnPost()
-        {
-            string sql2 = "where BrugerRolle = 2";
+        //public void OnPost()
+        //{
+        //    string sql2 = "where BrugerRolle = 2";
 
             Booking = _bookingService.GetAllReservationerByRolle(sql2);
         }

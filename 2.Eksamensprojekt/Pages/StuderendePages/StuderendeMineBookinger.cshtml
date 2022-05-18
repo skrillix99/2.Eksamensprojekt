@@ -1,6 +1,7 @@
 ﻿@page
 @model _2.Eksamensprojekt.Pages.StuderendePages.StuderendeMineBookingerModel
 @{
+    ViewData["Title"] = "Mine bookinger";
 }
 
 @foreach (var item in Model.Booking)
@@ -23,8 +24,8 @@
                 </div>
                 <div class="card-body">
                     <p class="card-text"><b>Lokale størrelse:</b> @item.Lokale.LokaleSize</p>
-                    <p class="card-text"><b>Dato:</b> @item.Dag</p>
-                    <p class="card-text"><b>Booket af:</b> @item.BrugerNavn</p>
+                    <p class="card-text"><b>Dato:</b> @item.Dag.ToString("d")</p>
+                    <p class="card-text"><b>Tidspunkt:</b> @item.TidStart.ToString(@"hh\:mm") - @item.TidSlut.ToString(@"hh\:mm")</p>
 
                     <div class="centrer-item">
                         <form method="post">

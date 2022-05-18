@@ -2,7 +2,7 @@
 @using SuperBookerData
 @model _2.Eksamensprojekt.Pages.Shared.BookedeLokalerModel
 @{
-    ViewData["Title"] = "Alle Bookinger";
+    ViewData["Title"] = "Bookede Lokaler";
 }
 
 @foreach (var lokale in Model.BookingData)
@@ -22,10 +22,9 @@
             </h2>
             <div class="card-body">
                 <p class="card-text"><b>Størrelse:</b> @lokale.Lokale.LokaleSize</p>
-                <p class="card-text"><b>Antal pladser tilbage:</b> @lokale.Lokale.MuligeBookinger</p>
                 <p class="card-text"><b>Date:</b> @lokale.Dag.ToString("d")</p>
                 <p class="card-text"><b>Start: </b>@lokale.TidStart.ToString(@"hh\:mm")</p>
-                <p class="card-text"><b>Varighed: </b>@lokale.TidSlut.ToString(@"hh\:mm") timer</p>
+                <p class="card-text"><b>Slut: </b>@lokale.TidSlut.ToString(@"hh\:mm")</p>
                 <p class="card-text"><b>Booket af:</b> @lokale.Bruger.BrugerNavn</p>
                 <p class="card-text"><b>Booket for: </b>@Enum.GetName(typeof(brugerRolle), (lokale.BookesFor))</p>
                 <form method="post">

@@ -182,7 +182,8 @@ namespace _2.Eksamensprojekt.Services
         {
             List<BookingData> lokaler = new List<BookingData>();
 
-            string sql = "Select ReservationID, TidStart, Dag, HeltBooket, TidSlut, BookesFor, BrugerRolle, BrugerID, BrugerNavn, LokaleNavn, LokaleNummer, LokaleSmartBoard, Size, Muligebookinger " +
+            string sql = "Select ReservationID, TidStart, Dag, HeltBooket, TidSlut, BookesFor, BrugerRolle, BrugerID, " +
+                "BrugerNavn, LokaleNavn, LokaleNummer, LokaleSmartBoard, Size, Muligebookinger " +
                 "From Reservation INNER JOIN Person ON Reservation.BrugerID_FK = Person.BrugerID " +
                 "INNER JOIN Lokale ON Reservation.LokaleID_FK = Lokale.LokaleID " +
                 "INNER JOIN LokaleLokation ON Lokale.LokaleLokation_FK = LokaleLokation.LokaleLokationId " +

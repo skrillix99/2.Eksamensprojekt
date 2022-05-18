@@ -10,5 +10,6 @@ namespace _2.Eksamensprojekt.Services
     {
         List<LokaleData> GetAll();
         List<LokaleData> GetAllLokaleBySqlString(string sql);
+        List<BookingData> GetAllLokaleBySqlStringBooking(string sql);
     }
 }

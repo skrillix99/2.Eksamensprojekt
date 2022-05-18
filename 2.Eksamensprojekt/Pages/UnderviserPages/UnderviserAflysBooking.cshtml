@@ -3,17 +3,18 @@
 @model _2.Eksamensprojekt.Pages.UnderviserPages.UnderviserAflysBookingModel
 @{
 }
-<p class="alert-danger">@Model.ErrorMsg</p>
 
 <a class="tilbageLink" asp-page="UnderviserMineBookinger"> < TILBAGE</a>
 
+<div class="centrer-item">
+    <p class="alert-danger little_margin_top">@Model.ErrorMsg</p>
+</div>
 <h1 class="text-center">Ønsker du at slette denne booking?</h1>
-@*<div class="lokaleInfoWrapper">*@
 <div class="row">
     <div class="lokale-info-centreret">
         <div class="card mb-2">
             <div class="card-header">
-                <h2>@Model.Booking.Lokale.LokaleNummer @Model.Booking.Lokale.LokaleNavn</h2>
+                <h2 class="card-title">@Model.Booking.Lokale.LokaleNummer @Model.Booking.Lokale.LokaleNavn</h2>
                 <h2>@(Model.Booking.Lokale.LokaleSmartBoard ? "M.Smartboard":"U.Smartboard")</h2>
             </div>
             <div class="card-body">

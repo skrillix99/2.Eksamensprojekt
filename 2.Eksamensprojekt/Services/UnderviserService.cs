@@ -57,7 +57,7 @@ namespace _2.Eksamensprojekt.Services
             int newDay = dag.Subtract(dt).Days;
             if ((dag.Subtract(dt).Days <= 3) && rolle == brugerRolle.Student)
             {
-                throw new ArgumentOutOfRangeException("Må kun annulere med minimum 3 dages varsel.");
+                throw new ArgumentOutOfRangeException("Må kun annullere med minimum 3 dages varsel.");
             }
 
             return true;

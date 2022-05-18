@@ -6,17 +6,19 @@
 
 <a class="tilbageLink" asp-page="UnderviserMineBookinger"> < TILBAGE</a>
 
+<div class="centrer-item">
+    <p class="alert-danger little_margin_top">@Model.ErrorMsg</p>
+</div>
 <h1 class="text-center">Ønsker du at slette denne booking?</h1>
-@*<div class="lokaleInfoWrapper">*@
 <div class="row">
     <div class="lokale-info-centreret">
         <div class="card mb-2">
             <div class="card-header">
-                <h2>@Model.Booking.Lokale.LokaleNummer @Model.Booking.Lokale.LokaleNavn</h2>
+                <h2 class="card-title">@Model.Booking.Lokale.LokaleNummer @Model.Booking.Lokale.LokaleNavn</h2>
                 <h2>@(Model.Booking.Lokale.LokaleSmartBoard ? "M.Smartboard":"U.Smartboard")</h2>
             </div>
             <div class="card-body">
-                <p class="card-text"><b>Størrelse:</b> @Enum.GetName(typeof(LokaleSize), (Model.Booking.Lokale.LokaleSize - 1)) </p>
+                <p class="card-text"><b>Størrelse:</b> @Enum.GetName(typeof(LokaleSize), (Model.Booking.Lokale.LokaleSize)) </p>
                 <p class="card-text"><b>Antal pladser tilbage:</b> @Model.Booking.Lokale.MuligeBookinger</p>
                 <p class="card-text"><b>Dato:</b> @Model.Booking.Dag</p>
                 <p class="card-text"><b>Tidspunkt:</b> @Model.Booking.TidStart - @Model.Booking.TidSlut</p>
@@ -24,6 +26,7 @@
             </div>
         </div>
     </div>
+</div>
 
     <form method="post" class="AflysbookingForm">
         <input type="submit" value="Ja" class="submitAprove custom-btn" asp-route-id="@Model.Booking.ResevertionId" asp-page="/UnderviserPages/UnderviserAflysBekræftigelse" />

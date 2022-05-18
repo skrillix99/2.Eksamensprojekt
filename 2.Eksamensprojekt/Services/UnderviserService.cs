@@ -6,7 +6,7 @@ using SuperBookerData;
 
 namespace _2.Eksamensprojekt.Services
 {
-    public class UnderviserService: IUnderviserService
+    public class UnderviserService : IUnderviserService
     {
         private const string connectionString = "Data Source=zealandmarc.database.windows.net;Initial Catalog=SuperBooker4000;User ID=AdminMarc;Password=Marcus19;Connect Timeout=30;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         private readonly ILogIndService _logIndService;
@@ -23,7 +23,7 @@ namespace _2.Eksamensprojekt.Services
         {
 
             string sql = "insert into Reservation VALUES (@tidStart, @dag, 0, @brugerFK, @lokaleFK, @tidSlut, @bookesFor)";
-                                                        // TidStart, Dag, Heltbooket, Bruger_FK, Lokale_FK, TidSlut, BookesFor
+            // TidStart, Dag, Heltbooket, Bruger_FK, Lokale_FK, TidSlut, BookesFor
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 TimeSpan tidSlut = newBooking.Dag.TimeOfDay.Add(newBooking.TidStart);
@@ -49,15 +49,21 @@ namespace _2.Eksamensprojekt.Services
 
         }
 
-
-        public void BegrænsetAdgang(DateTime dag, int id)
+        public bool CanDelete(DateTime dag, string email)
         {
+            brugerRolle rolle = _logIndService.GetSingelPersonByEmail(email).brugerRolle;
+
             DateTime dt = DateTime.Now.AddDays(-3); //TODO logic ændres
             int newDay = dag.Subtract(dt).Days;
-            if (!(dag.Subtract(dt).Days >= 3))
+            if ((dag.Subtract(dt).Days <= 3) && rolle == brugerRolle.Student)
             {
-                throw new ArgumentOutOfRangeException("Må kun annulere med minimum 3 dages varsel.");
+                throw new ArgumentOutOfRangeException("Må kun annullere med minimum 3 dages varsel.");
             }
+
+            return true;
+        }
+        public void BegrænsetAdgang(DateTime dag, int id, string email)
+        {
 
             if (id <= 0)
             {

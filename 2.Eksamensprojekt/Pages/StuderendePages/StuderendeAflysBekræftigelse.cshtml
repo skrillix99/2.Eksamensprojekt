@@ -1,13 +1,31 @@
 ﻿@page
+@using SuperBookerData;
 @model _2.Eksamensprojekt.Pages.StuderendePages.StuderendeAflysBekræftigelseModel
 @{
 }
 
+<a class="tilbageLink" asp-page="StuderendeMineBookinger"> < TILBAGE</a>
 
-
-
+<h1 class="text-center">Følgende booking er blevet slettet</h1>
+<div class="row">
+    <div class="lokale-info-centreret">
+        <div class="card mb-2">
+            <div class="card-header">
+                <h2 class="card-title">@Model.Booking.Lokale.LokaleNummer @Model.Booking.Lokale.LokaleNavn</h2>
+                <h2>@(Model.Booking.Lokale.LokaleSmartBoard ? "M.Smartboard":"U.Smartboard")</h2>
+            </div>
+            <div class="card-body">
+                <p><b>Størrelse:</b> @Enum.GetName(typeof(LokaleSize), (Model.Booking.Lokale.LokaleSize)) </p>
+                <p><b>Antal pladser tilbage:</b> @Model.Booking.Lokale.MuligeBookinger</p>
+                <p><b>Dato:</b> @Model.Booking.Dag</p>
+                <p><b>Tidspunkt:</b> @Model.Booking.TidStart - @Model.Booking.TidSlut</p>
+                <p><b>Booket af:</b> @Model.Booking.Bruger.BrugerNavn</p>
+            </div>
+        </div>
+    </div>
+</div>
 
 <form method="post" class="AflysbookingForm">
-    <input type="submit" value="OK" class="submitBlack custom-btn" asp-page="StuderendeMineBookinger"/>
+    <input type="submit" value="OK" class="submitBlack custom-btn" asp-page-handler="del" asp-route-id="@Model.Booking.ResevertionId" />
     <input type="submit" value="Fortryd" class="submitBlack custom-btn" asp-page="StuderendeMineBookinger" />
 </form>

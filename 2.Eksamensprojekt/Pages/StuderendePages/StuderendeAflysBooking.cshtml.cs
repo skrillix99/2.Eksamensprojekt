@@ -14,24 +14,25 @@ namespace _2.Eksamensprojekt.Pages.StuderendePages
     public class StuderendeAflysBookingModel : PageModel
     {
         private IStuderendeService _studerendeService;
-        private IAdministrationService _administrationService;
 
         public BookingData Booking { get; set; }
 
-        public StuderendeAflysBookingModel(IStuderendeService studerendeService, IAdministrationService administrationService)
+        public static BookingData TempBookingData { get; set; }
+
+        public StuderendeAflysBookingModel(IStuderendeService studerendeService)
         {
             _studerendeService = studerendeService;
-            _administrationService = administrationService;
         }
         public void OnGet(int id)
         {
-            Booking = _administrationService.GetSingelBooking(id);
+            Booking = _studerendeService.GetSingelBooking(id);
+            TempBookingData = _studerendeService.GetSingelBooking(id);
         }
 
         public void OnPost(int id)
         {
-            Booking = _administrationService.GetSingelBooking(id);
-            _studerendeService.DeleteReservation(id);
+            Booking = _studerendeService.GetSingelBooking(id);
+            TempBookingData = _studerendeService.GetSingelBooking(id);
         }
     }
 }

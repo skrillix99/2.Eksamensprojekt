@@ -23,13 +23,13 @@
                         if (LogIndModel.LoggedInUser == null)
                         {
                             <li class="nav-item text-end">
-                                <a class="nav-link" asp-area="" asp-page="/LogInd/LogInd" required>Login</a>
+                                <a class="nav-link black-button" asp-area="" asp-page="/LogInd/LogInd" required>Login</a>
                             </li>
                         }
                         else
                         {
                             <li class="nav-item text-end">
-                                <a class="nav-link" asp-area="" asp-page="/LogInd/LogUd" required>Logout</a>
+                                <a class="nav-link black-button" asp-area="" asp-page="/LogInd/LogUd" required>Log ud</a>
                             </li>
                         }
                     }
@@ -44,7 +44,7 @@
             <div class="container">
                 <form method="post">
                     <div class="form-group">
-                        <label asp-for="EmailLogInd" class="col-form-label "></label>
+                        <label asp-for="EmailLogInd" class="col-form-label ">Email</label>
                         <div>
                             <input asp-for="EmailLogInd" />
                         </div>

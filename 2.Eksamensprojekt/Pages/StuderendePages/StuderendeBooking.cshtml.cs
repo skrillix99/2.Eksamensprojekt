@@ -21,6 +21,8 @@ namespace _2.Eksamensprojekt.Pages.StuderendePages
         [BindProperty]
         public LokaleData Lokale { get; set; }
 
+        public string ErrorMsg { get; set; }
+
         public StuderendeBookingModel(IStuderendeService studerendeService, IAdministrationService administrationService)
         {
             _studerendeService = studerendeService;
@@ -38,11 +40,21 @@ namespace _2.Eksamensprojekt.Pages.StuderendePages
             Lokale = _administrationService.GetSingelLokale(id);
         }
 
-        public void OnPostBook(int id)
+        public IActionResult OnPostBook(int id)
         {
-            Lokale.LokaleID = id;
-            Booking.Lokale = _administrationService.GetSingelLokale(id);
-            _studerendeService.AddReservation(Booking);
+            try
+            {
+                Lokale.LokaleID = id;
+                Booking.Lokale = _administrationService.GetSingelLokale(id);
+                _studerendeService.AddReservation(Booking);
+            }
+            catch (ArgumentOutOfRangeException e)
+            {
+                ErrorMsg = e.ParamName;
+                return Page();
+            }
+
+            return RedirectToPage("StuderendeMineBookinger");
         }
     }
 }

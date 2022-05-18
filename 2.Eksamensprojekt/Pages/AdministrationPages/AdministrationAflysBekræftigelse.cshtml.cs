@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using _2.Eksamensprojekt.Services;
 using _2.Eksamensprojekt.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -13,13 +14,13 @@ namespace _2.Eksamensprojekt.Pages.AdministrationPages
     [Authorize(Roles = "Administration")]
     public class AdministrationAflysBekræftigelseModel : PageModel
     {
-        private IAdministrationService _administrationService;
+        private IBookingService _bookingService;
 
         public BookingData Booking{ get; set; }
 
-        public AdministrationAflysBekræftigelseModel(IAdministrationService administrationService)
+        public AdministrationAflysBekræftigelseModel(IBookingService bookingService)
         {
-            _administrationService = administrationService;
+            _bookingService = bookingService;
         }
 
         public void OnGet()
@@ -33,7 +34,7 @@ namespace _2.Eksamensprojekt.Pages.AdministrationPages
 
         public void OnPostDel(int id)
         {
-            _administrationService.DeleteReservation(id);
+            _bookingService.DeleteReservationById(id);
         }
     }
 }

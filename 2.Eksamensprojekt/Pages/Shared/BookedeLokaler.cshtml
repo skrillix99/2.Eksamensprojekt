@@ -65,35 +65,31 @@ https://codepen.io/dautoblog/pen/KMGogz -->
 
 @foreach (var lokale in Model.LokaleData)
 {
-    <div class="row">
-        <div class="lokale-info-centreret">
-            <div class="card mb-2">
-                <div class="card-header p-2">
-                    <h2 class="card-title">@lokale.Lokale.LokaleNummer @lokale.Lokale.LokaleNavn</h2>
-                    <h2>
-                        @if (lokale.Lokale.LokaleSmartBoard == true)
+    <div class="card mb-2" style="width: 20rem;">
+        <div class="card-header p-2">
+            <h2 class="card-title">@lokale.Lokale.LokaleNummer @lokale.Lokale.LokaleNavn</h2>
+            <h2>
+                @if (lokale.Lokale.LokaleSmartBoard == true)
+                {
+                    @("(M. SmartBoard)")
+                }
+                @if (lokale.Lokale.LokaleSmartBoard == false)
+                {
+                    @("(U. SmartBoard)")
+                }
+            </h2>
+            <div class="card-body">
+                <p class="card-text"><b>Størrelse:</b> @lokale.Lokale.LokaleSize</p>
+                <p class="card-text"><b>Date:</b> @lokale.Dag.ToString("d")</p>
+                <p class="card-text"><b>Start: </b>@lokale.TidStart.ToString(@"hh\:mm")</p>
+                <p class="card-text"><b>Slut: </b>@lokale.TidSlut.ToString(@"hh\:mm")</p>
+                <p class="card-text"><b>Booket af:</b> @lokale.Bruger.BrugerNavn</p>
+                <p class="card-text"><b>Booket for: </b>@Enum.GetName(typeof(brugerRolle), (lokale.BookesFor))</p>
+                <form method="post">
+                    @foreach (var test in User.Claims)
+                    {
+                        if (test.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name")
                         {
-                            @("(M. SmartBoard)")
-                        }
-                        @if (lokale.Lokale.LokaleSmartBoard == false)
-                        {
-                            @("(U. SmartBoard)")
-                        }
-                    </h2>
-                </div>
-                <div class="card-body">
-                    <p class="card-text"><b>Lokale størrelse:</b> @lokale.Lokale.LokaleSize</p>
-                    <p class="card-text"><b>Dato:</b> @lokale.Dag</p>
-                    <p class="card-text"><b>Varighed: </b>@lokale.TidSlut.ToString(@"hh\:mm") timer</p>
-                    <p class="card-text"><b>Booket af:</b> @lokale.Bruger.BrugerNavn</p>
-                    <p class="card-text"><b>Booket for: </b>@Enum.GetName(typeof(brugerRolle), (lokale.BookesFor))</p>
-
-                    <div class="centrer-item">
-                        <form method="post">
-                            @foreach (var test in User.Claims)
-                            {
-                                if (test.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name")
-                                {
 
                                     if (lokale.Bruger.BrugerEmail == test.Value)
                                     {

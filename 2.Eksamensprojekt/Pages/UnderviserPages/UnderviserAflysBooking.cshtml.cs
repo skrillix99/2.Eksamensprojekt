@@ -14,24 +14,24 @@ namespace _2.Eksamensprojekt.Pages.UnderviserPages
     [Authorize(Roles = "Underviser")]
     public class UnderviserAflysBookingModel : PageModel
     {
-        private readonly IAdministrationService _administrationService;
+        private readonly IBookingService _bookingService;
         private readonly IUnderviserService _underviserService;
         public BookingData Booking { get; set; }
         public PersonData Bruger { get; set; }
         public static BookingData TempBookingData { get; set; }
         public string ErrorMsg { get; private set; }
 
-        public UnderviserAflysBookingModel(IAdministrationService administrationService, IUnderviserService underviserService)
+        public UnderviserAflysBookingModel(IBookingService bookingService, IUnderviserService underviserService)
         {
-            _administrationService = administrationService;
+            _bookingService = bookingService;
             _underviserService = underviserService;
             Booking = new BookingData();
             Bruger = new PersonData();
         }
         public void OnGet(int id)
         {
-            Booking = _administrationService.GetSingelBooking(id);
-            TempBookingData = _administrationService.GetSingelBooking(id);
+            Booking = _bookingService.GetSingleBooking(id);
+            TempBookingData = _bookingService.GetSingleBooking(id);
         }
         public void OnPost(int id)
         {
@@ -45,8 +45,8 @@ namespace _2.Eksamensprojekt.Pages.UnderviserPages
                     }
                 }
                 
-                    Booking = _administrationService.GetSingelBooking(id);
-                TempBookingData = _administrationService.GetSingelBooking(id);
+                Booking = _bookingService.GetSingleBooking(id);
+                TempBookingData = _bookingService.GetSingleBooking(id);
                 _underviserService.CanDelete(Booking.Dag, Bruger.BrugerEmail);
             }
             catch (ArgumentOutOfRangeException e)

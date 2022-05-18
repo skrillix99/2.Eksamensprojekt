@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using _2.Eksamensprojekt.Services;
 using _2.Eksamensprojekt.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -11,25 +12,25 @@ namespace _2.Eksamensprojekt.Pages.AdministrationPages
 {
     public class AdministrationMineBookingerModel : PageModel
     {
-        private IAdministrationService _administrationService;
+        private IBookingService _bookingService;
 
         public List<BookingData> Booking { get; private set; }
 
-        public AdministrationMineBookingerModel(IAdministrationService administrationService)
+        public AdministrationMineBookingerModel(IBookingService bookingService)
         {
-            _administrationService = administrationService;
+            _bookingService = bookingService;
         }
         public void OnGet()
         {
             string sql2 = "where BrugerRolle = 2";
 
-            Booking = _administrationService.GetAllReservationer(sql2);
+            Booking = _bookingService.GetAllReservationerByRolle(sql2);
         }
-        public void OnPost()
-        {
-            string sql2 = "where BrugerRolle = 2";
+        //public void OnPost()
+        //{
+        //    string sql2 = "where BrugerRolle = 2";
 
-            Booking = _administrationService.GetAllReservationer(sql2);
+            Booking = _bookingService.GetAllReservationerByRolle(sql2);
         }
     }
 }

@@ -2,7 +2,9 @@
 @using SuperBookerData
 @model _2.Eksamensprojekt.Pages.UnderviserPages.UnderviserAflysBekræftigelseModel
 @{
+    ViewData["Title"] = "Bekræft Aflysning";
 }
+
 <a class="tilbageLink" asp-page="UnderviserMineBookinger"> < TILBAGE</a>
 
 <div class="centrer-item">
@@ -19,16 +21,19 @@
             </div>
             <div class="card-body">
                 <p><b>Størrelse:</b> @Enum.GetName(typeof(LokaleSize), (Model.Booking.Lokale.LokaleSize)) </p>
-                <p><b>Antal pladser tilbage:</b> @Model.Booking.Lokale.MuligeBookinger</p>
-                <p><b>Dato:</b> @Model.Booking.Dag</p>
-                <p><b>Tidspunkt:</b> @Model.Booking.TidStart - @Model.Booking.TidSlut</p>
+                <p><b>Dato:</b> @Model.Booking.Dag.ToString("d")</p>
+                <p><b>Tidspunkt:</b> @Model.Booking.TidStart.ToString(@"hh\:mm") - @Model.Booking.TidSlut.ToString(@"hh\:mm")</p>
                 <p><b>Booket af:</b> @Model.Booking.Bruger.BrugerNavn</p>
+                <p class="card-text"><b>Booket for:</b> @Enum.GetName(typeof(brugerRolle), (@Model.Booking.BookesFor))</p>
             </div>
         </div>
     </div>
 </div>
 
-            <form method="post" class="AflysbookingForm">
-                <input type="submit" value="OK" class="submitBlack custom-btn" asp-page="UnderviserMineBookinger" />
-                <input type="submit" value="Fortryd" class="submitBlack custom-btn" asp-page="UnderviserMineBookinger" />
-            </form>
+@if (Model.ErrorMsg != null)
+{
+    <form method="post" class="AflysbookingForm">
+        <input type="submit" value="OK" class="submitBlack custom-btn" asp-page="UnderviserMineBookinger"/>
+        <input type="submit" value="Fortryd" class="submitBlack custom-btn" asp-page="UnderviserMineBookinger"/>
+    </form>
+}

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using _2.Eksamensprojekt.Services;
 using _2.Eksamensprojekt.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +14,7 @@ namespace _2.Eksamensprojekt.Pages.AdministrationPages
     public class AdministrationBookingModel : PageModel
     {
         private IAdministrationService _administrationService;
+        private ILokalerService _lokalerService;
 
         [BindProperty]
         public BookingData Booking { get; set; }
@@ -21,21 +23,22 @@ namespace _2.Eksamensprojekt.Pages.AdministrationPages
         [BindProperty]
         public LokaleData Lokale { get; set; }
 
-        public AdministrationBookingModel(IAdministrationService administrationService)
+        public AdministrationBookingModel(IAdministrationService administrationService, ILokalerService lokalerService)
         {
             _administrationService = administrationService;
+            _lokalerService = lokalerService;
 
             Email = new PersonData();
             Lokale = new LokaleData();
         }
         public void OnGet(int id)
         {
-            Lokale = _administrationService.GetSingelLokale(id);
+            Lokale = _lokalerService.GetSingelLokale(id);
         }
 
         public void OnPost(int id)
         {
-            Lokale = _administrationService.GetSingelLokale(id);
+            Lokale = _lokalerService.GetSingelLokale(id);
 
 
         }
@@ -45,7 +48,7 @@ namespace _2.Eksamensprojekt.Pages.AdministrationPages
             Lokale.LokaleID = id;
             Booking.Lokale = Lokale;
             Booking.Bruger = Email;
-            _administrationService.AddReservation(Booking);
+            _administrationService.AddReservationAdmin(Booking);
 
             return RedirectToPage("/Shared/LedigeLokaler");
         }

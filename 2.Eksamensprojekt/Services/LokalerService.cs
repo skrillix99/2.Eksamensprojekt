@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 
 namespace _2.Eksamensprojekt.Services
 {
-    public class LedigeLokalerService : ILedigeLokalerService
+    public class LokalerService : ILokalerService
     {
         private const string connectionString = @"Data Source=zealandmarc.database.windows.net;Initial Catalog=SuperBooker4000;User ID=AdminMarc;Password=Marcus19;Connect Timeout=30;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
@@ -15,7 +15,7 @@ namespace _2.Eksamensprojekt.Services
         /// Henter alle lokaler i databasen og lægger dem ind i et list objekt af typen LokaleData.
         /// </summary>
         /// <returns>Returnerer en liste af typen LokaleData</returns>
-        public List<LokaleData> GetAll()
+        public List<LokaleData> GetAllLokaler()
         {
             List<LokaleData> LkDataList = new List<LokaleData>();
             string sql = "SELECT * FROM Lokale " +
@@ -153,4 +153,35 @@ namespace _2.Eksamensprojekt.Services
 
     }
    
+        /// <summary>
+        /// Henter et lokale baseret på id fra databasen
+        /// </summary>
+        /// <param name="id">Typen int. Indeholder værdien af id'et på det lokale man vil hente fra databasen </param>
+        /// <returns>Et objekt af typen LokaleData</returns>
+        public LokaleData GetSingelLokale(int id)
+        {
+            LokaleData list = new LokaleData();
+
+            string sql = "select * from Lokale " +
+                         "inner join LokaleSize ON LokaleSize_FK = SizeId " +
+                         "inner join LokaleLokation ON LokaleLokation_FK = LokaleLokationId " +
+                         "WHERE LokaleID = @id";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand(sql, connection);
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.Connection.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    var us = ReadLokaleData(reader);
+                    return us;
+                }
+
+                return list;
+            }
+        }
+    }
 }

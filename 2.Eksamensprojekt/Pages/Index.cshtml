@@ -17,29 +17,29 @@
     <link rel="stylesheet" href="~/css/Marcus.css" />
 </head>
 <body>
-<header>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 topNavBar">
-        <div class="container">
-            <a class="navbar-brand"> <img class="logo" src="~/img/Zealand_logo_black_RGB_1600px_72dpi.png" alt="Logo"> </a>
-            <ul class="navbar-nav flex-grow-1">
-                @{
-                    if (LogIndModel.LoggedInUser == null)
-                    {
-                        <li class="nav-item text-end">
-                            <a class="nav-link black-button" asp-area="" asp-page="/LogInd/LogInd">Login</a>
-                        </li>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 topNavBar">
+            <div class="container">
+                <a class="navbar-brand"> <img class="logo" src="~/img/Zealand_logo_black_RGB_1600px_72dpi.png" alt="Logo"> </a>
+                <ul class="navbar-nav flex-grow-1">
+                    @{
+                        if (LogIndModel.LoggedInUser == null)
+                        {
+                            <li class="nav-item text-end">
+                                <a class="nav-link black-button" asp-area="" asp-page="/LogInd/LogInd">Login</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item text-end">
+                                <a class="nav-link black-button" asp-area="" asp-page="/LogInd/LogUd">Logout</a>
+                            </li>
+                        }
                     }
-                    else
-                    {
-                        <li class="nav-item text-end">
-                            <a class="nav-link black-button" asp-area="" asp-page="/LogInd/LogUd">Logout</a>
-                        </li>
-                    }
-                }
-            </ul>
-        </div>
-    </nav>
-</header>
+                </ul>
+            </div>
+        </nav>
+    </header>
 
     <h1 style="margin-bottom: 2em; text-align: center;">Velkommen til SuperBookeren 4000!!!</h1>
     <img class="forsideBillede" src="Billeder/ForsideBillede2.png" alt="Alternate Text" />

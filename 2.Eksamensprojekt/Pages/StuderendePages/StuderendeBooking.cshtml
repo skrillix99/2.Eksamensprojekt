@@ -2,6 +2,7 @@
 @using SuperBookerData
 @model _2.Eksamensprojekt.Pages.StuderendePages.StuderendeBookingModel
 @{
+    ViewData["Title"] = "Booking";
 }
 
 
@@ -21,10 +22,13 @@
                 <h2>@(Model.Lokale.LokaleSmartBoard ? "M.Smartboard":"U.Smartboard")</h2>
             </div>
             <div class="card-body">
-                <p class="card-text"><b>Størrelse:</b> @Enum.GetName(typeof(LokaleSize), (Model.Lokale.LokaleSize - 1))</p>
+                <p class="card-text"><b>Størrelse:</b> @Enum.GetName(typeof(LokaleSize), (Model.Lokale.LokaleSize))</p>
             </div>
         </div>
 
+        <aside>
+            <p>Du må booke senest til kl: @Model.SenestBooketTid</p>
+        </aside>
 
         <form method="post">
 
@@ -38,10 +42,10 @@
             <fieldset>
                 <label><b>Tidspunkt og dato fra:</b></label>
                 <br />
-                <input type="datetime-local" asp-for="@Model.Booking.Dag" />
+                <input type="datetime-local" asp-for="@Model.Booking.Dag" value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" />
             </fieldset>
             <fieldset>
-                <label><b>Til:</b></label>
+                <label><b>Varighed:</b></label>
                 <br />
                 <input type="time" asp-for="Booking.TidStart" />
             </fieldset>
@@ -52,3 +56,9 @@
         </form>
     </div>
 </div>
+
+<script>
+    var today = new Date().toISOString().slice(0, 16);
+
+    document.getElementsByName("Booking.Dag")[0].min = today;
+</script>

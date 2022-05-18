@@ -10,16 +10,18 @@ namespace _2.Eksamensprojekt.Services
     public class StuderendeService: IStuderendeService
     {
         private const string connectionString = "Data Source=zealandmarc.database.windows.net;Initial Catalog=SuperBooker4000;User ID=AdminMarc;Password=Marcus19;Connect Timeout=30;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-        private readonly ILogIndService _logIndService;
+        private readonly IPersonService _logIndService;
         private readonly IAdministrationService _administrationService;
+        private readonly IBookingService _bookingService;
         /// <summary>
         /// Laver dependency injection til at kunne bruge ILogIndService.
         /// </summary>
         /// <param name="logIndService">Typen ILogIndService</param>
-        public StuderendeService(ILogIndService logIndService, IAdministrationService administrationService)
+        public StuderendeService(IPersonService logIndService, IAdministrationService administrationService, IBookingService bookingService)
         {
             _logIndService = logIndService;
             _administrationService = administrationService;
+            _bookingService = bookingService;
         }
 
         #region ReadLokale
@@ -93,7 +95,8 @@ namespace _2.Eksamensprojekt.Services
 
             int BrugerID = _logIndService.GetSingelPersonByEmail(newBooking.BrugerEmail).BrugerID;
             int limit = (int) _administrationService.GetAllStuderendeRettigheder()[1];
-            if (CheckReservationerByBrugerId(BrugerID).Count <= limit)
+            int antalBooket = CheckReservationerByBrugerId(BrugerID).Count;
+            if (antalBooket <= limit)
             {
                 msg = $"Du har nu {limit - CheckReservationerByBrugerId(BrugerID).Count} tilbage";
             }
@@ -189,7 +192,7 @@ namespace _2.Eksamensprojekt.Services
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                BookingData bd = _administrationService.GetSingelBooking(id);
+                BookingData bd = _bookingService.GetSingleBooking(id);
 
                 SqlCommand cmdUpdate = new SqlCommand(sqlUpdate, connection);
                 cmdUpdate.Parameters.AddWithValue("@heltBooket", bd.HeltBooket + 1);

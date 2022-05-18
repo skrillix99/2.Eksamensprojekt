@@ -19,9 +19,10 @@
             </div>
             <div class="card-body">
                 <p><b>Størrelse:</b> @Enum.GetName(typeof(LokaleSize), (Model.Booking.Lokale.LokaleSize)) </p>
-                <p><b>Dato:</b> @Model.Booking.Dag</p>
-                <p><b>Tidspunkt:</b> @Model.Booking.TidStart - @Model.Booking.TidSlut</p>
+                <p><b>Dato:</b> @Model.Booking.Dag.ToString("d")</p>
+                <p><b>Tidspunkt:</b> @Model.Booking.TidStart.ToString(@"hh\:mm") - @Model.Booking.TidSlut.ToString(@"hh\:mm")</p>
                 <p><b>Booket af:</b> @Model.Booking.Bruger.BrugerNavn</p>
+                <p class="card-text"><b>Booket for:</b> @Enum.GetName(typeof(brugerRolle), (@Model.Booking.BookesFor))</p>
             </div>
         </div>
     </div>

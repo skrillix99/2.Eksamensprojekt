@@ -51,6 +51,34 @@ namespace _2.Eksamensprojekt.Services
 
         #endregion
 
+        private BookingData ReadBookings2(SqlDataReader reader)
+        {
+            BookingData k = new BookingData();
+
+            LokaleData ld = new LokaleData();
+            ld.LokaleNavn = reader.GetString(9);
+            ld.LokaleNummer = reader.GetString(10);
+            ld.LokaleSmartBoard = reader.GetBoolean(11);
+            ld.LokaleSize = (LokaleSize)reader.GetInt32(12);
+            ld.MuligeBookinger = reader.GetInt32(13);            
+
+            PersonData p = new PersonData();
+            p.brugerRolle = (brugerRolle)reader.GetInt32(6);
+            p.BrugerID = reader.GetInt32(7);
+            p.BrugerNavn = reader.GetString(8);           
+
+            k.ResevertionId = reader.GetInt32(i: 0);
+            k.TidStart = reader.GetTimeSpan(i: 1);
+            k.Dag = reader.GetDateTime(i: 2);
+            k.HeltBooket = reader.GetInt32(3);
+            k.TidSlut = reader.GetTimeSpan(4);
+            k.BookesFor = (brugerRolle)reader.GetInt32(5);
+            k.Lokale = ld; //3,4,5,6,7
+            k.Bruger = p; // 8                       
+            return k;
+        }
+
+
         private LokaleData ReadLokale(SqlDataReader reader)
         {
             LokaleData k = new LokaleData();
@@ -78,7 +106,7 @@ namespace _2.Eksamensprojekt.Services
             //fortæller hvad der skal hentes fra databasen i det her tilfælle fra flere tabler og den gør det ved hjælp af i inner join 
             String sql =
                 "Select Dag, TidStart, TidSlut, LokaleNavn, LokaleNummer, LokaleSmartBoard, Size, Muligebookinger, " +
-                "BrugerNavn, ReservationID, BrugerRolle, BookesFor, BrugerEmail, BrugerID From Reservation " +
+                "BrugerNavn, ReservationID, BrugerRolle, BookesFor, BrugerEmail, BrugerID, LokaleID From Reservation " +
                 "INNER JOIN Person ON Reservation.BrugerID_FK = Person.BrugerID " +
                 "INNER JOIN Lokale ON Reservation.LokaleID_FK = Lokale.LokaleID " +
                 "INNER JOIN LokaleLokation ON Lokale.LokaleLokation_FK = LokaleLokation.LokaleLokationId " +
@@ -134,7 +162,7 @@ namespace _2.Eksamensprojekt.Services
 
                 while (reader.Read())
                 {
-                    BookingData l = ReadBookings(reader);
+                    BookingData l = ReadBookings2(reader);
                     lokaler.Add(l);
                 }
             }

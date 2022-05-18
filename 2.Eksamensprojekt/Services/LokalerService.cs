@@ -151,7 +151,7 @@ namespace _2.Eksamensprojekt.Services
             return bd;
         }
 
-    }
+    
    
         /// <summary>
         /// Henter et lokale baseret på id fra databasen
@@ -183,5 +183,6 @@ namespace _2.Eksamensprojekt.Services
                 return list;
             }
         }
+
     }
 }

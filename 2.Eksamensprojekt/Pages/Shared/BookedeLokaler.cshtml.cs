@@ -15,7 +15,7 @@ namespace _2.Eksamensprojekt.Pages.Shared
 
     public class BookedeLokalerModel : PageModel
     {
-        private ILedigeLokalerService _ledigeLokalerService;
+        private ILokalerService _ledigeLokalerService;
         private IBookingService _bookingService;
 
         private static List<BookingData> _bookingListe;
@@ -36,7 +36,7 @@ namespace _2.Eksamensprojekt.Pages.Shared
         public List<BookingData> BookingData { get; set; }
 
 
-        public BookedeLokalerModel(IBookingService bookingService, ILedigeLokalerService ledigeLokalerService)
+        public BookedeLokalerModel(IBookingService bookingService, ILokalerService ledigeLokalerService)
         {
             _bookingService = bookingService;
             _ledigeLokalerService = ledigeLokalerService;

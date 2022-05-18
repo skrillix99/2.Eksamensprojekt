@@ -30,6 +30,7 @@ namespace _2.Eksamensprojekt.Pages.UnderviserPages
         }
         public void OnGet(int id)
         {
+            
             Booking = _bookingService.GetSingleBooking(id);
             TempBookingData = _bookingService.GetSingleBooking(id);
         }

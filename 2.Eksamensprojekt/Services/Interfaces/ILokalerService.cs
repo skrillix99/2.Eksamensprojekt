@@ -10,6 +10,7 @@ namespace _2.Eksamensprojekt.Services
     {
         List<LokaleData> GetAllLokaler();
         List<LokaleData> GetAllLokaleBySqlString(string sql);
+        List<BookingData> GetAllLokaleBySqlStringBooking(string sql);
 
         /// <summary>
         /// Henter et enkelt lokale fra Lokale tabel, baseret på det parameter der bliver sendt med.

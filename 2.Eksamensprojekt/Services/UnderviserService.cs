@@ -49,13 +49,8 @@ namespace _2.Eksamensprojekt.Services
 
         public bool CanDelete(DateTime dag, string email)
         {
-            DateTime dt = DateTime.Now.AddDays(-3); //TODO logic ændres
-            int newDay = dag.Subtract(dt).Days;
-<<<<<<< HEAD
+            DateTime dt = DateTime.Now.AddDays(-3); //TODO logic ændres           
             if ((dag.Subtract(dt).Days <= 3))
-=======
-            if ((dag.Subtract(dt).Days >= 3))
->>>>>>> 13ceeecc91166a17a160e41fc125a6155e52fb2e
             {
                 throw new ArgumentOutOfRangeException("Må kun annullere med minimum 3 dages varsel.");
             }

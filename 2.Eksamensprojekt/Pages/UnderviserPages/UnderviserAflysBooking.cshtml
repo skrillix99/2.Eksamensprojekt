@@ -25,8 +25,13 @@
             </div>
         </div>
     </div>
-
+</div>
+    
+@if (Model.ErrorMsg != null)
+{
     <form method="post" class="AflysbookingForm">
         <input type="submit" value="Ja" class="submitAprove custom-btn" asp-route-id="@Model.Booking.ResevertionId" asp-page="/UnderviserPages/UnderviserAflysBekræftigelse" />
         <input type="submit" value="Nej" class="submitDenied custom-btn" asp-page="UnderviserMineBookinger" />
     </form>
+
+}

@@ -114,99 +114,10 @@ namespace _2.Eksamensprojekt.Services
         }
 
         #endregion
-        /// <summary>
-        /// Henter alle Lokaler i databasen ned i en liste
-        /// </summary>
-        /// <returns>Returnerer en list med objekter af typen LokaleData</returns>
-        public List<LokaleData> GetAllLokaler()
-        {
-            List<LokaleData> lokaler = new List<LokaleData>();
+       
+        
 
-            string sql = "select * from Lokale " +
-                         "inner join LokaleSize ON LokaleSize_FK = SizeId " +
-                         "inner join LokaleLokation ON LokaleLokation_FK = LokaleLokationId";
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                SqlCommand cmd = new SqlCommand(sql, connection);
-                cmd.Connection.Open();
-
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    LokaleData l = ReadLokale(reader);
-                    lokaler.Add(l);
-                }
-            }
-
-            return lokaler;
-        } //TODO need?
-        /// <summary>
-        /// Henter et lokale baseret på id fra databasen
-        /// </summary>
-        /// <param name="id">Typen int. Indeholder værdien af id'et på det lokale man vil hente fra databasen </param>
-        /// <returns>Et objekt af typen LokaleData</returns>
-        public LokaleData GetSingelLokale(int id)
-        {
-            LokaleData list = new LokaleData();
-
-            string sql = "select * from Lokale " +
-                         "inner join LokaleSize ON LokaleSize_FK = SizeId " +
-                         "inner join LokaleLokation ON LokaleLokation_FK = LokaleLokationId " +
-                         "WHERE LokaleID = @id";
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                SqlCommand cmd = new SqlCommand(sql, connection);
-                cmd.Parameters.AddWithValue("@id", id);
-                cmd.Connection.Open();
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    var us = ReadLokale(reader);
-                    return us;
-                }
-
-                return list;
-            }
-        }
-
-        /// <summary>
-        /// Henter alle bookinger ned fra databasen baseret på brugerrolle
-        /// </summary>
-        /// <param name="sql2">Typen string. Indeholder WHERE argumentet til sql strengen</param>
-        /// <returns>En liste af typen BookingData</returns>
-        public List<BookingData> GetAllReservationer(string sql2)
-        {
-            List<BookingData> lokaler = new List<BookingData>();
-
-            string sql = "Select ReservationID, TidStart, Dag, HeltBooket, TidSlut, BookesFor, BrugerRolle, BrugerID, BrugerNavn, LokaleNavn, LokaleNummer, LokaleSmartBoard, Size, Muligebookinger " +
-                "From Reservation INNER JOIN Person ON Reservation.BrugerID_FK = Person.BrugerID " +
-                "INNER JOIN Lokale ON Reservation.LokaleID_FK = Lokale.LokaleID " +
-                "INNER JOIN LokaleLokation ON Lokale.LokaleLokation_FK = LokaleLokation.LokaleLokationId " +
-                "INNER JOIN LokaleSize ON Lokale.LokaleSize_FK = LokaleSize.SizeId ";
-
-
-            sql += sql2;
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                SqlCommand cmd = new SqlCommand(sql, connection);
-                cmd.Connection.Open();
-
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    BookingData l = ReadReservation(reader);
-                    lokaler.Add(l);
-                }
-            }
-
-            return lokaler;
-        }
+        
         /// <summary>
         /// Henter en booking baseret på id fra databasen
         /// </summary>

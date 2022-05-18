@@ -10,8 +10,7 @@ namespace _2.Eksamensprojekt.Services
     public interface IBookingService
     {
         List<BookingData> GetAllBookings();
-
-        LokaleData GetById(int LokaleID);
+        List<BookingData> GetAllReservationerByRolle(string sql2);
 
         void DeleteResevation(int id);
 

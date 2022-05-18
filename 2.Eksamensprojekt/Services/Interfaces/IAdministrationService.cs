@@ -8,24 +8,12 @@ namespace _2.Eksamensprojekt.Services.Interfaces
     public interface IAdministrationService
     {
         /// <summary>
-        /// Henter alle lokaler der ligger i Lokale tabel.
-        /// </summary>
-        /// <returns>List af type LokaleData</returns>
-        List<LokaleData> GetAllLokaler();
-        /// <summary>
-        /// Henter et enkelt lokale fra Lokale tabel, baseret på det parameter der bliver sendt med.
-        /// </summary>
-        /// <param name="id">Typen int. Må ikke være negativt</param>
-        /// <returns>et object af typen LokaleData</returns>
-        LokaleData GetSingelLokale(int id);
-        /// <summary>
         /// Sletter en reservation fra Reservations tabellen.
         /// </summary>
         /// <param name="id">Typen int. Skal passe med et reservations id</param>
         /// <param name="dag">Typen DateTime. Skal være DateTime objectet da resevertionen blev oprettet</param>
         void DeleteReservationById(int id);
         void DeleteReservationByDay();
-        List<BookingData> GetAllReservationer(string sql2);
         /// <summary>
         /// Henter en bestemt reservation fra Rerservations tabellen, baseret på parameter id.
         /// </summary>

@@ -16,46 +16,6 @@ namespace _2.Eksamensprojekt.Services
         private const string ConnectionString = @"Data Source=zealandmarc.database.windows.net;Initial Catalog=SuperBooker4000;User ID=AdminMarc;Password=Marcus19;Connect Timeout=30;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
 
-        /// <summary>
-        /// laver en liste og henter alle parameterne fra databasen og returner dem som en liste.
-        /// </summary>
-        /// <returns>en list med alle de valgte parameter fra databasen</returns>
-        public List<BookingData> GetAllBookings()
-        {
-            
-            // opretter en ny list af BookingData
-            List<BookingData> list = new List<BookingData>();
-
-            //fortæller hvad der skal hentes fra databasen i det her tilfælle fra flere tabler og den gør det ved hjælp af i inner join 
-            String sql =
-                "Select Dag, TidStart, TidSlut, LokaleNavn, LokaleNummer, LokaleSmartBoard, Size, Muligebookinger, BrugerNavn, ReservationID, BrugerRolle, BookesFor, BrugerEmail From Reservation " +
-                "INNER JOIN Person ON Reservation.BrugerID_FK = Person.BrugerID " +
-                "INNER JOIN Lokale ON Reservation.LokaleID_FK = Lokale.LokaleID " +
-                "INNER JOIN LokaleLokation ON Lokale.LokaleLokation_FK = LokaleLokation.LokaleLokationId " +
-                "INNER JOIN LokaleSize ON Lokale.LokaleSize_FK = LokaleSize.SizeId";
-            
-            //opretter forbindelsen
-            using (SqlConnection connection = new SqlConnection(ConnectionString))
-            {
-                // //opretter sql query og åbner forbindelsen
-                SqlCommand cmd = new SqlCommand(sql, connection);
-                cmd.Connection.Open();
-
-                //altid ved select
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                //læser alle rækker
-                while (reader.Read())
-                {
-                    BookingData l = ReadBookings(reader);
-                    list.Add(l);
-                }
-                return list;
-            }
-        }
-
-
-
         private BookingData ReadBookings(SqlDataReader reader)
         {
             BookingData k = new BookingData();
@@ -71,6 +31,7 @@ namespace _2.Eksamensprojekt.Services
             p.BrugerNavn = reader.GetString(8);
             p.brugerRolle = (brugerRolle)reader.GetInt32(10);
             p.BrugerEmail = reader.GetString(12);
+            p.BrugerID = reader.GetInt32(13);
 
             k.Dag = reader.GetDateTime(i: 0);
             k.TidStart = reader.GetTimeSpan(i: 1);
@@ -96,30 +57,87 @@ namespace _2.Eksamensprojekt.Services
             return k;
         }
 
-
-        public LokaleData GetById(int LokaleID)
+        /// <summary>
+        /// laver en liste og henter alle parameterne fra databasen og returner dem som en liste.
+        /// </summary>
+        /// <returns>en list med alle de valgte parameter fra databasen</returns>
+        public List<BookingData> GetAllBookings()
         {
-            LokaleData k = new LokaleData();
-            String sql = "Select * from Lokale where LokaleID=@LokaleID";
+            
+            // opretter en ny list af BookingData
+            List<BookingData> list = new List<BookingData>();
+
+            //fortæller hvad der skal hentes fra databasen i det her tilfælle fra flere tabler og den gør det ved hjælp af i inner join 
+            String sql =
+                "Select Dag, TidStart, TidSlut, LokaleNavn, LokaleNummer, LokaleSmartBoard, Size, Muligebookinger, " +
+                "BrugerNavn, ReservationID, BrugerRolle, BookesFor, BrugerEmail, BrugerID From Reservation " +
+                "INNER JOIN Person ON Reservation.BrugerID_FK = Person.BrugerID " +
+                "INNER JOIN Lokale ON Reservation.LokaleID_FK = Lokale.LokaleID " +
+                "INNER JOIN LokaleLokation ON Lokale.LokaleLokation_FK = LokaleLokation.LokaleLokationId " +
+                "INNER JOIN LokaleSize ON Lokale.LokaleSize_FK = LokaleSize.SizeId";
+            
+            //opretter forbindelsen
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
-                connection.Open();
-
+                // //opretter sql query og åbner forbindelsen
                 SqlCommand cmd = new SqlCommand(sql, connection);
+                cmd.Connection.Open();
 
-                cmd.Parameters.AddWithValue("@LokaleID", LokaleID);
+                //altid ved select
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                //læser alle rækker
+                while (reader.Read())
+                {
+                    BookingData l = ReadBookings(reader);
+                    list.Add(l);
+                }
+                return list;
+            }
+        }
+
+        /// <summary>
+        /// Henter alle bookinger ned fra databasen baseret på brugerrolle
+        /// </summary>
+        /// <param name="sql2">Typen string. Indeholder WHERE argumentet til sql strengen</param>
+        /// <returns>En liste af typen BookingData</returns>
+        public List<BookingData> GetAllReservationerByRolle(string sql2)
+        {
+            List<BookingData> lokaler = new List<BookingData>();
+            // dag, tidstart, tidslut, lokalenavn, lokalenummer, lokalesmartboard, size, muligebooker, brugernavn, reservationID, brugerrolle, 
+            // bookesfor, brugeremail, 
+            string sql = "Select ReservationID, TidStart, Dag, HeltBooket, TidSlut, BookesFor, BrugerRolle, BrugerID, BrugerNavn, " +
+                         "LokaleNavn, LokaleNummer, LokaleSmartBoard, Size, Muligebookinger " +
+                         "From Reservation " +
+                         "INNER JOIN Person ON Reservation.BrugerID_FK = Person.BrugerID " +
+                         "INNER JOIN Lokale ON Reservation.LokaleID_FK = Lokale.LokaleID " +
+                         "INNER JOIN LokaleLokation ON Lokale.LokaleLokation_FK = LokaleLokation.LokaleLokationId " +
+                         "INNER JOIN LokaleSize ON Lokale.LokaleSize_FK = LokaleSize.SizeId ";
+
+
+            sql += sql2;
+
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand(sql, connection);
+                cmd.Connection.Open();
 
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 while (reader.Read())
                 {
-                    k = ReadLokale(reader);
-                    return k;
+                    BookingData l = ReadBookings(reader);
+                    lokaler.Add(l);
                 }
             }
 
-            return k;
+            return lokaler;
         }
+
+
+
+
+        
 
         public void DeleteResevation(int id)
         {

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using _2.Eksamensprojekt.Services;
 using _2.Eksamensprojekt.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -14,28 +15,28 @@ namespace _2.Eksamensprojekt.Pages.UnderviserPages
     public class UnderviserBookingModel : PageModel
     {
         private IUnderviserService _underviserService;
-        private IAdministrationService _administrationService;
+        private ILokalerService _lokalerService;
 
         [BindProperty]
         public BookingData Booking { get; set; }
         [BindProperty]
         public LokaleData Lokale { get; set; }
 
-        public UnderviserBookingModel(IUnderviserService underviserService, IAdministrationService administrationService)
+        public UnderviserBookingModel(IUnderviserService underviserService, ILokalerService lokalerService)
         {
             _underviserService = underviserService;
-            _administrationService = administrationService;
+            _lokalerService = lokalerService;
 
             Lokale = new LokaleData();
         }
         public void OnGet(int id)
         {
-            Lokale = _administrationService.GetSingelLokale(id);
+            Lokale = _lokalerService.GetSingelLokale(id);
         }
 
         public void OnPost(int id)
         {
-            Lokale = _administrationService.GetSingelLokale(id);
+            Lokale = _lokalerService.GetSingelLokale(id);
         }
 
         public IActionResult OnPostBook(int id)

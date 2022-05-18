@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using _2.Eksamensprojekt.Services;
 using _2.Eksamensprojekt.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -15,6 +16,7 @@ namespace _2.Eksamensprojekt.Pages.StuderendePages
     {
         private IStuderendeService _studerendeService;
         private IAdministrationService _administrationService;
+        private ILokalerService _lokalerService;
 
         [BindProperty]
         public BookingData Booking { get; set; }
@@ -25,21 +27,22 @@ namespace _2.Eksamensprojekt.Pages.StuderendePages
 
         public string ErrorMsg { get; set; }
 
-        public StuderendeBookingModel(IStuderendeService studerendeService, IAdministrationService administrationService)
+        public StuderendeBookingModel(IStuderendeService studerendeService, IAdministrationService administrationService, ILokalerService lokalerService)
         {
             _studerendeService = studerendeService;
             _administrationService = administrationService;
+            _lokalerService = lokalerService;
 
             Lokale = new LokaleData();
         }
         public void OnGet(int id)
         {
-            Lokale = _administrationService.GetSingelLokale(id);
+            Lokale = _lokalerService.GetSingelLokale(id);
         }
 
         public void OnPost(int id)
         {
-            Lokale = _administrationService.GetSingelLokale(id);
+            Lokale = _lokalerService.GetSingelLokale(id);
         }
 
         public IActionResult OnPostBook(int id)
@@ -56,7 +59,7 @@ namespace _2.Eksamensprojekt.Pages.StuderendePages
 
 
                 Lokale.LokaleID = id;
-                Booking.Lokale = _administrationService.GetSingelLokale(id);
+                Booking.Lokale = _lokalerService.GetSingelLokale(id);
                 _studerendeService.AddReservation(Booking);
             }
             catch (ArgumentOutOfRangeException e)

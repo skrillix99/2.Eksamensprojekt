@@ -29,7 +29,7 @@ namespace _2.Eksamensprojekt
         {
             services.AddRazorPages();
             services.AddSingleton<ILogIndService, LogIndService>();
-            services.AddSingleton<ILedigeLokalerService, LedigeLokalerService>();
+            services.AddSingleton<ILokalerService, LokalerService>();
             services.AddSingleton<IUnderviserService, UnderviserService>();
             services.AddSingleton<IAdministrationService, AdministrationService>();
             services.AddSingleton<IBookingService, BookingService>();

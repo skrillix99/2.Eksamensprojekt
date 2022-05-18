@@ -21,6 +21,8 @@ namespace _2.Eksamensprojekt.Pages.StuderendePages
         [BindProperty]
         public LokaleData Lokale { get; set; }
 
+        public TimeSpan SenestBooketTid => (TimeSpan) _administrationService.GetAllStuderendeRettigheder()[2];
+
         public string ErrorMsg { get; set; }
 
         public StuderendeBookingModel(IStuderendeService studerendeService, IAdministrationService administrationService)

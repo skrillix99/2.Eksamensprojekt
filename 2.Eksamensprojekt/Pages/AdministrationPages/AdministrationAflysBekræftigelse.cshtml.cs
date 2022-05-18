@@ -33,7 +33,7 @@ namespace _2.Eksamensprojekt.Pages.AdministrationPages
 
         public void OnPostDel(int id)
         {
-            _administrationService.DeleteReservation(id);
+            _administrationService.DeleteReservationById(id);
         }
     }
 }

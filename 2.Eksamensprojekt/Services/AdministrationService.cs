@@ -277,7 +277,7 @@ namespace _2.Eksamensprojekt.Services
         }
 
 
-        public void DeleteReservation(int id)
+        public void DeleteReservationById(int id)
         {
             string sql = "DELETE from Reservation WHERE ReservationID = @id";
 
@@ -300,7 +300,7 @@ namespace _2.Eksamensprojekt.Services
         /// <summary>
         /// Sletter en booking fra databasen dagen efter bookingen er overskredet
         /// </summary>
-        public void DeleteReservation()
+        public void DeleteReservationByDay()
         {
             string sql = "DELETE from Reservation WHERE Dag < @nextDay";
 

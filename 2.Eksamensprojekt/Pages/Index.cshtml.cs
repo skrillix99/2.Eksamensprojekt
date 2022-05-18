@@ -25,7 +25,7 @@ namespace _2.Eksamensprojekt.Pages
 
         public void OnGet()
         {
-            _administrationService.DeleteReservation();
+            _administrationService.DeleteReservationByDay();
 
             if (LogIndModel.LoggedInUser == null)
             {

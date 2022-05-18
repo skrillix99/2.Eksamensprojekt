@@ -15,7 +15,12 @@ namespace _2.Eksamensprojekt.Services
         /// </summary>
         private const string ConnectionString = @"Data Source=zealandmarc.database.windows.net;Initial Catalog=SuperBooker4000;User ID=AdminMarc;Password=Marcus19;Connect Timeout=30;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
-
+        #region ReadBookings
+        /// <summary>
+        /// Oversætter data fra et Booking database kald til et BookingData object med alle columns.
+        /// </summary>
+        /// <param name="reader">Typen SqlDataReader. objekt med data fra database kald</param>
+        /// <returns>et object af typen BookingData</returns>
         private BookingData ReadBookings(SqlDataReader reader)
         {
             BookingData k = new BookingData();
@@ -26,6 +31,7 @@ namespace _2.Eksamensprojekt.Services
             ld.LokaleSmartBoard = reader.GetBoolean(5);
             ld.LokaleSize = (LokaleSize)reader.GetInt32(6);
             ld.MuligeBookinger = reader.GetInt32(7);
+            ld.LokaleID = reader.GetInt32(14);
 
             PersonData p = new PersonData();
             p.BrugerNavn = reader.GetString(8);
@@ -42,6 +48,8 @@ namespace _2.Eksamensprojekt.Services
             k.BookesFor = (brugerRolle)reader.GetInt32(11);
             return k;
         }
+
+        #endregion
 
         private LokaleData ReadLokale(SqlDataReader reader)
         {
@@ -134,18 +142,47 @@ namespace _2.Eksamensprojekt.Services
             return lokaler;
         }
 
+        /// <summary>
+        /// Henter en booking baseret på id fra databasen
+        /// </summary>
+        /// <param name="id">Typen int. Indeholder id'et på den booking man vil hente fra databasen </param>
+        /// <returns>Et objekt af typen BookingData</returns>
+        public BookingData GetSingleBooking(int id)
+        { 
+            BookingData l = new BookingData();
+            string sql = "SELECT Dag, TidStart, TidSlut, LokaleNavn, LokaleNummer, LokaleSmartBoard, Size, Muligebookinger, " +
+                         "BrugerNavn, ReservationID, BrugerRolle, BookesFor, BrugerEmail, BrugerID, Lokale.lokaleID " +
+                         "FROM Reservation " +
+                         "INNER JOIN Lokale ON Reservation.LokaleID_FK = Lokale.LokaleID " +
+                         "inner join LokaleSize ON Lokale.LokaleSize_FK = SizeId " +
+                         "inner join LokaleLokation ON Lokale.LokaleLokation_FK = LokaleLokationId " +
+                         "INNER JOIN Person ON Reservation.BrugerID_FK = Person.BrugerID " +
+                         "WHERE ReservationID = @id";
 
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand(sql, connection);
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.Connection.Open();
 
+                SqlDataReader reader = cmd.ExecuteReader();
 
-        
+                while (reader.Read())
+                {
+                    l = ReadBookings(reader);
+                    return l;
+                }
 
-        public void DeleteResevation(int id)
+                return l;
+            }
+        }
+
+        public void DeleteReservationById(int id)
         {
             if (id <= 0)
             {
-                throw new KeyNotFoundException("Der findes ikke nogle reservationer med det ID");
+                throw new KeyNotFoundException("Ugyldigt ID");
             }
-
             string sql = "DELETE from Reservation WHERE ReservationID = @id";
 
             using (SqlConnection connection = new SqlConnection(ConnectionString))
@@ -158,10 +195,33 @@ namespace _2.Eksamensprojekt.Services
                 int rows = cmd.ExecuteNonQuery();
                 if (rows != 1)
                 {
-                    throw new InvalidOperationException("Der skete en fejl i databasen");
+                    throw new InvalidOperationException("Der skete en fejl i databasen"); 
                 }
             }
         }
+
+        /// <summary>
+        /// Sletter en booking fra databasen dagen efter bookingen er overskredet
+        /// </summary>
+        public void DeleteReservationByDay()
+        {
+            string sql = "DELETE from Reservation WHERE Dag < @nextDay";
+
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand(sql, connection);
+                cmd.Parameters.AddWithValue("@nextDay", DateTime.Today.ToString("s"));
+
+                cmd.Connection.Open();
+
+                int rows = cmd.ExecuteNonQuery();
+                //if (rows != 1)
+                //{
+                //    throw new InvalidOperationException("Der skete en fejl i databasen"); 
+                //}
+            }
+        }
+
 
     }
 }

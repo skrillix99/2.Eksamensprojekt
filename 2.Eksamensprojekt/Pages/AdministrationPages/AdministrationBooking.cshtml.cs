@@ -48,7 +48,7 @@ namespace _2.Eksamensprojekt.Pages.AdministrationPages
             Lokale.LokaleID = id;
             Booking.Lokale = Lokale;
             Booking.Bruger = Email;
-            _administrationService.AddReservation(Booking);
+            _administrationService.AddReservationAdmin(Booking);
 
             return RedirectToPage("/Shared/LedigeLokaler");
         }

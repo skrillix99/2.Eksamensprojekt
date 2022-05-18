@@ -118,49 +118,14 @@ namespace _2.Eksamensprojekt.Services
         
 
         
-        /// <summary>
-        /// Henter en booking baseret på id fra databasen
-        /// </summary>
-        /// <param name="id">Typen int. Indeholder id'et på den booking man vil hente fra databasen </param>
-        /// <returns>Et objekt af typen BookingData</returns>
-        public BookingData GetSingelBooking(int id)
-        {
-            BookingData l = new BookingData();
-            string sql = "SELECT Reservation.Dag, Reservation.TidStart, Reservation.TidSlut, " +
-                         "Lokale.LokaleNavn, LokaleLokation.LokaleNummer, LokaleSmartBoard, LokaleSize.Size, " +
-                         "MuligeBookinger, Person.BrugerNavn, Reservation.ReservationID, Reservation.Heltbooket, Lokale.lokaleID " +
-                         "FROM Reservation " +
-                         "INNER JOIN Lokale ON Reservation.LokaleID_FK = Lokale.LokaleID " +
-                         "inner join LokaleSize ON Lokale.LokaleSize_FK = SizeId " +
-                         "inner join LokaleLokation ON Lokale.LokaleLokation_FK = LokaleLokationId " +
-                         "INNER JOIN Person ON Reservation.BrugerID_FK = Person.BrugerID " +
-                         "WHERE ReservationID = @id";
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                SqlCommand cmd = new SqlCommand(sql, connection);
-                cmd.Parameters.AddWithValue("@id", id);
-                cmd.Connection.Open();
-
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    l = ReadBookings(reader);
-                    return l;
-                }
-
-                return l;
-            }
-        }
+        
         /// <summary>
         /// Opretter en ny booking og gemmer den i databasen
         /// </summary>
         /// <param name="newBooking">Typen BookingData. Indeholder den nye bookings information</param>
-        public void AddReservation(BookingData newBooking)
+        public void AddReservationAdmin(BookingData newBooking)
         {
             string sql = "insert into Reservation VALUES (@tidStart, @dag, @mulige, @brugerFK, @lokaleFK, @tidSlut, @bookesFor)";
-                                                        // TidStart, Dag, Heltbooket, Bruger_FK, Lokale_FK, TidSlut, BookesFor
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 string tidSlut = newBooking.Dag.Add(newBooking.TidStart).ToShortTimeString();
@@ -185,49 +150,6 @@ namespace _2.Eksamensprojekt.Services
                 }
             }
 
-        }
-
-
-        public void DeleteReservationById(int id)
-        {
-            string sql = "DELETE from Reservation WHERE ReservationID = @id";
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                SqlCommand cmd = new SqlCommand(sql, connection);
-                cmd.Parameters.AddWithValue("@id", id);
-
-                cmd.Connection.Open();
-
-                int rows = cmd.ExecuteNonQuery();
-                if (rows != 1)
-                {
-                    throw new InvalidOperationException("Der skete en fejl i databasen"); 
-                }
-            }
-        }
-
-
-        /// <summary>
-        /// Sletter en booking fra databasen dagen efter bookingen er overskredet
-        /// </summary>
-        public void DeleteReservationByDay()
-        {
-            string sql = "DELETE from Reservation WHERE Dag < @nextDay";
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                SqlCommand cmd = new SqlCommand(sql, connection);
-                cmd.Parameters.AddWithValue("@nextDay", DateTime.Today.ToString("s"));
-
-                cmd.Connection.Open();
-
-                int rows = cmd.ExecuteNonQuery();
-                //if (rows != 1)
-                //{
-                //    throw new InvalidOperationException("Der skete en fejl i databasen"); 
-                //}
-            }
         }
 
         public void StuderendeRettighederUpdate(int bookingLimit, TimeSpan senestBooking)

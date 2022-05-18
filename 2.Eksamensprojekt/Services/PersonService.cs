@@ -1,14 +1,11 @@
-﻿using SuperBookerData;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Threading.Tasks;
-using _2.Eksamensprojekt.Pages.LogInd;
+using _2.Eksamensprojekt.Services.Interfaces;
+using SuperBookerData;
 
 namespace _2.Eksamensprojekt.Services
 {
-    public class LogIndService: ILogIndService
+    public class PersonService: IPersonService
     {
         private const string connectionString = "Data Source=zealandmarc.database.windows.net;Initial Catalog=SuperBooker4000;User ID=AdminMarc;Password=Marcus19;Connect Timeout=30;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         /// <summary>
@@ -68,67 +65,6 @@ namespace _2.Eksamensprojekt.Services
             return l;
         }
         
-        public bool Contains(LogIndData LogInd)
-        {
-            string sql = "select BrugerEmail, BrugerPassword from Person where BrugerEmail = @email AND BrugerPassword = @password";
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                SqlCommand cmd = new SqlCommand(sql, connection);
-                cmd.Parameters.AddWithValue("@email", LogInd.EmailLogInd);
-                cmd.Parameters.AddWithValue("@password", LogInd.Password);
-                cmd.Connection.Open();
-
-
-            }
-
-            return true;
-        }
-
-        public List<string> GetEmails()
-        {
-            List<string> list = new List<string>();
-            string sql = "select BrugerEmail from Person";
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                SqlCommand cmd = new SqlCommand(sql, connection);
-                cmd.Connection.Open();
-
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    string s = ReadEmails(reader);
-                    list.Add(s);
-                }
-
-                return list;
-            }
-        }
-
-        private string ReadEmails(SqlDataReader reader)
-        {
-            string email = reader.GetString(0);
-            return email;
-        }
-
-        public brugerRolle ContainsAndGiveRole(LogIndData LogInd)
-        {
-            if (!Contains(LogInd))
-            {
-                LogInd.rolle = brugerRolle.Student;
-            }
-            else
-            {
-                foreach (string email in GetEmails())
-                {
-                    LogInd.rolle = (LogInd.EmailLogInd.Equals(email)) ? brugerRolle.Underviser : brugerRolle.Administration;
-                }
-            }
-
-            return LogInd.rolle;
-        }
         /// <summary>
         /// Henter et person ID ud fra email fra databasen og lægger det ind i et objekt af typen PersonData
         /// </summary>

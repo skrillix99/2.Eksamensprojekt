@@ -10,12 +10,13 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Security.Claims;
 using _2.Eksamensprojekt.Services;
+using _2.Eksamensprojekt.Services.Interfaces;
 
 namespace _2.Eksamensprojekt.Pages.LogInd
 {
     public class LogIndModel : PageModel
     {
-        private ILogIndService _brugerService;
+        private IPersonService _brugerService;
         public static LogIndData LoggedInUser { get; set; } = null;
 
         public string Errormsg { get; set; }
@@ -32,7 +33,7 @@ namespace _2.Eksamensprojekt.Pages.LogInd
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        public LogIndModel(ILogIndService brugerService)
+        public LogIndModel(IPersonService brugerService)
         {
             _brugerService = brugerService;
         }

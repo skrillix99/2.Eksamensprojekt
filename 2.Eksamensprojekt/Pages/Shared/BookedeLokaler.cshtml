@@ -65,84 +65,89 @@ https://codepen.io/dautoblog/pen/KMGogz -->
 
 @foreach (var lokale in Model.LokaleData)
 {
-    <div class="card mb-2" style="width: 20rem;">
-        <div class="card-header p-2">
-            <h2 class="card-title">@lokale.Lokale.LokaleNummer @lokale.Lokale.LokaleNavn</h2>
-            <h2>
-                @if (lokale.Lokale.LokaleSmartBoard == true)
-                {
-                    @("(M. SmartBoard)")
-                }
-                @if (lokale.Lokale.LokaleSmartBoard == false)
-                {
-                    @("(U. SmartBoard)")
-                }
-            </h2>
+<div class="row">
+    <div class="lokale-info-centreret">
+        <div class="card mb-2">
+            <div class="card-header p-2">
+                <h2 class="card-title">@lokale.Lokale.LokaleNummer @lokale.Lokale.LokaleNavn </h2>
+                <h2>
+                    @if (lokale.Lokale.LokaleSmartBoard == true)
+                    {
+                        @("(M. SmartBoard)")
+                    }
+                    @if (lokale.Lokale.LokaleSmartBoard == false)
+                    {
+                        @("(U. SmartBoard)")
+                    }
+                </h2>
+            </div>
             <div class="card-body">
                 <p class="card-text"><b>Størrelse:</b> @lokale.Lokale.LokaleSize</p>
-                <p class="card-text"><b>Date:</b> @lokale.Dag.ToString("d")</p>
-                <p class="card-text"><b>Start: </b>@lokale.TidStart.ToString(@"hh\:mm")</p>
-                <p class="card-text"><b>Slut: </b>@lokale.TidSlut.ToString(@"hh\:mm")</p>
+                <p class="card-text"><b>Dato:</b> @lokale.Dag.ToString("d")</p>
+                <p class="card-text"><b>Tidspunkt:</b> @lokale.TidStart.ToString(@"hh\:mm") - @lokale.TidSlut.ToString(@"hh\:mm")</p>
                 <p class="card-text"><b>Booket af:</b> @lokale.Bruger.BrugerNavn</p>
-                <p class="card-text"><b>Booket for: </b>@Enum.GetName(typeof(brugerRolle), (lokale.BookesFor))</p>
-                <form method="post">
-                    @foreach (var test in User.Claims)
-                    {
-                        if (test.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name")
-                        {
-
-                                    if (lokale.Bruger.BrugerEmail == test.Value)
+                <p class="card-text"><b>Booket for:</b> @Enum.GetName(typeof(brugerRolle), (lokale.BookesFor))</p>
+                <div class="centrer-item">
+                    <form method="post">
+                                    @foreach (var test in User.Claims)
                                     {
-                                        if (lokale.Bruger.brugerRolle == brugerRolle.Underviser)
+                                        if (test.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name")
                                         {
-                                            <button class="btn btn-primary black-button" type="submit" asp-page="/UnderviserPages/UnderviserAflysBooking" asp-route-id="@lokale.ResevertionId">AFLYS</button>
+
+                                            if (lokale.Bruger.BrugerEmail == test.Value)
+                                            {
+                                                if (lokale.Bruger.brugerRolle == brugerRolle.Underviser)
+                                                {
+                                                    <button class="btn btn-primary black-button" type="submit" asp-page="/UnderviserPages/UnderviserAflysBooking" asp-route-id="@lokale.ResevertionId">AFLYS</button>
+                                                }
+                                            }
+                                        }
+                                        if (test.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role")
+                                        {
+
+                                            if (lokale.Bruger.brugerRolle.ToString() == "Student" || lokale.Bruger.brugerRolle.ToString() == "0")
+                                            {
+                                                if (test.Value != "Administration")
+                                                {
+                                                    <button class="btn btn-primary black-button" type="submit" asp-page="/UnderviserPages/UnderviserAflysBooking" asp-route-id="@lokale.ResevertionId">AFLYS</button>
+                                                }
+                                            }
+                                            if (test.Value == "Administration")  //TODO ikke vis ovenståendes
+                                            {
+                                                <button class="btn btn-primary black-button" type="submit" asp-page="/AdministrationPages/AdministrationAflysBooking" asp-route-id="@lokale.ResevertionId">AFLYS</button>
+                                            }
                                         }
                                     }
-                                }
-                                if (test.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role")
-                                {
 
-                                    if (lokale.Bruger.brugerRolle.ToString() == "Student" || lokale.Bruger.brugerRolle.ToString() == "0")
-                                    {
-                                        if (test.Value != "Administration")
-                                        {
-                                            <button class="btn btn-primary black-button" type="submit" asp-page="/UnderviserPages/UnderviserAflysBooking" asp-route-id="@lokale.ResevertionId">AFLYS</button>
-                                        }
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+        </div>
+    </div>
+
+                    }
+
+                    @section Scripts
+{
+                        <script>
+                            $(document).ready(function () {
+                                $("#myModal").Modal({ backdrop: "static" });
+                                $("#myModal").Modal('show');
+                            });
+                            function soeg_lokale() {
+                                let input = document.getElementById('searchbar').value
+                                input = input.toLowerCase();
+                                let x = document.getElementsByClassName('card');
+
+                                for (i = 0; i < x.length; i++) {
+                                    if (!x[i].innerHTML.toLowerCase().includes(input)) {
+                                        x[i].style.display = "none";
                                     }
-                                    if (test.Value == "Administration")  //TODO ikke vis ovenståendes
-                                    {
-                                        <button class="btn btn-primary black-button" type="submit" asp-page="/AdministrationPages/AdministrationAflysBooking" asp-route-id="@lokale.ResevertionId">AFLYS</button>
+                                    else {
+                                        x[i].style.display = "flex";
                                     }
                                 }
                             }
-
-                        </form>
-                    </div>
-                </div>
-            </div>        
-
-}
-
-@section Scripts
-{
-    <script>
-        $(document).ready(function () {
-            $("#myModal").Modal({ backdrop: "static" });
-            $("#myModal").Modal('show');
-        });
-        function soeg_lokale() {
-            let input = document.getElementById('searchbar').value
-            input = input.toLowerCase();
-            let x = document.getElementsByClassName('card');
-
-            for (i = 0; i < x.length; i++) {
-                if (!x[i].innerHTML.toLowerCase().includes(input)) {
-                    x[i].style.display = "none";
-                }
-                else {
-                    x[i].style.display = "flex";
-                }
-            }
-        }
-    </script>
-}
+                        </script>
+                    }

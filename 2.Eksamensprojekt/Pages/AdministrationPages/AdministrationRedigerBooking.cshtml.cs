@@ -17,27 +17,20 @@ namespace _2.Eksamensprojekt.Pages.AdministrationPages
     {
         private IBookingService _bookingService;
         private IAdministrationService _administrationService;
-        private IBookingService _bookingService;
         
         [BindProperty]
         public BookingData Booking { get; set; }
 
 
-<<<<<<< HEAD
-        public AdministrationRedigerBookingModel(IAdministrationService administrationService, IBookingService booking)
-=======
+
+        //public AdministrationRedigerBookingModel(IAdministrationService administrationService, IBookingService booking)
+
         public AdministrationRedigerBookingModel(IBookingService bookingService, IAdministrationService administrationService)
->>>>>>> a373301ed9aee7c36ff8defbc9eeed1cd549f711
+
         {
             _bookingService = bookingService;
             _administrationService = administrationService;
-<<<<<<< HEAD
-            _bookingService = booking;
-            
-=======
-
-
->>>>>>> a373301ed9aee7c36ff8defbc9eeed1cd549f711
+            //_bookingService = booking;
         }
         
         public IActionResult OnGet(int id)

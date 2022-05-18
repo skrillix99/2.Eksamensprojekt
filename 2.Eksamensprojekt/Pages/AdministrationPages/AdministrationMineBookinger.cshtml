@@ -30,11 +30,13 @@
                     <form method="post">
                         <button class="btn btn-primary black-button" type="submit" asp-page="/AdministrationPages/AdministrationAflysBooking" asp-route-id="@item.ResevertionId">AFLYS</button>
                     </form>
-                    </div>
+                    <form method="get">
+                        <button type="submit" asp-page="/AdministrationPages/AdministrationRedigerBooking" asp-route-id="@item.ResevertionId">Rediger</button>
+                    </form>
                 </div>
             </div>
         </div>
-   </div>
+    </div>
 }
 
     <script>

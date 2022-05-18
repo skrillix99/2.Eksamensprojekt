@@ -340,6 +340,33 @@ namespace _2.Eksamensprojekt.Services
             }
         }
 
+        public void UpdateReservation(BookingData updatedBooking)
+        {
+
+            string sql = "UPDATE Reservation " +
+                         "SET TidStart = @Tidstart, Dag = @dag, TidSlut = @Tidslut, BookesFor = @Bookesfor " +
+                         "WHERE ReservationID = @id";
+            
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand(sql, connection);
+
+                cmd.Parameters.AddWithValue("@Tidstart", updatedBooking.TidStart);
+                cmd.Parameters.AddWithValue("@dag", updatedBooking.Dag);
+                cmd.Parameters.AddWithValue("@Tidslut", updatedBooking.TidSlut);
+                cmd.Parameters.AddWithValue("@Bookesfor", updatedBooking.BookesFor);
+                cmd.Parameters.AddWithValue("@id", updatedBooking.ResevertionId);
+
+                cmd.Connection.Open();
+
+                int rows = cmd.ExecuteNonQuery();
+                if (rows != 1)
+                {
+                    throw new InvalidOperationException("Der skete en fejl i databasen");
+                }
+            }
+        }
+
         public List<object> GetAllStuderendeRettigheder()
         {
             List<object> objects = new List<object>();

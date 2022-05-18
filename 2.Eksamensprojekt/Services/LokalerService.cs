@@ -101,6 +101,58 @@ namespace _2.Eksamensprojekt.Services
             }
             return Lokaler;
         }
+
+        public List<BookingData> GetAllLokaleBySqlStringBooking(string sql)
+        {
+            List<BookingData> Lokaler = new List<BookingData>();
+
+            //Opretter forbindelse
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                //åbner forbindelsen
+                connection.Open();
+
+                //Opretter sql query
+                SqlCommand cmd = new SqlCommand(sql, connection);
+
+                //altid ved select
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                //Læser alle rækker
+                while (reader.Read())
+                {
+                    BookingData ld = ReadBookingData(reader);
+                    Lokaler.Add(ld);
+                }
+            }
+            return Lokaler;
+        }
+        private BookingData ReadBookingData(SqlDataReader reader)
+        {
+            BookingData bd = new BookingData();
+            PersonData pd = new PersonData();
+            pd.brugerRolle = (brugerRolle)reader.GetInt32(3);
+            pd.BrugerEmail = reader.GetString(4);
+            pd.BrugerNavn = reader.GetString(6);
+
+            LokaleData ld = new LokaleData();
+            ld.Etage = reader.GetInt32(5);
+            ld.LokaleNavn = reader.GetString(7);
+            ld.LokaleNummer = reader.GetString(8);
+            ld.LokaleSmartBoard = reader.GetBoolean(9);
+            ld.LokaleSize = (LokaleSize)reader.GetInt32(10);
+                
+            bd.Dag = reader.GetDateTime(0);
+            bd.TidSlut = reader.GetTimeSpan(1);
+            bd.BookesFor = (brugerRolle)reader.GetInt32(2);
+            bd.Bruger = pd;
+            bd.Lokale = ld;
+
+            return bd;
+        }
+
+    }
+   
         /// <summary>
         /// Henter et lokale baseret på id fra databasen
         /// </summary>

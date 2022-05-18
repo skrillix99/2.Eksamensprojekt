@@ -82,7 +82,7 @@ namespace _2.Eksamensprojekt.Services
                 "INNER JOIN Person ON Reservation.BrugerID_FK = Person.BrugerID " +
                 "INNER JOIN Lokale ON Reservation.LokaleID_FK = Lokale.LokaleID " +
                 "INNER JOIN LokaleLokation ON Lokale.LokaleLokation_FK = LokaleLokation.LokaleLokationId " +
-                "INNER JOIN LokaleSize ON Lokale.LokaleSize_FK = LokaleSize.SizeId";
+                "INNER JOIN LokaleSize ON Lokale.LokaleSize_FK = LokaleSize.SizeId ";
             
             //opretter forbindelsen
             using (SqlConnection connection = new SqlConnection(ConnectionString))

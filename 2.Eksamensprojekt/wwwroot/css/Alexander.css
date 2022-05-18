@@ -6,19 +6,20 @@
     border-color: black;
     background-color: black;
 }
-.body-1 {
-    background-color: #fff387;
-}
-.container-1 {
-    background-color: #ffffff;
-    text-align: center;
-}
-.text1 {
-    width: 75%;
-    margin: 1em auto;
 }
 .plantegning {
     width: 100%;
     height: auto;
     /*Taget fra w3schools https://www.w3schools.com/css/css_rwd_images.asp*/
+}
+.log-ind{
+    text-align:center;
+    border: solid 1px;
+    background-color: white;
+}
+.btn-margin{
+    margin-bottom:0.5rem
+}
+.header-margin{
+    margin-top: 0.1em
 }

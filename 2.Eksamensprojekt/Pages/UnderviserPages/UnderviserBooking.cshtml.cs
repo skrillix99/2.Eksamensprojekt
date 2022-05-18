@@ -43,7 +43,7 @@ namespace _2.Eksamensprojekt.Pages.UnderviserPages
         {
             Lokale.LokaleID = id;
             Booking.Lokale = Lokale;
-            _underviserService.AddReservation(Booking);
+            _underviserService.AddReservationUnderviser(Booking);
 
             return RedirectToPage("/Shared/LedigeLokaler");
         }

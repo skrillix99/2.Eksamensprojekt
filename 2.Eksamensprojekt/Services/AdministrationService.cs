@@ -11,12 +11,12 @@ namespace _2.Eksamensprojekt.Services
     public class AdministrationService : IAdministrationService
     {
         private const string connectionString = "Data Source=zealandmarc.database.windows.net;Initial Catalog=SuperBooker4000;User ID=AdminMarc;Password=Marcus19;Connect Timeout=30;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-        private readonly ILogIndService _logIndService;
+        private readonly IPersonService _logIndService;
         /// <summary>
         /// Laver dependency injection til at kunne bruge ILogIndService.
         /// </summary>
         /// <param name="logIndService">Typen ILogIndService</param>
-        public AdministrationService(ILogIndService logIndService)
+        public AdministrationService(IPersonService logIndService)
         {
             _logIndService = logIndService;
         }

@@ -28,7 +28,7 @@ namespace _2.Eksamensprojekt
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
-            services.AddSingleton<ILogIndService, LogIndService>();
+            services.AddSingleton<IPersonService, PersonService>();
             services.AddSingleton<ILokalerService, LokalerService>();
             services.AddSingleton<IUnderviserService, UnderviserService>();
             services.AddSingleton<IAdministrationService, AdministrationService>();

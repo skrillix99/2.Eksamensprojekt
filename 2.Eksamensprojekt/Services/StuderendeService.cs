@@ -93,7 +93,8 @@ namespace _2.Eksamensprojekt.Services
 
             int BrugerID = _logIndService.GetSingelPersonByEmail(newBooking.BrugerEmail).BrugerID;
             int limit = (int) _administrationService.GetAllStuderendeRettigheder()[1];
-            if (CheckReservationerByBrugerId(BrugerID).Count <= limit)
+            int antalBooket = CheckReservationerByBrugerId(BrugerID).Count;
+            if (antalBooket <= limit)
             {
                 msg = $"Du har nu {limit - CheckReservationerByBrugerId(BrugerID).Count} tilbage";
             }

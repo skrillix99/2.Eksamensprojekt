@@ -319,14 +319,15 @@ namespace _2.Eksamensprojekt.Services
             }
         }
 
-        public void StuderendeRettighederUpdate(int bookingLimit)
+        public void StuderendeRettighederUpdate(int bookingLimit, TimeSpan senestBooking)
         {
-            string sql = "UPDATE StuderendeRettigheder SET BookingLimit = @bookingLimit";
+            string sql = "UPDATE StuderendeRettigheder SET BookingLimit = @bookingLimit, SenestBookingTid = @senestBooking";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlCommand cmd = new SqlCommand(sql, connection);
                 cmd.Parameters.AddWithValue("@bookingLimit", bookingLimit);
+                cmd.Parameters.AddWithValue("@senestBooking", senestBooking);
 
                 cmd.Connection.Open();
 
@@ -335,6 +336,33 @@ namespace _2.Eksamensprojekt.Services
                 if (rows < 1)
                 {
                     throw new ArgumentException("Der skete en fejl");
+                }
+            }
+        }
+
+        public void UpdateReservation(BookingData updatedBooking)
+        {
+
+            string sql = "UPDATE Reservation " +
+                         "SET TidStart = @Tidstart, Dag = @dag, TidSlut = @Tidslut, BookesFor = @Bookesfor " +
+                         "WHERE ReservationID = @id";
+            
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand(sql, connection);
+
+                cmd.Parameters.AddWithValue("@Tidstart", updatedBooking.TidStart);
+                cmd.Parameters.AddWithValue("@dag", updatedBooking.Dag);
+                cmd.Parameters.AddWithValue("@Tidslut", updatedBooking.TidSlut);
+                cmd.Parameters.AddWithValue("@Bookesfor", updatedBooking.BookesFor);
+                cmd.Parameters.AddWithValue("@id", updatedBooking.ResevertionId);
+
+                cmd.Connection.Open();
+
+                int rows = cmd.ExecuteNonQuery();
+                if (rows != 1)
+                {
+                    throw new InvalidOperationException("Der skete en fejl i databasen");
                 }
             }
         }
@@ -356,8 +384,10 @@ namespace _2.Eksamensprojekt.Services
                 {
                     int id = reader.GetInt32(0);
                     int limit = reader.GetInt32(1);
+                    TimeSpan senestBookingTid = reader.GetTimeSpan(2);
                     objects.Add(id);
                     objects.Add(limit);
+                    objects.Add(senestBookingTid);
                 }
             }
 

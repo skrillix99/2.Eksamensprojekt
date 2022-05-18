@@ -51,11 +51,9 @@ namespace _2.Eksamensprojekt.Services
 
         public bool CanDelete(DateTime dag, string email)
         {
-            brugerRolle rolle = _logIndService.GetSingelPersonByEmail(email).brugerRolle;
-
             DateTime dt = DateTime.Now.AddDays(-3); //TODO logic ændres
             int newDay = dag.Subtract(dt).Days;
-            if ((dag.Subtract(dt).Days <= 3) && rolle == brugerRolle.Student)
+            if ((dag.Subtract(dt).Days >= 3))
             {
                 throw new ArgumentOutOfRangeException("Må kun annullere med minimum 3 dages varsel.");
             }

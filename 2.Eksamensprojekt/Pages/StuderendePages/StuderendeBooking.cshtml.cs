@@ -42,8 +42,17 @@ namespace _2.Eksamensprojekt.Pages.StuderendePages
 
         public IActionResult OnPostBook(int id)
         {
+            TimeSpan senestTid = (TimeSpan) _administrationService.GetAllStuderendeRettigheder()[2];
+            TimeSpan slutBookingTid = Booking.Dag.TimeOfDay.Add(Booking.TidStart);
             try
             {
+                if (slutBookingTid > senestTid)
+                {
+                    ErrorMsg = $"Du må senest have et lokale booke til kl: {senestTid:hh\\:mm}";
+                    return Page();
+                }
+
+
                 Lokale.LokaleID = id;
                 Booking.Lokale = _administrationService.GetSingelLokale(id);
                 _studerendeService.AddReservation(Booking);

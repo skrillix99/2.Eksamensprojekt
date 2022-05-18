@@ -6,9 +6,15 @@
 <div class="centered">
     <h1>Studerendes rettigheder</h1>
     <form method="post">
-        <label>Antal bookings de må have ad gangen</label>
-        <input type="text" asp-for="@Model.NewLimit" value="@Model.NewLimit" />
-        
-        <input type="submit" value="Updatere" />
+        <fieldset>
+            <label>Antal bookings de må have ad gangen</label>
+            <input type="text" asp-for="@Model.NewLimit" value="@Model.NewLimit"/>
+        </fieldset>
+        <fieldset>
+            <label>Senest tid et lokale må blive booket til</label>
+            <input type="time" asp-for="@Model.TimeLimit" value="@Model.TimeLimit"/>
+        </fieldset>
+
+        <input type="submit" value="Updatere"/>
     </form>
 </div>

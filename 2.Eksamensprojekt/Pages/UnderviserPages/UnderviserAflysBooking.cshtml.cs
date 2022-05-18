@@ -47,7 +47,7 @@ namespace _2.Eksamensprojekt.Pages.UnderviserPages
                 
                     Booking = _administrationService.GetSingelBooking(id);
                 TempBookingData = _administrationService.GetSingelBooking(id);
-                _underviserService.CanDelete(Booking.Dag, Bruger.BrugerEmail);
+                //_underviserService.CanDelete(Booking.Dag, Bruger.BrugerEmail);
             }
             catch (ArgumentOutOfRangeException e)
             {

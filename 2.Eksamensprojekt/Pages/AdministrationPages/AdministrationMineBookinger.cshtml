@@ -21,22 +21,23 @@
                         }
                     </h2>
                 </div>
-                <div class="card-body">
+            <div class="card-body">
                     <p class="card-text"><b>Lokale størrelse:</b> @item.Lokale.LokaleSize</p>
                     <p class="card-text"><b>Dato:</b> @item.Dag</p>
                     <p class="card-text"><b>Booket af:</b> @item.BrugerNavn</p>
                     <p class="card-text"><b>Booket for:</b> @Enum.GetName(typeof(brugerRolle), (item.BookesFor))</p>
-                    <div class="centrer-item">
+                <div class="centrer-item">
                     <form method="post">
                         <button class="btn btn-primary black-button" type="submit" asp-page="/AdministrationPages/AdministrationAflysBooking" asp-route-id="@item.ResevertionId">AFLYS</button>
                     </form>
                     <form method="get">
-                        <button type="submit" asp-page="/AdministrationPages/AdministrationRedigerBooking" asp-route-id="@item.ResevertionId">Rediger</button>
+                        <button type="submit" class="btn btn-primary black-button" asp-page="/AdministrationPages/AdministrationRedigerBooking" asp-route-id="@item.ResevertionId">Rediger</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+ </div>
 }
 
     <script>

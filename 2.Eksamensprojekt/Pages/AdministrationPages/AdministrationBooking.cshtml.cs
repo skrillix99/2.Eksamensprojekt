@@ -20,8 +20,6 @@ namespace _2.Eksamensprojekt.Pages.AdministrationPages
         [BindProperty]
         public BookingData Booking { get; set; }
         [BindProperty]
-        public PersonData Email { get; set; }
-        [BindProperty]
         public LokaleData Lokale { get; set; }
 
         public string ErrorMsg { get; set; }
@@ -31,7 +29,6 @@ namespace _2.Eksamensprojekt.Pages.AdministrationPages
             _administrationService = administrationService;
             _lokalerService = lokalerService;
 
-            Email = new PersonData();
             Lokale = new LokaleData();
         }
         public void OnGet(int id)
@@ -56,7 +53,6 @@ namespace _2.Eksamensprojekt.Pages.AdministrationPages
             
             Lokale.LokaleID = id;
             Booking.Lokale = Lokale;
-            Booking.Bruger = Email;
             _administrationService.AddReservationAdmin(Booking);
 
             return RedirectToPage("/Shared/LedigeLokaler");

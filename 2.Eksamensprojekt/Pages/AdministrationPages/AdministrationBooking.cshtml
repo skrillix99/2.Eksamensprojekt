@@ -29,8 +29,7 @@
             {
                 if (claim.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name")
                 {
-                    Model.Email.BrugerEmail = claim.Value;
-                    <input type="text" value="@claim.Value" asp-for="Email.BrugerEmail" hidden="hidden" />
+                    <input type="text" value="@claim.Value" asp-for="Booking.Bruger.BrugerEmail" hidden="hidden" />
                 }
             }
 

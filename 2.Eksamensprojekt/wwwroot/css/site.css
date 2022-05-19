@@ -187,8 +187,8 @@ h2 {
 }
 .forsideBillede {
     display: block;
-    height: 45vh;
     margin: 0 auto;
+    max-width: 100%;
 }
 
 @media (min-width: 576px) {

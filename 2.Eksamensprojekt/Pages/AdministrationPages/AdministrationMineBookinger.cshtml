@@ -27,14 +27,14 @@
                     <p class="card-text"><b>Størrelse:</b> @item.Lokale.LokaleSize</p>
                     <p class="card-text"><b>Dato:</b> @item.Dag.ToString("d")</p>
                     <p class="card-text"><b>Tidspunkt:</b> @item.TidStart.ToString(@"hh\:mm") - @item.TidSlut.ToString(@"hh\:mm")</p>
-                    <p class="card-text"><b>Booket af:</b> @item.BrugerNavn</p>
+                    <p class="card-text"><b>Booket af:</b> @item.Bruger.BrugerNavn</p>
                     <p class="card-text"><b>Booket for:</b> @Enum.GetName(typeof(brugerRolle), (item.BookesFor))</p>
                 <div class="centrer-item">
-                    <form method="post">
-                        <button class="btn btn-primary black-button" type="submit" asp-page="/AdministrationPages/AdministrationAflysBooking" asp-route-id="@item.ResevertionId">AFLYS</button>
+                    <form method="post" class="AflysbookingForm" style="display:inline; margin-right: 3em;">
+                        <button class="btn btn-primary black-button custom-btn" type="submit" asp-page="/AdministrationPages/AdministrationAflysBooking" asp-route-id="@item.ResevertionId">AFLYS</button>
                     </form>
-                    <form method="get">
-                        <button type="submit" class="btn btn-primary black-button" asp-page="/AdministrationPages/AdministrationRedigerBooking" asp-route-id="@item.ResevertionId">Rediger</button>
+                    <form method="get" class="AflysbookingForm" style="display:inline">
+                        <button type="submit" class="btn btn-primary black-button custom-btn" asp-page="/AdministrationPages/AdministrationRedigerBooking" asp-route-id="@item.ResevertionId">Rediger</button>
                     </form>
                 </div>
             </div>

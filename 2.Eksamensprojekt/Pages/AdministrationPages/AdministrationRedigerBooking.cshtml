@@ -2,49 +2,58 @@
 @using SuperBookerData
 @model _2.Eksamensprojekt.Pages.AdministrationPages.AdministrationRedigerBookingModel
 @{
-    ViewData["Title"] = "Rediger Bookinger Admin";
+    ViewData["Title"] = "Rediger Booking";
 }
 
-<a asp-page="/AdministrationPages/AdministrationMineBooking">< TILBAGE</a>
-<div class="centered">
-    <h1>Booking af</h1>
-    <div class="lokaleInfoWrapper" style="width: unset">
-        <h3>@Model.Booking.Lokale.LokaleNummer @Model.Booking.Lokale.LokaleNavn</h3>
-        <p><b>Størrelse:</b> @Enum.GetName(typeof(LokaleSize), (Model.Booking.Lokale.LokaleSize - 1))</p>
+<a class="tilbageLink" asp-page="AdministrationMineBookinger">< TILBAGE</a>
+<div class="centrer-item">
+    <h1>Redigering af:</h1>
+</div>
+    <div class="row">
+        <div class="lokale-info-centreret">
+            <div class="card mb-2">
+                <div class="card-header p-2">
+                    <h2 class="card-title"> @Model.Booking.Lokale.LokaleNummer @Model.Booking.Lokale.LokaleNavn</h2>
+                </div>
+                <div class="card-body">
+                    <p class="card-text"><b>Størrelse:</b> @Enum.GetName(typeof(LokaleSize), (Model.Booking.Lokale.LokaleSize - 1))</p>
+                </div>
+            </div>
+
+
+                <form method="post">
+
+                    <fieldset>
+                        <label><b>Tidspunkt og dato fra:</b></label>
+                        <br />
+                        <input type="datetime-local" asp-for="@Model.Booking.Dag" />
+                    </fieldset>
+                    <fieldset>
+                        <label><b>Varighed:</b></label>
+                        <br />
+                        <input type="time" asp-for="Booking.TidSlut" />
+                    </fieldset>
+                    <fieldset>
+                        <label><b>Bookes for:</b></label>
+                        <br />
+                        <select asp-for="@Model.Booking.BookesFor">
+                            @foreach (var rolle in Enum.GetValues(typeof(brugerRolle)))
+                            {
+                                <option value="@rolle">@rolle</option>
+
+                            }
+                        </select>
+                    </fieldset>
+                    <div class="centrer-item">
+                        <input type="submit" value="Rediger" class="btn-primary black-button book-btn" />
+                    </div>
+                </form>
+        </div>
     </div>
 
 
-    <form method="post">
+            <script>
+                var today = new Date().toISOString().slice(0, 16);
 
-        <fieldset>
-            <label>Tidspunkt og dato Fra:</label>
-            <br />
-            <input type="datetime-local" asp-for="@Model.Booking.Dag" />
-        </fieldset>
-        <fieldset>
-            <label>Til:</label>
-            <br />
-            <input type="time" asp-for="Booking.TidSlut" />
-        </fieldset>
-        <fieldset>
-            <label>Bookes for</label>
-            <br />
-            <select asp-for="@Model.Booking.BookesFor">
-                @foreach (var rolle in Enum.GetValues(typeof(brugerRolle)))
-                {
-                    <option value="@rolle">@rolle</option>
-
-                }
-            </select>
-        </fieldset>
-
-        <input type="submit" value="Rediger" class="btn-primary"/>
-    </form>
-</div>
-
-
-<script>
-    var today = new Date().toISOString().slice(0, 16);
-
-    document.getElementsByName("Booking.Dag")[0].min = today;
-</script>
+                document.getElementsByName("Booking.Dag")[0].min = today;
+            </script>

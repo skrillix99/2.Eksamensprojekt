@@ -1,4 +1,4 @@
-﻿
+﻿/*
 .custom-btn, .submitAprove, .submitDenied, .submitBlack {
     padding: 0.5em 1em;
     border: solid 2px #555;
@@ -50,14 +50,4 @@ h1 {
 .submitYellow {
     background-color: #FFF387;
 }
-
-/*.lokaleInfoWrapper {
-    margin: 1em auto;
-    width: 75%;
-    border: solid 1.5px #222;
-    color: #555;
-    padding: 2em;
-}*/
-.lokaleInfoWrapper p {
-    margin: 0;
-}
+*/

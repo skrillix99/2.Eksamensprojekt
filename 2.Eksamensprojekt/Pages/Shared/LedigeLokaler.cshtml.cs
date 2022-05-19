@@ -19,7 +19,7 @@ namespace _2.Eksamensprojekt.Pages.Shared
     public class LedigeLokalerModel : PageModel
     {
         
-        private ILedigeLokalerService _ledigeLokalerService;
+        private ILokalerService _ledigeLokalerService;
         private static List<LokaleData> _lokaleListe;
         
         
@@ -42,16 +42,16 @@ namespace _2.Eksamensprojekt.Pages.Shared
         /// <summary>
         /// Bruges til at bestemme valgmulighederne i de forskellige søgekriterier.
         /// </summary>
-        public LedigeLokalerModel(ILedigeLokalerService ledigeLokalerService)
+        public LedigeLokalerModel(ILokalerService ledigeLokalerService)
         {
             _ledigeLokalerService = ledigeLokalerService;
             SKEtage = new List<string>()
             {
-                "Vælg etage", "Stue etage (D1)", "1. etage (D2)", "2. etage (D3)"
+                "Vælg etage", "Stueetage (D1)", "1. etage (D2)", "2. etage (D3)"
             };
             SKStoerrelse = new List<string>()
             {
-               "Vælg lokale størrelse", "Gruppe lokaler", "Klasse lokaler", "Auditorie"
+               "Vælg lokale størrelse", "Gruppelokaler", "Klasselokaler", "Auditorie"
             };
             SKSmartBoard = new List<string>()
             {
@@ -66,7 +66,7 @@ namespace _2.Eksamensprojekt.Pages.Shared
         /// </summary>
         public void OnGet()
         {
-            _lokaleListe = _ledigeLokalerService.GetAll();
+            _lokaleListe = _ledigeLokalerService.GetAllLokaler();
             LokaleData = new List<LokaleData>(_lokaleListe);
         }
 

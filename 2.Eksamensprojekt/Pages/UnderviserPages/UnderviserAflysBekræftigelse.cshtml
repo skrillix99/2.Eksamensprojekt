@@ -2,7 +2,9 @@
 @using SuperBookerData
 @model _2.Eksamensprojekt.Pages.UnderviserPages.UnderviserAflysBekræftigelseModel
 @{
+    ViewData["Title"] = "Bekræft Aflysning";
 }
+
 <a class="tilbageLink" asp-page="UnderviserMineBookinger"> < TILBAGE</a>
 
 <div class="centrer-item">
@@ -28,10 +30,10 @@
     </div>
 </div>
 
-@if (Model.ErrorMsg != null)
+@if (Model.ErrorMsg == null)
 {
     <form method="post" class="AflysbookingForm">
         <input type="submit" value="OK" class="submitBlack custom-btn" asp-page="UnderviserMineBookinger"/>
-        <input type="submit" value="Fortryd" class="submitBlack custom-btn" asp-page="UnderviserMineBookinger"/>
+        <input type="submit" value="Fortryd" class="submitDenied  custom-btn" asp-page="UnderviserMineBookinger"/>
     </form>
 }

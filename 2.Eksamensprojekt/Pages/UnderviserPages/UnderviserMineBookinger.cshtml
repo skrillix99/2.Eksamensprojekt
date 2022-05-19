@@ -2,7 +2,7 @@
 @using SuperBookerData
 @model _2.Eksamensprojekt.Pages.UnderviserPages.UnderviserMineBookingerModel
 @{
-    ViewData["Title"] = "Mine bookinger - Underviser";
+    ViewData["Title"] = "Mine bookinger";
 }
 
 @foreach (var item in Model.Booking)
@@ -28,7 +28,7 @@
                     <p class="card-text"><b>Størrelse:</b> @item.Lokale.LokaleSize</p>
                     <p class="card-text"><b>Dato:</b> @item.Dag.ToString("d")</p>
                     <p class="card-text"><b>Tidspunkt:</b> @item.TidStart.ToString(@"hh\:mm") - @item.TidSlut.ToString(@"hh\:mm")</p>
-                    <p class="card-text"><b>Booket af:</b> @item.BrugerNavn</p>
+                    <p class="card-text"><b>Booket af:</b> @item.Bruger.BrugerNavn</p>
                     <p class="card-text"><b>Booket for:</b> @Enum.GetName(typeof(brugerRolle), (item.BookesFor))</p>
                     <div class="centrer-item">
                         <form method="post">

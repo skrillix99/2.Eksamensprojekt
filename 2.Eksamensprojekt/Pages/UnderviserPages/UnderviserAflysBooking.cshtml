@@ -2,6 +2,7 @@
 @using SuperBookerData
 @model _2.Eksamensprojekt.Pages.UnderviserPages.UnderviserAflysBookingModel
 @{
+    ViewData["Title"] = "Aflys Booking";
 }
 
 <a class="tilbageLink" asp-page="UnderviserMineBookinger"> < TILBAGE</a>
@@ -28,7 +29,7 @@
     </div>
 </div>
     
-@if (Model.ErrorMsg != null)
+@if (Model.ErrorMsg == null)
 {
     <form method="post" class="AflysbookingForm">
         <input type="submit" value="Ja" class="submitAprove custom-btn" asp-route-id="@Model.Booking.ResevertionId" asp-page="/UnderviserPages/UnderviserAflysBekræftigelse" />

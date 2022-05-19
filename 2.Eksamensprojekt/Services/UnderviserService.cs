@@ -9,9 +9,9 @@ namespace _2.Eksamensprojekt.Services
     public class UnderviserService : IUnderviserService
     {
         private const string connectionString = "Data Source=zealandmarc.database.windows.net;Initial Catalog=SuperBooker4000;User ID=AdminMarc;Password=Marcus19;Connect Timeout=30;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-        private readonly ILogIndService _logIndService;
+        private readonly IPersonService _logIndService;
 
-        public UnderviserService(ILogIndService logIndService)
+        public UnderviserService(IPersonService logIndService)
         {
             _logIndService = logIndService;
         }
@@ -19,11 +19,9 @@ namespace _2.Eksamensprojekt.Services
         /// Opretter en reservation og gemmer den i Databasen med de data BookingData objektet indeholder
         /// </summary>
         /// <param name="newBooking">Typen BookingData. Indeholder data om den nye reservation</param>
-        public void AddReservation(BookingData newBooking)
+        public void AddReservationUnderviser(BookingData newBooking)
         {
-
             string sql = "insert into Reservation VALUES (@tidStart, @dag, 0, @brugerFK, @lokaleFK, @tidSlut, @bookesFor)";
-            // TidStart, Dag, Heltbooket, Bruger_FK, Lokale_FK, TidSlut, BookesFor
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 TimeSpan tidSlut = newBooking.Dag.TimeOfDay.Add(newBooking.TidStart);
@@ -31,7 +29,7 @@ namespace _2.Eksamensprojekt.Services
 
                 SqlCommand cmd = new SqlCommand(sql, connection);
                 cmd.Parameters.AddWithValue("@tidStart", newBooking.Dag.ToShortTimeString());
-                cmd.Parameters.AddWithValue("@dag", newBooking.Dag.ToString("s"));
+                cmd.Parameters.AddWithValue("@dag", newBooking.Dag.Date.ToString("s"));
                 cmd.Parameters.AddWithValue("@tidSlut", tidSlut);
                 cmd.Parameters.AddWithValue("@brugerFK", brugerID);
                 cmd.Parameters.AddWithValue("@lokaleFK", newBooking.Lokale.LokaleID);
@@ -51,9 +49,9 @@ namespace _2.Eksamensprojekt.Services
 
         public bool CanDelete(DateTime dag, string email)
         {
-            DateTime dt = DateTime.Now.AddDays(-3); //TODO logic ændres
-            int newDay = dag.Subtract(dt).Days;
-            if ((dag.Subtract(dt).Days >= 3))
+            DateTime dt = DateTime.Now.AddDays(-3);
+            if ((dag.Subtract(dt).Days <= 3))
+
             {
                 throw new ArgumentOutOfRangeException("Må kun annullere med minimum 3 dages varsel.");
             }

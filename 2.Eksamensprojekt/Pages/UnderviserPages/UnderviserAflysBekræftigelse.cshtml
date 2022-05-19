@@ -30,7 +30,7 @@
     </div>
 </div>
 
-@if (Model.ErrorMsg != null)
+@if (Model.ErrorMsg == null)
 {
     <form method="post" class="AflysbookingForm">
         <input type="submit" value="OK" class="submitBlack custom-btn" asp-page="UnderviserMineBookinger"/>

@@ -24,7 +24,7 @@ namespace _2.Eksamensprojekt.Pages.UnderviserPages
         }
         public void OnGet()
         {
-        
+            Booking = UnderviserAflysBookingModel.TempBookingData;
         }
 
         public void OnPost(int id)

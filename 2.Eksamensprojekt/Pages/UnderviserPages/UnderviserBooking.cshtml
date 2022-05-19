@@ -20,49 +20,49 @@
                 </div>
             </div>
 
-                <form method="post">
+            <form method="post">
 
-                    @foreach (var claim in User.Claims)
+                @foreach (var claim in User.Claims)
+                {
+                    if (claim.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name")
                     {
-                        if (claim.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name")
-                        {
-                            <input type="text" value="@claim.Value" asp-for="Booking.BrugerEmail" hidden="hidden" />
-                        }
+                        <input type="text" value="@claim.Value" asp-for="Booking.BrugerEmail" hidden="hidden" />
                     }
+                }
 
-                    <fieldset>
-                        <label><b>Tidspunkt og dato fra:</b></label>
-                        <br />
-                        <input type="datetime-local" asp-for="@Model.Booking.Dag" value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" />
-                    </fieldset>
-                    <fieldset>
-                        <label><b>Varighed:</b></label>
-                        <br />
-                        <input type="time" asp-for="Booking.TidStart" />
-                    </fieldset>
-                    <fieldset>
-                        <label><b>Bookes for:</b></label>
-                        <br />
-                        <select asp-for="@Model.Booking.BookesFor">
-                            @foreach (var rolle in Enum.GetValues(typeof(brugerRolle)))
+                <fieldset>
+                    <label><b>Tidspunkt og dato fra:</b></label>
+                    <br />
+                    <input type="datetime-local" asp-for="@Model.Booking.Dag" value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" />
+                </fieldset>
+                <fieldset>
+                    <label><b>Varighed:</b></label>
+                    <br />
+                    <input type="time" asp-for="Booking.TidStart" />
+                </fieldset>
+                <fieldset>
+                    <label><b>Bookes for:</b></label>
+                    <br />
+                    <select asp-for="@Model.Booking.BookesFor">
+                        @foreach (var rolle in Enum.GetValues(typeof(brugerRolle)))
+                        {
+                            if (!(brugerRolle.Administration.ToString() == rolle.ToString()))
                             {
-                                if (!(brugerRolle.Administration.ToString() == rolle.ToString()))
-                                {
-                                    <option value="@rolle">@rolle</option>
-                                }
+                                <option value="@rolle">@rolle</option>
                             }
-                        </select>
-                    </fieldset>
-                    <div class="centrer-item">
-                        <input type="submit" value="Book" class="btn-primary book-btn" asp-page-handler="book" asp-route-id="@Model.Lokale.LokaleID" />
-                    </div>
-                </form>
+                        }
+                    </select>
+                </fieldset>
+                <div class="centrer-item">
+                    <input type="submit" value="Book" class="btn-primary book-btn" asp-page-handler="book" asp-route-id="@Model.Lokale.LokaleID" />
+                </div>
+            </form>
         </div>
     </div>
 
 
-            <script>
-                var today = new Date().toISOString().slice(0, 16);
+<script>
+    var today = new Date().toISOString().slice(0, 16);
 
-                document.getElementsByName("Booking.Dag")[0].min = today;
-            </script>
+    document.getElementsByName("Booking.Dag")[0].min = today;
+</script>

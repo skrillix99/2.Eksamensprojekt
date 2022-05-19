@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SuperBookerData;
 using Microsoft.AspNetCore.Authorization;
-using _2.Eksamensprojekt.Services;
 
 namespace _2.Eksamensprojekt.Pages.AdministrationPages
 {

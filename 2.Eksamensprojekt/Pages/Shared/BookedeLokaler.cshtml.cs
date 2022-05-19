@@ -20,8 +20,6 @@ namespace _2.Eksamensprojekt.Pages.Shared
 
         private static List<BookingData> _bookingListe;
 
-        private static List<BookingData> _lokaleListe;
-
         public List<BookingData> LokaleData { get; private set; }
         public List<string> SKEtage { get; private set; }
         public List<string> SKStoerrelse { get; private set; }

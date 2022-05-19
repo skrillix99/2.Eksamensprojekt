@@ -18,7 +18,7 @@ namespace _2.Eksamensprojekt.Services
         /// <summary>
         /// Opretter en reservation og gemmer den i Databasen med de data BookingData objektet indeholder
         /// </summary>
-        /// <param name="newBooking">Typen BookingData. Indeholder data om den nye reservation</param>
+        /// <param name="newBooking">Typen BookingData. Skal indeholder data om den nye reservation</param>
         public void AddReservationUnderviser(BookingData newBooking)
         {
             string sql = "insert into Reservation VALUES (@tidStart, @dag, 0, @brugerFK, @lokaleFK, @tidSlut, @bookesFor)";

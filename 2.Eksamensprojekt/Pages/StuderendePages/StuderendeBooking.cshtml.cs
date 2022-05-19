@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using _2.Eksamensprojekt.Services;
 using _2.Eksamensprojekt.Services.Interfaces;
@@ -49,23 +50,24 @@ namespace _2.Eksamensprojekt.Pages.StuderendePages
         {
             if (Booking.TidStart > Booking.TidSlut)
             {
-                ErrorMsg = "Til skal være senere end fra!";
+                ErrorMsg = "Til skal være senere end Fra!";
                 return Page();
             }
 
-            TimeSpan senestTid = (TimeSpan) _administrationService.GetAllStuderendeRettigheder()[2];
-            TimeSpan slutBookingTid = Booking.Dag.TimeOfDay.Add(Booking.TidStart);
+            TimeSpan senestLovligeTid = (TimeSpan) _administrationService.GetAllStuderendeRettigheder()[2];
+            TimeSpan bookingTilTid = Booking.TidSlut;
             try
             {
-                if (slutBookingTid > senestTid)
+                if (bookingTilTid > senestLovligeTid)
                 {
-                    ErrorMsg = $"Du må senest have et lokale booke til kl: {senestTid:hh\\:mm}";
+                    ErrorMsg = $"Du må senest have et lokale booke til kl: {senestLovligeTid:hh\\:mm}";
                     return Page();
                 }
 
 
                 Lokale.LokaleID = id;
                 Booking.Lokale = _lokalerService.GetSingelLokale(id);
+                Thread.Sleep(1000);
                 _studerendeService.AddReservation(Booking);
             }
             catch (ArgumentOutOfRangeException e)

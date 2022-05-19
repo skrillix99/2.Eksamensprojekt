@@ -21,6 +21,8 @@ namespace _2.Eksamensprojekt.Pages.UnderviserPages
         public UnderviserMineBookingerModel(IBookingService bookingService)
         {
             _bookingService = bookingService;
+
+            UnderviserBookingModel.CountUp = 0;
         }
         public void OnGet()
         {

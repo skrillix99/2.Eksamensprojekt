@@ -22,6 +22,8 @@ namespace _2.Eksamensprojekt.Pages.UnderviserPages
         public BookingData Booking { get; set; }
         [BindProperty]
         public LokaleData Lokale { get; set; }
+        public static int CountUp { get; set; }
+
         public string ErrorMsg { get; set; }
 
         public UnderviserBookingModel(IUnderviserService underviserService, ILokalerService lokalerService)
@@ -49,9 +51,13 @@ namespace _2.Eksamensprojekt.Pages.UnderviserPages
                 return Page();
             }
 
-            Lokale.LokaleID = id;
-            Booking.Lokale = Lokale;
-            _underviserService.AddReservationUnderviser(Booking);
+            if (CountUp == 0)
+            {
+                Lokale.LokaleID = id;
+                Booking.Lokale = Lokale;
+                _underviserService.AddReservationUnderviser(Booking);
+            }
+            CountUp++;
             
             return RedirectToPage("UnderviserMineBookinger");
         }

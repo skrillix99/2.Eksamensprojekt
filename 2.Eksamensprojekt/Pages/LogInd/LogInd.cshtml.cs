@@ -47,7 +47,7 @@ namespace _2.Eksamensprojekt.Pages.LogInd
             foreach (LogIndData user in logIndData)
             {
 
-                if (EmailLogInd == user.EmailLogInd && Password == user.Password)
+                if (EmailLogInd.ToLower() == user.EmailLogInd.ToLower() && Password == user.Password)
                 {
                     LoggedInUser = user;
                     // sætter Claims op med Email (ClaimTypes.Name) og Rolle (ClaimTypes.Role) og bagefter redirect'er til den rette forside baseret på role.

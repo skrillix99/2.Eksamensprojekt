@@ -17,14 +17,16 @@ namespace _2.Eksamensprojekt.Pages.AdministrationPages
         private IBookingService _bookingService;
 
         public BookingData Booking{ get; set; }
+        public BookingData TempBookingData { get; set; }
 
         public AdministrationAflysBekræftigelseModel(IBookingService bookingService)
         {
             _bookingService = bookingService;
         }
 
-        public void OnGet()
+        public void OnGet(int id)
         {
+            TempBookingData = _bookingService.GetSingleBooking(id);
         }
 
         public void OnPost(int id)
@@ -32,9 +34,11 @@ namespace _2.Eksamensprojekt.Pages.AdministrationPages
             Booking = AdministrationAflysBookingModel.TempBookingData;
         }
 
-        public void OnPostDel(int id)
+        public IActionResult OnPostDel(int id)
         {
             _bookingService.DeleteReservationById(id);
+
+            return RedirectToPage("AdministrationPages/AdministrationMineBookinger");
         }
     }
 }

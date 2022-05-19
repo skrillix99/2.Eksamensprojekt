@@ -10,16 +10,18 @@ namespace _2.Eksamensprojekt.Services
     public class StuderendeService: IStuderendeService
     {
         private const string connectionString = "Data Source=zealandmarc.database.windows.net;Initial Catalog=SuperBooker4000;User ID=AdminMarc;Password=Marcus19;Connect Timeout=30;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-        private readonly IPersonService _logIndService;
+        private readonly IPersonService _personService;
+        private readonly ILokalerService _lokalerService;
         private readonly IAdministrationService _administrationService;
         private readonly IBookingService _bookingService;
         /// <summary>
         /// Laver dependency injection til at kunne bruge ILogIndService.
         /// </summary>
-        /// <param name="logIndService">Typen ILogIndService</param>
-        public StuderendeService(IPersonService logIndService, IAdministrationService administrationService, IBookingService bookingService)
+        /// <param name="personService">Typen IPersonService</param>
+        public StuderendeService(IPersonService personService, ILokalerService lokalerService, IAdministrationService administrationService, IBookingService bookingService)
         {
-            _logIndService = logIndService;
+            _personService= personService;
+            _lokalerService = lokalerService;
             _administrationService = administrationService;
             _bookingService = bookingService;
         }
@@ -60,6 +62,7 @@ namespace _2.Eksamensprojekt.Services
             ld.LokaleSmartBoard = reader.GetBoolean(5);
             ld.LokaleSize = (LokaleSize)reader.GetInt32(6);
             ld.MuligeBookinger = reader.GetInt32(7);
+            ld.LokaleID = reader.GetInt32(12);
 
             PersonData p = new PersonData();
             p.BrugerNavn = reader.GetString(8);
@@ -93,7 +96,7 @@ namespace _2.Eksamensprojekt.Services
         {
             string msg;
 
-            int BrugerID = _logIndService.GetSingelPersonByEmail(newBooking.BrugerEmail).BrugerID;
+            int BrugerID = _personService.GetSingelPersonByEmail(newBooking.BrugerEmail).BrugerID;
             int limit = (int) _administrationService.GetAllStuderendeRettigheder()[1];
             int antalBooket = CheckReservationerByBrugerId(BrugerID).Count;
             if (antalBooket <= limit)
@@ -107,11 +110,11 @@ namespace _2.Eksamensprojekt.Services
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                BookingData tilbage = GetSingelBooking(newBooking.Lokale.LokaleID);
+                BookingData tilbage = GetSingleBookingByIdAndDay(newBooking.Lokale.LokaleID, newBooking.Dag);
                 if (tilbage == null)
                 {
                     tilbage = new BookingData();
-                    tilbage.HeltBooket = GetSingelLokale(newBooking.Lokale.LokaleID).MuligeBookinger;
+                    tilbage.HeltBooket = _lokalerService.GetSingelLokale(newBooking.Lokale.LokaleID).MuligeBookinger;
                 }
                 else if (tilbage.HeltBooket == 0)
                 {
@@ -126,7 +129,7 @@ namespace _2.Eksamensprojekt.Services
 
                 SqlCommand cmd = new SqlCommand(sql, connection);
                 cmd.Parameters.AddWithValue("@tidStart", newBooking.Dag.ToShortTimeString());
-                cmd.Parameters.AddWithValue("@dag", newBooking.Dag.ToString("s"));
+                cmd.Parameters.AddWithValue("@dag", newBooking.Dag.Date.ToString("s"));
                 cmd.Parameters.AddWithValue("@mulige", tilbage.HeltBooket);
                 cmd.Parameters.AddWithValue("@tidSlut", tidSlut);
                 cmd.Parameters.AddWithValue("@brugerFK", BrugerID);
@@ -157,32 +160,6 @@ namespace _2.Eksamensprojekt.Services
             }
 
             return msg;
-        }
-
-        public LokaleData GetSingelLokale(int id)
-        {
-            LokaleData list = new LokaleData();
-
-            string sql = "select * from Lokale " +
-                         "inner join LokaleSize ON LokaleSize_FK = SizeId " +
-                         "inner join LokaleLokation ON LokaleLokation_FK = LokaleLokationId " +
-                         "WHERE LokaleID = @id";
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                SqlCommand cmd = new SqlCommand(sql, connection);
-                cmd.Parameters.AddWithValue("@id", id);
-                cmd.Connection.Open();
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    var us = ReadLokale(reader);
-                    return us;
-                }
-
-                return list;
-            }
         }
 
         public void DeleteReservation(int id)
@@ -222,11 +199,6 @@ namespace _2.Eksamensprojekt.Services
             }
         }
 
-        public List<BookingData> GetAllReservationer(string sql2)
-        {
-            throw new NotImplementedException();
-        }
-
         public List<BookingData> CheckReservationerByBrugerId(int id)
         {
             List<BookingData> lokaler = new List<BookingData>();
@@ -248,40 +220,33 @@ namespace _2.Eksamensprojekt.Services
 
                 while (reader.Read())
                 {
-                    BookingData l = ReadReservationByBrugerId(reader);
-                    lokaler.Add(l);
+                    BookingData bd = new();
+                    bd.ResevertionId = reader.GetInt32(0);
+                    lokaler.Add(bd);
                 }
             }
 
             return lokaler;
         }
 
-        private BookingData ReadReservationByBrugerId(SqlDataReader reader)
-        {
-            BookingData bd = new BookingData();
-
-            bd.ResevertionId = reader.GetInt32(0);
-
-            return bd;
-        }
-
-        public BookingData GetSingelBooking(int id)
+        public BookingData GetSingleBookingByIdAndDay(int id, DateTime dag)
         {
             BookingData l = new BookingData();
             string sql = "SELECT Reservation.Dag, Reservation.TidStart, Reservation.TidSlut, " +
                          "Lokale.LokaleNavn, LokaleLokation.LokaleNummer, LokaleSmartBoard, LokaleSize.Size, " +
-                         "MuligeBookinger, Person.BrugerNavn, Reservation.ReservationID, Reservation.Heltbooket, Lokale.lokaleID " +
+                         "MuligeBookinger, Person.BrugerNavn, Reservation.ReservationID, BrugerID, Reservation.Heltbooket, Lokale.lokaleID " +
                          "FROM Reservation " +
                          "INNER JOIN Lokale ON Reservation.LokaleID_FK = Lokale.LokaleID " +
                          "inner join LokaleSize ON Lokale.LokaleSize_FK = SizeId " +
                          "inner join LokaleLokation ON Lokale.LokaleLokation_FK = LokaleLokationId " +
                          "INNER JOIN Person ON Reservation.BrugerID_FK = Person.BrugerID " +
-                         "WHERE ReservationID = @id";
+                         "WHERE LokaleID = @id AND Reservation.Dag = @dag";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlCommand cmd = new SqlCommand(sql, connection);
                 cmd.Parameters.AddWithValue("@id", id);
+                cmd.Parameters.AddWithValue("@dag", dag.Date.ToString("yyyy-MM-ddTHH:mm:ss"));
                 cmd.Connection.Open();
 
                 SqlDataReader reader = cmd.ExecuteReader();

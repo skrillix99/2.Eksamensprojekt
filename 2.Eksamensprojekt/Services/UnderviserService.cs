@@ -29,7 +29,7 @@ namespace _2.Eksamensprojekt.Services
 
                 SqlCommand cmd = new SqlCommand(sql, connection);
                 cmd.Parameters.AddWithValue("@tidStart", newBooking.Dag.ToShortTimeString());
-                cmd.Parameters.AddWithValue("@dag", newBooking.Dag.ToString("s"));
+                cmd.Parameters.AddWithValue("@dag", newBooking.Dag.Date.ToString("s"));
                 cmd.Parameters.AddWithValue("@tidSlut", tidSlut);
                 cmd.Parameters.AddWithValue("@brugerFK", brugerID);
                 cmd.Parameters.AddWithValue("@lokaleFK", newBooking.Lokale.LokaleID);
@@ -49,11 +49,9 @@ namespace _2.Eksamensprojekt.Services
 
         public bool CanDelete(DateTime dag, string email)
         {
-            //DateTime dt = DateTime.Now.AddDays(-3); //TODO logic ændres           
-            //if ((dag.Subtract(dt).Days <= 3))
-            DateTime dt = DateTime.Now.AddDays(-3); //TODO logic ændres
-            int newDay = dag.Subtract(dt).Days;
+            DateTime dt = DateTime.Now.AddDays(-3);
             if ((dag.Subtract(dt).Days <= 3))
+
             {
                 throw new ArgumentOutOfRangeException("Må kun annullere med minimum 3 dages varsel.");
             }

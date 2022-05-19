@@ -21,104 +21,6 @@ namespace _2.Eksamensprojekt.Services
             _logIndService = logIndService;
         }
 
-
-        #region ReadLokale
-
-        /// <summary>
-        /// Oversætter data fra et Lokale database kald til et LokaleData object med alle columns.
-        /// </summary>
-        /// <param name="reader">Typen SqlDataReader. object med data fra database kald</param>
-        /// <returns>et object af typen LokaleData</returns>
-        public LokaleData ReadLokale(SqlDataReader reader)
-        {
-            LokaleData l = new LokaleData();
-
-            l.LokaleID = reader.GetInt32(0);
-            l.LokaleNavn = reader.GetString(1);
-            l.LokaleSmartBoard = reader.GetBoolean(2);
-            l.LokaleSize = (LokaleSize)reader.GetInt32(7);
-            l.LokaleNummer = reader.GetString(10);
-            l.MuligeBookinger = reader.GetInt32(8);
-            l.Etage = reader.GetInt32(11);
-
-            return l;
-        }
-
-        #endregion
-
-        #region ReadReservation
-        /// <summary>
-        /// Oversætter data fra et Booking database kald til et BookingData object med alle columns.
-        /// </summary>
-        /// <param name="reader">Typen SqlDataReader. object med data fra database kald</param>
-        /// <returns>et object af typen BookingData</returns>
-        private BookingData ReadReservation(SqlDataReader reader)
-        {
-            BookingData b = new BookingData();
-            b.ResevertionId = reader.GetInt32(0);
-            b.TidStart = reader.GetTimeSpan(1);
-            b.Dag = reader.GetDateTime(2);
-            b.HeltBooket = reader.GetInt32(3);
-            b.TidSlut = reader.GetTimeSpan(4);
-            b.BookesFor = (brugerRolle)reader.GetInt32(5);
-            b.brugerRolle = (brugerRolle)reader.GetInt32(6);
-            b.BrugerID = reader.GetInt32(7);
-            b.BrugerNavn = reader.GetString(8);
-
-            LokaleData l = new LokaleData();
-            l.LokaleNavn = reader.GetString(9);
-            l.LokaleNummer = reader.GetString(10);
-            l.LokaleSmartBoard = reader.GetBoolean(11);
-            l.LokaleSize = (LokaleSize)reader.GetInt32(12);
-            l.MuligeBookinger = reader.GetInt32(13);
-            b.Lokale = l;
-            
-
-
-            //TODO tilføj brugerID og lokaleID foreign keys
-            return b;
-        }
-
-        #endregion
-        /// <summary>
-        /// Oversætter data fra et Booking database kald til et BookingData object med alle columns.
-        /// </summary>
-        /// <param name="reader">Typen SqlDataReader. objekt med data fra database kald</param>
-        /// <returns>et object af typen BookingData</returns>
-        #region ReadBooking
-
-        private BookingData ReadBookings(SqlDataReader reader)
-        {
-            BookingData k = new BookingData();
-
-            LokaleData ld = new LokaleData();
-            ld.LokaleNavn = reader.GetString(3);
-            ld.LokaleNummer = reader.GetString(4);
-            ld.LokaleSmartBoard = reader.GetBoolean(5);
-            ld.LokaleSize = (LokaleSize) reader.GetInt32(6);
-            ld.MuligeBookinger = reader.GetInt32(7);
-            ld.LokaleID = reader.GetInt32(11);
-
-            PersonData p = new PersonData();
-            p.BrugerNavn = reader.GetString(8);
-
-            k.Dag = reader.GetDateTime(i: 0);
-            k.TidStart = reader.GetTimeSpan(i: 1);
-            k.TidSlut = reader.GetTimeSpan(i: 2);
-            k.Lokale = ld; //3,4,5,6,7
-            k.Bruger = p; // 8
-            k.ResevertionId = reader.GetInt32(9);
-            k.HeltBooket = reader.GetInt32(10);
-
-            return k;
-        }
-
-        #endregion
-       
-        
-
-        
-        
         /// <summary>
         /// Opretter en ny booking og gemmer den i databasen
         /// </summary>
@@ -133,7 +35,7 @@ namespace _2.Eksamensprojekt.Services
 
                 SqlCommand cmd = new SqlCommand(sql, connection);
                 cmd.Parameters.AddWithValue("@tidStart", newBooking.Dag.ToShortTimeString());
-                cmd.Parameters.AddWithValue("@dag", newBooking.Dag.ToString("s"));
+                cmd.Parameters.AddWithValue("@dag", newBooking.Dag.Date.ToString("s"));
                 cmd.Parameters.AddWithValue("@tidSlut", tidSlut);
                 cmd.Parameters.AddWithValue("@brugerFK", brugerID);
                 cmd.Parameters.AddWithValue("@lokaleFK", newBooking.Lokale.LokaleID);
@@ -185,7 +87,7 @@ namespace _2.Eksamensprojekt.Services
                 SqlCommand cmd = new SqlCommand(sql, connection);
 
                 cmd.Parameters.AddWithValue("@Tidstart", updatedBooking.TidStart);
-                cmd.Parameters.AddWithValue("@dag", updatedBooking.Dag);
+                cmd.Parameters.AddWithValue("@dag", updatedBooking.Dag.Date);
                 cmd.Parameters.AddWithValue("@Tidslut", updatedBooking.TidSlut);
                 cmd.Parameters.AddWithValue("@Bookesfor", updatedBooking.BookesFor);
                 cmd.Parameters.AddWithValue("@id", updatedBooking.ResevertionId);

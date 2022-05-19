@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SuperBookerData;
 using Microsoft.AspNetCore.Authorization;
-using _2.Eksamensprojekt.Services;
 
 namespace _2.Eksamensprojekt.Pages.AdministrationPages
 {
@@ -17,20 +16,16 @@ namespace _2.Eksamensprojekt.Pages.AdministrationPages
     {
         private IBookingService _bookingService;
         private IAdministrationService _administrationService;
-        
+
         [BindProperty]
         public BookingData Booking { get; set; }
 
 
-
-        //public AdministrationRedigerBookingModel(IAdministrationService administrationService, IBookingService booking)
-
-        public AdministrationRedigerBookingModel(IBookingService bookingService, IAdministrationService administrationService)
-
+        public AdministrationRedigerBookingModel(IAdministrationService administrationService, IBookingService booking)
         {
-            _bookingService = bookingService;
             _administrationService = administrationService;
-            //_bookingService = booking;
+            _bookingService = booking;
+            
         }
         
         public IActionResult OnGet(int id)

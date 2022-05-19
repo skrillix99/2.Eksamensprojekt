@@ -34,7 +34,7 @@ namespace SuperBookerData
 
         protected bool Checker(LogIndData check)
         {
-            return EmailLogInd == check.EmailLogInd && Password == check.Password;
+            return EmailLogInd.ToLower() == check.EmailLogInd.ToLower() && Password == check.Password;
         }
 
         public override bool Equals(object obj)

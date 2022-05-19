@@ -47,7 +47,7 @@ namespace _2.Eksamensprojekt.Pages.UnderviserPages
             Booking.Lokale = Lokale;
             _underviserService.AddReservationUnderviser(Booking);
             
-            return RedirectToPage("/Shared/LedigeLokaler");
+            return RedirectToPage("UnderviserMineBookinger");
         }
     }
 }

@@ -38,7 +38,7 @@ namespace _2.Eksamensprojekt.Pages.AdministrationPages
         {
             _bookingService.DeleteReservationById(id);
 
-            return RedirectToPage("AdministrationPages/AdministrationMineBookinger");
+            return RedirectToPage("AdministrationMineBookinger");
         }
     }
 }

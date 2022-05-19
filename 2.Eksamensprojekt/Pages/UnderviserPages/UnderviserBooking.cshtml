@@ -6,6 +6,9 @@
 }
 
 <a class="tilbageLink" asp-page="/Shared/LedigeLokaler">< TILBAGE</a>
+
+<p class="alert-danger text-center" style="margin-top: 1em;">@Model.ErrorMsg</p>
+
 <div class="centrer-item">
     <h1>Booking af:</h1>
 </div>
@@ -31,14 +34,19 @@
                 }
 
                 <fieldset>
-                    <label><b>Tidspunkt og dato fra:</b></label>
+                    <label><b>Dato:</b></label>
                     <br />
-                    <input type="datetime-local" asp-for="@Model.Booking.Dag" value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" />
+                    <input type="date" asp-for="Booking.Dag" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
                 </fieldset>
                 <fieldset>
-                    <label><b>Varighed:</b></label>
+                    <label><b>Fra:</b></label>
                     <br />
                     <input type="time" asp-for="Booking.TidStart" />
+                </fieldset>
+                <fieldset>
+                    <label><b>Til:</b></label>
+                    <br />
+                    <input type="time" asp-for="Booking.TidSlut" />
                 </fieldset>
                 <fieldset>
                     <label><b>Bookes for:</b></label>

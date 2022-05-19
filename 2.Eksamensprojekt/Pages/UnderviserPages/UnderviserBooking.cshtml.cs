@@ -22,7 +22,7 @@ namespace _2.Eksamensprojekt.Pages.UnderviserPages
         public BookingData Booking { get; set; }
         [BindProperty]
         public LokaleData Lokale { get; set; }
-        public int TesTimeSpan { get; set; }
+        public string ErrorMsg { get; set; }
 
         public UnderviserBookingModel(IUnderviserService underviserService, ILokalerService lokalerService)
         {
@@ -43,6 +43,12 @@ namespace _2.Eksamensprojekt.Pages.UnderviserPages
 
         public IActionResult OnPostBook(int id)
         {
+            if (Booking.TidStart > Booking.TidSlut)
+            {
+                ErrorMsg = "Til skal være senere end fra!";
+                return Page();
+            }
+
             Lokale.LokaleID = id;
             Booking.Lokale = Lokale;
             _underviserService.AddReservationUnderviser(Booking);

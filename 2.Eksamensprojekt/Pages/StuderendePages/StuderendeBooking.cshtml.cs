@@ -47,6 +47,12 @@ namespace _2.Eksamensprojekt.Pages.StuderendePages
 
         public IActionResult OnPostBook(int id)
         {
+            if (Booking.TidStart > Booking.TidSlut)
+            {
+                ErrorMsg = "Til skal være senere end fra!";
+                return Page();
+            }
+
             TimeSpan senestTid = (TimeSpan) _administrationService.GetAllStuderendeRettigheder()[2];
             TimeSpan slutBookingTid = Booking.Dag.TimeOfDay.Add(Booking.TidStart);
             try

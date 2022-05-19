@@ -23,6 +23,8 @@ namespace _2.Eksamensprojekt.Pages.AdministrationPages
         [BindProperty]
         public LokaleData Lokale { get; set; }
 
+        public string ErrorMsg { get; set; }
+
         public AdministrationBookingModel(IAdministrationService administrationService, ILokalerService lokalerService)
         {
             _administrationService = administrationService;
@@ -45,6 +47,12 @@ namespace _2.Eksamensprojekt.Pages.AdministrationPages
 
         public IActionResult OnPostBook(int id)
         {
+            if (Booking.TidStart > Booking.TidSlut)
+            {
+                ErrorMsg = "Til skal være senere end fra!";
+                return Page();
+            }
+            
             Lokale.LokaleID = id;
             Booking.Lokale = Lokale;
             Booking.Bruger = Email;

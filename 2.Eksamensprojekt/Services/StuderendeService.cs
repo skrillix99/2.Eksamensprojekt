@@ -121,17 +121,14 @@ namespace _2.Eksamensprojekt.Services
                     throw new ArgumentOutOfRangeException("Der er ikke flere bookings ledige på dette lokale");
                 }
 
-
-                string tidSlut = newBooking.Dag.Add(newBooking.TidStart).ToShortTimeString();
-
                 string sql = "insert into Reservation VALUES (@tidStart, @dag, @mulige, @brugerFK, @lokaleFK, @tidSlut, 0)";
                 string sqlUpdate = "UPDATE Reservation SET HeltBooket = @heltBooket WHERE LokaleID_FK = @id";
 
                 SqlCommand cmd = new SqlCommand(sql, connection);
-                cmd.Parameters.AddWithValue("@tidStart", newBooking.Dag.ToShortTimeString());
-                cmd.Parameters.AddWithValue("@dag", newBooking.Dag.Date.ToString("s"));
+                cmd.Parameters.AddWithValue("@tidStart", newBooking.TidStart);
+                cmd.Parameters.AddWithValue("@dag", newBooking.Dag.Date);
                 cmd.Parameters.AddWithValue("@mulige", tilbage.HeltBooket);
-                cmd.Parameters.AddWithValue("@tidSlut", tidSlut);
+                cmd.Parameters.AddWithValue("@tidSlut", newBooking.TidSlut);
                 cmd.Parameters.AddWithValue("@brugerFK", BrugerID);
                 cmd.Parameters.AddWithValue("@lokaleFK", newBooking.Lokale.LokaleID);
 

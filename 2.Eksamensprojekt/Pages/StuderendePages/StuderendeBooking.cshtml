@@ -40,14 +40,19 @@
                 }
             }
             <fieldset>
-                <label><b>Tidspunkt og dato fra:</b></label>
+                <label><b>Dato:</b></label>
                 <br />
-                <input type="datetime-local" asp-for="@Model.Booking.Dag" value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" />
+                <input type="date" asp-for="@Model.Booking.Dag" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
             </fieldset>
             <fieldset>
-                <label><b>Varighed:</b></label>
+                <label><b>Fra:</b></label>
                 <br />
                 <input type="time" asp-for="Booking.TidStart" />
+            </fieldset>
+            <fieldset>
+                <label><b>Til:</b></label>
+                <br />
+                <input type="time" asp-for="Booking.TidSlut" />
             </fieldset>
 
             <div class="centrer-item">

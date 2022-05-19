@@ -57,6 +57,7 @@ namespace _2.Eksamensprojekt.Services
 
             return true;
         }
+
         public void BegrænsetAdgang(DateTime dag, int id, string email)
         {
 

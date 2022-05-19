@@ -47,7 +47,7 @@ namespace _2.Eksamensprojekt.Pages.Shared
             _ledigeLokalerService = ledigeLokalerService;
             SKEtage = new List<string>()
             {
-                "Vælg etage", "Stueetage (D1)", "1. etage (D2)", "2. etage (D3)"
+                "Vælg etage", "Stue etage (D1)", "1. etage (D2)", "2. etage (D3)"
             };
             SKStoerrelse = new List<string>()
             {

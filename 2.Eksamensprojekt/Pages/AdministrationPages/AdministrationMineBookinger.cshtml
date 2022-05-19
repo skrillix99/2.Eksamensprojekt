@@ -25,7 +25,7 @@
                 </div>
             <div class="card-body">
                     <p class="card-text"><b>Størrelse:</b> @item.Lokale.LokaleSize</p>
-                    <p class="card-text"><b>Dato:</b> @item.Dag.ToString("d")</p>
+                    <p class="card-text"><b>Dag:</b> @item.Dag.ToString("d")</p>
                     <p class="card-text"><b>Tidspunkt:</b> @item.TidStart.ToString(@"hh\:mm") - @item.TidSlut.ToString(@"hh\:mm")</p>
                     <p class="card-text"><b>Booket af:</b> @item.Bruger.BrugerNavn</p>
                     <p class="card-text"><b>Booket for:</b> @Enum.GetName(typeof(brugerRolle), (item.BookesFor))</p>

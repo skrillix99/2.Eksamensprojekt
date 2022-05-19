@@ -11,6 +11,7 @@ using SuperBookerData;
 
 namespace _2.Eksamensprojekt.Pages.StuderendePages
 {
+    [Authorize(Roles = "Student")]
     public class StuderendeAflysBekræftigelseModel : PageModel
     {
         private IStuderendeService _studerendeService;

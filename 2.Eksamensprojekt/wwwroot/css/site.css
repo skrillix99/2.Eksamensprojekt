@@ -193,6 +193,10 @@ h2 {
     max-width: 100%;
 }
 
+.rediger-knap {
+    margin-left: 2em !important;
+}
+
 @media (min-width: 576px) {
     .navbar-expand-sm .navbar-nav {
         flex-direction: column;
@@ -206,12 +210,16 @@ h2 {
 
 .custom-btn {
     height: 7vh !important;
-    font-size: 3.5vw !important;
+    font-size: 3.2vw !important;
     padding: 1em 0em !important;
 }
 
 .AflysbookingForm {
     margin: 0 auto 0 !important;
+}
+
+.rediger-knap {
+    margin-left: 2em !important;
 }
 
 .footer-btn {

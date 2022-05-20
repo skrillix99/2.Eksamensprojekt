@@ -45,7 +45,7 @@ namespace _2.Eksamensprojekt.Services
             }
 
         }
-        public bool CanDelete(DateTime dag, string email)
+        public bool CanDelete(DateTime dag)
         {
             DateTime dt = DateTime.Now.Date;
             if (dag.Subtract(dt).Days < 3)
@@ -58,6 +58,7 @@ namespace _2.Eksamensprojekt.Services
 
         public void BegrænsetAdgang(DateTime dag, int id, string email)
         {
+            CanDelete(dag);
 
             if (id <= 0)
             {

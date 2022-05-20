@@ -51,7 +51,7 @@ namespace _2.Eksamensprojekt.Services
 
         #endregion
 
-        private BookingData ReadBookings2(SqlDataReader reader)
+        private BookingData ReadBookingsByRolle(SqlDataReader reader)
         {
             BookingData k = new BookingData();
 
@@ -77,22 +77,7 @@ namespace _2.Eksamensprojekt.Services
             k.Bruger = p; // 8                       
             return k;
         }
-
-
-        private LokaleData ReadLokale(SqlDataReader reader)
-        {
-            LokaleData k = new LokaleData();
-            k.LokaleID = reader.GetInt32(0);
-            k.LokaleNavn = reader.GetString(1);
-            k.LokaleSmartBoard = reader.GetBoolean(2);
-            k.LokaleSize = (LokaleSize)reader.GetInt32(7);
-            k.LokaleNummer = reader.GetString(10);
-            k.MuligeBookinger = reader.GetInt32(8);
-            k.Etage = reader.GetInt32(11);
-
-            return k;
-        }
-
+        
         /// <summary>
         /// laver en liste og henter alle parameterne fra databasen og returner dem som en liste.
         /// </summary>
@@ -162,7 +147,7 @@ namespace _2.Eksamensprojekt.Services
 
                 while (reader.Read())
                 {
-                    BookingData l = ReadBookings2(reader);
+                    BookingData l = ReadBookingsByRolle(reader);
                     lokaler.Add(l);
                 }
             }

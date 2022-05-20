@@ -27,7 +27,7 @@ namespace _2.Eksamensprojekt.Services
         /// <param name="newBooking">Typen BookingData. Indeholder den nye bookings information</param>
         public void AddReservationAdmin(BookingData newBooking)
         {
-            string sql = "insert into Reservation VALUES (@tidStart, @dag, @mulige, @brugerFK, @lokaleFK, @tidSlut, @bookesFor)";
+            string sql = "insert into Reservation VALUES (@tidStart, @dag, @mulige, @brugerFK, @lokaleFK, @tidSlut, @bookesFor, 1)";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 int brugerID = _logIndService.GetSingelPersonByEmail(newBooking.Bruger.BrugerEmail).BrugerID;

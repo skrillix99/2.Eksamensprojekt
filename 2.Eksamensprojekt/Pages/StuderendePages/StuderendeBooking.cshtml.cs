@@ -18,11 +18,9 @@ namespace _2.Eksamensprojekt.Pages.StuderendePages
         private IStuderendeService _studerendeService;
         private IAdministrationService _administrationService;
         private ILokalerService _lokalerService;
-        private IBookingService _bookingService;
 
         [BindProperty]
         public BookingData Booking { get; set; }
-        public List<BookingData> BookingList { get; set; }
         [BindProperty]
         public LokaleData Lokale { get; set; }
 
@@ -30,12 +28,11 @@ namespace _2.Eksamensprojekt.Pages.StuderendePages
 
         public string ErrorMsg { get; set; }
 
-        public StuderendeBookingModel(IStuderendeService studerendeService, IAdministrationService administrationService, ILokalerService lokalerService, IBookingService bookingService)
+        public StuderendeBookingModel(IStuderendeService studerendeService, IAdministrationService administrationService, ILokalerService lokalerService)
         {
             _studerendeService = studerendeService;
             _administrationService = administrationService;
             _lokalerService = lokalerService;
-            _bookingService = bookingService;
 
             Lokale = new LokaleData();
         }
@@ -47,7 +44,6 @@ namespace _2.Eksamensprojekt.Pages.StuderendePages
         public void OnPost(int id)
         {
             Lokale = _lokalerService.GetSingelLokale(id);
-            BookingList = _bookingService.GetAllBookings();
         }
 
         public IActionResult OnPostBook(int id)

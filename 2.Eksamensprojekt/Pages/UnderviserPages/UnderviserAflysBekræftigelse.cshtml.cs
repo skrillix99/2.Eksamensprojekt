@@ -27,7 +27,7 @@ namespace _2.Eksamensprojekt.Pages.UnderviserPages
             Booking = UnderviserAflysBookingModel.TempBookingData;
         }
 
-        public void OnPost(int id)
+        public IActionResult OnPost(int id)
         {
             try
             {
@@ -37,7 +37,10 @@ namespace _2.Eksamensprojekt.Pages.UnderviserPages
             catch (ArgumentOutOfRangeException e)
             {
                 ErrorMsg = e.ParamName;
+                return Page();
             }
+
+            return RedirectToPage("UnderviserMineBookinger");
         }
     }
 }

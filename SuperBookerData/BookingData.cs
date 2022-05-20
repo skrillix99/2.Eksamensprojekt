@@ -17,12 +17,13 @@ namespace SuperBookerData
         private LokaleData _lokale;
         private TimeSpan _tidSlut;
         private brugerRolle _bookesFor;
+        private bool _booketSmartBoard;
         
         public BookingData()
         {
         }
 
-        public BookingData(int resevertionId, TimeSpan tidStart, DateTime dag, int heltBooket, PersonData bruger, LokaleData lokale, TimeSpan tidSlut, brugerRolle rolle)
+        public BookingData(int resevertionId, TimeSpan tidStart, DateTime dag, int heltBooket, PersonData bruger, LokaleData lokale, TimeSpan tidSlut, brugerRolle rolle, bool booketSmartBoard)
         {
             _resevertionID = resevertionId;
             _tidStart = tidStart;
@@ -32,6 +33,7 @@ namespace SuperBookerData
             _lokale = lokale;
             _tidSlut = tidSlut;
             _bookesFor = rolle;
+            _booketSmartBoard = booketSmartBoard;
         }
 
         public int ResevertionId
@@ -84,6 +86,12 @@ namespace SuperBookerData
         {
             get => _bookesFor;
             set => _bookesFor = value;
+        }
+
+        public bool BooketSmartBoard
+        {
+            get => _booketSmartBoard;
+            set => _booketSmartBoard = value;
         }
     }
 }

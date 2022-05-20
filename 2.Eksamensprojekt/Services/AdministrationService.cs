@@ -27,7 +27,7 @@ namespace _2.Eksamensprojekt.Services
         /// <param name="newBooking">Typen BookingData. Indeholder den nye bookings information</param>
         public void AddReservationAdmin(BookingData newBooking)
         {
-            string sql = "insert into Reservation VALUES (@tidStart, @dag, @mulige, @brugerFK, @lokaleFK, @tidSlut, @bookesFor)";
+            string sql = "insert into Reservation VALUES (@tidStart, @dag, @mulige, @brugerFK, @lokaleFK, @tidSlut, @bookesFor, 1)";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 int brugerID = _logIndService.GetSingelPersonByEmail(newBooking.Bruger.BrugerEmail).BrugerID;
@@ -81,14 +81,13 @@ namespace _2.Eksamensprojekt.Services
                          "SET TidStart = @Tidstart, Dag = @dag, TidSlut = @Tidslut, BookesFor = @Bookesfor " +
                          "WHERE ReservationID = @id";
 
-            string tidSlut = updatedBooking.Dag.Add(updatedBooking.TidStart).ToShortTimeString();
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlCommand cmd = new SqlCommand(sql, connection);
 
                 cmd.Parameters.AddWithValue("@Tidstart", updatedBooking.TidStart);
-                cmd.Parameters.AddWithValue("@dag", updatedBooking.Dag.Date);
-                cmd.Parameters.AddWithValue("@Tidslut", tidSlut);
+                cmd.Parameters.AddWithValue("@dag", updatedBooking.Dag);
+                cmd.Parameters.AddWithValue("@Tidslut", updatedBooking.TidSlut);
                 cmd.Parameters.AddWithValue("@Bookesfor", updatedBooking.BookesFor);
                 cmd.Parameters.AddWithValue("@id", updatedBooking.ResevertionId);
 

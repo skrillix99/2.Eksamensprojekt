@@ -61,6 +61,13 @@
                 <p>Bliver automatisk sat til 2 timer</p>
             }
             </fieldset>
+            <fieldset>
+                <label><b>Smartboard:</b></label>
+                <br />
+                <span>JA: </span><input type="radio" asp-for="Booking.BooketSmartBoard" value="true"/>
+                <br />
+                <span>NEJ: </span> <input type="radio" asp-for="Booking.BooketSmartBoard" value="false"/>
+            </fieldset>
 
             <div class="centrer-item">
                 <input type="submit" value="Book" class="btn-primary book-btn" asp-page-handler="book" asp-route-id="@Model.Lokale.LokaleID" />

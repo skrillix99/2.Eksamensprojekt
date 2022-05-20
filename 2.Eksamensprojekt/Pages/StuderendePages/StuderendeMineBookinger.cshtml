@@ -28,8 +28,8 @@
                     <p class="card-text"><b>Tidspunkt:</b> @item.TidStart.ToString(@"hh\:mm") - @item.TidSlut.ToString(@"hh\:mm")</p>
 
                     <div class="centrer-item">
-                        <form method="post">
-                            <button class="btn btn-primary black-button" type="submit" asp-page="/StuderendePages/StuderendeAflysBooking" asp-route-id="@item.ResevertionId">AFLYS</button>
+                        <form method="post" class="aflys-knap">
+                            <button class="btn btn-primary black-button custom-btn" type="submit" asp-page="/StuderendePages/StuderendeAflysBooking" asp-route-id="@item.ResevertionId">AFLYS</button>
                         </form>
                     </div>
                 </div>

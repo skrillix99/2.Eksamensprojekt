@@ -1,7 +1,7 @@
 ﻿/*Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
-a.navbar-brand {
+/*a.navbar-brand {
     white-space: normal;
     text-align: center;
     word-break: break-all;
@@ -12,9 +12,9 @@ html {
     min-height: 100%;
 }
 
-body {
+body {*/
     /* Margin bottom by footer height */
-    margin-bottom: 60px;
+    /*margin-bottom: 60px;
 }
 
 .line-space {
@@ -47,9 +47,9 @@ body {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);*/
     /*Taget fra w3schools https://www.w3schools.com/howto/howto_css_image_text.asp*/
-    color: black;
+    /*color: black;
     background-color: white;
     font-size: 1.3em;
     padding: 0.5em;
@@ -59,9 +59,9 @@ body {
 .imagecontainer {
     position: relative;
     text-align: center;
-    color: white;
+    color: white;*/
     /*Taget fra w3schools https://www.w3schools.com/howto/howto_css_image_text.asp/ */
-}
+/*}
 
 .rund_knap {
     border-radius: 50px;
@@ -100,4 +100,4 @@ body {
 
 .margin_left_small {
     margin-left: 2.5%;
-}
+}*/

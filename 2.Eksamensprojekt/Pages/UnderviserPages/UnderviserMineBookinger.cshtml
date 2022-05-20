@@ -31,8 +31,8 @@
                     <p class="card-text"><b>Booket af:</b> @item.Bruger.BrugerNavn</p>
                     <p class="card-text"><b>Booket for:</b> @Enum.GetName(typeof(brugerRolle), (item.BookesFor))</p>
                     <div class="centrer-item">
-                        <form method="post">
-                            <button class="btn btn-primary black-button" type="submit" asp-page="/UnderviserPages/UnderviserAflysBooking" asp-route-id="@item.ResevertionId">AFLYS</button>
+                        <form method="post" class="aflys-knap">
+                            <button class="btn btn-primary black-button custom-btn" type="submit" asp-page="/UnderviserPages/UnderviserAflysBooking" asp-route-id="@item.ResevertionId">AFLYS</button>
                         </form>
                     </div>
                 </div>

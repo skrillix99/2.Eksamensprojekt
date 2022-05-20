@@ -193,6 +193,95 @@ h2 {
     max-width: 100%;
 }
 
+.rediger-knap {
+    margin-left: 2em !important;
+}
+
+
+/*CSS Skrevet af Alexander*/
+.input-1 {
+    text-align: center;
+}
+.btn-outline-light {
+    color: white;
+    border-color: black;
+    background-color: black;
+}
+.plantegning {
+    width: 100%;
+    height: auto;
+    /*Taget fra w3schools https://www.w3schools.com/css/css_rwd_images.asp*/
+}
+.log-ind {
+    text-align: center;
+    border: solid 1px;
+    background-color: white;
+}
+
+.btn-margin {
+    margin-bottom: 0.5rem
+}
+.header-margin {
+    margin-top: 0.1em
+}
+
+/*CSS skrevet af Marcus*/
+.custom-btn, .submitAprove, .submitDenied, .submitBlack {
+    padding: 0.5em 1em;
+    border: solid 2px #555;
+    width: 25%;
+    font-size: 1.2em;
+    font-weight: 700;
+}
+.topNavBar {
+    background-color: #FFF387 !important;
+}
+.logo {
+    width: 10em;
+    height: 2em;
+}
+.text-end {
+    text-align: end;
+}
+
+h1 {
+    margin-top: 1em;
+    font-size: 2em;
+}
+
+.tilbageLink {
+    padding: 0.5em;
+    border: solid 1.5px black;
+    color: black;
+    font-weight: 700;
+    margin-left: 2rem;
+}
+
+.AflysbookingForm {
+    width: 75%;
+    display: flex;
+    justify-content: space-around;
+    margin: 2em auto 0;
+}
+.submitAprove {
+    background-color: limegreen;
+}
+
+.submitDenied {
+    background-color: red;
+}
+
+.submitBlack {
+    background-color: #222222;
+    color: white;
+}
+
+.submitYellow {
+    background-color: #FFF387;
+}
+
+/*Media Queries*/
+
 @media (min-width: 576px) {
     .navbar-expand-sm .navbar-nav {
         flex-direction: column;
@@ -206,12 +295,16 @@ h2 {
 
 .custom-btn {
     height: 7vh !important;
-    font-size: 3.5vw !important;
+    font-size: 3.2vw !important;
     padding: 1em 0em !important;
 }
 
 .AflysbookingForm {
     margin: 0 auto 0 !important;
+}
+
+.rediger-knap {
+    margin-left: 2em !important;
 }
 
 .footer-btn {
@@ -220,6 +313,7 @@ h2 {
 
 h1 {
     padding: 0 1em;
+
 }
 .form-control {
     font-size: 4vw !important;

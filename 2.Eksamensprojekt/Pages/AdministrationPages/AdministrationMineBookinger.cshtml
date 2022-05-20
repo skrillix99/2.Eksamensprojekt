@@ -30,10 +30,10 @@
                     <p class="card-text"><b>Booket af:</b> @item.Bruger.BrugerNavn</p>
                     <p class="card-text"><b>Booket for:</b> @Enum.GetName(typeof(brugerRolle), (item.BookesFor))</p>
                 <div class="centrer-item">
-                    <form method="post" class="AflysbookingForm" style="display:inline; margin-right: 3em;">
+                    <form method="post" class="AflysbookingForm display_inline">
                         <button class="btn btn-primary black-button custom-btn" type="submit" asp-page="/AdministrationPages/AdministrationAflysBooking" asp-route-id="@item.ResevertionId">AFLYS</button>
                     </form>
-                    <form method="get" class="AflysbookingForm" style="display:inline">
+                    <form method="get" class="AflysbookingForm display_inline rediger-knap">
                         <button type="submit" class="btn btn-primary black-button custom-btn" asp-page="/AdministrationPages/AdministrationRedigerBooking" asp-route-id="@item.ResevertionId">REDIGER</button>
                     </form>
                 </div>

@@ -7,11 +7,6 @@ a.navbar-brand {
     word-break: break-all;
 }
 
-/* Provide sufficient contrast against white background */
-a {
-    color: #0366d6;
-}
-
 .btn-primary {
     color: #000;
     background-color: #FFF387;
@@ -41,28 +36,6 @@ body {
     white-space: nowrap;
     line-height: 60px; /* Vertically center the text there */
 }
-
-.line-space {
-    height: 1.3rem;
-}
-
-
-.tynd_knap {
-    font-size: 0.8em !important;
-    padding: 7px;
-}
-
-.wider-box {
-    width: 14em;
-}
-
-.Bredde100 {
-    max-width: 100%;
-    height: auto;
-    padding: 0;
-    margin: 0;
-}
-
 
 .centered {
     position: absolute;
@@ -119,43 +92,12 @@ body {
     height: 4rem;
 }
 
-.rund_knap {
-    border-radius: 50px;
-}
-
-.opgave_border {
-    border-style: solid;
-    padding: 1em 0em;
-}
-
-.ingen_liste_prik {
-    padding-left: 0px;
-    list-style-type: none;
-}
-
-    .ingen_liste_prik ul li {
-        list-style-type: none;
-    }
-
-.knap_divider {
-    margin-right: 30%;
-}
-
 .little_margin_top {
     margin-top: 2% !important;
 }
 
 .display_inline {
     display: inline !important;
-}
-
-#margin_center {
-    margin-right: 2.5%;
-    margin-left: -5.5%;
-}
-
-.margin_left_small {
-    margin-left: 2.5%;
 }
 
 .btn {
@@ -187,7 +129,8 @@ h2 {
     padding-left: 1rem !important;
     padding-right: 1rem !important;
 }
-.forsideBillede {
+
+#forsideBillede {
     display: block;
     margin: 0 auto;
     max-width: 100%;
@@ -199,20 +142,12 @@ h2 {
 
 
 /*CSS Skrevet af Alexander*/
-.input-1 {
-    text-align: center;
-}
-.btn-outline-light {
-    color: white;
-    border-color: black;
-    background-color: black;
-}
 .plantegning {
     width: 100%;
     height: auto;
     /*Taget fra w3schools https://www.w3schools.com/css/css_rwd_images.asp*/
 }
-.log-ind {
+#log-ind {
     text-align: center;
     border: solid 1px;
     background-color: white;
@@ -221,7 +156,7 @@ h2 {
 .btn-margin {
     margin-bottom: 0.5rem
 }
-.header-margin {
+#header-margin {
     margin-top: 0.1em
 }
 
@@ -276,9 +211,221 @@ h1 {
     color: white;
 }
 
-.submitYellow {
-    background-color: #FFF387;
+/*Anders CSS kode*/
+.book-btn {
+    display: inline;
+    width: 40%;
+    margin-left: 30%;
+    margin-right: 30%;
+    padding: 10px 0%;
+    font-weight: bold;
 }
+
+.ll-border-custom {
+    border-top: 3px dashed black;
+    max-width: 100%;
+    margin-top: 5px;
+    border-left-width: 0px;
+    border-right-width: 0px;
+}
+
+#ll-border-bottom {
+    border-bottom: 3px dashed black;
+    margin-bottom: 0.5rem;
+}
+.container {
+    margin-left: 0;
+    margin-right: 0;
+    max-width: 100% !important;
+}
+
+.dropdown-kategorier {
+    text-align: center;
+    width: 70%;
+    margin-left: 15%;
+}
+
+.dropdown-button {
+    text-align: center;
+    width: 100% !important;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    color: black;
+    background-color: white;
+}
+
+.mb-2 {
+    margin-bottom: 1.5rem !important;
+}
+
+.ingen-border-bottom {
+    border-bottom: 0px !important;
+}
+
+.form-control {
+    display: inline-block;
+    color: gray;
+    border: 1px solid black;
+    border-radius: 10px;
+    font-size: 1.3rem;
+}
+
+fieldset {
+    padding-bottom: 0.5rem;
+}
+
+.lokale-info-centreret {
+    width: 70%;
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+.centrer-item {
+    text-align: center;
+}
+
+/*Søge-bar*/
+#searchbar {
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 0.5em;
+    width: 70%;
+    margin-left: 15%;
+    text-align: center;
+}
+
+input[type=text] {
+    width: 100%;
+    -webkit-transition: width 0.15s ease-in-out;
+    transition: width 0.15s ease-in-out;
+}
+
+/* Dropdown-menu kode er inspireret af*/
+/*https://codepen.io/dautoblog/pen/KMGogz*/
+
+
+.toggle, [id^=drop] {
+    display: none;
+}
+
+.soege-kriteria {
+    margin: 2em;
+    padding: 0;
+    background-color: #FFF;
+    border: solid black 2px;
+}
+
+    .soege-kriteria:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    .soege-kriteria ul {
+        /*  float: left;*/
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        position: relative;
+    }
+
+        .soege-kriteria ul li {
+            margin: 0px;
+            display: block;
+            float: left;
+            background-color: #FFF;
+            width: 100%;
+        }
+
+    .soege-kriteria a {
+        display: block;
+        padding: 0 20px;
+        color: #000;
+        font-size: 20px;
+        line-height: 60px;
+        text-decoration: none;
+    }
+
+    .soege-kriteria ul ul {
+        display: none;
+        position: absolute;
+        top: 60px;
+    }
+
+
+        .soege-kriteria ul ul li {
+            width: 170px;
+            float: none;
+            display: list-item;
+            position: relative;
+        }
+
+        .soege-kriteria ul ul ul li {
+            position: relative;
+            top: -60px;
+            left: 170px;
+        }
+
+li > a:after {
+    content: ' +';
+}
+
+li > a:only-child:after {
+    content: '';
+}
+
+nav ul li:active > ul {
+    display: inherit;
+}
+
+.toggle + a,
+.menu {
+    display: none;
+}
+
+.toggle {
+    display: block;
+    background-color: #FFF;
+    padding: 0 20px;
+    color: #000;
+    font-size: 22px;
+    font-weight: bold;
+    line-height: 60px;
+    text-decoration: none;
+}
+
+
+[id^=drop]:checked + ul {
+    display: block;
+}
+
+.soege-kriteria ul ul .toggle,
+.soege-kriteria ul ul a {
+    padding: 0 40px;
+}
+
+.soege-kriteria ul li ul li .toggle,
+.soege-kriteria ul ul a {
+    background-color: #fff;
+}
+
+.soege-kriteria ul ul {
+    float: none;
+    position: static;
+    color: #000;
+}
+
+    .soege-kriteria ul ul li {
+        display: block;
+        width: 100%;
+    }
+
+    .soege-kriteria ul ul ul li {
+        position: static;
+    }
+    /*}*/
+
+
 
 /*Media Queries*/
 
@@ -288,6 +435,13 @@ h1 {
     }
     .container {
         max-width: 100%;
+    }
+}
+
+@media (min-width: 768px) {
+
+    .book-btn {
+        width: 25%;
     }
 }
 
@@ -320,4 +474,5 @@ h1 {
 }
 
 }
+
 

@@ -39,7 +39,6 @@ namespace _2.Eksamensprojekt.Pages.AdministrationPages
         public IActionResult OnPost(int id)
         {
             Booking.ResevertionId = id;
-            Booking.TidStart = Booking.Dag.TimeOfDay;
             _administrationService.UpdateReservation(Booking);
             return RedirectToPage("AdministrationMineBookinger");
         }

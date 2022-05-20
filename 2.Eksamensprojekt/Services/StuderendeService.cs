@@ -126,8 +126,8 @@ namespace _2.Eksamensprojekt.Services
                     throw new ArgumentOutOfRangeException("Der er ikke flere bookings ledige på dette lokale");
                 }
 
-                string sql = "insert into Reservation VALUES (@tidStart, @dag, @mulige, @brugerFK, @lokaleFK, @tidSlut, 0, 0)";
-                string sqlUpdate = "UPDATE Reservation SET HeltBooket = @heltBooket, BooketSmartBoard = @smartBoard WHERE LokaleID_FK = @id";
+                string sql = "insert into Reservation VALUES (@tidStart, @dag, @mulige, @brugerFK, @lokaleFK, @tidSlut, 0, @smartboard)";
+                string sqlUpdate = "UPDATE Reservation SET HeltBooket = @heltBooket WHERE LokaleID_FK = @id";
 
                 SqlCommand cmd = new SqlCommand(sql, connection);
                 cmd.Parameters.AddWithValue("@tidStart", newBooking.TidStart);
@@ -136,6 +136,7 @@ namespace _2.Eksamensprojekt.Services
                 cmd.Parameters.AddWithValue("@tidSlut", newBooking.TidSlut);
                 cmd.Parameters.AddWithValue("@brugerFK", BrugerID);
                 cmd.Parameters.AddWithValue("@lokaleFK", newBooking.Lokale.LokaleID);
+                cmd.Parameters.AddWithValue("@smartboard", newBooking.BooketSmartBoard);
 
                 cmd.Connection.Open();
 
@@ -150,7 +151,6 @@ namespace _2.Eksamensprojekt.Services
 
                 SqlCommand cmdUpdate = new SqlCommand(sqlUpdate, connection);
                 cmdUpdate.Parameters.AddWithValue("@heltBooket", tilbage.HeltBooket - 1);
-                cmdUpdate.Parameters.AddWithValue("@smartBoard", newBooking.BooketSmartBoard);
                 cmdUpdate.Parameters.AddWithValue("@id", newBooking.Lokale.LokaleID);
 
                 cmdUpdate.Connection.Open();

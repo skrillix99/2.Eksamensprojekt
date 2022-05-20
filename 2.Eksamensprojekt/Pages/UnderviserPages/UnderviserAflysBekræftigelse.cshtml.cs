@@ -32,7 +32,7 @@ namespace _2.Eksamensprojekt.Pages.UnderviserPages
             try
             {
                 Booking = UnderviserAflysBookingModel.TempBookingData;
-                _underviserService.BegrænsetAdgang(Booking.Dag, id, Booking.Bruger.BrugerEmail);
+                _underviserService.BegrænsetAdgang(Booking.Dag, id);
             }
             catch (ArgumentOutOfRangeException e)
             {

@@ -27,7 +27,7 @@
         </div>
 
         <aside>
-            <p>Du må booke senest til kl: @Model.SenestBooketTid.ToString(@"hh\:mm")</p>
+            <p class="alert-info">Du må booke mellem kl: 08:00 til @Model.SenestBooketTid.ToString(@"hh\:mm")</p>
         </aside>
 
         <form method="post">
@@ -42,17 +42,24 @@
             <fieldset>
                 <label><b>Dato:</b></label>
                 <br />
-                <input type="date" asp-for="@Model.Booking.Dag" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                <input type="date" asp-for="@Model.Booking.Dag" value="@DateTime.Now.ToString("yyyy-MM-dd")"/>
             </fieldset>
             <fieldset>
                 <label><b>Fra:</b></label>
                 <br />
-                <input type="time" asp-for="Booking.TidStart" />
+                <input type="time" asp-for="Booking.TidStart" value="@TimeSpan.Parse("08:00")"/>
             </fieldset>
             <fieldset>
-                <label><b>Til:</b></label>
+            <label><b>Til:</b></label>
+            @if (Model.Lokale.LokaleSize != LokaleSize.Mødelokale)
+            {
                 <br />
-                <input type="time" asp-for="Booking.TidSlut" />
+                <input type="time" asp-for="Booking.TidSlut"/>
+            }
+            else
+            {
+                <p>Bliver automatisk sat til 2 timer</p>
+            }
             </fieldset>
 
             <div class="centrer-item">
@@ -63,7 +70,7 @@
 </div>
 
 <script>
-    var today = new Date().toISOString().slice(0, 16);
+    var today = new Date().toISOString().slice(0, 10);
 
     document.getElementsByName("Booking.Dag")[0].min = today;
 </script>

@@ -48,6 +48,19 @@ namespace _2.Eksamensprojekt.Pages.StuderendePages
 
         public IActionResult OnPostBook(int id)
         {
+            Lokale = _lokalerService.GetSingelLokale(id);
+
+            if (Booking.TidStart < TimeSpan.Parse("08:00"))
+            {
+                ErrorMsg = "Du må ikke booke før kl: 08:00";
+                return Page();
+            }
+
+            if (Lokale.LokaleSize == LokaleSize.Mødelokale)
+            {
+                Booking.TidSlut = Booking.TidStart.Add(TimeSpan.FromHours(2));
+            }
+
             if (Booking.TidStart > Booking.TidSlut)
             {
                 ErrorMsg = "Til skal være senere end Fra!";
@@ -66,8 +79,7 @@ namespace _2.Eksamensprojekt.Pages.StuderendePages
 
 
                 Lokale.LokaleID = id;
-                Booking.Lokale = _lokalerService.GetSingelLokale(id);
-                Thread.Sleep(1000);
+                Booking.Lokale = Lokale;
                 _studerendeService.AddReservation(Booking);
             }
             catch (ArgumentOutOfRangeException e)

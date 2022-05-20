@@ -108,6 +108,11 @@ namespace _2.Eksamensprojekt.Services
                 throw new ArgumentOutOfRangeException($"Du må kun have {limit} bookings ad gangen");
             }
 
+            if (newBooking.Lokale.LokaleID == 0)
+            {
+                newBooking.Lokale.LokaleID = _bookingService.GetSingleBooking(newBooking.ResevertionId).Lokale.LokaleID;
+            }
+
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 BookingData tilbage = GetSingleBookingByIdAndDay(newBooking.Lokale.LokaleID, newBooking.Dag);

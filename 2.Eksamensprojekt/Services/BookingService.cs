@@ -78,6 +78,11 @@ namespace _2.Eksamensprojekt.Services
             return k;
         }
 
+        /// <summary>
+        /// Oversætter data fra et Lokale database kald til et LokaleData object med alle columns. brugs i BookedeLokaler
+        /// </summary>
+        /// <param name="reader">Typen SqlDataReader. objekt med data fra database kald</param>
+        /// <returns>et object af typen LokaleData</returns>
 
         private LokaleData ReadLokale(SqlDataReader reader)
         {
@@ -205,6 +210,10 @@ namespace _2.Eksamensprojekt.Services
             }
         }
 
+        /// <summary>
+        /// sletter en booking fra databasen ud fra fundet id og smider en exception ugyldigt id hvis id ikke er fundet
+        /// </summary>
+        /// <param name="id"></param>
         public void DeleteReservationById(int id)
         {
             if (id <= 0)

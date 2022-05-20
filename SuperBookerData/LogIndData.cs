@@ -31,24 +31,5 @@ namespace SuperBookerData
             Password = password;
             rolle = role;
         }
-
-        protected bool Checker(LogIndData check)
-        {
-            return EmailLogInd.ToLower() == check.EmailLogInd.ToLower() && Password == check.Password;
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
-            return Checker((LogIndData)obj);
-        }
-
-        public override int GetHashCode()
-        {
-            return HashCode.Combine(EmailLogInd, Password);
-        }
-
     }
 }

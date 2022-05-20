@@ -15,6 +15,9 @@ namespace _2.Eksamensprojekt.Pages.Shared
 
     public class BookedeLokalerModel : PageModel
     {
+        /// <summary>
+        /// lave variabler af ILokalerService og IBookingService typen.
+        /// </summary>
         private ILokalerService _ledigeLokalerService;
         private IBookingService _bookingService;
 
@@ -24,6 +27,9 @@ namespace _2.Eksamensprojekt.Pages.Shared
         public List<string> SKEtage { get; private set; }
         public List<string> SKStoerrelse { get; private set; }
 
+        /// <summary>
+        /// BindProperty søger for at dataen fra HTML bliver lagt in i din variable 
+        /// </summary>
         [BindProperty]
         public string SKEtage_valg { get; set; }
 

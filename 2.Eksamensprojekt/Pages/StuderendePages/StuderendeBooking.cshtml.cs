@@ -51,8 +51,6 @@ namespace _2.Eksamensprojekt.Pages.StuderendePages // Marcus
         {
             Lokale = _lokalerService.GetSingelLokale(id);
 
-            //TimeSpan tidligstLovligeTid = (TimeSpan)_administrationService.GetAllStuderendeRettigheder()[3];
-
             //tjekker om man har booket før den lovligetid
             if (Booking.TidStart < TidligstLovligeTid)
             {
@@ -74,7 +72,6 @@ namespace _2.Eksamensprojekt.Pages.StuderendePages // Marcus
                 return Page();
             }
 
-            //TimeSpan senestLovligeTid = (TimeSpan) _administrationService.GetAllStuderendeRettigheder()[2];
             TimeSpan bookingTilTid = Booking.TidSlut;
             try
             {

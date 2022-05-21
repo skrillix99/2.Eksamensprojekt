@@ -50,11 +50,17 @@
                 <input type="time" asp-for="Booking.TidStart" value="@Model.TidligstLovligeTid.ToString(@"hh\:mm")"/>
             </fieldset>
             <fieldset>
-            <label><b>Til:</b></label>
+            <label><b>Til i timer:</b></label>
             @if (Model.Lokale.LokaleSize != LokaleSize.Mødelokale)
             {
+                <select asp-for="Booking.TidSlut">
+                    <option value="@TimeSpan.Parse("00:30")">00:30</option>
+                    <option value="@TimeSpan.Parse("01:00")">01:00</option>
+                    <option value="@TimeSpan.Parse("01:30")">01:30</option>
+                    <option value="@TimeSpan.Parse("02:00")">02:00</option>
+                </select>
                 <br />
-                <input type="time" asp-for="Booking.TidSlut"/>
+                @*<input type="time" asp-for="Booking.TidSlut"/>*@
             }
             else
             {

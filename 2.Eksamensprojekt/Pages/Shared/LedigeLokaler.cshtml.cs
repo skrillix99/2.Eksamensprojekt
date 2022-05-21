@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Security.Claims;
 
+//Hovedansvarlig: Anders Petersen
 
 namespace _2.Eksamensprojekt.Pages.Shared
 {

@@ -98,7 +98,7 @@ https://codepen.io/dautoblog/pen/KMGogz -->
                                             {
                                                 if (lokale.Bruger.brugerRolle == brugerRolle.Underviser)
                                                 {
-                                                    <button class="btn btn-primary black-button" type="submit" asp-page="/UnderviserPages/UnderviserAflysBooking" asp-route-id="@lokale.ResevertionId">AFLYS</button>
+                                                    <button class="btn btn-primary black-button custom-btn" type="submit" asp-page="/UnderviserPages/UnderviserAflysBooking" asp-route-id="@lokale.ResevertionId">AFLYS</button>
                                                 }
                                             }
                                         }
@@ -109,12 +109,12 @@ https://codepen.io/dautoblog/pen/KMGogz -->
                                             {
                                                 if (test.Value != "Administration")
                                                 {
-                                                    <button class="btn btn-primary black-button" type="submit" asp-page="/UnderviserPages/UnderviserAflysBooking" asp-route-id="@lokale.ResevertionId">AFLYS</button>
+                                                    <button class="btn btn-primary black-button custom-btn" type="submit" asp-page="/UnderviserPages/UnderviserAflysBooking" asp-route-id="@lokale.ResevertionId">AFLYS</button>
                                                 }
                                             }
                                             if (test.Value == "Administration")  //TODO ikke vis ovenståendes
                                             {
-                                                <button class="btn btn-primary black-button" type="submit" asp-page="/AdministrationPages/AdministrationAflysBooking" asp-route-id="@lokale.ResevertionId">AFLYS</button>
+                                                <button class="btn btn-primary black-button custom-btn" type="submit" asp-page="/AdministrationPages/AdministrationAflysBooking" asp-route-id="@lokale.ResevertionId">AFLYS</button>
                                             }
                                         }
                                     }

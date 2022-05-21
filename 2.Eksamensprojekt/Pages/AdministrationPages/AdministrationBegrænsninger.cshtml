@@ -4,18 +4,30 @@
     ViewData["Title"] = "Admin Begrænsninger";
 }
 
-<div class="centered">
-    <h1>Studerendes rettigheder</h1>
-    <form method="post">
-        <fieldset>
-            <label>Antal bookings de må have ad gangen</label>
-            <input type="text" asp-for="@Model.NewLimit" value="@Model.NewLimit"/>
-        </fieldset>
-        <fieldset>
-            <label>Senest tid et lokale må blive booket til</label>
-            <input type="time" asp-for="@Model.TimeLimit" value="@Model.TimeLimit"/>
-        </fieldset>
+<div class="centrer-item">
+    <h1>Studerendes rettigheder:</h1>
+</div>
+<div class="row">
+    <div class="lokale-info-centreret">
+        <div class="card mb-2">
+            <div class="card-body">
+            <form method="post">
+                <fieldset>
+                    <label><b>Antal bookinger de studerende må have ad gangen:</b></label> 
+                </br>
+                    <input type="number" asp-for="@Model.NewLimit" value="@Model.NewLimit" />
+                </fieldset>
+                <fieldset>
+                    <label><b>Senest tid et lokale må blive booket til:</b></label>
+                </br>
+                    <input type="time" asp-for="@Model.TimeLimit" value="@Model.TimeLimit" />
+                </fieldset>
 
-        <input type="submit" value="Opdatere"/>
-    </form>
+                <div class="centrer-item">
+                    <input type="submit" value="Opdater" class="black-button custom-btn btn btn-primary" />
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
 </div>

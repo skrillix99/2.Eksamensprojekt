@@ -184,7 +184,7 @@ namespace _2.Eksamensprojekt.Services // Marcus
         public void DeleteReservation(int id)
         {
             string sql = "DELETE from Reservation WHERE ReservationID = @id";
-            string sqlUpdate = "UPDATE Reservation SET HeltBooket = @heltBooket WHERE LokaleID_FK = @id";
+            string sqlUpdate = "UPDATE Reservation SET HeltBooket = @heltBooket WHERE LokaleID_FK = @id AND dag = @dag";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -193,6 +193,7 @@ namespace _2.Eksamensprojekt.Services // Marcus
                 SqlCommand cmdUpdate = new SqlCommand(sqlUpdate, connection);
                 cmdUpdate.Parameters.AddWithValue("@heltBooket", bd.HeltBooket + 1);
                 cmdUpdate.Parameters.AddWithValue("@id", bd.Lokale.LokaleID);
+                cmdUpdate.Parameters.AddWithValue("@dag", bd.Dag);
 
                 cmdUpdate.Connection.Open();
 

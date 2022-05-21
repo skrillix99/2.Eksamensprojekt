@@ -46,6 +46,7 @@ namespace _2.Eksamensprojekt.Services
             k.Bruger = p; // 8
             k.ResevertionId = reader.GetInt32(9);
             k.BookesFor = (brugerRolle)reader.GetInt32(11);
+            k.HeltBooket = reader.GetInt32(15);
             return k;
         }
 
@@ -164,7 +165,7 @@ namespace _2.Eksamensprojekt.Services
         { 
             BookingData l = new BookingData();
             string sql = "SELECT Dag, TidStart, TidSlut, LokaleNavn, LokaleNummer, LokaleSmartBoard, Size, Muligebookinger, " +
-                         "BrugerNavn, ReservationID, BrugerRolle, BookesFor, BrugerEmail, BrugerID, Lokale.lokaleID " +
+                         "BrugerNavn, ReservationID, BrugerRolle, BookesFor, BrugerEmail, BrugerID, Lokale.lokaleID, HeltBooket " +
                          "FROM Reservation " +
                          "INNER JOIN Lokale ON Reservation.LokaleID_FK = Lokale.LokaleID " +
                          "inner join LokaleSize ON Lokale.LokaleSize_FK = SizeId " +

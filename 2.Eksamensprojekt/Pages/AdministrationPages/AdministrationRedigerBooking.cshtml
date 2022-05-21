@@ -8,7 +8,6 @@
 <a class="tilbageLink" asp-page="AdministrationMineBookinger">< TILBAGE</a>
 <div class="centrer-item">
     <h1>Redigering af:</h1>
-</div>
     <div class="row">
         <div class="lokale-info-centreret">
             <div class="card mb-2">
@@ -21,44 +20,44 @@
             </div>
 
 
-                <form method="post">
+            <form method="post">
 
 
 
 
-                    <fieldset>
-                        <label><b>Dato:</b></label>
-                        <br />
-                        <input type="date" asp-for="Booking.Dag"/>
-                    </fieldset>
-                    <fieldset>
-                        <label><b>Fra:</b></label>
-                        <br />
-                        <input type="time" asp-for="Booking.TidStart" />
-                    </fieldset>
-                    <fieldset>
-                        <label><b>Til:</b></label>
-                        <br />
-                        <input type="time" asp-for="Booking.TidSlut" />
-                    </fieldset>
-                    <fieldset>
-                        <label><b>Bookes for:</b></label>
-                        <br />
-                        <select asp-for="@Model.Booking.BookesFor">
-                            @foreach (var rolle in Enum.GetValues(typeof(brugerRolle)))
-                            {
-                                <option value="@rolle">@rolle</option>
+                <fieldset>
+                    <label><b>Dato:</b></label>
+                    <br />
+                    <input type="date" asp-for="Booking.Dag" />
+                </fieldset>
+                <fieldset>
+                    <label><b>Fra:</b></label>
+                    <br />
+                    <input type="time" asp-for="Booking.TidStart" />
+                </fieldset>
+                <fieldset>
+                    <label><b>Til:</b></label>
+                    <br />
+                    <input type="time" asp-for="Booking.TidSlut" />
+                </fieldset>
+                <fieldset>
+                    <label><b>Bookes for:</b></label>
+                    <br />
+                    <select asp-for="@Model.Booking.BookesFor">
+                        @foreach (var rolle in Enum.GetValues(typeof(brugerRolle)))
+                        {
+                            <option value="@rolle">@rolle</option>
 
-                            }
-                        </select>
-                    </fieldset>
-                    <div class="centrer-item">
-                        <input type="submit" value="REDIGER" class="btn-primary black-button book-btn" />
-                    </div>
-                </form>
+                        }
+                    </select>
+                </fieldset>
+                <div class="centrer-item">
+                    <input type="submit" value="REDIGER" class="btn-primary black-button book-btn" />
+                </div>
+            </form>
         </div>
     </div>
-
+</div>
 
             <script>
                 var today = new Date().toISOString().slice(0, 10);

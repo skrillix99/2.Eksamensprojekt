@@ -90,53 +90,47 @@ https://codepen.io/dautoblog/pen/KMGogz -->
     <div class="lokale-info-centreret">
         @foreach (var LkD in @Model.LokaleData)
         {
-            if (LogIndModel.LoggedInUser.rolle == brugerRolle.Student)
-            {
-                if (LkD.LokaleSize != LokaleSize.Auditorium)
-                {
-                    <div class="card mb-2">
-                        <div class="card-header p-2">
-                            <h2 class="card-title">@LkD.LokaleNummer @LkD.LokaleNavn</h2>
-                            <h2>
-                                @if (LkD.LokaleSmartBoard == true)
-                                {
-                                    @("(M. SmartBoard)")
-                                }
-                                @if (LkD.LokaleSmartBoard == false)
-                                {
-                                    @("(U. SmartBoard)")
-                                }
-                            </h2>
-                        </div>
-                        <div class="card-body">
+            <div class="card mb-2">
+                <div class="card-header p-2">
+                    <h2 class="card-title">@LkD.LokaleNummer @LkD.LokaleNavn</h2>
+                    <h2>
+                        @if (LkD.LokaleSmartBoard == true)
+                        {
+                            @("(M. SmartBoard)")
+                        }
+                        @if (LkD.LokaleSmartBoard == false)
+                        {
+                            @("(U. SmartBoard)")
+                        }
+                    </h2>
+                </div>
+                <div class="card-body">
 
-                            <p class="card-text"><b>Størrelse:</b> @LkD.LokaleSize</p>
+                    <p class="card-text"><b>Størrelse:</b> @LkD.LokaleSize</p>
 
 
-                            @foreach (var test in User.Claims)
-                            {
-                                if (test.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role")
+                    @foreach (var test in User.Claims)
+                    {
+                        if (test.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role")
+                        {
+                            <form method="post" class="centrer-item">
+                                @if (test.Value == "Underviser")
                                 {
-                                    <form method="post" class="centrer-item">
-                                        @if (test.Value == "Underviser")
-                                        {
-                                            <input type="submit" value="Lærer Book" asp-page="/UnderviserPages/UnderviserBooking" asp-route-id="@LkD.LokaleID" class="btn btn-primary book-btn font-weight-bold" />
-                                        }
-                                        @if (test.Value == "Administration")
-                                        {
-                                            <input type="submit" value="Admin Book" asp-page="/AdministrationPages/AdministrationBooking" asp-route-id="@LkD.LokaleID" class="btn btn-primary book-btn font-weight-bold" />
-                                        }
-                                        @if (test.Value == "Student")
-                                        {
-                                            <input type="submit" value="Stud Book" asp-page="/StuderendePages/StuderendeBooking" asp-route-id="@LkD.LokaleID" class="btn btn-primary book-btn font-weight-bold" />
-                                        }
-                                    </form>
+                                    <input type="submit" value="Lærer Book" asp-page="/UnderviserPages/UnderviserBooking" asp-route-id="@LkD.LokaleID" class="btn btn-primary book-btn font-weight-bold" />
                                 }
-                            }
-                        </div>
-                    </div>
-                }
-            }
+                                @if (test.Value == "Administration")
+                                {
+                                    <input type="submit" value="Admin Book" asp-page="/AdministrationPages/AdministrationBooking" asp-route-id="@LkD.LokaleID" class="btn btn-primary book-btn font-weight-bold" />
+                                }
+                                @if (test.Value == "Student")
+                                {
+                                    <input type="submit" value="Stud Book" asp-page="/StuderendePages/StuderendeBooking" asp-route-id="@LkD.LokaleID" class="btn btn-primary book-btn font-weight-bold" />
+                                }
+                            </form>
+                        }
+                    }
+                </div>
+            </div>
         }
     </div>
 </div>

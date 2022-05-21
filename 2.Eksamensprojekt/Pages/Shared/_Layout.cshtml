@@ -20,22 +20,35 @@
             <div class="container">
                 <a class="navbar-brand" asp-page="/Shared/LedigeLokaler"> <img class="logo" src="~/img/Zealand_logo_black_RGB_1600px_72dpi.png" alt="Logo"> </a>
                 
-                    <ul class="navbar-nav flex-grow-1">
-                        @{
-                            if (LogIndModel.LoggedInUser == null)
-                            {
-                                <li class="nav-item text-end">
-                                    <a class="nav-link black-button" asp-area="" asp-page="/LogInd/LogInd">Login</a>
-                                </li>
-                            }
-                            else
-                            {
-                                <li class="nav-item text-end">
-                                    <b><a class="nav-link black-button" asp-area="" asp-page="/LogInd/LogUd">Log ud</a></b>
-                                </li>
-                            }
+                <ul class="navbar-nav header-indstillinger">
+                    @{
+                        if (LogIndModel.LoggedInUser == null)
+                        {
+                            <li class="nav-item text-end">
+                                <a class="nav-link black-button" asp-area="" asp-page="/LogInd/LogInd">Login</a>
+                            </li>
                         }
-                    </ul>
+                        else
+                        {
+                            @foreach (var test in User.Claims)
+                            {
+                                if (test.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role")
+                                {
+                                    @if (test.Value == "Administration")
+                                    {
+                                        <li class="nav-item">
+                                            <a class="nav-link black-button" asp-page="/AdministrationPages/AdministrationBegrænsninger">⚙️ INDSTILLINGER</a>
+                                        </li>
+                                    }
+                                }
+
+                            }
+                            <li class="nav-item text-end little_margin_left">
+                                <b><a class="nav-link black-button" asp-area="" asp-page="/LogInd/LogUd">Log ud</a></b>
+                            </li>
+                        }
+                    }
+                </ul>
             </div>
         </nav>
     </header>

@@ -39,9 +39,9 @@ namespace _2.Eksamensprojekt.Services
             p.BrugerEmail = reader.GetString(12);
             p.BrugerID = reader.GetInt32(13);
 
-            k.Dag = reader.GetDateTime(i: 0);
-            k.TidStart = reader.GetTimeSpan(i: 1);
-            k.TidSlut = reader.GetTimeSpan(i: 2);
+            k.Dag = reader.GetDateTime(0);
+            k.TidStart = reader.GetTimeSpan(1);
+            k.TidSlut = reader.GetTimeSpan(2);
             k.Lokale = ld; //3,4,5,6,7
             k.Bruger = p; // 8
             k.ResevertionId = reader.GetInt32(9);
@@ -66,16 +66,17 @@ namespace _2.Eksamensprojekt.Services
             PersonData p = new PersonData();
             p.brugerRolle = (brugerRolle)reader.GetInt32(6);
             p.BrugerID = reader.GetInt32(7);
-            p.BrugerNavn = reader.GetString(8);           
+            p.BrugerNavn = reader.GetString(8);
+            p.BrugerEmail = reader.GetString(14);
 
-            k.ResevertionId = reader.GetInt32(i: 0);
-            k.TidStart = reader.GetTimeSpan(i: 1);
-            k.Dag = reader.GetDateTime(i: 2);
+            k.ResevertionId = reader.GetInt32(0);
+            k.TidStart = reader.GetTimeSpan(1);
+            k.Dag = reader.GetDateTime(2);
             k.HeltBooket = reader.GetInt32(3);
             k.TidSlut = reader.GetTimeSpan(4);
             k.BookesFor = (brugerRolle)reader.GetInt32(5);
-            k.Lokale = ld; //3,4,5,6,7
-            k.Bruger = p; // 8                       
+            k.Lokale = ld;
+            k.Bruger = p;
             return k;
         }
         
@@ -129,7 +130,7 @@ namespace _2.Eksamensprojekt.Services
             // dag, tidstart, tidslut, lokalenavn, lokalenummer, lokalesmartboard, size, muligebooker, brugernavn, reservationID, brugerrolle, 
             // bookesfor, brugeremail, 
             string sql = "Select ReservationID, TidStart, Dag, HeltBooket, TidSlut, BookesFor, BrugerRolle, BrugerID, BrugerNavn, " +
-                         "LokaleNavn, LokaleNummer, LokaleSmartBoard, Size, Muligebookinger " +
+                         "LokaleNavn, LokaleNummer, LokaleSmartBoard, Size, Muligebookinger, BrugerEmail " +
                          "From Reservation " +
                          "INNER JOIN Person ON Reservation.BrugerID_FK = Person.BrugerID " +
                          "INNER JOIN Lokale ON Reservation.LokaleID_FK = Lokale.LokaleID " +

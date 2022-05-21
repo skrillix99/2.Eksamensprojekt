@@ -27,7 +27,7 @@
         </div>
 
         <aside>
-            <p class="alert-info">Du må booke mellem kl: 08:00 til @Model.SenestBooketTid.ToString(@"hh\:mm")</p>
+            <p class="alert-info">Du må booke mellem kl: @Model.TidligstLovligeTid.ToString(@"hh\:mm") til @Model.SenestLovligeTid.ToString(@"hh\:mm")</p>
         </aside>
 
         <form method="post">
@@ -47,7 +47,7 @@
             <fieldset>
                 <label><b>Fra:</b></label>
                 <br />
-                <input type="time" asp-for="Booking.TidStart" value="@TimeSpan.Parse("08:00")"/>
+                <input type="time" asp-for="Booking.TidStart" value="@Model.TidligstLovligeTid.ToString(@"hh\:mm")"/>
             </fieldset>
             <fieldset>
             <label><b>Til:</b></label>
@@ -64,8 +64,11 @@
             <fieldset>
                 <label><b>Smartboard:</b></label>
                 <br />
-                <span>JA: </span><input type="radio" asp-for="Booking.BooketSmartBoard" value="true"/>
-                <br />
+                @if (Model.Lokale.LokaleSmartBoard)
+                {
+                    <span>JA: </span><input type="radio" asp-for="Booking.BooketSmartBoard" value="true"/>
+                    <br />
+                }
                 <span>NEJ: </span> <input type="radio" asp-for="Booking.BooketSmartBoard" value="false"/>
             </fieldset>
 

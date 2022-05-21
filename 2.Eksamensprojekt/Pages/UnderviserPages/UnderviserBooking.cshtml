@@ -41,7 +41,7 @@
                 <fieldset>
                     <label><b>Fra:</b></label>
                     <br />
-                    <input type="time" asp-for="Booking.TidStart" />
+                    <input type="time" asp-for="Booking.TidStart" value="@Model.TidligstLovligeTid.ToString(@"hh\:mm")" />
                 </fieldset>
                 <fieldset>
                     <label><b>Til:</b></label>

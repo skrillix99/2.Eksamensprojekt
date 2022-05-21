@@ -1,5 +1,6 @@
 ﻿@page
 @using SuperBookerData
+@using _2.Eksamensprojekt.Pages.LogInd
 @model _2.Eksamensprojekt.Pages.Shared.LedigeLokalerModel
 @{
     ViewData["Title"] = "Ledige Lokaler";
@@ -83,13 +84,12 @@ https://codepen.io/dautoblog/pen/KMGogz -->
     </ul>
 </div>
 
-<br /> @*awoo*@
+<br /> 
 
 <div class="row">
     <div class="lokale-info-centreret">
         @foreach (var LkD in @Model.LokaleData)
         {
-
             <div class="card mb-2">
                 <div class="card-header p-2">
                     <h2 class="card-title">@LkD.LokaleNummer @LkD.LokaleNavn</h2>

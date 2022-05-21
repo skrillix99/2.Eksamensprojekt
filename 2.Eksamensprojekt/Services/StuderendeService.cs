@@ -68,9 +68,9 @@ namespace _2.Eksamensprojekt.Services // Marcus
             p.BrugerNavn = reader.GetString(8);
             p.BrugerID = reader.GetInt32(10);
 
-            k.Dag = reader.GetDateTime(i: 0);
-            k.TidStart = reader.GetTimeSpan(i: 1);
-            k.TidSlut = reader.GetTimeSpan(i: 2);
+            k.Dag = reader.GetDateTime(0);
+            k.TidStart = reader.GetTimeSpan(1);
+            k.TidSlut = reader.GetTimeSpan(2);
             k.Lokale = ld; //3,4,5,6,7
             k.Bruger = p; // 8
             k.ResevertionId = reader.GetInt32(9);

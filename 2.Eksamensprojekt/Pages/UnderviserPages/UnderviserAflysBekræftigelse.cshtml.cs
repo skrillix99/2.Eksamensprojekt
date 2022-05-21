@@ -27,17 +27,20 @@ namespace _2.Eksamensprojekt.Pages.UnderviserPages
             Booking = UnderviserAflysBookingModel.TempBookingData;
         }
 
-        public void OnPost(int id)
+        public IActionResult OnPost(int id)
         {
             try
             {
                 Booking = UnderviserAflysBookingModel.TempBookingData;
-                _underviserService.BegrænsetAdgang(Booking.Dag, id, Booking.Bruger.BrugerEmail);
+                _underviserService.BegrænsetAdgang(Booking.Dag, id);
             }
             catch (ArgumentOutOfRangeException e)
             {
                 ErrorMsg = e.ParamName;
+                return Page();
             }
+
+            return RedirectToPage("UnderviserMineBookinger");
         }
     }
 }

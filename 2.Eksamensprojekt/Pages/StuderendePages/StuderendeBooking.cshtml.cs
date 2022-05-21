@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SuperBookerData;
 
-namespace _2.Eksamensprojekt.Pages.StuderendePages
+namespace _2.Eksamensprojekt.Pages.StuderendePages // Marcus
 {
     [Authorize(Roles = "Student")]
     public class StuderendeBookingModel : PageModel
@@ -18,24 +18,21 @@ namespace _2.Eksamensprojekt.Pages.StuderendePages
         private IStuderendeService _studerendeService;
         private IAdministrationService _administrationService;
         private ILokalerService _lokalerService;
-        private IBookingService _bookingService;
 
         [BindProperty]
         public BookingData Booking { get; set; }
-        public List<BookingData> BookingList { get; set; }
         [BindProperty]
         public LokaleData Lokale { get; set; }
 
-        public TimeSpan SenestBooketTid => (TimeSpan) _administrationService.GetAllStuderendeRettigheder()[2];
+        public TimeSpan SenestBooketTid => (TimeSpan) _administrationService.GetAllStuderendeRettigheder()[2]; // henter den seneste tid man må booke til
 
         public string ErrorMsg { get; set; }
 
-        public StuderendeBookingModel(IStuderendeService studerendeService, IAdministrationService administrationService, ILokalerService lokalerService, IBookingService bookingService)
+        public StuderendeBookingModel(IStuderendeService studerendeService, IAdministrationService administrationService, ILokalerService lokalerService)
         {
             _studerendeService = studerendeService;
             _administrationService = administrationService;
             _lokalerService = lokalerService;
-            _bookingService = bookingService;
 
             Lokale = new LokaleData();
         }
@@ -47,25 +44,27 @@ namespace _2.Eksamensprojekt.Pages.StuderendePages
         public void OnPost(int id)
         {
             Lokale = _lokalerService.GetSingelLokale(id);
-            BookingList = _bookingService.GetAllBookings();
         }
 
         public IActionResult OnPostBook(int id)
         {
             Lokale = _lokalerService.GetSingelLokale(id);
 
+            //tjekker om man har booket før kl:08:00
             if (Booking.TidStart < TimeSpan.Parse("08:00"))
             {
                 ErrorMsg = "Du må ikke booke før kl: 08:00";
                 return Page();
             }
-
+            
+            //tjekker hvis man har valgt et mødelokale 
             if (Lokale.LokaleSize == LokaleSize.Mødelokale)
             {
                 Booking.TidSlut = Booking.TidStart.Add(TimeSpan.FromHours(2));
                 Booking.BooketSmartBoard = true;
             }
 
+            //tjekker om man har valgt at slut tiden er før start tiden på en booking
             if (Booking.TidStart > Booking.TidSlut)
             {
                 ErrorMsg = "Til skal være senere end Fra!";
@@ -76,6 +75,7 @@ namespace _2.Eksamensprojekt.Pages.StuderendePages
             TimeSpan bookingTilTid = Booking.TidSlut;
             try
             {
+                //tjekker om man har booket til efter den tid man må booke til.
                 if (bookingTilTid > senestLovligeTid)
                 {
                     ErrorMsg = $"Du må senest have et lokale booke til kl: {senestLovligeTid:hh\\:mm}";

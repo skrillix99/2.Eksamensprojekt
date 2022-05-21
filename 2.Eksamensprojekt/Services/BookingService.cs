@@ -191,6 +191,10 @@ namespace _2.Eksamensprojekt.Services
             }
         }
 
+        /// <summary>
+        /// sletter en booking fra databasen ud fra fundet id og smider en exception ugyldigt id hvis id ikke er fundet
+        /// </summary>
+        /// <param name="id"></param>
         public void DeleteReservationById(int id)
         {
             if (id <= 0)

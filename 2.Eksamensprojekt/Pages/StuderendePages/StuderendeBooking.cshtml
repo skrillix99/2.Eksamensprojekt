@@ -64,8 +64,11 @@
             <fieldset>
                 <label><b>Smartboard:</b></label>
                 <br />
-                <span>JA: </span><input type="radio" asp-for="Booking.BooketSmartBoard" value="true"/>
-                <br />
+                @if (Model.Lokale.LokaleSmartBoard)
+                {
+                    <span>JA: </span><input type="radio" asp-for="Booking.BooketSmartBoard" value="true"/>
+                    <br />
+                }
                 <span>NEJ: </span> <input type="radio" asp-for="Booking.BooketSmartBoard" value="false"/>
             </fieldset>
 

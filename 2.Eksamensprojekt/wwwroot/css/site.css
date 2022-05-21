@@ -309,7 +309,7 @@ input[type=text] {
 }
 
 .soege-kriteria {
-    margin: 2em;
+    margin-bottom: 2em;
     padding: 0;
     background-color: #FFF;
     border: solid black 2px;
@@ -471,6 +471,7 @@ h1 {
 }
 .form-control {
     font-size: 4vw !important;
+/*Skal være 4vw fordi alt under ser ud til at ændre på dropdown, så den sidder skævt.*/
 }
 
 }

@@ -48,7 +48,7 @@
                     <div>
                         <label asp-for="EmailLogInd">Email</label>
                         <div>
-                            <input asp-for="EmailLogInd" placeholder="bruger@zealand.dk"/>
+                            <input asp-for="EmailLogInd" placeholder="bruger@zealand.dk" type="email"/>
                         </div>
                         <span asp-validation-for="EmailLogInd" class="alert-danger"></span> <br />
                     
@@ -58,7 +58,7 @@
                             <input asp-for="Password" placeholder="Adgangskode" />
                         </div>
                         <span asp-validation-for="Password" class="alert-danger"></span> <br />
-                        <button class="btn btn-primary btn-margin black-button">Log in</button>
+                        <button class="btn btn-primary btn-margin black-button">Login</button>
                         <p>Glemt kodeord? Send en SMS med teksten "kodeord" til 50 76 27 10</p>
                     </div>
                 </form>

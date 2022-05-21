@@ -92,7 +92,7 @@ namespace _2.Eksamensprojekt.Services
             //fortæller hvad der skal hentes fra databasen i det her tilfælle fra flere tabler og den gør det ved hjælp af i inner join 
             String sql =
                 "Select Dag, TidStart, TidSlut, LokaleNavn, LokaleNummer, LokaleSmartBoard, Size, Muligebookinger, " +
-                "BrugerNavn, ReservationID, BrugerRolle, BookesFor, BrugerEmail, BrugerID, LokaleID From Reservation " +
+                "BrugerNavn, ReservationID, BrugerRolle, BookesFor, BrugerEmail, BrugerID, LokaleID, HeltBooket From Reservation " +
                 "INNER JOIN Person ON Reservation.BrugerID_FK = Person.BrugerID " +
                 "INNER JOIN Lokale ON Reservation.LokaleID_FK = Lokale.LokaleID " +
                 "INNER JOIN LokaleLokation ON Lokale.LokaleLokation_FK = LokaleLokation.LokaleLokationId " +

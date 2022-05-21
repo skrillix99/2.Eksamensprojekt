@@ -1,5 +1,6 @@
 ﻿@page
 @using SuperBookerData
+@using _2.Eksamensprojekt.Pages.LogInd
 @model _2.Eksamensprojekt.Pages.UnderviserPages.UnderviserMineBookingerModel
 @{
     ViewData["Title"] = "Mine bookinger";
@@ -7,38 +8,40 @@
 
 @foreach (var item in Model.Booking)
 {
-
-    <div class="row">
-        <div class="lokale-info-centreret">
-            <div class="card mb-2">
-                <div class="card-header p-2">
-                    <h2 class="card-title">@item.Lokale.LokaleNummer @item.Lokale.LokaleNavn </h2>
-                    <h2>
-                        @if (item.Lokale.LokaleSmartBoard == true)
-                        {
-                            @("(M. SmartBoard)")
-                        }
-                        @if (item.Lokale.LokaleSmartBoard == false)
-                        {
-                            @("(U. SmartBoard)")
-                        }
-                    </h2>
-                </div>
-                <div class="card-body">
-                    <p class="card-text"><b>Størrelse:</b> @item.Lokale.LokaleSize</p>
-                    <p class="card-text"><b>Dag:</b> @item.Dag.ToString("d")</p>
-                    <p class="card-text"><b>Tidspunkt:</b> @item.TidStart.ToString(@"hh\:mm") - @item.TidSlut.ToString(@"hh\:mm")</p>
-                    <p class="card-text"><b>Booket af:</b> @item.Bruger.BrugerNavn</p>
-                    <p class="card-text"><b>Booket for:</b> @Enum.GetName(typeof(brugerRolle), (item.BookesFor))</p>
-                    <div class="centrer-item">
-                        <form method="post" class="aflys-knap">
-                            <button class="btn btn-primary black-button custom-btn" type="submit" asp-page="/UnderviserPages/UnderviserAflysBooking" asp-route-id="@item.ResevertionId">AFLYS</button>
-                        </form>
+    if (LogIndModel.LoggedInUser.EmailLogInd == item.Bruger.BrugerEmail)
+    {
+        <div class="row">
+            <div class="lokale-info-centreret">
+                <div class="card mb-2">
+                    <div class="card-header p-2">
+                        <h2 class="card-title">@item.Lokale.LokaleNummer @item.Lokale.LokaleNavn </h2>
+                        <h2>
+                            @if (item.Lokale.LokaleSmartBoard == true)
+                            {
+                                @("(M. SmartBoard)")
+                            }
+                            @if (item.Lokale.LokaleSmartBoard == false)
+                            {
+                                @("(U. SmartBoard)")
+                            }
+                        </h2>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text"><b>Størrelse:</b> @item.Lokale.LokaleSize</p>
+                        <p class="card-text"><b>Dag:</b> @item.Dag.ToString("d")</p>
+                        <p class="card-text"><b>Tidspunkt:</b> @item.TidStart.ToString(@"hh\:mm") - @item.TidSlut.ToString(@"hh\:mm")</p>
+                        <p class="card-text"><b>Booket af:</b> @item.Bruger.BrugerNavn</p>
+                        <p class="card-text"><b>Booket for:</b> @Enum.GetName(typeof(brugerRolle), (item.BookesFor))</p>
+                        <div class="centrer-item">
+                            <form method="post" class="aflys-knap">
+                                <button class="btn btn-primary black-button custom-btn" type="submit" asp-page="/UnderviserPages/UnderviserAflysBooking" asp-route-id="@item.ResevertionId">AFLYS</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    }
 }
 
 <script>

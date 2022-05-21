@@ -26,6 +26,11 @@ namespace _2.Eksamensprojekt.Services // Marcus
             string sql = "insert into Reservation VALUES (@tidStart, @dag, 0, @brugerFK, @lokaleFK, @tidSlut, @bookesFor, 1)";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
+                if (newBooking.Lokale.LokaleID == 0)
+                {
+                    newBooking.Lokale.LokaleID = _bookingService.GetSingleBooking(newBooking.ResevertionId).Lokale.LokaleID;
+                }
+
                 int brugerID = _logIndService.GetSingelPersonByEmail(newBooking.BrugerEmail).BrugerID;
 
                 SqlCommand cmd = new SqlCommand(sql, connection);

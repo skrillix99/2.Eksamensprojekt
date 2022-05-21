@@ -108,7 +108,7 @@ namespace _2.Eksamensprojekt.Services // Marcus
             }
             else
             {
-                throw new ArgumentOutOfRangeException($"Du må kun have {limit} bookings ad gangen");
+                throw new ArgumentOutOfRangeException($"Du må kun have {limit} bookinger ad gangen");
             }
             //failsafe. hvis lokaleID er 0 så finder vi den rigtige.
             if (newBooking.Lokale.LokaleID == 0)

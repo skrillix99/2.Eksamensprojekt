@@ -119,9 +119,11 @@ namespace _2.Eksamensprojekt.Services
                     int id = reader.GetInt32(0);
                     int limit = reader.GetInt32(1);
                     TimeSpan senestBookingTid = reader.GetTimeSpan(2);
+                    TimeSpan tidligstBookingTid = reader.GetTimeSpan(3);
                     objects.Add(id);
                     objects.Add(limit);
                     objects.Add(senestBookingTid);
+                    objects.Add(tidligstBookingTid);
                 }
             }
 

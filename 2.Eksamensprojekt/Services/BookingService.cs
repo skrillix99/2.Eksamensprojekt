@@ -66,7 +66,8 @@ namespace _2.Eksamensprojekt.Services
             PersonData p = new PersonData();
             p.brugerRolle = (brugerRolle)reader.GetInt32(6);
             p.BrugerID = reader.GetInt32(7);
-            p.BrugerNavn = reader.GetString(8);           
+            p.BrugerNavn = reader.GetString(8);
+            p.BrugerEmail = reader.GetString(14);
 
             k.ResevertionId = reader.GetInt32(0);
             k.TidStart = reader.GetTimeSpan(1);
@@ -129,7 +130,7 @@ namespace _2.Eksamensprojekt.Services
             // dag, tidstart, tidslut, lokalenavn, lokalenummer, lokalesmartboard, size, muligebooker, brugernavn, reservationID, brugerrolle, 
             // bookesfor, brugeremail, 
             string sql = "Select ReservationID, TidStart, Dag, HeltBooket, TidSlut, BookesFor, BrugerRolle, BrugerID, BrugerNavn, " +
-                         "LokaleNavn, LokaleNummer, LokaleSmartBoard, Size, Muligebookinger " +
+                         "LokaleNavn, LokaleNummer, LokaleSmartBoard, Size, Muligebookinger, BrugerEmail " +
                          "From Reservation " +
                          "INNER JOIN Person ON Reservation.BrugerID_FK = Person.BrugerID " +
                          "INNER JOIN Lokale ON Reservation.LokaleID_FK = Lokale.LokaleID " +

@@ -24,7 +24,8 @@ namespace _2.Eksamensprojekt.Pages.StuderendePages // Marcus
         [BindProperty]
         public LokaleData Lokale { get; set; }
 
-        public TimeSpan SenestBooketTid => (TimeSpan) _administrationService.GetAllStuderendeRettigheder()[2]; // henter den seneste tid man må booke til
+        public TimeSpan TidligstLovligeTid => (TimeSpan) _administrationService.GetAllStuderendeRettigheder()[3]; // henter den tidligste tid man må booke til
+        public TimeSpan SenestLovligeTid => (TimeSpan) _administrationService.GetAllStuderendeRettigheder()[2]; // henter den seneste tid man må booke til
 
         public string ErrorMsg { get; set; }
 
@@ -50,10 +51,12 @@ namespace _2.Eksamensprojekt.Pages.StuderendePages // Marcus
         {
             Lokale = _lokalerService.GetSingelLokale(id);
 
-            //tjekker om man har booket før kl:08:00
-            if (Booking.TidStart < TimeSpan.Parse("08:00"))
+            //TimeSpan tidligstLovligeTid = (TimeSpan)_administrationService.GetAllStuderendeRettigheder()[3];
+
+            //tjekker om man har booket før den lovligetid
+            if (Booking.TidStart < TidligstLovligeTid)
             {
-                ErrorMsg = "Du må ikke booke før kl: 08:00";
+                ErrorMsg = $"Du må ikke booke før kl: {TidligstLovligeTid:hh\\:mm}";
                 return Page();
             }
             
@@ -71,14 +74,14 @@ namespace _2.Eksamensprojekt.Pages.StuderendePages // Marcus
                 return Page();
             }
 
-            TimeSpan senestLovligeTid = (TimeSpan) _administrationService.GetAllStuderendeRettigheder()[2];
+            //TimeSpan senestLovligeTid = (TimeSpan) _administrationService.GetAllStuderendeRettigheder()[2];
             TimeSpan bookingTilTid = Booking.TidSlut;
             try
             {
                 //tjekker om man har booket til efter den tid man må booke til.
-                if (bookingTilTid > senestLovligeTid)
+                if (bookingTilTid > SenestLovligeTid)
                 {
-                    ErrorMsg = $"Du må senest have et lokale booke til kl: {senestLovligeTid:hh\\:mm}";
+                    ErrorMsg = $"Du må senest have et lokale booke til kl: {SenestLovligeTid:hh\\:mm}";
                     return Page();
                 }
 

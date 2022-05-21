@@ -17,19 +17,21 @@ namespace _2.Eksamensprojekt.Pages.UnderviserPages
     {
         private IUnderviserService _underviserService;
         private ILokalerService _lokalerService;
+        private IAdministrationService _administrationService;
 
         [BindProperty]
         public BookingData Booking { get; set; }
         [BindProperty]
         public LokaleData Lokale { get; set; }
         public static int CountUp { get; set; }
-
+        public TimeSpan TidligstLovligeTid => (TimeSpan)_administrationService.GetAllStuderendeRettigheder()[3]; // henter den tidligste tid man må booke til
         public string ErrorMsg { get; set; }
 
-        public UnderviserBookingModel(IUnderviserService underviserService, ILokalerService lokalerService)
+        public UnderviserBookingModel(IUnderviserService underviserService, ILokalerService lokalerService, IAdministrationService administrationService)
         {
             _underviserService = underviserService;
             _lokalerService = lokalerService;
+            _administrationService = administrationService;
 
             Lokale = new LokaleData();
         }
@@ -45,6 +47,14 @@ namespace _2.Eksamensprojekt.Pages.UnderviserPages
 
         public IActionResult OnPostBook(int id)
         {
+            Lokale = _lokalerService.GetSingelLokale(id);
+
+            if (Booking.TidStart < TidligstLovligeTid)
+            {
+                ErrorMsg = $"Du må ikke booke før kl: {TidligstLovligeTid:hh\\:mm}";
+                return Page();
+            }
+
             if (Booking.TidStart > Booking.TidSlut)
             {
                 ErrorMsg = "Til skal være senere end fra!";

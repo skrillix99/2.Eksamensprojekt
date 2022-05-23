@@ -20,6 +20,7 @@ namespace _2.Eksamensprojekt.Pages.AdministrationPages
         [BindProperty]
         public BookingData Booking { get; set; }
 
+        public string ErrorMsg { get; set; }
 
         public AdministrationRedigerBookingModel(IAdministrationService administrationService, IBookingService booking)
         {
@@ -38,6 +39,14 @@ namespace _2.Eksamensprojekt.Pages.AdministrationPages
 
         public IActionResult OnPost(int id)
         {
+
+            if (Booking.TidStart > Booking.TidSlut)
+            {
+                ErrorMsg = "Til skal være senere end fra!";
+                Booking = _bookingService.GetSingleBooking(id);
+                return Page();
+            }
+
             Booking.ResevertionId = id;
             _administrationService.UpdateReservation(Booking);
             return RedirectToPage("AdministrationMineBookinger");

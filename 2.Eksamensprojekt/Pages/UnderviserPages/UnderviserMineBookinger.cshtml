@@ -16,11 +16,11 @@
                     <div class="card-header p-2">
                         <h2 class="card-title">@item.Lokale.LokaleNummer @item.Lokale.LokaleNavn </h2>
                         <h2>
-                            @if (item.Lokale.LokaleSmartBoard == true)
+                            @if (item.BooketSmartBoard == true)
                             {
                                 @("(M. SmartBoard)")
                             }
-                            @if (item.Lokale.LokaleSmartBoard == false)
+                            @if (item.BooketSmartBoard == false)
                             {
                                 @("(U. SmartBoard)")
                             }

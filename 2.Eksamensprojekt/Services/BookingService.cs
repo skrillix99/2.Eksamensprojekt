@@ -78,6 +78,7 @@ namespace _2.Eksamensprojekt.Services
             k.BookesFor = (brugerRolle)reader.GetInt32(5);
             k.Lokale = ld;
             k.Bruger = p;
+            k.BooketSmartBoard = reader.GetBoolean(15);
             return k;
         }
         
@@ -132,7 +133,7 @@ namespace _2.Eksamensprojekt.Services
             // dag, tidstart, tidslut, lokalenavn, lokalenummer, lokalesmartboard, size, muligebooker, brugernavn, reservationID, brugerrolle, 
             // bookesfor, brugeremail, 
             string sql = "Select ReservationID, TidStart, Dag, HeltBooket, TidSlut, BookesFor, BrugerRolle, BrugerID, BrugerNavn, " +
-                         "LokaleNavn, LokaleNummer, LokaleSmartBoard, Size, Muligebookinger, BrugerEmail " +
+                         "LokaleNavn, LokaleNummer, LokaleSmartBoard, Size, Muligebookinger, BrugerEmail, BooketSmartBoard " +
                          "From Reservation " +
                          "INNER JOIN Person ON Reservation.BrugerID_FK = Person.BrugerID " +
                          "INNER JOIN Lokale ON Reservation.LokaleID_FK = Lokale.LokaleID " +

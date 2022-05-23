@@ -53,15 +53,16 @@ namespace _2.Eksamensprojekt.Services
 
         }
 
-        public void StuderendeRettighederUpdate(int bookingLimit, TimeSpan senestBooking)
+        public void StuderendeRettighederUpdate(int bookingLimit, TimeSpan senestTid, TimeSpan tidligstTid)
         {
-            string sql = "UPDATE StuderendeRettigheder SET BookingLimit = @bookingLimit, SenestBookingTid = @senestBooking";
+            string sql = "UPDATE StuderendeRettigheder SET BookingLimit = @bookingLimit, SenestBookingTid = @senestBooking, TidligstBookingTid = @tidligstBooking";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlCommand cmd = new SqlCommand(sql, connection);
                 cmd.Parameters.AddWithValue("@bookingLimit", bookingLimit);
-                cmd.Parameters.AddWithValue("@senestBooking", senestBooking);
+                cmd.Parameters.AddWithValue("@senestBooking", senestTid);
+                cmd.Parameters.AddWithValue("@tidligstBooking", tidligstTid);
 
                 cmd.Connection.Open();
 

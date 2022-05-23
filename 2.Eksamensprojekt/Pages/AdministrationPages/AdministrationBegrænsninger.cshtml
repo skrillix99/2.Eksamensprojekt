@@ -4,6 +4,8 @@
     ViewData["Title"] = "Admin Begrænsninger";
 }
 
+<p class="alert-info text-center">@Model.Msg</p>
+
 <div class="centrer-item">
     <h1>Studerendes rettigheder:</h1>
 </div>
@@ -18,11 +20,15 @@
                     <input type="number" asp-for="@Model.NewLimit" value="@Model.NewLimit" />
                 </fieldset>
                 <fieldset>
+                    <label><b>Tidligeste tid et lokale må blive booket fra</b></label>
+                    <br />
+                    <input type="time" asp-for="@Model.TidligstTid" value="@Model.TidligstTid" />
+                </fieldset>
+                <fieldset>
                     <label><b>Senest tid et lokale må blive booket til:</b></label>
                 </br>
-                    <input type="time" asp-for="@Model.TimeLimit" value="@Model.TimeLimit" />
+                    <input type="time" asp-for="@Model.SenestTid" value="@Model.SenestTid" />
                 </fieldset>
-
                 <div class="centrer-item">
                     <input type="submit" value="Opdater" class="black-button custom-btn btn btn-primary" />
                 </div>

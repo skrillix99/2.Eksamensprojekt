@@ -16,7 +16,10 @@ namespace _2.Eksamensprojekt.Pages.AdministrationPages
         [BindProperty]
         public int NewLimit { get; set; }
         [BindProperty]
-        public TimeSpan TimeLimit { get; set; }
+        public TimeSpan SenestTid { get; set; }
+        [BindProperty]
+        public TimeSpan TidligstTid { get; set; }
+        public string Msg { get; set; }
 
         public AdministrationBegrænsningerModel(IAdministrationService administrationService)
         {
@@ -26,12 +29,14 @@ namespace _2.Eksamensprojekt.Pages.AdministrationPages
         public void OnGet()
         {
             NewLimit = (int) _administrationService.GetAllStuderendeRettigheder()[1];
-            TimeLimit = (TimeSpan) _administrationService.GetAllStuderendeRettigheder()[2];
+            SenestTid = (TimeSpan) _administrationService.GetAllStuderendeRettigheder()[2];
+            TidligstTid = (TimeSpan) _administrationService.GetAllStuderendeRettigheder()[3];
         }
 
         public void OnPost()
         {
-            _administrationService.StuderendeRettighederUpdate(NewLimit, TimeLimit);
+            Msg = "Opdateret";
+            _administrationService.StuderendeRettighederUpdate(NewLimit, SenestTid, TidligstTid);
         }
     }
 }

@@ -17,7 +17,7 @@ namespace _2.Eksamensprojekt.Services.Interfaces
         void UpdateReservation(BookingData updatedBooking);
 
 
-        void StuderendeRettighederUpdate(int bookingLimit, TimeSpan senestBooking);
+        void StuderendeRettighederUpdate(int bookingLimit, TimeSpan senestTid, TimeSpan tidligstTid);
         List<object> GetAllStuderendeRettigheder();
     }
 }

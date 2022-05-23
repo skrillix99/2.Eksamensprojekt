@@ -262,12 +262,12 @@ namespace _2.Eksamensprojekt.Services
         /// </summary>
         public void DeleteReservationByDay()
         {
-            string sql = "DELETE from Reservation WHERE Dag < @nextDay";
+            string sql = "DELETE from Reservation WHERE Dag < @today";
 
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
                 SqlCommand cmd = new SqlCommand(sql, connection);
-                cmd.Parameters.AddWithValue("@nextDay", DateTime.Today.ToString("s"));
+                cmd.Parameters.AddWithValue("@today", DateTime.Today.ToString("s"));
 
                 cmd.Connection.Open();
 

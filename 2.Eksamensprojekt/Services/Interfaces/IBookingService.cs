@@ -17,6 +17,8 @@ namespace _2.Eksamensprojekt.Services
         /// <param name="id">Typen int. Skal passe med et reservations id</param>
         /// <returns>BookingData objet</returns>
         BookingData GetSingleBooking(int id);
+
+        List<BookingData> GetAllBookingsByIdAndDag(int id, DateTime dag);
         /// <summary>
         /// Sletter en reservation fra Reservations tabellen.
         /// </summary>

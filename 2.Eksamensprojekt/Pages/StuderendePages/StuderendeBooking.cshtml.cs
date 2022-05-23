@@ -18,6 +18,7 @@ namespace _2.Eksamensprojekt.Pages.StuderendePages // Marcus
         private IStuderendeService _studerendeService;
         private IAdministrationService _administrationService;
         private ILokalerService _lokalerService;
+        private IBookingService _bookingService;
 
         [BindProperty]
         public BookingData Booking { get; set; }
@@ -29,11 +30,13 @@ namespace _2.Eksamensprojekt.Pages.StuderendePages // Marcus
 
         public string ErrorMsg { get; set; }
 
-        public StuderendeBookingModel(IStuderendeService studerendeService, IAdministrationService administrationService, ILokalerService lokalerService)
+        public StuderendeBookingModel(IStuderendeService studerendeService, IAdministrationService administrationService, 
+            ILokalerService lokalerService, IBookingService bookingService)
         {
             _studerendeService = studerendeService;
             _administrationService = administrationService;
             _lokalerService = lokalerService;
+            _bookingService = bookingService;
 
             Lokale = new LokaleData();
         }
@@ -50,6 +53,15 @@ namespace _2.Eksamensprojekt.Pages.StuderendePages // Marcus
         public IActionResult OnPostBook(int id)
         {
             Lokale = _lokalerService.GetSingelLokale(id);
+            foreach (var sm in _bookingService.GetAllBookingsByIdAndDag(id, Booking.Dag))
+            {
+                if (sm.BooketSmartBoard)
+                {
+                    ErrorMsg = "Smartboardet er booket i forvejen";
+                    return Page();
+                }
+            }
+
 
             Booking.TidSlut = Booking.TidStart.Add(Booking.TidSlut);
 

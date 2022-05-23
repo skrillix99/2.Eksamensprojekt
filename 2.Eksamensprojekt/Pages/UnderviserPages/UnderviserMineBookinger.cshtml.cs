@@ -26,13 +26,15 @@ namespace _2.Eksamensprojekt.Pages.UnderviserPages
         }
         public void OnGet()
         {
-            string sql2 = "where BrugerRolle = 1";
+            string sql2 = "where BrugerRolle = 1 " +
+                          "Order By Dag, TidStart";
 
             Booking = _bookingService.GetAllReservationerByRolle(sql2);
         }
         public void OnPost()
         {
-            string sql2 = "where BrugerRolle = 1";
+            string sql2 = "where BrugerRolle = 1 " +
+                          "Order By Dag, TidStart";
 
             Booking = _bookingService.GetAllReservationerByRolle(sql2);
         }

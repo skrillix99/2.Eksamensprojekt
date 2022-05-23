@@ -51,6 +51,8 @@ namespace _2.Eksamensprojekt.Pages.StuderendePages // Marcus
         {
             Lokale = _lokalerService.GetSingelLokale(id);
 
+            Booking.TidSlut = Booking.TidStart.Add(Booking.TidSlut);
+
             //tjekker om man har booket før den lovligetid
             if (Booking.TidStart < TidligstLovligeTid)
             {
@@ -63,13 +65,6 @@ namespace _2.Eksamensprojekt.Pages.StuderendePages // Marcus
             {
                 Booking.TidSlut = Booking.TidStart.Add(TimeSpan.FromHours(2));
                 Booking.BooketSmartBoard = true;
-            }
-
-            //tjekker om man har valgt at slut tiden er før start tiden på en booking
-            if (Booking.TidStart > Booking.TidSlut)
-            {
-                ErrorMsg = "Til skal være senere end Fra!";
-                return Page();
             }
 
             TimeSpan bookingTilTid = Booking.TidSlut;

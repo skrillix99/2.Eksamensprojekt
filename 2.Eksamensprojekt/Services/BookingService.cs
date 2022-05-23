@@ -236,7 +236,7 @@ namespace _2.Eksamensprojekt.Services
         /// <param name="id"></param>
         public void DeleteReservationById(int id)
         {
-            if (id <= 0)
+            if (GetSingleBooking(id).ResevertionId != id)
             {
                 throw new KeyNotFoundException("Ugyldigt ID");
             }

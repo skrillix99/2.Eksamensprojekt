@@ -53,12 +53,15 @@ namespace _2.Eksamensprojekt.Pages.StuderendePages // Marcus
         public IActionResult OnPostBook(int id)
         {
             Lokale = _lokalerService.GetSingelLokale(id);
-            foreach (var sm in _bookingService.GetAllBookingsByIdAndDag(id, Booking.Dag))
+            if (Booking.BooketSmartBoard)
             {
-                if (sm.BooketSmartBoard)
+                foreach (var sm in _bookingService.GetAllBookingsByIdAndDag(id, Booking.Dag))
                 {
-                    ErrorMsg = "Smartboardet er booket i forvejen";
-                    return Page();
+                    if (sm.BooketSmartBoard)
+                    {
+                        ErrorMsg = "Smartboardet er booket i forvejen";
+                        return Page();
+                    }
                 }
             }
 

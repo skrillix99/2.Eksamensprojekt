@@ -172,9 +172,17 @@ h2 {
     background-color: #FFF387 !important;
 }
 .logo {
-    width: 10em;
-    height: 2em;
+    width: 100%;
+    float:left;
+    display: inline;
 }
+
+.navbar-brand {
+    text-align: left;
+    display:inline;
+    width: 50%;
+}
+
 .text-end {
     text-align: end;
 }
@@ -308,6 +316,15 @@ fieldset {
     border-color: #000;
 }
 
+.header-indstillinger {
+    float:right;
+    display: -webkit-box;
+    margin-top: 1em;
+}
+
+.little_margin_left {
+    margin-left: 2em;
+}
 /*Søge-bar*/
 #searchbar {
     padding: 15px;
@@ -468,6 +485,10 @@ nav ul li:active > ul {
     }
     .plantegning {
         width: 65%;
+    }
+    .logo {
+        width: 10em;
+        height: 2em;
     }
 }
 

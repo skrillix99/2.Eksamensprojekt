@@ -73,7 +73,12 @@ namespace _2.Eksamensprojekt.Services
                 }
             }
         }
-
+        /// <summary>
+        /// Opdaterer en booking baseret på id og gemmer de opdaterede oplysninger i databasen
+        /// </summary>
+        /// <param name="updatedBooking">Typen BookingData. Indeholder de redigerede oplysninger på den booking
+        /// der skal opdateres
+        /// </param>
         public void UpdateReservation(BookingData updatedBooking)
         {
 

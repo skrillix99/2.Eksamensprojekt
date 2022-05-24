@@ -11,6 +11,7 @@ namespace SuperBookerTest
 
         /// <summary>
         /// Tester med rigtige værdier om en studerende må booke inden for given tidsramme. Baseret på den tid de har valgt.
+        /// Taget fra StuderendeBooking.cshtml.cs. har taget 2 checks og lavet dem om til 1 her.
         /// </summary>
         /// <param name="tid">typen string. I programmet typen TimeSpan</param>
         [TestMethod]
@@ -38,6 +39,7 @@ namespace SuperBookerTest
 
         /// <summary>
         /// Tester med forkerte værdier om en studerende må booke inden for given tidsramme. Baseret på den tid de har valgt.
+        /// Taget fra StuderendeBooking.cshtml.cs. har taget 2 checks og lavet dem om til 1 her.
         /// </summary>
         /// <param name="tid">typen string. I programmet typen TimeSpan</param>
         [TestMethod]
@@ -72,6 +74,7 @@ namespace SuperBookerTest
 
         /// <summary>
         /// Tester med rigtige værdier om en underviser har lov til at slette baseret på hvor mange dage der er gået.
+        /// Taget fra UnderviserService
         /// </summary>
         /// <param name="dag">typen double. i programmet typen DateTime.</param>
         [TestMethod]
@@ -96,6 +99,7 @@ namespace SuperBookerTest
 
         /// <summary>
         /// Tester med fejl værdier om en underviser har lov til at slette baseret på hvor mange dage der er gået.
+        /// Taget fra UnderviserService
         /// </summary>
         /// <param name="dag">typen double. i programmet typen DateTime.</param>
         [TestMethod]
@@ -129,6 +133,7 @@ namespace SuperBookerTest
 
         /// <summary>
         /// Propertien der skal validere om det er en gyldig email.
+        /// Taget fra Logind.cshtml
         /// </summary>
         public string EmailLogInd
         {

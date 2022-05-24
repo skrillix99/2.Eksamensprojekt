@@ -20,7 +20,8 @@ namespace _2.Eksamensprojekt.Services
             List<LokaleData> LkDataList = new List<LokaleData>();
             string sql = "SELECT * FROM Lokale " +
                          "inner join LokaleSize ON LokaleSize_FK = SizeId " +
-                         "inner join LokaleLokation ON LokaleLokation_FK = LokaleLokationId";
+                         "inner join LokaleLokation ON LokaleLokation_FK = LokaleLokationId " +
+                         "Order By LokaleNummer";
             //Opretter forbindelse
             using (SqlConnection connection = new SqlConnection(connectionString))
             {

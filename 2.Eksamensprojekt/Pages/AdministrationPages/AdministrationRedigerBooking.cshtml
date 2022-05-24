@@ -6,61 +6,65 @@
 }
 
 <a class="tilbageLink" asp-page="AdministrationMineBookinger">< TILBAGE</a>
+<br />
+<p class="alert-danger text-center" style="margin-top: 1em;">@Model.ErrorMsg</p>
+
 <div class="centrer-item">
     <h1>Redigering af:</h1>
-    <div class="row">
-        <div class="lokale-info-centreret">
-            <div class="card mb-2">
-                <div class="card-header p-2">
-                    <h2 class="card-title"> @Model.Booking.Lokale.LokaleNummer @Model.Booking.Lokale.LokaleNavn</h2>
-                </div>
-                <div class="card-body">
-                    <p class="card-text"><b>Størrelse:</b> @Enum.GetName(typeof(LokaleSize), Model.Booking.Lokale.LokaleSize)</p>
-                </div>
+</div>
+<div class="row">
+    <div class="lokale-info-centreret">
+        <div class="card mb-2">
+            <div class="card-header p-2">
+                <h2 class="card-title"> @Model.Booking.Lokale.LokaleNummer @Model.Booking.Lokale.LokaleNavn</h2>
             </div>
-
-
-            <form method="post">
-
-
-
-
-                <fieldset>
-                    <label><b>Dato:</b></label>
-                    <br />
-                    <input type="date" asp-for="Booking.Dag" />
-                </fieldset>
-                <fieldset>
-                    <label><b>Fra:</b></label>
-                    <br />
-                    <input type="time" asp-for="Booking.TidStart" />
-                </fieldset>
-                <fieldset>
-                    <label><b>Til:</b></label>
-                    <br />
-                    <input type="time" asp-for="Booking.TidSlut" />
-                </fieldset>
-                <fieldset>
-                    <label><b>Bookes for:</b></label>
-                    <br />
-                    <select asp-for="@Model.Booking.BookesFor">
-                        @foreach (var rolle in Enum.GetValues(typeof(brugerRolle)))
-                        {
-                            <option value="@rolle">@rolle</option>
-
-                        }
-                    </select>
-                </fieldset>
-                <div class="centrer-item">
-                    <input type="submit" value="REDIGER" class="btn-primary black-button book-btn" />
-                </div>
-            </form>
+            <div class="card-body">
+                <p class="card-text"><b>Størrelse:</b> @Enum.GetName(typeof(LokaleSize), Model.Booking.Lokale.LokaleSize)</p>
+            </div>
         </div>
+
+
+        <form method="post">
+
+
+
+
+            <fieldset>
+                <label><b>Dato:</b></label>
+                <br />
+                <input type="date" asp-for="Booking.Dag" />
+            </fieldset>
+            <fieldset>
+                <label><b>Fra:</b></label>
+                <br />
+                <input type="time" asp-for="Booking.TidStart" />
+            </fieldset>
+            <fieldset>
+                <label><b>Til:</b></label>
+                <br />
+                <input type="time" asp-for="Booking.TidSlut" />
+            </fieldset>
+            <fieldset>
+                <label><b>Bookes for:</b></label>
+                <br />
+                <select asp-for="@Model.Booking.BookesFor">
+                    @foreach (var rolle in Enum.GetValues(typeof(brugerRolle)))
+                    {
+                        <option value="@rolle">@rolle</option>
+
+                    }
+                </select>
+            </fieldset>
+            <div class="centrer-item">
+                <input type="submit" value="REDIGER" class="btn-primary black-button book-btn" />
+            </div>
+        </form>
     </div>
 </div>
 
-            <script>
-                var today = new Date().toISOString().slice(0, 10);
 
-                document.getElementsByName("Booking.Dag")[0].min = today;
-            </script>
+<script>
+    var today = new Date().toISOString().slice(0, 10);
+
+    document.getElementsByName("Booking.Dag")[0].min = today;
+</script>

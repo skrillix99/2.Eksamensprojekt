@@ -59,7 +59,7 @@ namespace _2.Eksamensprojekt.Pages.LogInd
                     var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
 
-                    if (claims[1].Value == brugerRolle.Student.ToString())
+                    if (claims[1].Value == brugerRolle.Student.ToString()) //TODO cleanup?
                     {
                         return RedirectToPage("/Shared/LedigeLokaler");
                     }

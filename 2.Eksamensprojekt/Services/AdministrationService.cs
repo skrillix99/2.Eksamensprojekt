@@ -53,15 +53,16 @@ namespace _2.Eksamensprojekt.Services
 
         }
 
-        public void StuderendeRettighederUpdate(int bookingLimit, TimeSpan senestBooking)
+        public void StuderendeRettighederUpdate(int bookingLimit, TimeSpan senestTid, TimeSpan tidligstTid)
         {
-            string sql = "UPDATE StuderendeRettigheder SET BookingLimit = @bookingLimit, SenestBookingTid = @senestBooking";
+            string sql = "UPDATE StuderendeRettigheder SET BookingLimit = @bookingLimit, SenestBookingTid = @senestBooking, TidligstBookingTid = @tidligstBooking";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlCommand cmd = new SqlCommand(sql, connection);
                 cmd.Parameters.AddWithValue("@bookingLimit", bookingLimit);
-                cmd.Parameters.AddWithValue("@senestBooking", senestBooking);
+                cmd.Parameters.AddWithValue("@senestBooking", senestTid);
+                cmd.Parameters.AddWithValue("@tidligstBooking", tidligstTid);
 
                 cmd.Connection.Open();
 
@@ -73,7 +74,12 @@ namespace _2.Eksamensprojekt.Services
                 }
             }
         }
-
+        /// <summary>
+        /// Opdaterer en booking baseret på id og gemmer de opdaterede oplysninger i databasen
+        /// </summary>
+        /// <param name="updatedBooking">Typen BookingData. Indeholder de redigerede oplysninger på den booking
+        /// der skal opdateres
+        /// </param>
         public void UpdateReservation(BookingData updatedBooking)
         {
 

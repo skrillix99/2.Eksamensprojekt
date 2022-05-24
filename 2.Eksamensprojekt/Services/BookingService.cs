@@ -47,6 +47,7 @@ namespace _2.Eksamensprojekt.Services
             k.ResevertionId = reader.GetInt32(9);
             k.BookesFor = (brugerRolle)reader.GetInt32(11);
             k.HeltBooket = reader.GetInt32(15);
+            k.BooketSmartBoard = reader.GetBoolean(16);
             return k;
         }
 
@@ -77,6 +78,7 @@ namespace _2.Eksamensprojekt.Services
             k.BookesFor = (brugerRolle)reader.GetInt32(5);
             k.Lokale = ld;
             k.Bruger = p;
+            k.BooketSmartBoard = reader.GetBoolean(15);
             return k;
         }
         
@@ -93,11 +95,12 @@ namespace _2.Eksamensprojekt.Services
             //fortæller hvad der skal hentes fra databasen i det her tilfælle fra flere tabler og den gør det ved hjælp af i inner join 
             String sql =
                 "Select Dag, TidStart, TidSlut, LokaleNavn, LokaleNummer, LokaleSmartBoard, Size, Muligebookinger, " +
-                "BrugerNavn, ReservationID, BrugerRolle, BookesFor, BrugerEmail, BrugerID, LokaleID, HeltBooket From Reservation " +
+                "BrugerNavn, ReservationID, BrugerRolle, BookesFor, BrugerEmail, BrugerID, LokaleID, HeltBooket, BooketSmartBoard From Reservation " +
                 "INNER JOIN Person ON Reservation.BrugerID_FK = Person.BrugerID " +
                 "INNER JOIN Lokale ON Reservation.LokaleID_FK = Lokale.LokaleID " +
                 "INNER JOIN LokaleLokation ON Lokale.LokaleLokation_FK = LokaleLokation.LokaleLokationId " +
-                "INNER JOIN LokaleSize ON Lokale.LokaleSize_FK = LokaleSize.SizeId ";
+                "INNER JOIN LokaleSize ON Lokale.LokaleSize_FK = LokaleSize.SizeId " +
+                "Order By Dag, TidStart";
             
             //opretter forbindelsen
             using (SqlConnection connection = new SqlConnection(ConnectionString))
@@ -130,7 +133,7 @@ namespace _2.Eksamensprojekt.Services
             // dag, tidstart, tidslut, lokalenavn, lokalenummer, lokalesmartboard, size, muligebooker, brugernavn, reservationID, brugerrolle, 
             // bookesfor, brugeremail, 
             string sql = "Select ReservationID, TidStart, Dag, HeltBooket, TidSlut, BookesFor, BrugerRolle, BrugerID, BrugerNavn, " +
-                         "LokaleNavn, LokaleNummer, LokaleSmartBoard, Size, Muligebookinger, BrugerEmail " +
+                         "LokaleNavn, LokaleNummer, LokaleSmartBoard, Size, Muligebookinger, BrugerEmail, BooketSmartBoard " +
                          "From Reservation " +
                          "INNER JOIN Person ON Reservation.BrugerID_FK = Person.BrugerID " +
                          "INNER JOIN Lokale ON Reservation.LokaleID_FK = Lokale.LokaleID " +
@@ -166,7 +169,7 @@ namespace _2.Eksamensprojekt.Services
         { 
             BookingData l = new BookingData();
             string sql = "SELECT Dag, TidStart, TidSlut, LokaleNavn, LokaleNummer, LokaleSmartBoard, Size, Muligebookinger, " +
-                         "BrugerNavn, ReservationID, BrugerRolle, BookesFor, BrugerEmail, BrugerID, Lokale.lokaleID, HeltBooket " +
+                         "BrugerNavn, ReservationID, BrugerRolle, BookesFor, BrugerEmail, BrugerID, Lokale.lokaleID, HeltBooket, BooketSmartBoard " +
                          "FROM Reservation " +
                          "INNER JOIN Lokale ON Reservation.LokaleID_FK = Lokale.LokaleID " +
                          "inner join LokaleSize ON Lokale.LokaleSize_FK = SizeId " +
@@ -191,6 +194,42 @@ namespace _2.Eksamensprojekt.Services
                 return l;
             }
         }
+        public List<BookingData> GetAllBookingsByIdAndDag(int id, DateTime dag)
+        {
+            // opretter en ny list af BookingData
+            List<BookingData> list = new List<BookingData>();
+
+            //fortæller hvad der skal hentes fra databasen i det her tilfælle fra flere tabler og den gør det ved hjælp af i inner join 
+            String sql =
+                "Select Dag, TidStart, TidSlut, LokaleNavn, LokaleNummer, LokaleSmartBoard, Size, Muligebookinger, " +
+                "BrugerNavn, ReservationID, BrugerRolle, BookesFor, BrugerEmail, BrugerID, LokaleID, HeltBooket, BooketSmartBoard " +
+                "From Reservation " +
+                "INNER JOIN Person ON Reservation.BrugerID_FK = Person.BrugerID " +
+                "INNER JOIN Lokale ON Reservation.LokaleID_FK = Lokale.LokaleID " +
+                "INNER JOIN LokaleLokation ON Lokale.LokaleLokation_FK = LokaleLokation.LokaleLokationId " +
+                "INNER JOIN LokaleSize ON Lokale.LokaleSize_FK = LokaleSize.SizeId " +
+                "Where Dag = @dag";
+
+            //opretter forbindelsen
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                // //opretter sql query og åbner forbindelsen
+                SqlCommand cmd = new SqlCommand(sql, connection);
+                cmd.Parameters.AddWithValue("@dag", dag);
+                cmd.Connection.Open();
+
+                //altid ved select
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                //læser alle rækker
+                while (reader.Read())
+                {
+                    BookingData l = ReadBookings(reader);
+                    list.Add(l);
+                }
+                return list;
+            }
+        }
 
         /// <summary>
         /// sletter en booking fra databasen ud fra fundet id og smider en exception ugyldigt id hvis id ikke er fundet
@@ -198,7 +237,7 @@ namespace _2.Eksamensprojekt.Services
         /// <param name="id"></param>
         public void DeleteReservationById(int id)
         {
-            if (id <= 0)
+            if (GetSingleBooking(id).ResevertionId != id)
             {
                 throw new KeyNotFoundException("Ugyldigt ID");
             }
@@ -224,12 +263,12 @@ namespace _2.Eksamensprojekt.Services
         /// </summary>
         public void DeleteReservationByDay()
         {
-            string sql = "DELETE from Reservation WHERE Dag < @nextDay";
+            string sql = "DELETE from Reservation WHERE Dag < @today";
 
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
                 SqlCommand cmd = new SqlCommand(sql, connection);
-                cmd.Parameters.AddWithValue("@nextDay", DateTime.Today.ToString("s"));
+                cmd.Parameters.AddWithValue("@today", DateTime.Today.ToString("s"));
 
                 cmd.Connection.Open();
 

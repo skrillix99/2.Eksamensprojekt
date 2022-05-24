@@ -18,6 +18,7 @@ namespace _2.Eksamensprojekt.Pages.StuderendePages // Marcus
         private IStuderendeService _studerendeService;
         private IAdministrationService _administrationService;
         private ILokalerService _lokalerService;
+        private IBookingService _bookingService;
 
         [BindProperty]
         public BookingData Booking { get; set; }
@@ -29,11 +30,13 @@ namespace _2.Eksamensprojekt.Pages.StuderendePages // Marcus
 
         public string ErrorMsg { get; set; }
 
-        public StuderendeBookingModel(IStuderendeService studerendeService, IAdministrationService administrationService, ILokalerService lokalerService)
+        public StuderendeBookingModel(IStuderendeService studerendeService, IAdministrationService administrationService, 
+            ILokalerService lokalerService, IBookingService bookingService)
         {
             _studerendeService = studerendeService;
             _administrationService = administrationService;
             _lokalerService = lokalerService;
+            _bookingService = bookingService;
 
             Lokale = new LokaleData();
         }
@@ -50,6 +53,20 @@ namespace _2.Eksamensprojekt.Pages.StuderendePages // Marcus
         public IActionResult OnPostBook(int id)
         {
             Lokale = _lokalerService.GetSingelLokale(id);
+            if (Booking.BooketSmartBoard)
+            {
+                foreach (var sm in _bookingService.GetAllBookingsByIdAndDag(id, Booking.Dag))
+                {
+                    if (sm.BooketSmartBoard)
+                    {
+                        ErrorMsg = "Smartboardet er booket i forvejen";
+                        return Page();
+                    }
+                }
+            }
+
+
+            Booking.TidSlut = Booking.TidStart.Add(Booking.TidSlut);
 
             //tjekker om man har booket før den lovligetid
             if (Booking.TidStart < TidligstLovligeTid)
@@ -63,13 +80,6 @@ namespace _2.Eksamensprojekt.Pages.StuderendePages // Marcus
             {
                 Booking.TidSlut = Booking.TidStart.Add(TimeSpan.FromHours(2));
                 Booking.BooketSmartBoard = true;
-            }
-
-            //tjekker om man har valgt at slut tiden er før start tiden på en booking
-            if (Booking.TidStart > Booking.TidSlut)
-            {
-                ErrorMsg = "Til skal være senere end Fra!";
-                return Page();
             }
 
             TimeSpan bookingTilTid = Booking.TidSlut;

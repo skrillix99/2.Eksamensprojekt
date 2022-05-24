@@ -24,13 +24,15 @@ namespace _2.Eksamensprojekt.Pages.StuderendePages
         }
         public void OnGet()
         {
-            string sql2 = "where BrugerRolle = 0";
+            string sql2 = "where BrugerRolle = 0 " +
+                          "Order By Dag, TidStart";
 
             Booking = _bookingService.GetAllReservationerByRolle(sql2);
         }
         public void OnPost()
         {
-            string sql2 = "where BrugerRolle = 0";
+            string sql2 = "where BrugerRolle = 0 " +
+                          "Order By Dag, TidStart";
 
             Booking = _bookingService.GetAllReservationerByRolle(sql2);
         }

@@ -28,7 +28,7 @@ namespace SuperBookerTest
             // Act
             bool actualValue = true;
 
-            if (testValue <= TimeSpan.Parse("08:00") && testValue >= TimeSpan.Parse("16:30"))
+            if (testValue < TimeSpan.Parse("08:00") || testValue > TimeSpan.Parse("16:30"))
             {
                 actualValue = false;
             }
@@ -167,6 +167,7 @@ namespace SuperBookerTest
         /// <param name="email">typen string. rigtig email værdi</param>
         [TestMethod]
         [DataRow("123qwe@zealand.dk")]
+        [DataRow("w2we@zealand.dk")]
         public void EmailLogIndValidation_Test(string email) 
         {
             string expected = email;

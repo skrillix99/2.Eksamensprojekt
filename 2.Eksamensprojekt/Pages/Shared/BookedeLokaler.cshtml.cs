@@ -74,31 +74,32 @@ namespace _2.Eksamensprojekt.Pages.Shared
             //  "Vælg Etage"
             if (SKEtage_valg == "Stueplan (D1)")
             {
-                sql += "AND LokaleEtage = 1";
+                sql += "AND LokaleEtage = 1 ";
             }
             if (SKEtage_valg == "1. etage (D2)")
             {
-                sql += "AND LokaleEtage = 2";
+                sql += "AND LokaleEtage = 2 ";
             }
             if (SKEtage_valg == "2. etage (D3)")
             {
-                sql += "AND LokaleEtage = 3";
+                sql += "AND LokaleEtage = 3 ";
             }
 
             // "Vælg lokale størrelse"
             if (SKStoerrelse_valg == "Gruppelokaler")
             {
-                sql += "AND Size = 0";
+                sql += "AND Size = 0 ";
             }
             if (SKStoerrelse_valg == "Klasselokaler")
             {
-                sql += "AND Size = 1";
+                sql += "AND Size = 1 ";
             }
             if (SKStoerrelse_valg == "Auditorie")
             {
-                sql += "AND Size = 2";
+                sql += "AND Size = 2 ";
             }
 
+            sql += " Order By LokaleNummer";
             LokaleData = _ledigeLokalerService.GetAllLokaleBySqlStringBooking(sql);
         }
     }

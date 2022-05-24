@@ -118,6 +118,7 @@ namespace _2.Eksamensprojekt.Pages.Shared
                 sql += "AND LokaleSmartBoard = 0 ";
             }
 
+            sql += " Order By LokaleNummer";
 
             LokaleData = _ledigeLokalerService.GetAllLokaleBySqlString(sql);
         }

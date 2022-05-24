@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using _2.Eksamensprojekt.Pages.LogInd;
 using _2.Eksamensprojekt.Services.Interfaces;
 using SuperBookerData;
 
@@ -60,9 +61,9 @@ namespace _2.Eksamensprojekt.Services // Marcus
         /// <param name="dag">typen DateTime. skal indeholde dagen reservationen er fra.</param>
         /// <returns>True</returns>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        public bool CanDelete(DateTime dag, string email)
+        public bool CanDelete(DateTime dag)
         {
-            brugerRolle rolle = _logIndService.GetSingelPersonByEmail(email).brugerRolle;
+            brugerRolle rolle = LogIndModel.LoggedInUser.rolle;
             DateTime dt = DateTime.Now.Date;
             if (dag.Subtract(dt).Days < 3 && rolle == brugerRolle.Student)
             {

@@ -42,10 +42,14 @@ namespace _2.Eksamensprojekt.Pages.LogInd
         }
         public async Task<IActionResult> OnPost()
         {
+
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
             List<LogIndData> logIndData = _brugerService.GetPersoner();
             foreach (LogIndData user in logIndData)
             {
-
                 if (EmailLogInd.ToLower() == user.EmailLogInd.ToLower() && Password == user.Password)
                 {
                     LoggedInUser = user;

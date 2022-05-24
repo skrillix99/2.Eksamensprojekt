@@ -60,11 +60,10 @@ namespace _2.Eksamensprojekt.Services // Marcus
         /// <param name="dag">typen DateTime. skal indeholde dagen reservationen er fra.</param>
         /// <returns>True</returns>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        public bool CanDelete(DateTime dag, string email)
+        public bool CanDelete(DateTime dag)
         {
-            brugerRolle rolle = _logIndService.GetSingelPersonByEmail(email).brugerRolle;
             DateTime dt = DateTime.Now.Date;
-            if (dag.Subtract(dt).Days < 3 && rolle == brugerRolle.Student)
+            if (dag.Subtract(dt).Days < 3)
             {
                 throw new ArgumentOutOfRangeException("Må kun annullere med minimum 3 dages varsel.");
             }

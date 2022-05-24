@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SuperBookerData;
 
+//Hovedansvarlig: Dennis Møllegård Hansen
+
 namespace _2.Eksamensprojekt.Pages.Shared
 {
     [Authorize(Roles = "Underviser, Administration")]

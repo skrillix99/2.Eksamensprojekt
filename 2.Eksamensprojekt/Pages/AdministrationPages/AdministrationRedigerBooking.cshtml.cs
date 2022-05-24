@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SuperBookerData;
 using Microsoft.AspNetCore.Authorization;
-
+// Alexander Gerdil
 namespace _2.Eksamensprojekt.Pages.AdministrationPages
 {
     [Authorize(Roles = "Administration")]

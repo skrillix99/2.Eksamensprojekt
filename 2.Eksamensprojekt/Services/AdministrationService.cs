@@ -74,6 +74,7 @@ namespace _2.Eksamensprojekt.Services
                 }
             }
         }
+        // Alexander Gerdil
         /// <summary>
         /// Opdaterer en booking baseret på id og gemmer de opdaterede oplysninger i databasen
         /// </summary>

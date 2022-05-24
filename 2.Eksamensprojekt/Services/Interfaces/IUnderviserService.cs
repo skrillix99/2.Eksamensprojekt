@@ -9,6 +9,6 @@ namespace _2.Eksamensprojekt.Services.Interfaces
     {
         void AddReservationUnderviser(BookingData newBooking);
         void BegrænsetAdgang(DateTime dag, int id);
-        bool CanDelete(DateTime dag);
+        bool CanDelete(DateTime dag, string email);
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SuperBookerData
 {
-    public enum LokaleSize { Mødelokale, Klasselokale, Auditorium }
+    public enum LokaleSize { Gruppelokale, Klasselokale, Auditorium }
     public class LokaleData
     {
         private int _lokaleID;

@@ -51,7 +51,7 @@
             </fieldset>
             <fieldset>
             <label><b>Til i timer:</b></label>
-            @if (Model.Lokale.LokaleSize != LokaleSize.Mødelokale)
+            @if (Model.Lokale.LokaleSize != LokaleSize.Gruppelokale)
             {
                 <select asp-for="Booking.TidSlut">
                     <option value="@TimeSpan.Parse("00:30")">00:30</option>

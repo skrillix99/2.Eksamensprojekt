@@ -52,7 +52,7 @@ namespace _2.Eksamensprojekt.Pages.Shared
             };
             SKStoerrelse = new List<string>()
             {
-               "Vælg lokale størrelse", "Gruppelokaler", "Klasselokaler", "Auditorie"
+               "Vælg lokale størrelse", "Gruppelokale", "Klasselokaler", "Auditorie"
             };
             SKSmartBoard = new List<string>()
             {
@@ -95,11 +95,11 @@ namespace _2.Eksamensprojekt.Pages.Shared
             }
 
             // "Vælg lokale størrelse"
-            if (SKStoerrelse_valg == "Gruppe lokaler")
+            if (SKStoerrelse_valg == "Gruppelokale")
             {
                 sql += "AND Size = 0";
             }
-            if (SKStoerrelse_valg == "Klasse lokaler")
+            if (SKStoerrelse_valg == "Klasselokaler")
             {
                 sql += "AND Size = 1";
             }
@@ -120,10 +120,6 @@ namespace _2.Eksamensprojekt.Pages.Shared
 
 
             LokaleData = _ledigeLokalerService.GetAllLokaleBySqlString(sql);
-
-
-            //TODO SØRG FOR AT MAN KAN SORTERE EFTER DATO
-            //   string sql = "select * from Lokale WHERE Dag between 'welp1' AND 'welp2'";
         }
     }
 }

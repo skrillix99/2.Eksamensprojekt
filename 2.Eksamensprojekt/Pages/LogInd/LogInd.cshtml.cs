@@ -29,7 +29,6 @@ namespace _2.Eksamensprojekt.Pages.LogInd
 
         [BindProperty]
         [Required(ErrorMessage = "Du skal udfylde adgangskode feltet.")]
-        //TODO make a regularexpression
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
@@ -58,20 +57,8 @@ namespace _2.Eksamensprojekt.Pages.LogInd
                 };
                     var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
-
-                    if (claims[1].Value == brugerRolle.Student.ToString()) //TODO cleanup?
-                    {
-                        return RedirectToPage("/Shared/LedigeLokaler");
+                    return RedirectToPage("/Shared/LedigeLokaler");
                     }
-                    if (claims[1].Value == brugerRolle.Underviser.ToString())
-                    {
-                        return RedirectToPage("/Shared/LedigeLokaler");
-                    }
-                    if (claims[1].Value == brugerRolle.Administration.ToString())
-                    {
-                        return RedirectToPage("/Shared/LedigeLokaler");
-                    }
-                }
             }
 
             return Page();

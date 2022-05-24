@@ -47,7 +47,7 @@ namespace _2.Eksamensprojekt.Services // Marcus
 
                 if (rows != 1)
                 {
-                    throw new Exception("welp");
+                    throw new Exception("Der skete en fejl med databasen. prøv senere");
                 }
             }
 

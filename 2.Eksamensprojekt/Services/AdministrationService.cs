@@ -8,7 +8,7 @@ using Claim = System.Security.Claims.Claim;
 
 namespace _2.Eksamensprojekt.Services
 {
-    public class AdministrationService : IAdministrationService
+    public class AdministrationService : IAdministrationService // Marcus
     {
         private const string connectionString = "Data Source=zealandmarc.database.windows.net;Initial Catalog=SuperBooker4000;User ID=AdminMarc;Password=Marcus19;Connect Timeout=30;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         private readonly IPersonService _logIndService;
@@ -47,7 +47,7 @@ namespace _2.Eksamensprojekt.Services
 
                 if (rows != 1)
                 {
-                    throw new Exception("welp");
+                    throw new Exception("Der skete en fejl med databasen. prøv senere");
                 }
             }
 

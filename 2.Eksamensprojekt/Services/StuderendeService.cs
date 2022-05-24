@@ -26,30 +26,6 @@ namespace _2.Eksamensprojekt.Services // Marcus
             _bookingService = bookingService;
         }
 
-        #region ReadLokale
-
-        /// <summary>
-        /// Oversætter data fra et Lokale database kald til et LokaleData object med alle columns.
-        /// </summary>
-        /// <param name="reader">Typen SqlDataReader. object med data fra database kald</param>
-        /// <returns>et object af typen LokaleData</returns>
-        public LokaleData ReadLokale(SqlDataReader reader)
-        {
-            LokaleData l = new LokaleData();
-
-            l.LokaleID = reader.GetInt32(0);
-            l.LokaleNavn = reader.GetString(1);
-            l.LokaleSmartBoard = reader.GetBoolean(2);
-            l.LokaleSize = (LokaleSize)reader.GetInt32(7);
-            l.LokaleNummer = reader.GetString(10);
-            l.MuligeBookinger = reader.GetInt32(8);
-            l.Etage = reader.GetInt32(11);
-
-            return l;
-        }
-
-        #endregion
-
         #region ReadBooking
 
         private BookingData ReadBookings(SqlDataReader reader)
@@ -154,7 +130,7 @@ namespace _2.Eksamensprojekt.Services // Marcus
 
                 if (rows != 1)
                 {
-                    throw new Exception("welp");
+                    throw new Exception("Der skete en fejl med databasen. prøv senere");
                 }
                 // lukker for forbindelsen.
                 cmd.Connection.Close();
@@ -170,7 +146,7 @@ namespace _2.Eksamensprojekt.Services // Marcus
                 int rowsUpdate = cmdUpdate.ExecuteNonQuery();
                 if (rowsUpdate < 1)
                 {
-                    throw new Exception("humu humu");
+                    throw new Exception("Der skete en fejl med databasen. prøv senere");
                 }
             }
 

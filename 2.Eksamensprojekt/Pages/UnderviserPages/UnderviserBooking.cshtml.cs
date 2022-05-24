@@ -13,7 +13,7 @@ using System.Threading;
 namespace _2.Eksamensprojekt.Pages.UnderviserPages
 {
     [Authorize(Roles = "Underviser")]
-    public class UnderviserBookingModel : PageModel
+    public class UnderviserBookingModel : PageModel // Marcus
     {
         private IUnderviserService _underviserService;
         private ILokalerService _lokalerService;

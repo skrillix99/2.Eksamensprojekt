@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace SuperBookerTest
 {
     [TestClass]
-    public class UnitTest1
+    public class UnitTest1 // Marcus
     {
         private string _email;
 
@@ -113,7 +113,7 @@ namespace SuperBookerTest
             {
                 if (dato.Subtract(dt).Days < 3)
                 {
-                    throw new ArgumentOutOfRangeException("welp");
+                    throw new ArgumentOutOfRangeException("");
                 }
             }
             catch (ArgumentOutOfRangeException)

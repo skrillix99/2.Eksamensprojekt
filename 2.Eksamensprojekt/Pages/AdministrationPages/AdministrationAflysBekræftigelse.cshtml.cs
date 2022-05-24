@@ -12,7 +12,7 @@ using SuperBookerData;
 namespace _2.Eksamensprojekt.Pages.AdministrationPages
 {
     [Authorize(Roles = "Administration")]
-    public class AdministrationAflysBekræftigelseModel : PageModel
+    public class AdministrationAflysBekræftigelseModel : PageModel // Marcus
     {
         private IBookingService _bookingService;
 

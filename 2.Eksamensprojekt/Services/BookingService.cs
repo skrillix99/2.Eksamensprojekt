@@ -273,10 +273,7 @@ namespace _2.Eksamensprojekt.Services
                 cmd.Connection.Open();
 
                 int rows = cmd.ExecuteNonQuery();
-                //if (rows != 1)
-                //{
-                //    throw new InvalidOperationException("Der skete en fejl i databasen"); 
-                //}
+                
             }
         }
 

@@ -12,7 +12,7 @@ using SuperBookerData;
 namespace _2.Eksamensprojekt.Pages.UnderviserPages
 {
     [Authorize(Roles = "Underviser")]
-    public class UnderviserAflysBekræftigelseModel : PageModel
+    public class UnderviserAflysBekræftigelseModel : PageModel // Marcus
     {
         private IUnderviserService _underviserService;
 

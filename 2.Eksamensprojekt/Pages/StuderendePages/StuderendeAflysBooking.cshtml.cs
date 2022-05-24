@@ -12,7 +12,7 @@ using SuperBookerData;
 namespace _2.Eksamensprojekt.Pages.StuderendePages
 {
     [Authorize(Roles = "Student")]
-    public class StuderendeAflysBookingModel : PageModel
+    public class StuderendeAflysBookingModel : PageModel // Marcus
     {
         private IStuderendeService _studerendeService;
         private IBookingService _bookingService;

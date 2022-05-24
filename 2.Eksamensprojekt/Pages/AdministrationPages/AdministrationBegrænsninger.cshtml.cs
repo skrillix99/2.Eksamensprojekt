@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 namespace _2.Eksamensprojekt.Pages.AdministrationPages
 {
     [Authorize(Roles = "Administration")]
-    public class AdministrationBegrænsningerModel : PageModel
+    public class AdministrationBegrænsningerModel : PageModel // Marcus
     {
         private IAdministrationService _administrationService;
         [BindProperty]

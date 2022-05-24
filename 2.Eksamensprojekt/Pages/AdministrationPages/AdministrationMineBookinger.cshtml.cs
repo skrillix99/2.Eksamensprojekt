@@ -12,7 +12,7 @@ using SuperBookerData;
 namespace _2.Eksamensprojekt.Pages.AdministrationPages
 {
     [Authorize(Roles = "Administration")]
-    public class AdministrationMineBookingerModel : PageModel
+    public class AdministrationMineBookingerModel : PageModel //Jonathan
     {
         private IBookingService _bookingService;
 

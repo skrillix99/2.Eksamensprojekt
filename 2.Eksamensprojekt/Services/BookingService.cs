@@ -208,7 +208,7 @@ namespace _2.Eksamensprojekt.Services
                 "INNER JOIN Lokale ON Reservation.LokaleID_FK = Lokale.LokaleID " +
                 "INNER JOIN LokaleLokation ON Lokale.LokaleLokation_FK = LokaleLokation.LokaleLokationId " +
                 "INNER JOIN LokaleSize ON Lokale.LokaleSize_FK = LokaleSize.SizeId " +
-                "Where Dag = @dag";
+                "Where Dag = @dag AND LokaleID = @id";
 
             //opretter forbindelsen
             using (SqlConnection connection = new SqlConnection(ConnectionString))
@@ -216,6 +216,7 @@ namespace _2.Eksamensprojekt.Services
                 // //opretter sql query og åbner forbindelsen
                 SqlCommand cmd = new SqlCommand(sql, connection);
                 cmd.Parameters.AddWithValue("@dag", dag);
+                cmd.Parameters.AddWithValue("@id", id);
                 cmd.Connection.Open();
 
                 //altid ved select

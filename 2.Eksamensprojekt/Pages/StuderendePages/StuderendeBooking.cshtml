@@ -50,10 +50,9 @@
                 <input type="time" asp-for="Booking.TidStart" value="@Model.TidligstLovligeTid.ToString(@"hh\:mm")"/>
             </fieldset>
             <fieldset>
-            <label><b>Til i timer:</b></label>
+            <label><b>bookes i antal timer:</b></label>
             <br />
-            @if (Model.Lokale.LokaleSize != LokaleSize.Gruppelokale)
-            {
+            
                 <select asp-for="Booking.TidSlut">
                     <option value="@TimeSpan.Parse("00:30")">00:30</option>
                     <option value="@TimeSpan.Parse("01:00")">01:00</option>
@@ -61,13 +60,8 @@
                     <option value="@TimeSpan.Parse("02:00")">02:00</option>
                 </select>
                 <br />
-                @*<input type="time" asp-for="Booking.TidSlut"/>*@
-            }
-            else
-            {
-                <p>Bliver automatisk sat til 2 timer</p>
-            }
-            </fieldset>
+                
+                </fieldset>
             <fieldset>
                 <label><b>Smartboard:</b></label>
                 <br />
@@ -76,7 +70,8 @@
                     <span>JA: </span><input type="radio" asp-for="Booking.BooketSmartBoard" value="true"/>
                     <br />
                 }
-                <span>NEJ: </span> <input type="radio" asp-for="Booking.BooketSmartBoard" value="false"/>
+                
+                    <span>NEJ: </span> <input type="radio" asp-for="Booking.BooketSmartBoard" value="false"/>
             </fieldset>
 
             <div class="centrer-item">

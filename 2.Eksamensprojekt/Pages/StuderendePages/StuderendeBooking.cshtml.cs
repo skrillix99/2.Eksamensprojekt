@@ -75,13 +75,6 @@ namespace _2.Eksamensprojekt.Pages.StuderendePages // Marcus
                 return Page();
             }
 
-            //tjekker hvis man har valgt et Gruppelokale 
-            if (Lokale.LokaleSize == LokaleSize.Gruppelokale)
-            {
-                Booking.TidSlut = Booking.TidStart.Add(TimeSpan.FromHours(2));
-                Booking.BooketSmartBoard = true;
-            }
-
             TimeSpan bookingTilTid = Booking.TidSlut;
             try
             {
